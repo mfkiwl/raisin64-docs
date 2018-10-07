@@ -5,7 +5,7 @@
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 SPHINXPROJ    = Raisin64
-SOURCEDIR     = .
+SOURCEDIR     = _sources
 BUILDDIR      = _build
 
 #Because I will forget to make the PDF
