@@ -1,2 +1,3 @@
 _build/latex/*
 !_build/latex/Raisin64.pdf
+_build/doctrees
