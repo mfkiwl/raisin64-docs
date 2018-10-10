@@ -32,5 +32,3 @@ Major features of the Raisin64 include:
    software
    tools
    nexysddr
-   
-

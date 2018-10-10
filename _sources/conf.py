@@ -167,5 +167,5 @@ texinfo_documents = [
 
 # Options for Symbolator
 symbolator_cmd = 'symbolator'
-symbolator_cmd_args = [''] # ['-t', '--scale=0.5']
-symbolator_output_format = 'svg'  # 'png' is other format
+symbolator_cmd_args = ['-t'] # ['-t', '--scale=0.5']
+symbolator_output_format = 'png'  # 'svg' is other format
