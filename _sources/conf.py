@@ -17,9 +17,9 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+sys.path.insert(0, os.path.abspath('_exts'))
 
 
 # -- General configuration ------------------------------------------------
@@ -31,7 +31,10 @@
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.githubpages', 'symbolator_sphinx', 'sphinx.ext.imgconverter']
+extensions = ['sphinx.ext.githubpages', 
+              'symbolator_sphinx', 
+              'sphinx.ext.imgconverter',
+              'bitfields']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -169,3 +172,7 @@ texinfo_documents = [
 symbolator_cmd = 'symbolator'
 symbolator_cmd_args = ['-t'] # ['-t', '--scale=0.5']
 symbolator_output_format = 'png'  # 'svg' is other format
+
+# Options for bitfields
+bitfields_cmd = 'bitfield.js'
+bitfields_cmd_args = [''] # ['-t', '--scale=0.5']
