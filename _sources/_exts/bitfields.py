@@ -238,7 +238,7 @@ def render_symbol_latex(self, node, filename, options, prefix='symbol'):
             elif node['align'] == 'right':
                 self.body.append('{\\hspace*{\\fill}')
                 post = '}'
-        self.body.append('%s\\includegraphics{%s}%s' %
+        self.body.append('%s\\includegraphics[width=\\textwidth]{%s}%s' %
                          (para_separator, fname, para_separator))
         if post:
             self.body.append(post)
