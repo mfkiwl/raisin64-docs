@@ -125,7 +125,7 @@ class Bitfields(Directive):
 
 
 
-def render_symbol(self, filename, options, prefix='symbol'):
+def render_symbol(self, filename, options, prefix='symbol', format='svg'):
     # type: (nodes.NodeVisitor, unicode, Dict, unicode, unicode) -> Tuple[unicode, unicode]
     """Render bitfields code into a PNG or SVG output file."""
 
@@ -135,7 +135,7 @@ def render_symbol(self, filename, options, prefix='symbol'):
 
     # Use name option if present otherwise fallback onto SHA-1 hash
     name = options.get('name', sha1(hashkey).hexdigest())
-    fname = '%s-%s.%s' % (prefix, name, 'png')
+    fname = '%s-%s.%s' % (prefix, name, format)
     relfn = posixpath.join(self.builder.imgpath, fname)
     outfn = path.join(self.builder.outdir, self.builder.imagedir, fname)
 
@@ -157,17 +157,36 @@ def render_symbol(self, filename, options, prefix='symbol'):
     if 'bits' in options: cmd_args.extend(['--bits', options['bits']])
     if 'bigendian' in options: cmd_args.extend(['--bigendian', 'true'])
     try:
-        tempfile = outfn + ".svg"
+        if format == 'png':
+            tempfile = outfn + ".svg"
 
-        with open(tempfile, 'w') as outfd:
-            p = Popen(cmd_args, stdout=outfd, stdin=PIPE, stderr=PIPE)
+            with open(tempfile, 'w') as outfd:
+                p = Popen(cmd_args, stdout=outfd, stdin=PIPE, stderr=PIPE)
+                p.wait()
+                if p.returncode != 0:
+                    raise BitfieldsError('bitfields exited with error %s' % p.stderr.read())
+            convertCmd = ['convert', '-resize', str(options['hspace'] if 'hspace' in options else 640)+'x',tempfile, outfn]
+            p = Popen(convertCmd, stdin=PIPE, stderr=PIPE)
             p.wait()
-            if p.returncode != 0:
-                raise BitfieldsError('bitfields exited with error %s' % p.stderr.read())
-        convertCmd = ['convert', '-resize', str(options['hspace'] if 'hspace' in options else 640)+'x',tempfile, outfn]
-        p = Popen(convertCmd, stdin=PIPE, stderr=PIPE)
-        p.wait()
-        remove(tempfile)
+            remove(tempfile)
+        elif format == 'pdf':
+            tempfile = outfn + ".svg"
+
+            with open(tempfile, 'w') as outfd:
+                p = Popen(cmd_args, stdout=outfd, stdin=PIPE, stderr=PIPE)
+                p.wait()
+                if p.returncode != 0:
+                    raise BitfieldsError('bitfields exited with error %s' % p.stderr.read())
+            convertCmd = ['rsvg-convert', '-f', 'pdf', '-o', outfn, tempfile]
+            p = Popen(convertCmd, stdin=PIPE, stderr=PIPE)
+            p.wait()
+            remove(tempfile)
+        else:
+            with open(outfn, 'w') as outfd:
+                p = Popen(cmd_args, stdout=outfd, stdin=PIPE, stderr=PIPE)
+                p.wait()
+                if p.returncode != 0:
+                    raise BitfieldsError('bitfields exited with error %s' % p.stderr.read())
     except OSError as err:
         if err.errno != ENOENT:   # No such file or directory
             raise
@@ -188,7 +207,7 @@ def render_symbol_html(self, node, filename, options, prefix='symbol',
                     imgcls=None, alt=None):
     # type: (nodes.NodeVisitor, bitfields, unicode, Dict, unicode, unicode, unicode) -> Tuple[unicode, unicode]  # NOQA
     try:
-        fname, outfn = render_symbol(self, filename, options, prefix)
+        fname, outfn = render_symbol(self, filename, options, prefix, 'svg')
     except BitfieldsError as exc:
         logger.warning('bitfields filename %r: ' % filename + str(exc))
         raise nodes.SkipNode
@@ -196,14 +215,10 @@ def render_symbol_html(self, node, filename, options, prefix='symbol',
     if fname is None:
         raise BitfieldsError('no file passed to bitfield')
     else:
-        if alt is None:
-            alt = node.get('alt', self.encode(filename).strip())
         imgcss = imgcls and 'class="%s"' % imgcls or ''
         if 'align' in node:
-            self.body.append('<div align="%s" class="align-%s">' %
-                                (node['align'], node['align']))
-        self.body.append('<img src="%s" alt="%s" %s/>\n' %
-                            (fname, alt, imgcss))
+            self.body.append('<div align="%s" class="align-%s">' % (node['align'], node['align']))
+        self.body.append('<img src="%s" alt="%s" %s/>\n' % (fname, alt, imgcss))
         if 'align' in node:
             self.body.append('</div>\n')
 
@@ -218,7 +233,7 @@ def html_visit_bitfields(self, node):
 def render_symbol_latex(self, node, filename, options, prefix='symbol'):
     # type: (nodes.NodeVisitor, bitfields, unicode, Dict, unicode) -> None
     try:
-        fname, outfn = render_symbol(self, filename, options, prefix)
+        fname, outfn = render_symbol(self, filename, options, prefix, 'pdf')
     except BitfieldsError as exc:
         logger.warning('bitfields filename %r: ' % filename + str(exc))
         raise nodes.SkipNode
@@ -254,7 +269,7 @@ def latex_visit_bitfields(self, node):
 def render_symbol_texinfo(self, node, filename, options, prefix='symbol'):
     # type: (nodes.NodeVisitor, bitfields, unicode, Dict, unicode) -> None
     try:
-        fname, outfn = render_symbol(self, filename, options, prefix)
+        fname, outfn = render_symbol(self, filename, options, prefix, 'svg')
     except BitfieldsError as exc:
         logger.warning('bitfields filename %r: ' % filename + str(exc))
         raise nodes.SkipNode

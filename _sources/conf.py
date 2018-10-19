@@ -33,8 +33,9 @@ sys.path.insert(0, os.path.abspath('_exts'))
 # ones.
 extensions = ['sphinx.ext.githubpages', 
               'symbolator_sphinx', 
-              'sphinx.ext.imgconverter',
-              'bitfields']
+              'sphinx.ext.autosectionlabel',
+              'bitfields',
+              'sphinxcontrib.rsvgconverter']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -171,8 +172,11 @@ texinfo_documents = [
 # Options for Symbolator
 symbolator_cmd = 'symbolator'
 symbolator_cmd_args = ['-t'] # ['-t', '--scale=0.5']
-symbolator_output_format = 'png'  # 'svg' is other format
+symbolator_output_format = 'svg'  # 'svg' is other format
 
 # Options for bitfields
 bitfields_cmd = 'bitfield.js'
 bitfields_cmd_args = [''] # ['-t', '--scale=0.5']
+
+# Options for autosectionlabel
+autosectionlabel_prefix_document = True
