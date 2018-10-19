@@ -1,3 +1,4 @@
 _build/latex/*
 !_build/latex/Raisin64.pdf
 _build/doctrees
+_sources/_exts/__pycache__
