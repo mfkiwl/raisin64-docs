@@ -156,6 +156,7 @@ def render_symbol(self, filename, options, prefix='symbol', format='svg'):
     if 'lanes' in options: cmd_args.extend(['--lanes', options['lanes']])
     if 'bits' in options: cmd_args.extend(['--bits', options['bits']])
     if 'bigendian' in options: cmd_args.extend(['--bigendian', 'true'])
+    else: cmd_args.extend(['--bigendian', 'false'])
     try:
         if format == 'png':
             tempfile = outfn + ".svg"

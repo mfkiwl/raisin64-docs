@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="ADD" href="isa/add.html" />
+    <link rel="next" title="ADD - Integer Add" href="isa/add.html" />
     <link rel="prev" title="Reference Index" href="../modules.html" /> 
 
   
@@ -93,7 +93,54 @@
 <li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#instruction-format">Instruction Format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#instructions">Instructions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="isa/add.html">ADD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/add.html">ADD - Integer Add</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/addi.html">ADDI - Integer Add Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/and.html">AND - Bitwise AND</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/andi.html">ANDI - Bitwise AND Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/be.html">BE - Branch if Even</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/bo.html">BO - Branch if Odd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/div.html">DIV - Integer Divide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/divi.html">DIVI - Integer Divide Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/j.html">J - Jump</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/jal.html">JAL - Jump and Link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/jali.html">JALI - Jump and Link Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/ji.html">JI - Jump Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/l16.html">L16 - Load 16-bit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/l16s.html">L16S - Load 16-bit Sign-Extend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/l32.html">L32 - Load 32-bit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/l32s.html">L32S - Load 32-bit Sign-Extend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/l8.html">L8 - Load 8-bit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/l8s.html">L8S - Load 8-bit Sign-Extend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/lw.html">LW - Load 64-bit Word</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/mul.html">MUL - Integer Multiply</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/muli.html">MUL - Integer Multiply Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/nor.html">NOR - Bitwise NOR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/nori.html">NORI - Bitwise NOR Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/or.html">OR - Bitwise OR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/ori.html">ORI - Bitwise OR Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/s16.html">S16 - Store 16-bit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/s32.html">S32 - Store 32-bit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/s8.html">S8 - Store 8-bit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/seq.html">SEQ - Set 1 if Equal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/seqi.html">SEQI - Set 1 if Equal Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sle.html">SLE - Set 1 if Less than or Equal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/slei.html">SLEI - Set 1 if Less than or Equal Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sll.html">SLL - Shift Left Logical</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/slli.html">SLLI - Shift Left Logical Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/slt.html">SLT - Set 1 if Less Than</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/slti.html">SLTI - Set 1 if Less Than Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sne.html">SNE - Set 1 if Not Equal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/snei.html">SNEI - Set 1 if Not Equal Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sra.html">SRA - Shift Right Arithmetic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/srai.html">SRAI - Shift Right Arithmetic Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/srl.html">SRL - Shift Right Logical</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/srli.html">SRLI - Shift Right Logical Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sub.html">SUB - Integer Subtract</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/subi.html">SUBI - Integer Subtract Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sw.html">SW - Store 64-bit Word</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/syscall.html">SYSCALL - System Call</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/xor.html">XOR - Bitwise XOR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/xori.html">XORI - Bitwise XOR Immediate</a></li>
 </ul>
 </li>
 </ul>
@@ -179,7 +226,7 @@
 <div class="section" id="overview">
 <h2><a class="toc-backref" href="#id1">Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>The Raisin64’s instruction set draws heavily from MIPS with some concepts graciously borrowed from ARM as well.  While the programmer’s model and instruction set are decoupled from the underlying microarchitecture of the specific implementation, it was nonetheless decided to design the instructions such that a hardwired control unit (see TODO:ref:<cite>Instruction Decode</cite>) could process and set the appropriate signals.</p>
-<p>Instructions are variable length (16-64) bit, and some have multiple forms like the <a class="reference internal" href="isa/add.html#add"><span class="std std-ref">ADD Instruction</span></a>.  When an instruction has multiple encodings, the opcode is usually the same between the alternate length versions of that instruction, but in all cases the processor expands the 16 and 32-bit versions of the instruction into their canonical 64-bit form, which has a regular encoding.  The general instruction formats and opcodes are described below.</p>
+<p>Instructions are variable length (16-64) bit, and some have multiple forms like the <a class="reference internal" href="isa/add.html#add-integer-add"><span class="std std-ref">ADD Instruction</span></a>.  When an instruction has multiple encodings, the opcode is usually the same between the alternate length versions of that instruction, but in all cases the processor expands the 16 and 32-bit versions of the instruction into their canonical 64-bit form, which has a regular encoding.  The general instruction formats and opcodes are described below.</p>
 <div class="admonition-but-why admonition">
 <p class="first admonition-title">But Why?</p>
 <p class="last">There is a natural appeal to 64 registers on a 64-bit machine.  This means 6 bits are needed in the instruction format to address each register.  While 64-bit instructions allow this and efficient loading of immediate values, they waste program space more often than not.  Variable length instructions are a good compromise to avoid the size penalty when not necessary.</p>
@@ -187,13 +234,72 @@
 </div>
 <div class="section" id="instruction-format">
 <h2><a class="toc-backref" href="#id2">Instruction Format</a><a class="headerlink" href="#instruction-format" title="Permalink to this headline">¶</a></h2>
-<p>There are TODO instruction formats in Raisin64</p>
+<p>There are 6 instruction formats in Raisin64</p>
+<div align="center" class="align-center"><img src="../_images/symbol-873e6d98c5c7268b713d360a7129ffb260586535.svg" alt="None" />
+</div>
+<div align="center" class="align-center"><img src="../_images/symbol-8b3136c8efa6a539336b2e86287de30d996ec2b8.svg" alt="None" />
+</div>
+<div align="center" class="align-center"><img src="../_images/symbol-d85843c82a64f9cc8f87ba9cc832b3cb211c295c.svg" alt="None" />
+</div>
+<div align="center" class="align-center"><img src="../_images/symbol-b46abede8694fb86be189afb7f9d90c77ec27383.svg" alt="None" />
+</div>
+<div align="center" class="align-center"><img src="../_images/symbol-5bd42e54af7e7f260c75c51ece8e46c6e4b07c0a.svg" alt="None" />
+</div>
+<div align="center" class="align-center"><img src="../_images/symbol-ebc863be7cbc1ada7032c33bfd865daae0f4d691.svg" alt="None" />
+</div>
 </div>
 <div class="section" id="instructions">
 <h2><a class="toc-backref" href="#id3">Instructions</a><a class="headerlink" href="#instructions" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="isa/add.html">ADD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/add.html">ADD - Integer Add</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/addi.html">ADDI - Integer Add Immediate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/and.html">AND - Bitwise AND</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/andi.html">ANDI - Bitwise AND Immediate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/be.html">BE - Branch if Even</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/bo.html">BO - Branch if Odd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/div.html">DIV - Integer Divide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/divi.html">DIVI - Integer Divide Immediate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/j.html">J - Jump</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/jal.html">JAL - Jump and Link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/jali.html">JALI - Jump and Link Immediate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/ji.html">JI - Jump Immediate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/l16.html">L16 - Load 16-bit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/l16s.html">L16S - Load 16-bit Sign-Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/l32.html">L32 - Load 32-bit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/l32s.html">L32S - Load 32-bit Sign-Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/l8.html">L8 - Load 8-bit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/l8s.html">L8S - Load 8-bit Sign-Extend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/lw.html">LW - Load 64-bit Word</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/mul.html">MUL - Integer Multiply</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/muli.html">MUL - Integer Multiply Immediate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/nor.html">NOR - Bitwise NOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/nori.html">NORI - Bitwise NOR Immediate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/or.html">OR - Bitwise OR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/ori.html">ORI - Bitwise OR Immediate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/s16.html">S16 - Store 16-bit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/s32.html">S32 - Store 32-bit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/s8.html">S8 - Store 8-bit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/seq.html">SEQ - Set 1 if Equal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/seqi.html">SEQI - Set 1 if Equal Immediate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/sle.html">SLE - Set 1 if Less than or Equal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/slei.html">SLEI - Set 1 if Less than or Equal Immediate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/sll.html">SLL - Shift Left Logical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/slli.html">SLLI - Shift Left Logical Immediate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/slt.html">SLT - Set 1 if Less Than</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/slti.html">SLTI - Set 1 if Less Than Immediate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/sne.html">SNE - Set 1 if Not Equal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/snei.html">SNEI - Set 1 if Not Equal Immediate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/sra.html">SRA - Shift Right Arithmetic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/srai.html">SRAI - Shift Right Arithmetic Immediate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/srl.html">SRL - Shift Right Logical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/srli.html">SRLI - Shift Right Logical Immediate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/sub.html">SUB - Integer Subtract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/subi.html">SUBI - Integer Subtract Immediate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/sw.html">SW - Store 64-bit Word</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/syscall.html">SYSCALL - System Call</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/xor.html">XOR - Bitwise XOR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/xori.html">XORI - Bitwise XOR Immediate</a></li>
 </ul>
 </div>
 </div>
@@ -207,7 +313,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="isa/add.html" class="btn btn-neutral float-right" title="ADD" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="isa/add.html" class="btn btn-neutral float-right" title="ADD - Integer Add" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../modules.html" class="btn btn-neutral" title="Reference Index" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

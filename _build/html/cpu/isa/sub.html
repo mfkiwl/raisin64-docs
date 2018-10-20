@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>&lt;no title&gt; &mdash; Raisin64 0.1 documentation</title>
+  <title>SUB - Integer Subtract &mdash; Raisin64 0.1 documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="subi.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="srli.html" /> 
+    <link rel="next" title="SUBI - Integer Subtract Immediate" href="subi.html" />
+    <link rel="prev" title="SRLI - Shift Right Logical Immediate" href="srli.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -83,12 +83,71 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../cpu.html">Raisin64 CPU</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../software.html">Code Snippets and Software</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tools.html">Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../nexysddr.html">Nexys 4 DDR Reference Implementation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Reference Index</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../modules.html">Reference Index</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../isa.html">Raisin64 Instruction Set</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../isa.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../isa.html#instruction-format">Instruction Format</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../isa.html#instructions">Instructions</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="add.html">ADD - Integer Add</a></li>
+<li class="toctree-l4"><a class="reference internal" href="addi.html">ADDI - Integer Add Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="and.html">AND - Bitwise AND</a></li>
+<li class="toctree-l4"><a class="reference internal" href="andi.html">ANDI - Bitwise AND Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="be.html">BE - Branch if Even</a></li>
+<li class="toctree-l4"><a class="reference internal" href="bo.html">BO - Branch if Odd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="div.html">DIV - Integer Divide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="divi.html">DIVI - Integer Divide Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="j.html">J - Jump</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jal.html">JAL - Jump and Link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jali.html">JALI - Jump and Link Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ji.html">JI - Jump Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="l16.html">L16 - Load 16-bit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="l16s.html">L16S - Load 16-bit Sign-Extend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="l32.html">L32 - Load 32-bit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="l32s.html">L32S - Load 32-bit Sign-Extend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="l8.html">L8 - Load 8-bit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="l8s.html">L8S - Load 8-bit Sign-Extend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lw.html">LW - Load 64-bit Word</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mul.html">MUL - Integer Multiply</a></li>
+<li class="toctree-l4"><a class="reference internal" href="muli.html">MUL - Integer Multiply Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nor.html">NOR - Bitwise NOR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nori.html">NORI - Bitwise NOR Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="or.html">OR - Bitwise OR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ori.html">ORI - Bitwise OR Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="s16.html">S16 - Store 16-bit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="s32.html">S32 - Store 32-bit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="s8.html">S8 - Store 8-bit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="seq.html">SEQ - Set 1 if Equal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="seqi.html">SEQI - Set 1 if Equal Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sle.html">SLE - Set 1 if Less than or Equal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="slei.html">SLEI - Set 1 if Less than or Equal Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sll.html">SLL - Shift Left Logical</a></li>
+<li class="toctree-l4"><a class="reference internal" href="slli.html">SLLI - Shift Left Logical Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="slt.html">SLT - Set 1 if Less Than</a></li>
+<li class="toctree-l4"><a class="reference internal" href="slti.html">SLTI - Set 1 if Less Than Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sne.html">SNE - Set 1 if Not Equal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="snei.html">SNEI - Set 1 if Not Equal Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sra.html">SRA - Shift Right Arithmetic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="srai.html">SRAI - Shift Right Arithmetic Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="srl.html">SRL - Shift Right Logical</a></li>
+<li class="toctree-l4"><a class="reference internal" href="srli.html">SRLI - Shift Right Logical Immediate</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">SUB - Integer Subtract</a></li>
+<li class="toctree-l4"><a class="reference internal" href="subi.html">SUBI - Integer Subtract Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sw.html">SW - Store 64-bit Word</a></li>
+<li class="toctree-l4"><a class="reference internal" href="syscall.html">SYSCALL - System Call</a></li>
+<li class="toctree-l4"><a class="reference internal" href="xor.html">XOR - Bitwise XOR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="xori.html">XORI - Bitwise XOR Immediate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modules.html">Verilog Module Index</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -138,7 +197,7 @@
         
           <li><a href="../isa.html">Raisin64 Instruction Set</a> &raquo;</li>
         
-      <li>&lt;no title&gt;</li>
+      <li>SUB - Integer Subtract</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -157,7 +216,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  
+  <div class="section" id="sub-integer-subtract">
+<h1>SUB - Integer Subtract<a class="headerlink" href="#sub-integer-subtract" title="Permalink to this headline">¶</a></h1>
+</div>
+
 
            </div>
            
@@ -166,10 +228,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="subi.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="subi.html" class="btn btn-neutral float-right" title="SUBI - Integer Subtract Immediate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="srli.html" class="btn btn-neutral" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="srli.html" class="btn btn-neutral" title="SRLI - Shift Right Logical Immediate" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

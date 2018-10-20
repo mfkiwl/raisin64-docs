@@ -1,0 +1,7 @@
+[
+    { "name": "11",   "bits": 2, "attr": "Size" },
+    { "name": "111", "bits": 5, "attr": "OpType" },
+    { "name": "OpCode", "bits": 2 },
+    { "name": "Rs",   "bits": 6 },
+    { "name": "Imm", "bits": 48 }
+]

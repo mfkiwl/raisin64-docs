@@ -1,0 +1,2 @@
+SUBI - Integer Subtract Immediate
+=================================

@@ -1,0 +1,2 @@
+XORI - Bitwise XOR Immediate
+============================
