@@ -1,5 +1,6 @@
 ]
     { "name": "Imm", "bits": 48 },
+    { "bits": 2},
     { "name": "Rs",   "bits": 6 },
     { "name": "OpCode", "bits": 2 },
     { "name": "111", "bits": 5, "attr": "OpType" },
