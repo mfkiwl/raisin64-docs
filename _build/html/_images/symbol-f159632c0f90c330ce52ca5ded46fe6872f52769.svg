@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="709" height="85" viewBox="0 0 709 85">
+  <g transform="translate(4.5,0.5)">
+    <g stroke="black" stroke-width="1" stroke-linecap="round" transform="translate(0,20)">
+      <line x2="700"/>
+      <line y2="40"/>
+      <line x2="700" y1="40" y2="40"/>
+      <line x1="700" x2="700" y2="40"/>
+      <line x1="678.125" x2="678.125" y2="5"/>
+      <line x1="678.125" x2="678.125" y1="35" y2="40"/>
+      <line x1="656.25" x2="656.25" y2="5"/>
+      <line x1="656.25" x2="656.25" y1="35" y2="40"/>
+      <line x1="634.375" x2="634.375" y2="5"/>
+      <line x1="634.375" x2="634.375" y1="35" y2="40"/>
+      <line x1="612.5" x2="612.5" y2="5"/>
+      <line x1="612.5" x2="612.5" y1="35" y2="40"/>
+      <line x1="590.625" x2="590.625" y2="5"/>
+      <line x1="590.625" x2="590.625" y1="35" y2="40"/>
+      <line x1="568.75" x2="568.75" y2="5"/>
+      <line x1="568.75" x2="568.75" y1="35" y2="40"/>
+      <line x1="546.875" x2="546.875" y2="5"/>
+      <line x1="546.875" x2="546.875" y1="35" y2="40"/>
+      <line x1="525" x2="525" y2="5"/>
+      <line x1="525" x2="525" y1="35" y2="40"/>
+      <line x1="503.125" x2="503.125" y2="5"/>
+      <line x1="503.125" x2="503.125" y1="35" y2="40"/>
+      <line x1="481.25" x2="481.25" y2="5"/>
+      <line x1="481.25" x2="481.25" y1="35" y2="40"/>
+      <line x1="459.375" x2="459.375" y2="5"/>
+      <line x1="459.375" x2="459.375" y1="35" y2="40"/>
+      <line x1="437.5" x2="437.5" y2="40"/>
+      <line x1="415.625" x2="415.625" y2="5"/>
+      <line x1="415.625" x2="415.625" y1="35" y2="40"/>
+      <line x1="393.75" x2="393.75" y2="5"/>
+      <line x1="393.75" x2="393.75" y1="35" y2="40"/>
+      <line x1="371.875" x2="371.875" y2="5"/>
+      <line x1="371.875" x2="371.875" y1="35" y2="40"/>
+      <line x1="350" x2="350" y2="5"/>
+      <line x1="350" x2="350" y1="35" y2="40"/>
+      <line x1="328.125" x2="328.125" y2="5"/>
+      <line x1="328.125" x2="328.125" y1="35" y2="40"/>
+      <line x1="306.25" x2="306.25" y2="40"/>
+      <line x1="284.375" x2="284.375" y2="5"/>
+      <line x1="284.375" x2="284.375" y1="35" y2="40"/>
+      <line x1="262.5" x2="262.5" y2="5"/>
+      <line x1="262.5" x2="262.5" y1="35" y2="40"/>
+      <line x1="240.625" x2="240.625" y2="5"/>
+      <line x1="240.625" x2="240.625" y1="35" y2="40"/>
+      <line x1="218.75" x2="218.75" y2="5"/>
+      <line x1="218.75" x2="218.75" y1="35" y2="40"/>
+      <line x1="196.875" x2="196.875" y2="5"/>
+      <line x1="196.875" x2="196.875" y1="35" y2="40"/>
+      <line x1="175" x2="175" y2="40"/>
+      <line x1="153.125" x2="153.125" y2="5"/>
+      <line x1="153.125" x2="153.125" y1="35" y2="40"/>
+      <line x1="131.25" x2="131.25" y2="40"/>
+      <line x1="109.375" x2="109.375" y2="5"/>
+      <line x1="109.375" x2="109.375" y1="35" y2="40"/>
+      <line x1="87.5" x2="87.5" y2="5"/>
+      <line x1="87.5" x2="87.5" y1="35" y2="40"/>
+      <line x1="65.625" x2="65.625" y2="5"/>
+      <line x1="65.625" x2="65.625" y1="35" y2="40"/>
+      <line x1="43.75" x2="43.75" y2="40"/>
+      <line x1="21.875" x2="21.875" y2="5"/>
+      <line x1="21.875" x2="21.875" y1="35" y2="40"/>
+    </g>
+    <g text-anchor="middle">
+      <g>
+        <g transform="translate(0,20)"/>
+        <g transform="translate(10.9375,16)">
+          <text x="678.125" font-size="14" font-family="sans-serif" font-weight="normal">0</text>
+          <text x="437.5" font-size="14" font-family="sans-serif" font-weight="normal">11</text>
+          <text x="415.625" font-size="14" font-family="sans-serif" font-weight="normal">12</text>
+          <text x="306.25" font-size="14" font-family="sans-serif" font-weight="normal">17</text>
+          <text x="284.375" font-size="14" font-family="sans-serif" font-weight="normal">18</text>
+          <text x="175" font-size="14" font-family="sans-serif" font-weight="normal">23</text>
+          <text x="153.125" font-size="14" font-family="sans-serif" font-weight="normal">24</text>
+          <text x="131.25" font-size="14" font-family="sans-serif" font-weight="normal">25</text>
+          <text x="109.375" font-size="14" font-family="sans-serif" font-weight="normal">26</text>
+          <text x="43.75" font-size="14" font-family="sans-serif" font-weight="normal">29</text>
+          <text x="21.875" font-size="14" font-family="sans-serif" font-weight="normal">30</text>
+          <text x="0" font-size="14" font-family="sans-serif" font-weight="normal">31</text>
+        </g>
+        <g transform="translate(10.9375,44)">
+          <text x="557.8125" font-size="14" font-family="sans-serif" font-weight="normal">
+            <tspan>Imm</tspan>
+          </text>
+          <text x="360.9375" font-size="14" font-family="sans-serif" font-weight="normal">
+            <tspan>Rs</tspan>
+          </text>
+          <text x="229.6875" font-size="14" font-family="sans-serif" font-weight="normal">
+            <tspan>Rd</tspan>
+          </text>
+          <text x="142.1875" font-size="14" font-family="sans-serif" font-weight="normal">
+            <tspan>Code</tspan>
+          </text>
+          <text x="76.5625" font-size="14" font-family="sans-serif" font-weight="normal">
+            <tspan>Type</tspan>
+          </text>
+          <text x="10.9375" font-size="14" font-family="sans-serif" font-weight="normal">
+            <tspan>10</tspan>
+          </text>
+        </g>
+        <g transform="translate(10.9375,80)">
+          <text x="10.9375" font-size="14" font-family="sans-serif" font-weight="normal">
+            <tspan>Size</tspan>
+          </text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
+

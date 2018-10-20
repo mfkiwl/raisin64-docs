@@ -24,7 +24,7 @@ There are 6 instruction formats in Raisin64
    :align: center
    :bigendian:
    :lanes: 1
-   :hspace: 600
+   :hspace: 400
    :bits: 16
    
 .. bitfields:: 16i.json
@@ -32,7 +32,7 @@ There are 6 instruction formats in Raisin64
    :align: center
    :bigendian:
    :lanes: 1
-   :hspace: 600
+   :hspace: 400
    :bits: 16
    
 .. bitfields:: 32r.json
@@ -40,7 +40,7 @@ There are 6 instruction formats in Raisin64
    :align: center
    :bigendian:
    :lanes: 1
-   :hspace: 900
+   :hspace: 700
    :bits: 32
    
 .. bitfields:: 32i.json
@@ -48,23 +48,23 @@ There are 6 instruction formats in Raisin64
    :align: center
    :bigendian:
    :lanes: 1
-   :hspace: 900
+   :hspace: 700
    :bits: 32
    
 .. bitfields:: 64s.json
    :alt: 64S
    :align: center
    :bigendian:
-   :lanes: 1
-   :hspace: 1200
+   :lanes: 2
+   :hspace: 700
    :bits: 64
    
 .. bitfields:: 64j.json
    :alt: 64J
    :align: center
    :bigendian:
-   :lanes: 1
-   :hspace: 1200
+   :lanes: 2
+   :hspace: 700
    :bits: 64
 
 Instructions

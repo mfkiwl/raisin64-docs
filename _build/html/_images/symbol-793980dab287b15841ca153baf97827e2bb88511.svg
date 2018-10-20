@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="409" height="85" viewBox="0 0 409 85">
+  <g transform="translate(4.5,0.5)">
+    <g stroke="black" stroke-width="1" stroke-linecap="round" transform="translate(0,20)">
+      <line x2="400"/>
+      <line y2="40"/>
+      <line x2="400" y1="40" y2="40"/>
+      <line x1="400" x2="400" y2="40"/>
+      <line x1="375" x2="375" y2="5"/>
+      <line x1="375" x2="375" y1="35" y2="40"/>
+      <line x1="350" x2="350" y2="5"/>
+      <line x1="350" x2="350" y1="35" y2="40"/>
+      <line x1="325" x2="325" y2="5"/>
+      <line x1="325" x2="325" y1="35" y2="40"/>
+      <line x1="300" x2="300" y2="5"/>
+      <line x1="300" x2="300" y1="35" y2="40"/>
+      <line x1="275" x2="275" y2="5"/>
+      <line x1="275" x2="275" y1="35" y2="40"/>
+      <line x1="250" x2="250" y2="40"/>
+      <line x1="225" x2="225" y2="5"/>
+      <line x1="225" x2="225" y1="35" y2="40"/>
+      <line x1="200" x2="200" y2="5"/>
+      <line x1="200" x2="200" y1="35" y2="40"/>
+      <line x1="175" x2="175" y2="5"/>
+      <line x1="175" x2="175" y1="35" y2="40"/>
+      <line x1="150" x2="150" y2="5"/>
+      <line x1="150" x2="150" y1="35" y2="40"/>
+      <line x1="125" x2="125" y2="5"/>
+      <line x1="125" x2="125" y1="35" y2="40"/>
+      <line x1="100" x2="100" y2="40"/>
+      <line x1="75" x2="75" y2="5"/>
+      <line x1="75" x2="75" y1="35" y2="40"/>
+      <line x1="50" x2="50" y2="5"/>
+      <line x1="50" x2="50" y1="35" y2="40"/>
+      <line x1="25" x2="25" y2="40"/>
+    </g>
+    <g text-anchor="middle">
+      <g>
+        <g transform="translate(0,20)"/>
+        <g transform="translate(12.5,16)">
+          <text x="375" font-size="14" font-family="sans-serif" font-weight="normal">0</text>
+          <text x="250" font-size="14" font-family="sans-serif" font-weight="normal">5</text>
+          <text x="225" font-size="14" font-family="sans-serif" font-weight="normal">6</text>
+          <text x="100" font-size="14" font-family="sans-serif" font-weight="normal">11</text>
+          <text x="75" font-size="14" font-family="sans-serif" font-weight="normal">12</text>
+          <text x="25" font-size="14" font-family="sans-serif" font-weight="normal">14</text>
+          <text x="0" font-size="14" font-family="sans-serif" font-weight="normal">15</text>
+        </g>
+        <g transform="translate(12.5,44)">
+          <text x="312.5" font-size="14" font-family="sans-serif" font-weight="normal">
+            <tspan>Rs</tspan>
+          </text>
+          <text x="162.5" font-size="14" font-family="sans-serif" font-weight="normal">
+            <tspan>Rd</tspan>
+          </text>
+          <text x="50" font-size="14" font-family="sans-serif" font-weight="normal">
+            <tspan>OpCode</tspan>
+          </text>
+          <text x="0" font-size="14" font-family="sans-serif" font-weight="normal">
+            <tspan>0</tspan>
+          </text>
+        </g>
+        <g transform="translate(12.5,80)">
+          <text x="0" font-size="14" font-family="sans-serif" font-weight="normal">
+            <tspan>Size</tspan>
+          </text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
+
