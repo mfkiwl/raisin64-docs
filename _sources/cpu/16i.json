@@ -1,5 +1,5 @@
-[
-    { "name": "1",   "bits": 1, "attr": "Size" },
-    { "name": "OpCode", "bits": 3 },
-    { "name": "Imm",   "bits": 12 }
 ]
+    { "name": "Imm",   "bits": 12 },
+    { "name": "OpCode", "bits": 3 },
+    { "name": "1",   "bits": 1, "attr": "Size" }
+[
