@@ -1,2 +1,2 @@
-BO - Branch if Odd
+S32 - Store 32-bit
 ==================

@@ -1,0 +1,2 @@
+ORI - Bitwise OR Immediate
+==========================

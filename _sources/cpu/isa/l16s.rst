@@ -1,2 +1,2 @@
-JALI - Jump and Link Immediate
+L16S - Load 16-bit Sign-Extend
 ==============================

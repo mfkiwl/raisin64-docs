@@ -1,0 +1,2 @@
+NORI - Bitwise NOR Immediate
+============================

@@ -1,2 +1,2 @@
-OR - Bitwise OR
+L8 - Load 8-bit
 ===============

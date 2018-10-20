@@ -1,5 +1,5 @@
-ADD
-===
+ADD - Integer Add
+=================
 
 .. bitfields:: add.json
    :alt: ADD

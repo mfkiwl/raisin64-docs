@@ -1,2 +1,2 @@
-BO - Branch if Odd
+S16 - Store 16-bit
 ==================

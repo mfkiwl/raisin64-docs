@@ -1,2 +1,2 @@
-XOR - Bitwise XOR
+L16 - Load 16-bit
 =================

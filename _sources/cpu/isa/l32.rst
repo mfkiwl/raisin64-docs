@@ -1,2 +1,2 @@
-XOR - Bitwise XOR
+L32 - Load 32-bit
 =================

@@ -1,2 +1,2 @@
-JALI - Jump and Link Immediate
+L32S - Load 32-bit Sign-Extend
 ==============================
