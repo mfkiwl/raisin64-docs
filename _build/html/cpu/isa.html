@@ -265,7 +265,7 @@
 <h2><a class="toc-backref" href="#id3">Instruction Format</a><a class="headerlink" href="#instruction-format" title="Permalink to this headline">¶</a></h2>
 <p>There are 6 instruction formats in Raisin64, register and immediate type 16-bit formats (16R and 16I), register and immediate type 32-bit formats (32R and 32I), and a combined register and immediate 64-bit format (64S) as well as a jump format (64J).</p>
 <p>Comparing the 16, 32, and 64-bit formats, the smaller instructions contain those instructions which will fit in the reduced number of bits.  The larger instruction formats are a super-set of the smaller ones, and whenever an instruction is available in a smaller format, it is available in all larger formats.  For example, ADDI is available in 16, 32, and 64-bit instruction size, with the permitted size of the immediate growing as the instruction grows.</p>
-<p>The 32 and 64-bit instruction formats share the same Unit/Op numbers, which are effectively the OpCode.  The Unit number represents the type of operation while the Op indicates the specific operation requested.</p>
+<p>The 32 and 64-bit instruction formats share the same Unit/Op numbers, which are effectively the OpCode.  The Unit number represents the type of operation while the Op indicates the specific operation requested.  This conveniently fits into the first 8 bits of the instruction, making the opcode easier to view and manipulate.</p>
 </div>
 <div class="section" id="bit-formats">
 <h2><a class="toc-backref" href="#id4">16-bit formats</a><a class="headerlink" href="#bit-formats" title="Permalink to this headline">¶</a></h2>

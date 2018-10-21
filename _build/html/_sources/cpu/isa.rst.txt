@@ -21,7 +21,7 @@ There are 6 instruction formats in Raisin64, register and immediate type 16-bit 
 
 Comparing the 16, 32, and 64-bit formats, the smaller instructions contain those instructions which will fit in the reduced number of bits.  The larger instruction formats are a super-set of the smaller ones, and whenever an instruction is available in a smaller format, it is available in all larger formats.  For example, ADDI is available in 16, 32, and 64-bit instruction size, with the permitted size of the immediate growing as the instruction grows.
 
-The 32 and 64-bit instruction formats share the same Unit/Op numbers, which are effectively the OpCode.  The Unit number represents the type of operation while the Op indicates the specific operation requested.
+The 32 and 64-bit instruction formats share the same Unit/Op numbers, which are effectively the OpCode.  The Unit number represents the type of operation while the Op indicates the specific operation requested.  This conveniently fits into the first 8 bits of the instruction, making the opcode easier to view and manipulate.
 
 16-bit formats
 --------------
@@ -223,5 +223,6 @@ Instructions
 
 .. toctree::
    :glob:
+   :maxdepth: 1
 
    isa/*

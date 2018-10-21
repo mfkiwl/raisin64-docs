@@ -221,6 +221,41 @@
             
   <div class="section" id="and-bitwise-and">
 <h1>AND - Bitwise AND<a class="headerlink" href="#and-bitwise-and" title="Permalink to this headline">¶</a></h1>
+<p>Bitwise ANDs registers <code class="docutils literal notranslate"><span class="pre">Rs1</span></code> and <code class="docutils literal notranslate"><span class="pre">Rs2</span></code>, placing the result in <code class="docutils literal notranslate"><span class="pre">Rd</span></code>.</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-asm notranslate"><div class="highlight"><pre><span></span><span class="nf">and</span> <span class="no">Rd</span><span class="p">,</span> <span class="no">Rs1</span><span class="p">,</span> <span class="no">Rs2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="operation">
+<h2>Operation<a class="headerlink" href="#operation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Rd</span> <span class="o">=</span> <span class="n">Rs1</span> <span class="o">&amp;</span> <span class="n">Rs2</span><span class="p">;</span>
+<span class="n">advance_pc</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="encoding">
+<h2>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">0</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Unit:</th><td class="field-body">3</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Op:</th><td class="field-body">0</td>
+</tr>
+<tr class="field-even field"><th class="field-name">16-bit Opcode:</th><td class="field-body">NONE</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">32-bit Opcode:</th><td class="field-body">0x8C</td>
+</tr>
+<tr class="field-even field"><th class="field-name">64-bit Opcode:</th><td class="field-body">0xCC</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 
 

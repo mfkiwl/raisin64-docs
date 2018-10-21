@@ -221,6 +221,43 @@
             
   <div class="section" id="bo-branch-if-odd">
 <h1>BO - Branch if Odd<a class="headerlink" href="#bo-branch-if-odd" title="Permalink to this headline">¶</a></h1>
+<p>Branches if the <code class="docutils literal notranslate"><span class="pre">Rs</span></code> register is odd.  This is useful in conjunction with the set type instructions (SEQ, SLE, etc.) to branch on a positive result as 1 is odd.</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-asm notranslate"><div class="highlight"><pre><span></span><span class="nf">bo</span> <span class="no">Rs</span><span class="p">,</span> <span class="no">imm</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="operation">
+<h2>Operation<a class="headerlink" href="#operation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">is_odd</span><span class="p">(</span><span class="n">Rs</span><span class="p">))</span>
+   <span class="n">pc</span> <span class="o">=</span> <span class="n">pc</span><span class="o">+</span><span class="p">(</span><span class="n">imm</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">);</span>
+<span class="k">else</span>
+   <span class="nf">advance_pc</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="encoding">
+<h2>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">1</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Unit:</th><td class="field-body">7</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Op:</th><td class="field-body">1</td>
+</tr>
+<tr class="field-even field"><th class="field-name">16-bit Opcode:</th><td class="field-body">NONE</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">32-bit Opcode:</th><td class="field-body">0xBD</td>
+</tr>
+<tr class="field-even field"><th class="field-name">64-bit Opcode:</th><td class="field-body">0xFD</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 
 
