@@ -4,8 +4,8 @@
     { "name": "Rs1",   "bits": 6 },
     { "name": "Rd2",   "bits": 6 },
     { "name": "Rd",   "bits": 6 },
-    { "name": "Code", "bits": 2 },
+    { "name": "Op", "bits": 2 },
     { "name": "Unit", "bits": 3 },
-    { "name": "1", "bits": 1, "attr": "Type" },
+    { "name": "R/I", "bits": 1 },
     { "name": "11",   "bits": 2, "attr": "Size" }
 ]

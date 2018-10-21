@@ -2,7 +2,7 @@
     { "name": "Imm", "bits": 48 },
     { "bits": 2},
     { "name": "Rs",   "bits": 6 },
-    { "name": "Code", "bits": 2 },
+    { "name": "Op", "bits": 2 },
     { "name": "111", "bits": 3, "attr": "Unit" },
     { "name": "1", "bits": 1, "attr": "Type" },
     { "name": "11",   "bits": 2, "attr": "Size" }

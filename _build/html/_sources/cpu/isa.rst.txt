@@ -17,7 +17,72 @@ Instructions are variable length (16-64) bit, and some have multiple forms like 
 Instruction Format
 ------------------
 
-There are 6 instruction formats in Raisin64
+There are 6 instruction formats in Raisin64, register and immediate type 16-bit formats (16R and 16I), register and immediate type 32-bit formats (32R and 32I), and a combined register and immediate 64-bit format (64S) as well as a jump format (64J).
+
+Comparing the 16, 32, and 64-bit formats, the smaller instructions contain those instructions which whill fit in the reduced number of bits.  The larger instruction formats are a superset of the smaller ones, and whenever an instruction is available in a smaller format, it is available in all larger formats.  For example, ADDI is available in 16, 32, and 64-bit instruction size, with the permitted size of the immediate growing as the instruction grows.
+
+The 32 and 64-bit instruction formats share the same Unit/Op numbers, which are effectively the OpCode.  The Unit number represents the type of operation while the Op indicates the specific operation requested.
+
+Unit/Op Table
+-------------
+
++-----+----------------------+-------------------+
+| R/I |         Unit         |         Op        |
++=====+======================+===================+
+| 0/1 | 0 - Integer Math     | | 0 - ADD         |
+|     |                      | | 1 - SUB         |
+|     |                      | | 2 - MUL         |
+|     |                      | | 3 - DIV         |
+|     +----------------------+-------------------+
+|     | 1 - Compare/Set      | | 0 - SEQ         |
+|     |                      | | 1 - SLE         |
+|     |                      | | 2 - SLT         |
+|     |                      | | 3 - SNE         |
+|     +----------------------+-------------------+
+|     | 2 - Shift            | | 0 - SLL         |
+|     |                      | | 1 - SRA         |
+|     |                      | | 2 - SRL         |
+|     +----------------------+-------------------+
+|     | 3 - Bitwise Op       | | 0 - AND         |
+|     |                      | | 1 - NOR         |
+|     |                      | | 2 - OR          |
+|     |                      | | 3 - XOR         |
++-----+----------------------+-------------------+
+|  0  | 4 - Reserved         |                   |
+|     +----------------------+-------------------+
+|     | 5 - Reserved         |                   |
+|     +----------------------+-------------------+
+|     | 6 - Reserved         |                   |
++-----+----------------------+-------------------+
+|  1  | 4 - Regular Load     | | 0 - LW          |
+|     |                      | | 1 - L32         |
+|     |                      | | 2 - L16         |
+|     |                      | | 3 - L8          |
+|     +----------------------+-------------------+
+|     | 5 - Sign-Extend Load | | 0 - SW          |
+|     |                      | | 1 - S32         |
+|     |                      | | 2 - S16         |
+|     |                      | | 3 - S8          |
+|     +----------------------+-------------------+
+|     | 6 - Store            | | 0 - SW          |
+|     |                      | | 1 - S32         |
+|     |                      | | 2 - S16         |
+|     |                      | | 3 - S8          |
++-----+----------------------+-------------------+
+|  0  | 7 - Jump/Special     | | 0 - SYSCALL     |
+|     |                      | | 1 - Reserved    |
+|     |                      | | 2 - JAL         |
+|     |                      | | 3 - J           |
++-----+----------------------+-------------------+
+|  1  | 7 - Jump Immediate   | | 0 - BE          |
+|     |                      | | 1 - BO          |
+|     |                      | | 2 - JALI        |
+|     |                      | | 3 - JI          |
++-----+----------------------+-------------------+
+
+
+16R - 16-bit Register Format
+++++++++++++++++++++++++++++
 
 .. bitfields:: 16r.json
    :alt: 16R
@@ -27,6 +92,12 @@ There are 6 instruction formats in Raisin64
    :hspace: 400
    :bits: 16
    
+The 16-bit regsiter format is a compact expression of select instructions operating with one source and one destination register.  Instructions normally operating on three registers, such as ADD, instead operate in 2-register mode (i.e. Rd = Rd + Rs).
+   
+   
+16I - 16-bit Immediate Format
++++++++++++++++++++++++++++++
+
 .. bitfields:: 16i.json
    :alt: 16I
    :align: center
@@ -35,6 +106,12 @@ There are 6 instruction formats in Raisin64
    :hspace: 400
    :bits: 16
    
+The 16-bit immediate format is used only for ADDI and SUBI, allowing for small increment and decrement operations in a compact format.
+   
+   
+32R - 32-bit Register Format
+++++++++++++++++++++++++++++
+
 .. bitfields:: 32r.json
    :alt: 32R
    :align: center
@@ -43,6 +120,12 @@ There are 6 instruction formats in Raisin64
    :hspace: 700
    :bits: 32
    
+All register type insturctions in the Raisin64 are available in 32R format.   
+   
+   
+32I - 32-bit Immediate Format
++++++++++++++++++++++++++++++
+
 .. bitfields:: 32i.json
    :alt: 32I
    :align: center
@@ -51,6 +134,12 @@ There are 6 instruction formats in Raisin64
    :hspace: 700
    :bits: 32
    
+With the exception of JI, JALI, DIVI, and MULI, all immediate type instructions in the Raisin64 are available in the 32I format albeit with a reduced 12-bit immediate value.
+   
+   
+64S - 64-bit Standard Format
+++++++++++++++++++++++++++++
+
 .. bitfields:: 64s.json
    :alt: 64S
    :align: center
@@ -59,6 +148,12 @@ There are 6 instruction formats in Raisin64
    :hspace: 700
    :bits: 64
    
+All register and immediate type instructions (with the expcetion of branch insturctions) from the 32-bit instruction formats are available in the unified 64S format.  This 64-bit format has space for 4 registers (allowing for instructions like MUL) in addition to 32-bits of immediate data (for shifting and bitwise operations).
+   
+   
+64J - 64-bit Jump Format
+++++++++++++++++++++++++
+
 .. bitfields:: 64j.json
    :alt: 64J
    :align: center
@@ -66,6 +161,8 @@ There are 6 instruction formats in Raisin64
    :lanes: 2
    :hspace: 700
    :bits: 64
+   
+A special jump format for large displacement BE, BO, JI, and JALI, the 64J format allows for a full 48-bit displacement/jump, sufficient to cover the entire virtual address space of the Raisin64.
 
 Instructions
 ------------
