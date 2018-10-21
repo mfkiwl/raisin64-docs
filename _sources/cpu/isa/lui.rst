@@ -1,0 +1,2 @@
+LUI - Load Upper Immediate
+==========================

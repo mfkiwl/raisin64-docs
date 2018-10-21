@@ -1,0 +1,11 @@
+[
+    { "name": "Shift/Imm", "bits": 32 },
+    { "name": "Rs2",   "bits": 6 },
+    { "name": "Rs1",   "bits": 6 },
+    { "name": "Rd2",   "bits": 6 },
+    { "name": "Rd",   "bits": 6 },
+    { "name": "Op", "bits": 2 },
+    { "name": "Unit", "bits": 3 },
+    { "name": "R/I", "bits": 1 },
+    { "name": "11",   "bits": 2, "attr": "Size" }
+]
