@@ -221,7 +221,7 @@
             
   <div class="section" id="be-branch-if-even">
 <h1>BE - Branch if Even<a class="headerlink" href="#be-branch-if-even" title="Permalink to this headline">¶</a></h1>
-<p>Branches if the <code class="docutils literal notranslate"><span class="pre">Rs</span></code> register is even.  An unconditional branch can be accomplished by using <code class="docutils literal notranslate"><span class="pre">$r0</span></code> as zero is even.</p>
+<p>Branches if the <code class="docutils literal notranslate"><span class="pre">Rs</span></code> register is even.  An unconditional branch can be accomplished by using <code class="docutils literal notranslate"><span class="pre">$r0</span></code> as zero is even.   As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.</p>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-asm notranslate"><div class="highlight"><pre><span></span><span class="nf">be</span> <span class="no">Rs</span><span class="p">,</span> <span class="no">imm</span>

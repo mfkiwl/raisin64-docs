@@ -221,6 +221,41 @@
             
   <div class="section" id="jal-jump-and-link">
 <h1>JAL - Jump and Link<a class="headerlink" href="#jal-jump-and-link" title="Permalink to this headline">¶</a></h1>
+<p>Unconditional jump to the instruction in <code class="docutils literal notranslate"><span class="pre">Rs</span></code>, placing the return address in $63.  As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-asm notranslate"><div class="highlight"><pre><span></span><span class="nf">jal</span> <span class="no">Rs</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="operation">
+<h2>Operation<a class="headerlink" href="#operation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">r63</span> <span class="o">=</span> <span class="n">next_pc</span><span class="p">();</span>
+<span class="n">pc</span> <span class="o">=</span> <span class="n">Rs</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="encoding">
+<h2>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">0</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Unit:</th><td class="field-body">7</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Op:</th><td class="field-body">2</td>
+</tr>
+<tr class="field-even field"><th class="field-name">16-bit Opcode:</th><td class="field-body">0x6</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">32-bit Opcode:</th><td class="field-body">0x9E</td>
+</tr>
+<tr class="field-even field"><th class="field-name">64-bit Opcode:</th><td class="field-body">0xDE</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 
 

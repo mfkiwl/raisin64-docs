@@ -1,7 +1,7 @@
 BO - Branch if Odd
 ==================
 
-Branches if the ``Rs`` register is odd.  This is useful in conjunction with the set type instructions (SEQ, SLE, etc.) to branch on a positive result as 1 is odd.
+Branches if the ``Rs`` register is odd.  This is useful in conjunction with the set type instructions (SEQ, SLE, etc.) to branch on a positive result as 1 is odd.   As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.
 
 Usage
 -----

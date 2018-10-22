@@ -1,7 +1,7 @@
 BE - Branch if Even
 ===================
 
-Branches if the ``Rs`` register is even.  An unconditional branch can be accomplished by using ``$r0`` as zero is even.
+Branches if the ``Rs`` register is even.  An unconditional branch can be accomplished by using ``$r0`` as zero is even.   As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.
 
 Usage
 -----

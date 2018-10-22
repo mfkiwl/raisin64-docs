@@ -221,7 +221,7 @@
             
   <div class="section" id="bo-branch-if-odd">
 <h1>BO - Branch if Odd<a class="headerlink" href="#bo-branch-if-odd" title="Permalink to this headline">¶</a></h1>
-<p>Branches if the <code class="docutils literal notranslate"><span class="pre">Rs</span></code> register is odd.  This is useful in conjunction with the set type instructions (SEQ, SLE, etc.) to branch on a positive result as 1 is odd.</p>
+<p>Branches if the <code class="docutils literal notranslate"><span class="pre">Rs</span></code> register is odd.  This is useful in conjunction with the set type instructions (SEQ, SLE, etc.) to branch on a positive result as 1 is odd.   As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.</p>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-asm notranslate"><div class="highlight"><pre><span></span><span class="nf">bo</span> <span class="no">Rs</span><span class="p">,</span> <span class="no">imm</span>

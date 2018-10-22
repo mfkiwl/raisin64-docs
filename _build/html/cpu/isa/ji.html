@@ -221,6 +221,40 @@
             
   <div class="section" id="ji-jump-immediate">
 <h1>JI - Jump Immediate<a class="headerlink" href="#ji-jump-immediate" title="Permalink to this headline">¶</a></h1>
+<p>Unconditional jump to the immediate value.  The top 16 bits of the jump destination address are taken from the current program counter.  As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.  Due to the size of the immediate value, JI is only available in 64J format.</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-asm notranslate"><div class="highlight"><pre><span></span><span class="nf">ji</span> <span class="no">imm</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="operation">
+<h2>Operation<a class="headerlink" href="#operation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">pc</span> <span class="o">=</span> <span class="p">(</span><span class="n">pc</span> <span class="o">&amp;</span> <span class="mh">0xffff000000000000</span><span class="p">)</span> <span class="o">|</span> <span class="n">imm</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="encoding">
+<h2>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">1</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Unit:</th><td class="field-body">7</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Op:</th><td class="field-body">3</td>
+</tr>
+<tr class="field-even field"><th class="field-name">16-bit Opcode:</th><td class="field-body">NONE</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">32-bit Opcode:</th><td class="field-body">NONE</td>
+</tr>
+<tr class="field-even field"><th class="field-name">64-bit Opcode:</th><td class="field-body">0xFF</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 
 
