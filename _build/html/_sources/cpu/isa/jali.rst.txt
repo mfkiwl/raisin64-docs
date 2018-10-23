@@ -1,7 +1,7 @@
 JALI - Jump and Link Immediate
 ==============================
 
-Unconditional jump to the immediate value, placing the return address in $63.  The top 16 bits of the jump destination address are taken from the current program counter.  As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.  Due to the size of the immediate value, JALI is only available in 64J format.
+Unconditional jump to the immediate value, placing the return address in ``r63``.  The top 16 bits of the jump destination address are taken from the current program counter.  As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.  Due to the size of the immediate value, JALI is only available in 64J format.
 
 Usage
 -----

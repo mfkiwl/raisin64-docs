@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>J - Jump &mdash; Raisin64 0.1 documentation</title>
+  <title>BEQAL - Branch if Equal And Link &mdash; Raisin64 0.1 documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="JAL - Jump and Link" href="jal.html" />
-    <link rel="prev" title="F* - FPU Call" href="f.html" /> 
+    <link rel="next" title="DIV - Integer Divide" href="div.html" />
+    <link rel="prev" title="BEQ - Branch if Equal" href="beq.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -100,11 +100,11 @@
 <li class="toctree-l4"><a class="reference internal" href="and.html">AND - Bitwise AND</a></li>
 <li class="toctree-l4"><a class="reference internal" href="andi.html">ANDI - Bitwise AND Immediate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="beq.html">BEQ - Branch if Equal</a></li>
-<li class="toctree-l4"><a class="reference internal" href="beqal.html">BEQAL - Branch if Equal And Link</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">BEQAL - Branch if Equal And Link</a></li>
 <li class="toctree-l4"><a class="reference internal" href="div.html">DIV - Integer Divide</a></li>
 <li class="toctree-l4"><a class="reference internal" href="divu.html">DIVU - Unsigned Integer Divide</a></li>
 <li class="toctree-l4"><a class="reference internal" href="f.html">F* - FPU Call</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">J - Jump</a></li>
+<li class="toctree-l4"><a class="reference internal" href="j.html">J - Jump</a></li>
 <li class="toctree-l4"><a class="reference internal" href="jal.html">JAL - Jump and Link</a></li>
 <li class="toctree-l4"><a class="reference internal" href="jali.html">JALI - Jump and Link Immediate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="ji.html">JI - Jump Immediate</a></li>
@@ -125,16 +125,16 @@
 <li class="toctree-l4"><a class="reference internal" href="s16.html">S16 - Store 16-bit</a></li>
 <li class="toctree-l4"><a class="reference internal" href="s32.html">S32 - Store 32-bit</a></li>
 <li class="toctree-l4"><a class="reference internal" href="s8.html">S8 - Store 8-bit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="sgt.html">SGT - Set 1 if Greater Than</a></li>
-<li class="toctree-l4"><a class="reference internal" href="sgti.html">SGTI - Set 1 if Greater Than Immediate</a></li>
-<li class="toctree-l4"><a class="reference internal" href="sgtiu.html">SGTIU - Set 1 if Greater Than Immediate Unsigned</a></li>
-<li class="toctree-l4"><a class="reference internal" href="sgtu.html">SGTU - Set 1 if Greater Than Unsigned</a></li>
+<li class="toctree-l4"><a class="reference internal" href="seq.html">SEQ - Set 1 if Equal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="seqi.html">SEQI - Set 1 if Equal Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sle.html">SLE - Set 1 if Less than or Equal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="slei.html">SLEI - Set 1 if Less than or Equal Immediate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="sll.html">SLL - Shift Left Logical</a></li>
 <li class="toctree-l4"><a class="reference internal" href="slli.html">SLLI - Shift Left Logical Immediate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="slt.html">SLT - Set 1 if Less Than</a></li>
 <li class="toctree-l4"><a class="reference internal" href="slti.html">SLTI - Set 1 if Less Than Immediate</a></li>
-<li class="toctree-l4"><a class="reference internal" href="sltiu.html">SLTIU - Set 1 if Less Than Immediate Unsigned</a></li>
-<li class="toctree-l4"><a class="reference internal" href="sltu.html">SLTU - Set 1 if Less Than Unsigned</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sne.html">SNE - Set 1 if Not Equal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="snei.html">SNEI - Set 1 if Not Equal Immediate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="sra.html">SRA - Shift Right Arithmetic</a></li>
 <li class="toctree-l4"><a class="reference internal" href="srai.html">SRAI - Shift Right Arithmetic Immediate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="srl.html">SRL - Shift Right Logical</a></li>
@@ -201,13 +201,13 @@
         
           <li><a href="../isa.html">Raisin64 Instruction Set</a> &raquo;</li>
         
-      <li>J - Jump</li>
+      <li>BEQAL - Branch if Equal And Link</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/cpu/isa/j.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/cpu/isa/beqal.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -220,18 +220,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="j-jump">
-<h1>J - Jump<a class="headerlink" href="#j-jump" title="Permalink to this headline">¶</a></h1>
-<p>Unconditional jump to the instruction in <code class="docutils literal notranslate"><span class="pre">Rs</span></code>.  As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.</p>
+  <div class="section" id="beqal-branch-if-equal-and-link">
+<h1>BEQAL - Branch if Equal And Link<a class="headerlink" href="#beqal-branch-if-equal-and-link" title="Permalink to this headline">¶</a></h1>
+<p>Branches if the <code class="docutils literal notranslate"><span class="pre">Rs</span></code> register is equal to the <code class="docutils literal notranslate"><span class="pre">Rd</span></code> register by a signed displacement in the immediate field.  The address of the next linear instruction is placed as a return address in <code class="docutils literal notranslate"><span class="pre">r63</span></code>.  As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">An unconditional branch can be accomplished by using the zero register <code class="docutils literal notranslate"><span class="pre">r0</span></code>.</p>
+</div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-asm notranslate"><div class="highlight"><pre><span></span><span class="nf">j</span> <span class="no">Rs</span>
+<div class="highlight-asm notranslate"><div class="highlight"><pre><span></span><span class="nf">beqal</span> <span class="no">Rd</span><span class="p">,</span> <span class="no">Rs</span><span class="p">,</span> <span class="no">imm</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="operation">
 <h2>Operation<a class="headerlink" href="#operation" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">pc</span> <span class="o">=</span> <span class="n">Rs</span><span class="p">;</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">Rd</span> <span class="o">==</span> <span class="n">Rs</span><span class="p">)</span>
+   <span class="n">r63</span> <span class="o">=</span> <span class="n">next_pc</span><span class="p">();</span>
+   <span class="n">pc</span> <span class="o">=</span> <span class="n">pc</span><span class="o">+</span><span class="p">(</span><span class="n">imm</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">);</span>
+<span class="k">else</span>
+   <span class="nf">advance_pc</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -241,17 +249,17 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">0</td>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">1</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Unit:</th><td class="field-body">7</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Op:</th><td class="field-body">3</td>
+<tr class="field-odd field"><th class="field-name">Op:</th><td class="field-body">1</td>
 </tr>
-<tr class="field-even field"><th class="field-name">16-bit Opcode:</th><td class="field-body">0x5</td>
+<tr class="field-even field"><th class="field-name">16-bit Opcode:</th><td class="field-body">NONE</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">32-bit Opcode:</th><td class="field-body">0x9F</td>
+<tr class="field-odd field"><th class="field-name">32-bit Opcode:</th><td class="field-body">0xBD</td>
 </tr>
-<tr class="field-even field"><th class="field-name">64-bit Opcode:</th><td class="field-body">0xDF</td>
+<tr class="field-even field"><th class="field-name">64-bit Opcode:</th><td class="field-body">0xFD</td>
 </tr>
 </tbody>
 </table>
@@ -266,10 +274,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="jal.html" class="btn btn-neutral float-right" title="JAL - Jump and Link" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="div.html" class="btn btn-neutral float-right" title="DIV - Integer Divide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="f.html" class="btn btn-neutral" title="F* - FPU Call" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="beq.html" class="btn btn-neutral" title="BEQ - Branch if Equal" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

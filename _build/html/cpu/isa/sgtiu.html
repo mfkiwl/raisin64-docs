@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>J - Jump &mdash; Raisin64 0.1 documentation</title>
+  <title>SGTIU - Set 1 if Greater Than Immediate Unsigned &mdash; Raisin64 0.1 documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="JAL - Jump and Link" href="jal.html" />
-    <link rel="prev" title="F* - FPU Call" href="f.html" /> 
+    <link rel="next" title="SGTU - Set 1 if Greater Than Unsigned" href="sgtu.html" />
+    <link rel="prev" title="SGTI - Set 1 if Greater Than Immediate" href="sgti.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -104,7 +104,7 @@
 <li class="toctree-l4"><a class="reference internal" href="div.html">DIV - Integer Divide</a></li>
 <li class="toctree-l4"><a class="reference internal" href="divu.html">DIVU - Unsigned Integer Divide</a></li>
 <li class="toctree-l4"><a class="reference internal" href="f.html">F* - FPU Call</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">J - Jump</a></li>
+<li class="toctree-l4"><a class="reference internal" href="j.html">J - Jump</a></li>
 <li class="toctree-l4"><a class="reference internal" href="jal.html">JAL - Jump and Link</a></li>
 <li class="toctree-l4"><a class="reference internal" href="jali.html">JALI - Jump and Link Immediate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="ji.html">JI - Jump Immediate</a></li>
@@ -127,7 +127,7 @@
 <li class="toctree-l4"><a class="reference internal" href="s8.html">S8 - Store 8-bit</a></li>
 <li class="toctree-l4"><a class="reference internal" href="sgt.html">SGT - Set 1 if Greater Than</a></li>
 <li class="toctree-l4"><a class="reference internal" href="sgti.html">SGTI - Set 1 if Greater Than Immediate</a></li>
-<li class="toctree-l4"><a class="reference internal" href="sgtiu.html">SGTIU - Set 1 if Greater Than Immediate Unsigned</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">SGTIU - Set 1 if Greater Than Immediate Unsigned</a></li>
 <li class="toctree-l4"><a class="reference internal" href="sgtu.html">SGTU - Set 1 if Greater Than Unsigned</a></li>
 <li class="toctree-l4"><a class="reference internal" href="sll.html">SLL - Shift Left Logical</a></li>
 <li class="toctree-l4"><a class="reference internal" href="slli.html">SLLI - Shift Left Logical Immediate</a></li>
@@ -201,13 +201,13 @@
         
           <li><a href="../isa.html">Raisin64 Instruction Set</a> &raquo;</li>
         
-      <li>J - Jump</li>
+      <li>SGTIU - Set 1 if Greater Than Immediate Unsigned</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/cpu/isa/j.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/cpu/isa/sgtiu.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -220,42 +220,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="j-jump">
-<h1>J - Jump<a class="headerlink" href="#j-jump" title="Permalink to this headline">¶</a></h1>
-<p>Unconditional jump to the instruction in <code class="docutils literal notranslate"><span class="pre">Rs</span></code>.  As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.</p>
-<div class="section" id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-asm notranslate"><div class="highlight"><pre><span></span><span class="nf">j</span> <span class="no">Rs</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="operation">
-<h2>Operation<a class="headerlink" href="#operation" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">pc</span> <span class="o">=</span> <span class="n">Rs</span><span class="p">;</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="encoding">
-<h2>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline">¶</a></h2>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">0</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Unit:</th><td class="field-body">7</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Op:</th><td class="field-body">3</td>
-</tr>
-<tr class="field-even field"><th class="field-name">16-bit Opcode:</th><td class="field-body">0x5</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">32-bit Opcode:</th><td class="field-body">0x9F</td>
-</tr>
-<tr class="field-even field"><th class="field-name">64-bit Opcode:</th><td class="field-body">0xDF</td>
-</tr>
-</tbody>
-</table>
-</div>
+  <div class="section" id="sgtiu-set-1-if-greater-than-immediate-unsigned">
+<h1>SGTIU - Set 1 if Greater Than Immediate Unsigned<a class="headerlink" href="#sgtiu-set-1-if-greater-than-immediate-unsigned" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -266,10 +232,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="jal.html" class="btn btn-neutral float-right" title="JAL - Jump and Link" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sgtu.html" class="btn btn-neutral float-right" title="SGTU - Set 1 if Greater Than Unsigned" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="f.html" class="btn btn-neutral" title="F* - FPU Call" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="sgti.html" class="btn btn-neutral" title="SGTI - Set 1 if Greater Than Immediate" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -111,8 +111,8 @@
 <li class="toctree-l4"><a class="reference internal" href="isa/addi.html">ADDI - Integer Add Immediate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/and.html">AND - Bitwise AND</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/andi.html">ANDI - Bitwise AND Immediate</a></li>
-<li class="toctree-l4"><a class="reference internal" href="isa/be.html">BE - Branch if Even</a></li>
-<li class="toctree-l4"><a class="reference internal" href="isa/bo.html">BO - Branch if Odd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/beq.html">BEQ - Branch if Equal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/beqal.html">BEQAL - Branch if Equal And Link</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/div.html">DIV - Integer Divide</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/divu.html">DIVU - Unsigned Integer Divide</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/f.html">F* - FPU Call</a></li>
@@ -137,16 +137,16 @@
 <li class="toctree-l4"><a class="reference internal" href="isa/s16.html">S16 - Store 16-bit</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/s32.html">S32 - Store 32-bit</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/s8.html">S8 - Store 8-bit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="isa/seq.html">SEQ - Set 1 if Equal</a></li>
-<li class="toctree-l4"><a class="reference internal" href="isa/seqi.html">SEQI - Set 1 if Equal Immediate</a></li>
-<li class="toctree-l4"><a class="reference internal" href="isa/sle.html">SLE - Set 1 if Less than or Equal</a></li>
-<li class="toctree-l4"><a class="reference internal" href="isa/slei.html">SLEI - Set 1 if Less than or Equal Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sgt.html">SGT - Set 1 if Greater Than</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sgti.html">SGTI - Set 1 if Greater Than Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sgtiu.html">SGTIU - Set 1 if Greater Than Immediate Unsigned</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sgtu.html">SGTU - Set 1 if Greater Than Unsigned</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/sll.html">SLL - Shift Left Logical</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/slli.html">SLLI - Shift Left Logical Immediate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/slt.html">SLT - Set 1 if Less Than</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/slti.html">SLTI - Set 1 if Less Than Immediate</a></li>
-<li class="toctree-l4"><a class="reference internal" href="isa/sne.html">SNE - Set 1 if Not Equal</a></li>
-<li class="toctree-l4"><a class="reference internal" href="isa/snei.html">SNEI - Set 1 if Not Equal Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sltiu.html">SLTIU - Set 1 if Less Than Immediate Unsigned</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sltu.html">SLTU - Set 1 if Less Than Unsigned</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/sra.html">SRA - Shift Right Arithmetic</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/srai.html">SRAI - Shift Right Arithmetic Immediate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/srl.html">SRL - Shift Right Logical</a></li>
@@ -371,13 +371,13 @@
 <tr class="row-odd"><td>1 - SUB/SUBI</td>
 </tr>
 <tr class="row-even"><td rowspan="4">1 - Compare/Set</td>
-<td>0 - SEQ/SEQI</td>
+<td>0 - SLT/SLTI</td>
 </tr>
-<tr class="row-odd"><td>1 - SLE/SLEI</td>
+<tr class="row-odd"><td>1 - SLTU/SLTIU</td>
 </tr>
-<tr class="row-even"><td>2 - SLT/SLTI</td>
+<tr class="row-even"><td>2 - SGT/SGTI</td>
 </tr>
-<tr class="row-odd"><td>3 - SNE/SNEI</td>
+<tr class="row-odd"><td>3 - SGTU/SGTIU</td>
 </tr>
 <tr class="row-even"><td rowspan="3">2 - Shift</td>
 <td>0 - SLL/SLLI</td>
@@ -451,9 +451,9 @@
 </tr>
 <tr class="row-odd"><td rowspan="4">1</td>
 <td rowspan="4">7 - Jump Immediate</td>
-<td>0 - BE</td>
+<td>0 - BEQ</td>
 </tr>
-<tr class="row-even"><td>1 - BO</td>
+<tr class="row-even"><td>1 - BEQAL</td>
 </tr>
 <tr class="row-odd"><td>2 - JALI <a class="footnote-reference" href="#id7" id="id5">[1]</a></td>
 </tr>
@@ -483,8 +483,8 @@
 <li class="toctree-l1"><a class="reference internal" href="isa/addi.html">ADDI - Integer Add Immediate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/and.html">AND - Bitwise AND</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/andi.html">ANDI - Bitwise AND Immediate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="isa/be.html">BE - Branch if Even</a></li>
-<li class="toctree-l1"><a class="reference internal" href="isa/bo.html">BO - Branch if Odd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/beq.html">BEQ - Branch if Equal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/beqal.html">BEQAL - Branch if Equal And Link</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/div.html">DIV - Integer Divide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/divu.html">DIVU - Unsigned Integer Divide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/f.html">F* - FPU Call</a></li>
@@ -509,16 +509,16 @@
 <li class="toctree-l1"><a class="reference internal" href="isa/s16.html">S16 - Store 16-bit</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/s32.html">S32 - Store 32-bit</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/s8.html">S8 - Store 8-bit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="isa/seq.html">SEQ - Set 1 if Equal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="isa/seqi.html">SEQI - Set 1 if Equal Immediate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="isa/sle.html">SLE - Set 1 if Less than or Equal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="isa/slei.html">SLEI - Set 1 if Less than or Equal Immediate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/sgt.html">SGT - Set 1 if Greater Than</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/sgti.html">SGTI - Set 1 if Greater Than Immediate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/sgtiu.html">SGTIU - Set 1 if Greater Than Immediate Unsigned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/sgtu.html">SGTU - Set 1 if Greater Than Unsigned</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/sll.html">SLL - Shift Left Logical</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/slli.html">SLLI - Shift Left Logical Immediate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/slt.html">SLT - Set 1 if Less Than</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/slti.html">SLTI - Set 1 if Less Than Immediate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="isa/sne.html">SNE - Set 1 if Not Equal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="isa/snei.html">SNEI - Set 1 if Not Equal Immediate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/sltiu.html">SLTIU - Set 1 if Less Than Immediate Unsigned</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/sltu.html">SLTU - Set 1 if Less Than Unsigned</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/sra.html">SRA - Shift Right Arithmetic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/srai.html">SRAI - Shift Right Arithmetic Immediate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/srl.html">SRL - Shift Right Logical</a></li>
