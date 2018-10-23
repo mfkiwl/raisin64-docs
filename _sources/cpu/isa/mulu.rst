@@ -1,2 +1,2 @@
-MUL - Integer Multiply Immediate
+MULU - Unsigned Integer Multiply
 ================================

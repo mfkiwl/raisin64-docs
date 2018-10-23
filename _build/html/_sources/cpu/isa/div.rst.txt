@@ -1,7 +1,7 @@
 DIV - Integer Divide
 ====================
 
-Divides registers ``Rs1`` by ``Rs2`` and places the quotient in ``Rd`` and the remainder in ``Rd2``.
+Divides registers ``Rs1`` by ``Rs2``, and places the quotient in ``Rd`` and the remainder in ``Rd2``, treating operands as 2's complement signed.
 
 Usage
 -----

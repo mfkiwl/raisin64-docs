@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>DIV - Integer Divide &mdash; Raisin64 0.1 documentation</title>
+  <title>MULU - Unsigned Integer Multiply &mdash; Raisin64 0.1 documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="DIVU - Unsigned Integer Divide" href="divu.html" />
-    <link rel="prev" title="BO - Branch if Odd" href="bo.html" /> 
+    <link rel="next" title="NOR - Bitwise NOR" href="nor.html" />
+    <link rel="prev" title="MUL - Integer Multiply" href="mul.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -101,7 +101,7 @@
 <li class="toctree-l4"><a class="reference internal" href="andi.html">ANDI - Bitwise AND Immediate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="be.html">BE - Branch if Even</a></li>
 <li class="toctree-l4"><a class="reference internal" href="bo.html">BO - Branch if Odd</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">DIV - Integer Divide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="div.html">DIV - Integer Divide</a></li>
 <li class="toctree-l4"><a class="reference internal" href="divu.html">DIVU - Unsigned Integer Divide</a></li>
 <li class="toctree-l4"><a class="reference internal" href="f.html">F* - FPU Call</a></li>
 <li class="toctree-l4"><a class="reference internal" href="j.html">J - Jump</a></li>
@@ -117,7 +117,7 @@
 <li class="toctree-l4"><a class="reference internal" href="lui.html">LUI - Load Upper Immediate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="lw.html">LW - Load 64-bit Word</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mul.html">MUL - Integer Multiply</a></li>
-<li class="toctree-l4"><a class="reference internal" href="mulu.html">MULU - Unsigned Integer Multiply</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">MULU - Unsigned Integer Multiply</a></li>
 <li class="toctree-l4"><a class="reference internal" href="nor.html">NOR - Bitwise NOR</a></li>
 <li class="toctree-l4"><a class="reference internal" href="nori.html">NORI - Bitwise NOR Immediate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="or.html">OR - Bitwise OR</a></li>
@@ -201,13 +201,13 @@
         
           <li><a href="../isa.html">Raisin64 Instruction Set</a> &raquo;</li>
         
-      <li>DIV - Integer Divide</li>
+      <li>MULU - Unsigned Integer Multiply</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/cpu/isa/div.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/cpu/isa/mulu.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -220,44 +220,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="div-integer-divide">
-<h1>DIV - Integer Divide<a class="headerlink" href="#div-integer-divide" title="Permalink to this headline">¶</a></h1>
-<p>Divides registers <code class="docutils literal notranslate"><span class="pre">Rs1</span></code> by <code class="docutils literal notranslate"><span class="pre">Rs2</span></code>, and places the quotient in <code class="docutils literal notranslate"><span class="pre">Rd</span></code> and the remainder in <code class="docutils literal notranslate"><span class="pre">Rd2</span></code>, treating operands as 2’s complement signed.</p>
-<div class="section" id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-asm notranslate"><div class="highlight"><pre><span></span><span class="nf">div</span> <span class="no">Rd</span><span class="p">,</span> <span class="no">Rd2</span><span class="p">,</span> <span class="no">Rs1</span><span class="p">,</span> <span class="no">Rs2</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="operation">
-<h2>Operation<a class="headerlink" href="#operation" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Rd</span> <span class="o">=</span> <span class="n">Rs1</span> <span class="o">/</span> <span class="n">Rs2</span><span class="p">;</span>
-<span class="n">Rd2</span> <span class="o">=</span> <span class="n">Rs1</span> <span class="o">%</span> <span class="n">Rs2</span><span class="p">;</span>
-<span class="n">advance_pc</span><span class="p">();</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="encoding">
-<h2>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline">¶</a></h2>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">0</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Unit:</th><td class="field-body">0</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Op:</th><td class="field-body">3</td>
-</tr>
-<tr class="field-even field"><th class="field-name">16-bit Opcode:</th><td class="field-body">NONE</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">32-bit Opcode:</th><td class="field-body">0x83</td>
-</tr>
-<tr class="field-even field"><th class="field-name">64-bit Opcode:</th><td class="field-body">0xC3</td>
-</tr>
-</tbody>
-</table>
-</div>
+  <div class="section" id="mulu-unsigned-integer-multiply">
+<h1>MULU - Unsigned Integer Multiply<a class="headerlink" href="#mulu-unsigned-integer-multiply" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -268,10 +232,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="divu.html" class="btn btn-neutral float-right" title="DIVU - Unsigned Integer Divide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="nor.html" class="btn btn-neutral float-right" title="NOR - Bitwise NOR" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="bo.html" class="btn btn-neutral" title="BO - Branch if Odd" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mul.html" class="btn btn-neutral" title="MUL - Integer Multiply" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

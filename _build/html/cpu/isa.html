@@ -114,7 +114,7 @@
 <li class="toctree-l4"><a class="reference internal" href="isa/be.html">BE - Branch if Even</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/bo.html">BO - Branch if Odd</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/div.html">DIV - Integer Divide</a></li>
-<li class="toctree-l4"><a class="reference internal" href="isa/divi.html">DIVI - Integer Divide Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/divu.html">DIVU - Unsigned Integer Divide</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/f.html">F* - FPU Call</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/j.html">J - Jump</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/jal.html">JAL - Jump and Link</a></li>
@@ -129,7 +129,7 @@
 <li class="toctree-l4"><a class="reference internal" href="isa/lui.html">LUI - Load Upper Immediate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/lw.html">LW - Load 64-bit Word</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/mul.html">MUL - Integer Multiply</a></li>
-<li class="toctree-l4"><a class="reference internal" href="isa/muli.html">MUL - Integer Multiply Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/mulu.html">MULU - Unsigned Integer Multiply</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/nor.html">NOR - Bitwise NOR</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/nori.html">NORI - Bitwise NOR Immediate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="isa/or.html">OR - Bitwise OR</a></li>
@@ -234,27 +234,27 @@
 <h1>Raisin64 Instruction Set<a class="headerlink" href="#raisin64-instruction-set" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#overview" id="id10">Overview</a></li>
-<li><a class="reference internal" href="#instruction-format" id="id11">Instruction Format</a></li>
-<li><a class="reference internal" href="#bit-formats" id="id12">16-bit formats</a><ul>
-<li><a class="reference internal" href="#r-16-bit-register-format" id="id13">16R - 16-bit Register Format</a></li>
-<li><a class="reference internal" href="#i-16-bit-immediate-format" id="id14">16I - 16-bit Immediate Format</a></li>
-<li><a class="reference internal" href="#bit-opcode-table" id="id15">16-bit OpCode Table</a></li>
+<li><a class="reference internal" href="#overview" id="id9">Overview</a></li>
+<li><a class="reference internal" href="#instruction-format" id="id10">Instruction Format</a></li>
+<li><a class="reference internal" href="#bit-formats" id="id11">16-bit formats</a><ul>
+<li><a class="reference internal" href="#r-16-bit-register-format" id="id12">16R - 16-bit Register Format</a></li>
+<li><a class="reference internal" href="#i-16-bit-immediate-format" id="id13">16I - 16-bit Immediate Format</a></li>
+<li><a class="reference internal" href="#bit-opcode-table" id="id14">16-bit OpCode Table</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id1" id="id16">32/64-bit Formats</a><ul>
-<li><a class="reference internal" href="#r-32-bit-register-format" id="id17">32R - 32-bit Register Format</a></li>
-<li><a class="reference internal" href="#i-32-bit-immediate-format" id="id18">32I - 32-bit Immediate Format</a></li>
-<li><a class="reference internal" href="#s-64-bit-standard-format" id="id19">64S - 64-bit Standard Format</a></li>
-<li><a class="reference internal" href="#j-64-bit-jump-format" id="id20">64J - 64-bit Jump Format</a></li>
-<li><a class="reference internal" href="#and-64-bit-unit-op-table" id="id21">32 and 64-bit Unit/Op Table</a></li>
+<li><a class="reference internal" href="#id1" id="id15">32/64-bit Formats</a><ul>
+<li><a class="reference internal" href="#r-32-bit-register-format" id="id16">32R - 32-bit Register Format</a></li>
+<li><a class="reference internal" href="#i-32-bit-immediate-format" id="id17">32I - 32-bit Immediate Format</a></li>
+<li><a class="reference internal" href="#s-64-bit-standard-format" id="id18">64S - 64-bit Standard Format</a></li>
+<li><a class="reference internal" href="#j-64-bit-jump-format" id="id19">64J - 64-bit Jump Format</a></li>
+<li><a class="reference internal" href="#and-64-bit-unit-op-table" id="id20">32 and 64-bit Unit/Op Table</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#instructions" id="id22">Instructions</a></li>
+<li><a class="reference internal" href="#instructions" id="id21">Instructions</a></li>
 </ul>
 </div>
 <div class="section" id="overview">
-<h2><a class="toc-backref" href="#id10">Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id9">Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>The Raisin64’s instruction set draws heavily from MIPS with some concepts graciously borrowed from ARM as well.  While the programmer’s model and instruction set are decoupled from the underlying microarchitecture of the specific implementation, it was nonetheless decided to design the instructions such that a hardwired control unit (see TODO:ref:<cite>Instruction Decode</cite>) could process and set the appropriate signals.</p>
 <p>Instructions are variable length (16-64) bit, and some have multiple forms like the <a class="reference internal" href="isa/add.html#add-integer-add"><span class="std std-ref">ADD Instruction</span></a>.  When an instruction has multiple encodings, the opcode is usually the same between the alternate length versions of that instruction, but in all cases the processor expands the 16 and 32-bit versions of the instruction into their canonical 64-bit form, which has a regular encoding.  The general instruction formats and opcodes are described below.</p>
 <div class="admonition-but-why admonition">
@@ -263,27 +263,27 @@
 </div>
 </div>
 <div class="section" id="instruction-format">
-<h2><a class="toc-backref" href="#id11">Instruction Format</a><a class="headerlink" href="#instruction-format" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id10">Instruction Format</a><a class="headerlink" href="#instruction-format" title="Permalink to this headline">¶</a></h2>
 <p>There are 6 instruction formats in Raisin64, register and immediate type 16-bit formats (16R and 16I), register and immediate type 32-bit formats (32R and 32I), and a combined register and immediate 64-bit format (64S) as well as a jump format (64J).</p>
 <p>Comparing the 16, 32, and 64-bit formats, the smaller instructions contain those instructions which will fit in the reduced number of bits.  The larger instruction formats are a super-set of the smaller ones, and whenever an instruction is available in a smaller format, it is available in all larger formats.  For example, ADDI is available in 16, 32, and 64-bit instruction size, with the permitted size of the immediate growing as the instruction grows.</p>
 <p>The 32 and 64-bit instruction formats share the same Unit/Op numbers, which are effectively the OpCode.  The Unit number represents the type of operation while the Op indicates the specific operation requested.  This conveniently fits into the first 8 bits of the instruction, making the opcode easier to view and manipulate.</p>
 </div>
 <div class="section" id="bit-formats">
-<h2><a class="toc-backref" href="#id12">16-bit formats</a><a class="headerlink" href="#bit-formats" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id11">16-bit formats</a><a class="headerlink" href="#bit-formats" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="r-16-bit-register-format">
-<h3><a class="toc-backref" href="#id13">16R - 16-bit Register Format</a><a class="headerlink" href="#r-16-bit-register-format" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id12">16R - 16-bit Register Format</a><a class="headerlink" href="#r-16-bit-register-format" title="Permalink to this headline">¶</a></h3>
 <div align="center" class="align-center"><img src="../_images/symbol-793980dab287b15841ca153baf97827e2bb88511.svg" alt="None" />
 </div>
 <p>The 16-bit regsiter format is a compact expression of select instructions operating with one source and one destination register.  Instructions normally operating on three registers, such as ADD, instead operate in 2-register mode (i.e. Rd = Rd + Rs).</p>
 </div>
 <div class="section" id="i-16-bit-immediate-format">
-<h3><a class="toc-backref" href="#id14">16I - 16-bit Immediate Format</a><a class="headerlink" href="#i-16-bit-immediate-format" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id13">16I - 16-bit Immediate Format</a><a class="headerlink" href="#i-16-bit-immediate-format" title="Permalink to this headline">¶</a></h3>
 <div align="center" class="align-center"><img src="../_images/symbol-0f3c1a0ab03df351a8d027d8cacf39fbdeba5499.svg" alt="None" />
 </div>
 <p>The 16-bit immediate format is used only for ADDI and SUBI, allowing for small increment and decrement operations in a compact format.</p>
 </div>
 <div class="section" id="bit-opcode-table">
-<h3><a class="toc-backref" href="#id15">16-bit OpCode Table</a><a class="headerlink" href="#bit-opcode-table" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id14">16-bit OpCode Table</a><a class="headerlink" href="#bit-opcode-table" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
 <col width="52%" />
@@ -324,33 +324,33 @@
 </div>
 </div>
 <div class="section" id="id1">
-<h2><a class="toc-backref" href="#id16">32/64-bit Formats</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id15">32/64-bit Formats</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="r-32-bit-register-format">
-<h3><a class="toc-backref" href="#id17">32R - 32-bit Register Format</a><a class="headerlink" href="#r-32-bit-register-format" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id16">32R - 32-bit Register Format</a><a class="headerlink" href="#r-32-bit-register-format" title="Permalink to this headline">¶</a></h3>
 <div align="center" class="align-center"><img src="../_images/symbol-59ddabddce36a1f46722fe6fa609ecd37a6ae5a0.svg" alt="None" />
 </div>
 <p>All register type instructions in the Raisin64 are available in 32R format.  The only exception of this is the F* FPU call, which uses the immediate field of the 64S format to call for a specific service, making it not available in 32-bit format.</p>
 </div>
 <div class="section" id="i-32-bit-immediate-format">
-<h3><a class="toc-backref" href="#id18">32I - 32-bit Immediate Format</a><a class="headerlink" href="#i-32-bit-immediate-format" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id17">32I - 32-bit Immediate Format</a><a class="headerlink" href="#i-32-bit-immediate-format" title="Permalink to this headline">¶</a></h3>
 <div align="center" class="align-center"><img src="../_images/symbol-f159632c0f90c330ce52ca5ded46fe6872f52769.svg" alt="None" />
 </div>
 <p>With the exception of JI, JALI, DIVI, and MULI, all immediate type instructions in the Raisin64 are available in the 32I format albeit with a reduced 12-bit immediate value.</p>
 </div>
 <div class="section" id="s-64-bit-standard-format">
-<h3><a class="toc-backref" href="#id19">64S - 64-bit Standard Format</a><a class="headerlink" href="#s-64-bit-standard-format" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id18">64S - 64-bit Standard Format</a><a class="headerlink" href="#s-64-bit-standard-format" title="Permalink to this headline">¶</a></h3>
 <div align="center" class="align-center"><img src="../_images/symbol-2a960262e69f48a270aa3b1e9c4fd7c915f28ae2.svg" alt="None" />
 </div>
 <p>All register and immediate type instructions (with the exception of branch instructions) from the 32-bit instruction formats are available in the unified 64S format.  When these smaller instructions are encountered by the Raisin64, they are internally expanded into canonical 64S format before being passed onto the rest of the processor.  This 64-bit format has space for 4 registers (allowing for instructions like MUL) in addition to 32-bits of immediate data (for shifting and bitwise operations).</p>
 </div>
 <div class="section" id="j-64-bit-jump-format">
-<h3><a class="toc-backref" href="#id20">64J - 64-bit Jump Format</a><a class="headerlink" href="#j-64-bit-jump-format" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id19">64J - 64-bit Jump Format</a><a class="headerlink" href="#j-64-bit-jump-format" title="Permalink to this headline">¶</a></h3>
 <div align="center" class="align-center"><img src="../_images/symbol-87fa2e47ab3db75ec2c1f6d376590bf21dac548d.svg" alt="None" />
 </div>
 <p>A special jump format for large displacement BE, BO, JI, and JALI, the 64J format allows for a full 48-bit displacement/jump, sufficient to cover the entire virtual address space of the Raisin64.</p>
 </div>
 <div class="section" id="and-64-bit-unit-op-table">
-<h3><a class="toc-backref" href="#id21">32 and 64-bit Unit/Op Table</a><a class="headerlink" href="#and-64-bit-unit-op-table" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id20">32 and 64-bit Unit/Op Table</a><a class="headerlink" href="#and-64-bit-unit-op-table" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
 <col width="6%" />
@@ -364,15 +364,11 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td rowspan="15">0/1</td>
-<td rowspan="4">0 - Integer Math</td>
-<td>0 - ADD/ANDI</td>
+<tr class="row-even"><td rowspan="13">0/1</td>
+<td rowspan="2">0 - Basic Integer Math</td>
+<td>0 - ADD/ADDI</td>
 </tr>
 <tr class="row-odd"><td>1 - SUB/SUBI</td>
-</tr>
-<tr class="row-even"><td>2 - MUL/MULI <a class="footnote-reference" href="#id8" id="id2">[1]</a></td>
-</tr>
-<tr class="row-odd"><td>3 - DIV/DIVI <a class="footnote-reference" href="#id8" id="id3">[1]</a></td>
 </tr>
 <tr class="row-even"><td rowspan="4">1 - Compare/Set</td>
 <td>0 - SEQ/SEQI</td>
@@ -399,82 +395,88 @@
 </tr>
 <tr class="row-even"><td>3 - XOR/XORI</td>
 </tr>
-<tr class="row-odd"><td rowspan="3">0</td>
-<td>4 - Unused Extension</td>
+<tr class="row-odd"><td rowspan="6">0</td>
+<td rowspan="4">4 - Advanced Integer Math</td>
+<td>0 - MUL</td>
+</tr>
+<tr class="row-even"><td>1 - MULU</td>
+</tr>
+<tr class="row-odd"><td>2 - DIV</td>
+</tr>
+<tr class="row-even"><td>3 - DIVU</td>
+</tr>
+<tr class="row-odd"><td>5 - Unused Extension</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td>5 - Unused Extension</td>
+<tr class="row-even"><td>6 - Unused Extension</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>6 - Unused Extension</td>
-<td>&#160;</td>
-</tr>
-<tr class="row-even"><td rowspan="12">1</td>
+<tr class="row-odd"><td rowspan="12">1</td>
 <td rowspan="4">4 - Regular Load</td>
 <td>0 - LW</td>
 </tr>
-<tr class="row-odd"><td>1 - L32</td>
+<tr class="row-even"><td>1 - L32</td>
 </tr>
-<tr class="row-even"><td>2 - L16</td>
+<tr class="row-odd"><td>2 - L16</td>
 </tr>
-<tr class="row-odd"><td>3 - L8</td>
+<tr class="row-even"><td>3 - L8</td>
 </tr>
-<tr class="row-even"><td rowspan="4">5 - Sign-Extend Load</td>
-<td>0 - LUI</td>
+<tr class="row-odd"><td rowspan="4">5 - Sign-Extend Load</td>
+<td>0 - LUI <a class="footnote-reference" href="#id7" id="id2">[1]</a></td>
 </tr>
-<tr class="row-odd"><td>1 - L32S</td>
+<tr class="row-even"><td>1 - L32S</td>
 </tr>
-<tr class="row-even"><td>2 - L16S</td>
+<tr class="row-odd"><td>2 - L16S</td>
 </tr>
-<tr class="row-odd"><td>3 - L8S</td>
+<tr class="row-even"><td>3 - L8S</td>
 </tr>
-<tr class="row-even"><td rowspan="4">6 - Store</td>
+<tr class="row-odd"><td rowspan="4">6 - Store</td>
 <td>0 - SW</td>
 </tr>
-<tr class="row-odd"><td>1 - S32</td>
+<tr class="row-even"><td>1 - S32</td>
 </tr>
-<tr class="row-even"><td>2 - S16</td>
+<tr class="row-odd"><td>2 - S16</td>
 </tr>
-<tr class="row-odd"><td>3 - S8</td>
+<tr class="row-even"><td>3 - S8</td>
 </tr>
-<tr class="row-even"><td rowspan="4">0</td>
+<tr class="row-odd"><td rowspan="4">0</td>
 <td rowspan="4">7 - Jump/Special</td>
 <td>0 - SYSCALL</td>
 </tr>
-<tr class="row-odd"><td>1 - F* (FPU Call) <a class="footnote-reference" href="#id8" id="id4">[1]</a> <a class="footnote-reference" href="#id9" id="id5">[2]</a></td>
+<tr class="row-even"><td>1 - F* (FPU Call) <a class="footnote-reference" href="#id7" id="id3">[1]</a> <a class="footnote-reference" href="#id8" id="id4">[2]</a></td>
 </tr>
-<tr class="row-even"><td>2 - JAL</td>
+<tr class="row-odd"><td>2 - JAL</td>
 </tr>
-<tr class="row-odd"><td>3 - J</td>
+<tr class="row-even"><td>3 - J</td>
 </tr>
-<tr class="row-even"><td rowspan="4">1</td>
+<tr class="row-odd"><td rowspan="4">1</td>
 <td rowspan="4">7 - Jump Immediate</td>
 <td>0 - BE</td>
 </tr>
-<tr class="row-odd"><td>1 - BO</td>
+<tr class="row-even"><td>1 - BO</td>
 </tr>
-<tr class="row-even"><td>2 - JALI <a class="footnote-reference" href="#id8" id="id6">[1]</a></td>
+<tr class="row-odd"><td>2 - JALI <a class="footnote-reference" href="#id7" id="id5">[1]</a></td>
 </tr>
-<tr class="row-odd"><td>3 - JI <a class="footnote-reference" href="#id8" id="id7">[1]</a></td>
+<tr class="row-even"><td>3 - JI <a class="footnote-reference" href="#id7" id="id6">[1]</a></td>
 </tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>, <a class="fn-backref" href="#id5">3</a>, <a class="fn-backref" href="#id6">4</a>)</em> 64-bit format only</td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id8" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>, <a class="fn-backref" href="#id4">3</a>, <a class="fn-backref" href="#id6">4</a>, <a class="fn-backref" href="#id7">5</a>)</em> 64-bit format only</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id9" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id5">[2]</a></td><td>The F* instruction uses the immediate field of 64S to request a specific enumerated service from the FPU.  These instructions are documented TODO::ref::here.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id4">[2]</a></td><td>The F* instruction uses the immediate field of 64S to request a specific enumerated service from the FPU.  These instructions are documented TODO::ref::here.</td></tr>
 </tbody>
 </table>
 </div>
 </div>
 <div class="section" id="instructions">
-<h2><a class="toc-backref" href="#id22">Instructions</a><a class="headerlink" href="#instructions" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id21">Instructions</a><a class="headerlink" href="#instructions" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="isa/add.html">ADD - Integer Add</a></li>
@@ -484,7 +486,7 @@
 <li class="toctree-l1"><a class="reference internal" href="isa/be.html">BE - Branch if Even</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/bo.html">BO - Branch if Odd</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/div.html">DIV - Integer Divide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="isa/divi.html">DIVI - Integer Divide Immediate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/divu.html">DIVU - Unsigned Integer Divide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/f.html">F* - FPU Call</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/j.html">J - Jump</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/jal.html">JAL - Jump and Link</a></li>
@@ -499,7 +501,7 @@
 <li class="toctree-l1"><a class="reference internal" href="isa/lui.html">LUI - Load Upper Immediate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/lw.html">LW - Load 64-bit Word</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/mul.html">MUL - Integer Multiply</a></li>
-<li class="toctree-l1"><a class="reference internal" href="isa/muli.html">MUL - Integer Multiply Immediate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isa/mulu.html">MULU - Unsigned Integer Multiply</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/nor.html">NOR - Bitwise NOR</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/nori.html">NORI - Bitwise NOR Immediate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="isa/or.html">OR - Bitwise OR</a></li>

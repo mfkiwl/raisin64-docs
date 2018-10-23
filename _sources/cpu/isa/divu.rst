@@ -1,7 +1,7 @@
-DIV - Integer Divide
-====================
+DIVU - Unsigned Integer Divide
+==============================
 
-Divides registers ``Rs1`` by ``Rs2``, and places the quotient in ``Rd`` and the remainder in ``Rd2``, treating operands as 2's complement signed.
+Divides registers ``Rs1`` by ``Rs2``, and places the quotient in ``Rd`` and the remainder in ``Rd2``, treating operands as unsigned.
 
 Usage
 -----
@@ -29,3 +29,4 @@ Encoding
 :16-bit Opcode: NONE
 :32-bit Opcode: 0x83
 :64-bit Opcode: 0xC3
+

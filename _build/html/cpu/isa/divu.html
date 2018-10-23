@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>DIV - Integer Divide &mdash; Raisin64 0.1 documentation</title>
+  <title>DIVU - Unsigned Integer Divide &mdash; Raisin64 0.1 documentation</title>
   
 
   
@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="DIVU - Unsigned Integer Divide" href="divu.html" />
-    <link rel="prev" title="BO - Branch if Odd" href="bo.html" /> 
+    <link rel="next" title="F* - FPU Call" href="f.html" />
+    <link rel="prev" title="DIV - Integer Divide" href="div.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -101,8 +101,8 @@
 <li class="toctree-l4"><a class="reference internal" href="andi.html">ANDI - Bitwise AND Immediate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="be.html">BE - Branch if Even</a></li>
 <li class="toctree-l4"><a class="reference internal" href="bo.html">BO - Branch if Odd</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">DIV - Integer Divide</a></li>
-<li class="toctree-l4"><a class="reference internal" href="divu.html">DIVU - Unsigned Integer Divide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="div.html">DIV - Integer Divide</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">DIVU - Unsigned Integer Divide</a></li>
 <li class="toctree-l4"><a class="reference internal" href="f.html">F* - FPU Call</a></li>
 <li class="toctree-l4"><a class="reference internal" href="j.html">J - Jump</a></li>
 <li class="toctree-l4"><a class="reference internal" href="jal.html">JAL - Jump and Link</a></li>
@@ -201,13 +201,13 @@
         
           <li><a href="../isa.html">Raisin64 Instruction Set</a> &raquo;</li>
         
-      <li>DIV - Integer Divide</li>
+      <li>DIVU - Unsigned Integer Divide</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/cpu/isa/div.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/cpu/isa/divu.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -220,9 +220,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="div-integer-divide">
-<h1>DIV - Integer Divide<a class="headerlink" href="#div-integer-divide" title="Permalink to this headline">¶</a></h1>
-<p>Divides registers <code class="docutils literal notranslate"><span class="pre">Rs1</span></code> by <code class="docutils literal notranslate"><span class="pre">Rs2</span></code>, and places the quotient in <code class="docutils literal notranslate"><span class="pre">Rd</span></code> and the remainder in <code class="docutils literal notranslate"><span class="pre">Rd2</span></code>, treating operands as 2’s complement signed.</p>
+  <div class="section" id="divu-unsigned-integer-divide">
+<h1>DIVU - Unsigned Integer Divide<a class="headerlink" href="#divu-unsigned-integer-divide" title="Permalink to this headline">¶</a></h1>
+<p>Divides registers <code class="docutils literal notranslate"><span class="pre">Rs1</span></code> by <code class="docutils literal notranslate"><span class="pre">Rs2</span></code>, and places the quotient in <code class="docutils literal notranslate"><span class="pre">Rd</span></code> and the remainder in <code class="docutils literal notranslate"><span class="pre">Rd2</span></code>, treating operands as unsigned.</p>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-asm notranslate"><div class="highlight"><pre><span></span><span class="nf">div</span> <span class="no">Rd</span><span class="p">,</span> <span class="no">Rd2</span><span class="p">,</span> <span class="no">Rs1</span><span class="p">,</span> <span class="no">Rs2</span>
@@ -268,10 +268,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="divu.html" class="btn btn-neutral float-right" title="DIVU - Unsigned Integer Divide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="f.html" class="btn btn-neutral float-right" title="F* - FPU Call" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="bo.html" class="btn btn-neutral" title="BO - Branch if Odd" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="div.html" class="btn btn-neutral" title="DIV - Integer Divide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
