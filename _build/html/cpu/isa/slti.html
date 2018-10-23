@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="SNE - Set 1 if Not Equal" href="sne.html" />
+    <link rel="next" title="SLTIU - Set 1 if Less Than Immediate Unsigned" href="sltiu.html" />
     <link rel="prev" title="SLT - Set 1 if Less Than" href="slt.html" /> 
 
   
@@ -99,10 +99,11 @@
 <li class="toctree-l4"><a class="reference internal" href="addi.html">ADDI - Integer Add Immediate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="and.html">AND - Bitwise AND</a></li>
 <li class="toctree-l4"><a class="reference internal" href="andi.html">ANDI - Bitwise AND Immediate</a></li>
-<li class="toctree-l4"><a class="reference internal" href="be.html">BE - Branch if Even</a></li>
-<li class="toctree-l4"><a class="reference internal" href="bo.html">BO - Branch if Odd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="beq.html">BEQ - Branch if Equal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="beqal.html">BEQAL - Branch if Equal And Link</a></li>
 <li class="toctree-l4"><a class="reference internal" href="div.html">DIV - Integer Divide</a></li>
-<li class="toctree-l4"><a class="reference internal" href="divi.html">DIVI - Integer Divide Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="divu.html">DIVU - Unsigned Integer Divide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="f.html">F* - FPU Call</a></li>
 <li class="toctree-l4"><a class="reference internal" href="j.html">J - Jump</a></li>
 <li class="toctree-l4"><a class="reference internal" href="jal.html">JAL - Jump and Link</a></li>
 <li class="toctree-l4"><a class="reference internal" href="jali.html">JALI - Jump and Link Immediate</a></li>
@@ -116,7 +117,7 @@
 <li class="toctree-l4"><a class="reference internal" href="lui.html">LUI - Load Upper Immediate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="lw.html">LW - Load 64-bit Word</a></li>
 <li class="toctree-l4"><a class="reference internal" href="mul.html">MUL - Integer Multiply</a></li>
-<li class="toctree-l4"><a class="reference internal" href="muli.html">MUL - Integer Multiply Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mulu.html">MULU - Unsigned Integer Multiply</a></li>
 <li class="toctree-l4"><a class="reference internal" href="nor.html">NOR - Bitwise NOR</a></li>
 <li class="toctree-l4"><a class="reference internal" href="nori.html">NORI - Bitwise NOR Immediate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="or.html">OR - Bitwise OR</a></li>
@@ -124,16 +125,16 @@
 <li class="toctree-l4"><a class="reference internal" href="s16.html">S16 - Store 16-bit</a></li>
 <li class="toctree-l4"><a class="reference internal" href="s32.html">S32 - Store 32-bit</a></li>
 <li class="toctree-l4"><a class="reference internal" href="s8.html">S8 - Store 8-bit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="seq.html">SEQ - Set 1 if Equal</a></li>
-<li class="toctree-l4"><a class="reference internal" href="seqi.html">SEQI - Set 1 if Equal Immediate</a></li>
-<li class="toctree-l4"><a class="reference internal" href="sle.html">SLE - Set 1 if Less than or Equal</a></li>
-<li class="toctree-l4"><a class="reference internal" href="slei.html">SLEI - Set 1 if Less than or Equal Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sgt.html">SGT - Set 1 if Greater Than</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sgti.html">SGTI - Set 1 if Greater Than Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sgtiu.html">SGTIU - Set 1 if Greater Than Immediate Unsigned</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sgtu.html">SGTU - Set 1 if Greater Than Unsigned</a></li>
 <li class="toctree-l4"><a class="reference internal" href="sll.html">SLL - Shift Left Logical</a></li>
 <li class="toctree-l4"><a class="reference internal" href="slli.html">SLLI - Shift Left Logical Immediate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="slt.html">SLT - Set 1 if Less Than</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">SLTI - Set 1 if Less Than Immediate</a></li>
-<li class="toctree-l4"><a class="reference internal" href="sne.html">SNE - Set 1 if Not Equal</a></li>
-<li class="toctree-l4"><a class="reference internal" href="snei.html">SNEI - Set 1 if Not Equal Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sltiu.html">SLTIU - Set 1 if Less Than Immediate Unsigned</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sltu.html">SLTU - Set 1 if Less Than Unsigned</a></li>
 <li class="toctree-l4"><a class="reference internal" href="sra.html">SRA - Shift Right Arithmetic</a></li>
 <li class="toctree-l4"><a class="reference internal" href="srai.html">SRAI - Shift Right Arithmetic Immediate</a></li>
 <li class="toctree-l4"><a class="reference internal" href="srl.html">SRL - Shift Right Logical</a></li>
@@ -231,7 +232,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sne.html" class="btn btn-neutral float-right" title="SNE - Set 1 if Not Equal" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sltiu.html" class="btn btn-neutral float-right" title="SLTIU - Set 1 if Less Than Immediate Unsigned" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="slt.html" class="btn btn-neutral" title="SLT - Set 1 if Less Than" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
