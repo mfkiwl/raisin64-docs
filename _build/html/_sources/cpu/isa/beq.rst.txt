@@ -1,9 +1,9 @@
 BEQ - Branch if Equal
 =====================
 
-Branches if the ``Rs`` register is equal to the ``Rd`` register by a signed displacement in the immediate field.  As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.
+If the ``Rs`` register is equal to the ``Rd`` register, the program branches by the signed immediate displacement.  As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.
 
-.. tip:: An unconditional branch can be accomplished by using the zero register ``r0``.
+.. tip:: An unconditional branch can be accomplished by comparing ``r0`` with itself.
 
 Usage
 -----

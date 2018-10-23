@@ -222,10 +222,10 @@
             
   <div class="section" id="beq-branch-if-equal">
 <h1>BEQ - Branch if Equal<a class="headerlink" href="#beq-branch-if-equal" title="Permalink to this headline">¶</a></h1>
-<p>Branches if the <code class="docutils literal notranslate"><span class="pre">Rs</span></code> register is equal to the <code class="docutils literal notranslate"><span class="pre">Rd</span></code> register by a signed displacement in the immediate field.  As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">Rs</span></code> register is equal to the <code class="docutils literal notranslate"><span class="pre">Rd</span></code> register, the program branches by the signed immediate displacement.  As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p class="last">An unconditional branch can be accomplished by using the zero register <code class="docutils literal notranslate"><span class="pre">r0</span></code>.</p>
+<p class="last">An unconditional branch can be accomplished by comparing <code class="docutils literal notranslate"><span class="pre">r0</span></code> with itself.</p>
 </div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
