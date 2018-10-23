@@ -104,7 +104,7 @@ All register type instructions in the Raisin64 are available in 32R format.  The
    :hspace: 700
    :bits: 32
    
-With the exception of JI, JALI, DIVI, and MULI, all immediate type instructions in the Raisin64 are available in the 32I format albeit with a reduced 12-bit immediate value.
+With the exception of JI, JALI, and LUI, all immediate type instructions in the Raisin64 are available in the 32I format albeit with a reduced 12-bit immediate value.
    
    
 64S - 64-bit Standard Format
@@ -118,7 +118,7 @@ With the exception of JI, JALI, DIVI, and MULI, all immediate type instructions 
    :hspace: 700
    :bits: 64
    
-All register and immediate type instructions (with the exception of branch instructions) from the 32-bit instruction formats are available in the unified 64S format.  When these smaller instructions are encountered by the Raisin64, they are internally expanded into canonical 64S format before being passed onto the rest of the processor.  This 64-bit format has space for 4 registers (allowing for instructions like MUL) in addition to 32-bits of immediate data (for shifting and bitwise operations).
+All register and immediate type instructions (except the immediate type branch and jump instructions) are available in the unified 64S format.  When smaller width instructions are encountered by the Raisin64, they are internally expanded into canonical 64S format before being passed onto the rest of the processor.  This 64-bit format has space for 4 registers (allowing for instructions like MUL) in addition to 32-bits of immediate data for shifting, bitwise, and ordinary  immediate operations).
    
    
 64J - 64-bit Jump Format
@@ -132,7 +132,7 @@ All register and immediate type instructions (with the exception of branch instr
    :hspace: 700
    :bits: 64
    
-A special jump format for large displacement BE, BO, JI, and JALI, the 64J format allows for a full 48-bit displacement/jump, sufficient to cover the entire virtual address space of the Raisin64.
+A special jump format for large displacement BEQ, BEQAL, JI, and JALI, the 64J format allows for a full 48-bit signed displacement/unsigned jump, sufficient to cover the entire virtual address space of the Raisin64.
 
 32 and 64-bit Unit/Op Table
 +++++++++++++++++++++++++++

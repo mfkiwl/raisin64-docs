@@ -335,19 +335,19 @@
 <h3><a class="toc-backref" href="#id17">32I - 32-bit Immediate Format</a><a class="headerlink" href="#i-32-bit-immediate-format" title="Permalink to this headline">¶</a></h3>
 <div align="center" class="align-center"><img src="../_images/symbol-f159632c0f90c330ce52ca5ded46fe6872f52769.svg" alt="None" />
 </div>
-<p>With the exception of JI, JALI, DIVI, and MULI, all immediate type instructions in the Raisin64 are available in the 32I format albeit with a reduced 12-bit immediate value.</p>
+<p>With the exception of JI, JALI, and LUI, all immediate type instructions in the Raisin64 are available in the 32I format albeit with a reduced 12-bit immediate value.</p>
 </div>
 <div class="section" id="s-64-bit-standard-format">
 <h3><a class="toc-backref" href="#id18">64S - 64-bit Standard Format</a><a class="headerlink" href="#s-64-bit-standard-format" title="Permalink to this headline">¶</a></h3>
 <div align="center" class="align-center"><img src="../_images/symbol-2a960262e69f48a270aa3b1e9c4fd7c915f28ae2.svg" alt="None" />
 </div>
-<p>All register and immediate type instructions (with the exception of branch instructions) from the 32-bit instruction formats are available in the unified 64S format.  When these smaller instructions are encountered by the Raisin64, they are internally expanded into canonical 64S format before being passed onto the rest of the processor.  This 64-bit format has space for 4 registers (allowing for instructions like MUL) in addition to 32-bits of immediate data (for shifting and bitwise operations).</p>
+<p>All register and immediate type instructions (except the immediate type branch and jump instructions) are available in the unified 64S format.  When smaller width instructions are encountered by the Raisin64, they are internally expanded into canonical 64S format before being passed onto the rest of the processor.  This 64-bit format has space for 4 registers (allowing for instructions like MUL) in addition to 32-bits of immediate data for shifting, bitwise, and ordinary  immediate operations).</p>
 </div>
 <div class="section" id="j-64-bit-jump-format">
 <h3><a class="toc-backref" href="#id19">64J - 64-bit Jump Format</a><a class="headerlink" href="#j-64-bit-jump-format" title="Permalink to this headline">¶</a></h3>
 <div align="center" class="align-center"><img src="../_images/symbol-87fa2e47ab3db75ec2c1f6d376590bf21dac548d.svg" alt="None" />
 </div>
-<p>A special jump format for large displacement BE, BO, JI, and JALI, the 64J format allows for a full 48-bit displacement/jump, sufficient to cover the entire virtual address space of the Raisin64.</p>
+<p>A special jump format for large displacement BEQ, BEQAL, JI, and JALI, the 64J format allows for a full 48-bit signed displacement/unsigned jump, sufficient to cover the entire virtual address space of the Raisin64.</p>
 </div>
 <div class="section" id="and-64-bit-unit-op-table">
 <h3><a class="toc-backref" href="#id20">32 and 64-bit Unit/Op Table</a><a class="headerlink" href="#and-64-bit-unit-op-table" title="Permalink to this headline">¶</a></h3>
