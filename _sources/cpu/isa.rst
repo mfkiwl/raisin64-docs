@@ -90,7 +90,7 @@ The 16-bit immediate format is used only for ADDI and SUBI, allowing for small i
    :hspace: 700
    :bits: 32
    
-All register type instructions in the Raisin64 are available in 32R format.  The only exception of this is the F* FPU call, which uses the immediate field of the 64S format to call for a specific service, making it not available in 32-bit format.
+All register type instructions in the Raisin64 are available in 32R format.  The only exception of this is the F* FPU call, which also uses the immediate field of the 64S format.
    
    
 32I - 32-bit Immediate Format
@@ -104,7 +104,7 @@ All register type instructions in the Raisin64 are available in 32R format.  The
    :hspace: 700
    :bits: 32
    
-With the exception of JI, JALI, and LUI, all immediate type instructions in the Raisin64 are available in the 32I format albeit with a reduced 12-bit immediate value.
+With the exception of JI, JALI, and LUI, all immediate type instructions in the Raisin64 are available in the 32I format with a 12-bit immediate value.
    
    
 64S - 64-bit Standard Format
