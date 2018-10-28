@@ -23,9 +23,9 @@ Encoding
 --------
 
 :Type: 0
-:Unit: 0
-:Op: 3
+:Unit: 4
+:Op: 2
 
 :16-bit Opcode: NONE
-:32-bit Opcode: 0x83
-:64-bit Opcode: 0xC3
+:32-bit Opcode: 0x92
+:64-bit Opcode: 0xD2

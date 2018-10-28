@@ -1,2 +1,29 @@
 L32 - Load 32-bit
 =================
+
+Usage
+-----
+
+.. code-block:: asm
+
+   todo
+
+Operation
+---------
+
+.. code-block:: c
+
+   todo;
+   advance_pc();
+
+Encoding
+--------
+
+:Type: 1
+:Unit: 4
+:Op: 1
+
+:16-bit Opcode: NONE
+:32-bit Opcode: 0xB1
+:64-bit Opcode: 0xF1
+
