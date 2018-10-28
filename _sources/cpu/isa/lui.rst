@@ -24,6 +24,6 @@ Encoding
 :Op: 0
 
 :16-bit Opcode: NONE
-:32-bit Opcode: 0xB4
+:32-bit Opcode: NONE
 :64-bit Opcode: 0xF4
 
