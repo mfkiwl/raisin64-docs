@@ -329,13 +329,13 @@
 <h3><a class="toc-backref" href="#id16">32R - 32-bit Register Format</a><a class="headerlink" href="#r-32-bit-register-format" title="Permalink to this headline">¶</a></h3>
 <div align="center" class="align-center"><img src="../_images/symbol-59ddabddce36a1f46722fe6fa609ecd37a6ae5a0.svg" alt="None" />
 </div>
-<p>All register type instructions in the Raisin64 are available in 32R format.  The only exception of this is the F* FPU call, which uses the immediate field of the 64S format to call for a specific service, making it not available in 32-bit format.</p>
+<p>All register type instructions in the Raisin64 are available in 32R format.  The only exception of this is the F* FPU call, which also uses the immediate field of the 64S format.</p>
 </div>
 <div class="section" id="i-32-bit-immediate-format">
 <h3><a class="toc-backref" href="#id17">32I - 32-bit Immediate Format</a><a class="headerlink" href="#i-32-bit-immediate-format" title="Permalink to this headline">¶</a></h3>
 <div align="center" class="align-center"><img src="../_images/symbol-f159632c0f90c330ce52ca5ded46fe6872f52769.svg" alt="None" />
 </div>
-<p>With the exception of JI, JALI, and LUI, all immediate type instructions in the Raisin64 are available in the 32I format albeit with a reduced 12-bit immediate value.</p>
+<p>With the exception of JI, JALI, and LUI, all immediate type instructions in the Raisin64 are available in the 32I format with a 12-bit immediate value.</p>
 </div>
 <div class="section" id="s-64-bit-standard-format">
 <h3><a class="toc-backref" href="#id18">64S - 64-bit Standard Format</a><a class="headerlink" href="#s-64-bit-standard-format" title="Permalink to this headline">¶</a></h3>
@@ -353,50 +353,49 @@
 <h3><a class="toc-backref" href="#id20">32 and 64-bit Unit/Op Table</a><a class="headerlink" href="#and-64-bit-unit-op-table" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
-<col width="6%" />
-<col width="45%" />
-<col width="49%" />
+<col width="10%" />
+<col width="43%" />
+<col width="47%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">R/I</th>
-<th class="head">Unit</th>
-<th class="head">Op</th>
+<tr class="row-odd"><th class="head"><strong>R/I</strong></th>
+<th class="head"><strong>Unit</strong></th>
+<th class="head"><strong>Op</strong></th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td rowspan="13">0/1</td>
+<tr class="row-even"><td rowspan="23">0</td>
 <td rowspan="2">0 - Basic Integer Math</td>
-<td>0 - ADD/ADDI</td>
+<td>0 - ADD</td>
 </tr>
-<tr class="row-odd"><td>1 - SUB/SUBI</td>
+<tr class="row-odd"><td>1 - SUB</td>
 </tr>
 <tr class="row-even"><td rowspan="4">1 - Compare/Set</td>
-<td>0 - SLT/SLTI</td>
+<td>0 - SLT</td>
 </tr>
-<tr class="row-odd"><td>1 - SLTU/SLTIU</td>
+<tr class="row-odd"><td>1 - SLTU</td>
 </tr>
-<tr class="row-even"><td>2 - SGT/SGTI</td>
+<tr class="row-even"><td>2 - SGT</td>
 </tr>
-<tr class="row-odd"><td>3 - SGTU/SGTIU</td>
+<tr class="row-odd"><td>3 - SGTU</td>
 </tr>
 <tr class="row-even"><td rowspan="3">2 - Shift</td>
-<td>0 - SLL/SLLI</td>
+<td>0 - SLL</td>
 </tr>
-<tr class="row-odd"><td>1 - SRA/SRAI</td>
+<tr class="row-odd"><td>1 - SRA</td>
 </tr>
-<tr class="row-even"><td>2 - SRL/SRLI</td>
+<tr class="row-even"><td>2 - SRL</td>
 </tr>
 <tr class="row-odd"><td rowspan="4">3 - Bitwise Op</td>
-<td>0 - AND/ANDI</td>
+<td>0 - AND</td>
 </tr>
-<tr class="row-even"><td>1 - NOR/NORI</td>
+<tr class="row-even"><td>1 - NOR</td>
 </tr>
-<tr class="row-odd"><td>2 - OR/ORI</td>
+<tr class="row-odd"><td>2 - OR</td>
 </tr>
-<tr class="row-even"><td>3 - XOR/XORI</td>
+<tr class="row-even"><td>3 - XOR</td>
 </tr>
-<tr class="row-odd"><td rowspan="6">0</td>
-<td rowspan="4">4 - Advanced Integer Math</td>
+<tr class="row-odd"><td rowspan="4">4 - Advanced Integer Math</td>
 <td>0 - MUL</td>
 </tr>
 <tr class="row-even"><td>1 - MULU</td>
@@ -405,70 +404,98 @@
 </tr>
 <tr class="row-even"><td>3 - DIVU</td>
 </tr>
-<tr class="row-odd"><td colspan="2">5 - Unused Extension</td>
+<tr class="row-odd"><td colspan="2">5 - Reserved</td>
 </tr>
-<tr class="row-even"><td colspan="2">6 - Unused Extension</td>
+<tr class="row-even"><td colspan="2">6 - Reserved</td>
 </tr>
-<tr class="row-odd"><td rowspan="12">1</td>
-<td rowspan="4">4 - Regular Load</td>
-<td>0 - LW</td>
-</tr>
-<tr class="row-even"><td>1 - L32</td>
-</tr>
-<tr class="row-odd"><td>2 - L16</td>
-</tr>
-<tr class="row-even"><td>3 - L8</td>
-</tr>
-<tr class="row-odd"><td rowspan="4">5 - Sign-Extend Load</td>
-<td>0 - LUI <a class="footnote-reference" href="#id7" id="id2">[1]</a></td>
-</tr>
-<tr class="row-even"><td>1 - L32S</td>
-</tr>
-<tr class="row-odd"><td>2 - L16S</td>
-</tr>
-<tr class="row-even"><td>3 - L8S</td>
-</tr>
-<tr class="row-odd"><td rowspan="4">6 - Store</td>
-<td>0 - SW</td>
-</tr>
-<tr class="row-even"><td>1 - S32</td>
-</tr>
-<tr class="row-odd"><td>2 - S16</td>
-</tr>
-<tr class="row-even"><td>3 - S8</td>
-</tr>
-<tr class="row-odd"><td rowspan="4">0</td>
-<td rowspan="4">7 - Jump/Special</td>
+<tr class="row-odd"><td rowspan="4">7 - Jump/Special</td>
 <td>0 - SYSCALL</td>
 </tr>
-<tr class="row-even"><td>1 - F* (FPU Call) <a class="footnote-reference" href="#id7" id="id3">[1]</a> <a class="footnote-reference" href="#id8" id="id4">[2]</a></td>
+<tr class="row-even"><td>1 - F* (FPU Call) <a class="footnote-reference" href="#id7" id="id2">[1]</a> <a class="footnote-reference" href="#id8" id="id3">[2]</a></td>
 </tr>
 <tr class="row-odd"><td>2 - JAL</td>
 </tr>
 <tr class="row-even"><td>3 - J</td>
 </tr>
-<tr class="row-odd"><td rowspan="4">1</td>
-<td rowspan="4">7 - Jump Immediate</td>
+<tr class="row-odd"><td rowspan="29">1</td>
+<td rowspan="2">0 - Basic Integer Math</td>
+<td>0 - ADDI</td>
+</tr>
+<tr class="row-even"><td>1 - SUBI</td>
+</tr>
+<tr class="row-odd"><td rowspan="4">1 - Compare/Set</td>
+<td>0 - SLTI</td>
+</tr>
+<tr class="row-even"><td>1 - SLTIU</td>
+</tr>
+<tr class="row-odd"><td>2 - SGTI</td>
+</tr>
+<tr class="row-even"><td>3 - SGTIU</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">2 - Shift</td>
+<td>0 - SLLI</td>
+</tr>
+<tr class="row-even"><td>1 - SRAI</td>
+</tr>
+<tr class="row-odd"><td>2 - SRLI</td>
+</tr>
+<tr class="row-even"><td rowspan="4">3 - Bitwise Op</td>
+<td>0 - ANDI</td>
+</tr>
+<tr class="row-odd"><td>1 - NORI</td>
+</tr>
+<tr class="row-even"><td>2 - ORI</td>
+</tr>
+<tr class="row-odd"><td>3 - XORI</td>
+</tr>
+<tr class="row-even"><td rowspan="4">4 - Regular Load</td>
+<td>0 - LW</td>
+</tr>
+<tr class="row-odd"><td>1 - L32</td>
+</tr>
+<tr class="row-even"><td>2 - L16</td>
+</tr>
+<tr class="row-odd"><td>3 - L8</td>
+</tr>
+<tr class="row-even"><td rowspan="4">5 - Sign-Extend Load</td>
+<td>0 - LUI <a class="footnote-reference" href="#id7" id="id4">[1]</a></td>
+</tr>
+<tr class="row-odd"><td>1 - L32S</td>
+</tr>
+<tr class="row-even"><td>2 - L16S</td>
+</tr>
+<tr class="row-odd"><td>3 - L8S</td>
+</tr>
+<tr class="row-even"><td rowspan="4">6 - Store</td>
+<td>0 - SW</td>
+</tr>
+<tr class="row-odd"><td>1 - S32</td>
+</tr>
+<tr class="row-even"><td>2 - S16</td>
+</tr>
+<tr class="row-odd"><td>3 - S8</td>
+</tr>
+<tr class="row-even"><td rowspan="4">7 - Jump Immediate</td>
 <td>0 - BEQ</td>
 </tr>
-<tr class="row-even"><td>1 - BEQAL</td>
+<tr class="row-odd"><td>1 - BEQAL</td>
 </tr>
-<tr class="row-odd"><td>2 - JALI <a class="footnote-reference" href="#id7" id="id5">[1]</a></td>
+<tr class="row-even"><td>2 - JALI <a class="footnote-reference" href="#id7" id="id5">[1]</a></td>
 </tr>
-<tr class="row-even"><td>3 - JI <a class="footnote-reference" href="#id7" id="id6">[1]</a></td>
+<tr class="row-odd"><td>3 - JI <a class="footnote-reference" href="#id7" id="id6">[1]</a></td>
 </tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id7" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>, <a class="fn-backref" href="#id5">3</a>, <a class="fn-backref" href="#id6">4</a>)</em> 64-bit format only</td></tr>
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id4">2</a>, <a class="fn-backref" href="#id5">3</a>, <a class="fn-backref" href="#id6">4</a>)</em> 64-bit format only</td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id8" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[2]</a></td><td>The F* instruction uses the immediate field of 64S to request a specific enumerated service from the FPU.  These instructions are documented TODO::ref::here.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>The F* instruction uses the immediate field of 64S to request a specific enumerated service from the FPU.  These instructions are documented TODO::ref::here.</td></tr>
 </tbody>
 </table>
 </div>

@@ -23,10 +23,10 @@ Encoding
 --------
 
 :Type: 0
-:Unit: 0
+:Unit: 4
 :Op: 3
 
 :16-bit Opcode: NONE
-:32-bit Opcode: 0x83
-:64-bit Opcode: 0xC3
+:32-bit Opcode: 0x93
+:64-bit Opcode: 0xD3
 
