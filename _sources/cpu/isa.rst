@@ -132,7 +132,7 @@ All register and immediate type instructions (except the immediate type branch a
    :hspace: 700
    :bits: 64
    
-A special jump format for large displacement BEQ, BEQAL, JI, and JALI, the 64J format allows for a full 48-bit signed displacement/unsigned jump, sufficient to cover the entire virtual address space of the Raisin64.
+A special jump format for large displacement JI and JALI, the 64J format allows for a full 56-bit unsigned jump, more than sufficient to cover the entire virtual address space of the Raisin64.
 
 32 and 64-bit Unit/Op Table
 +++++++++++++++++++++++++++

@@ -1,7 +1,7 @@
 JI - Jump Immediate
 ===================
 
-Unconditional jump to the immediate value.  The top 16 bits of the jump destination address are taken from the current program counter.  As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.  Due to the size of the immediate value, JI is only available in 64J format.
+Unconditional jump to the immediate value.  The top 8 bits of the jump destination address are taken from the current program counter.  As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.  Due to the size of the immediate value, JI is only available in 64J format.
 
 Usage
 -----
@@ -15,7 +15,7 @@ Operation
 
 .. code-block:: c
 
-   pc = (pc & 0xffff000000000000) | imm<<1;
+   pc = (pc & 0xff00000000000000) | imm<<1;
 
 Encoding
 --------
