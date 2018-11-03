@@ -50,7 +50,7 @@
             <tspan>Imm</tspan>
           </text>
           <text x="162.5" font-size="14" font-family="sans-serif" font-weight="normal">
-            <tspan>Rd</tspan>
+            <tspan>Rd/Rs1</tspan>
           </text>
           <text x="50" font-size="14" font-family="sans-serif" font-weight="normal">
             <tspan>OpCode</tspan>

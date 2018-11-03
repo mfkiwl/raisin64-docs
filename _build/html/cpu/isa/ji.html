@@ -222,7 +222,7 @@
             
   <div class="section" id="ji-jump-immediate">
 <h1>JI - Jump Immediate<a class="headerlink" href="#ji-jump-immediate" title="Permalink to this headline">¶</a></h1>
-<p>Unconditional jump to the immediate value.  The top 16 bits of the jump destination address are taken from the current program counter.  As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.  Due to the size of the immediate value, JI is only available in 64J format.</p>
+<p>Unconditional jump to the immediate value.  The top 8 bits of the jump destination address are taken from the current program counter.  As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.  Due to the size of the immediate value, JI is only available in 64J format.</p>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-asm notranslate"><div class="highlight"><pre><span></span><span class="nf">ji</span> <span class="no">imm</span>
@@ -231,7 +231,7 @@
 </div>
 <div class="section" id="operation">
 <h2>Operation<a class="headerlink" href="#operation" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">pc</span> <span class="o">=</span> <span class="p">(</span><span class="n">pc</span> <span class="o">&amp;</span> <span class="mh">0xffff000000000000</span><span class="p">)</span> <span class="o">|</span> <span class="n">imm</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">;</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">pc</span> <span class="o">=</span> <span class="p">(</span><span class="n">pc</span> <span class="o">&amp;</span> <span class="mh">0xff00000000000000</span><span class="p">)</span> <span class="o">|</span> <span class="n">imm</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
