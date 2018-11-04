@@ -168,6 +168,10 @@
 </div>
 <div class="section" id="pipeline-stages">
 <h2>Pipeline Stages<a class="headerlink" href="#pipeline-stages" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In general, all functional units are coded as combinational logic, with explicit register stages dividing up the processing pipeline.  This was done intentionally to allow expermintation and easy combining/splitting of functionality into however many registered stages are necessary to meet timing.  The pipeline register modules/files are suffexed with &lt;name&gt;_reg.</p>
+</div>
 </div>
 <div class="section" id="caches">
 <h2>Caches<a class="headerlink" href="#caches" title="Permalink to this headline">¶</a></h2>
