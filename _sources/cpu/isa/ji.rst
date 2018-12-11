@@ -22,8 +22,8 @@ Encoding
 
 :Type: 1
 :Unit: 7
-:Op: 3
+:Op: 2
 
 :16-bit Opcode: NONE
 :32-bit Opcode: NONE
-:64-bit Opcode: 0xFF
+:64-bit Opcode: 0xFE
