@@ -82,7 +82,89 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../cpu.html">Raisin64 CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software.html">Code Snippets and Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nexysddr.html">Nexys 4 DDR Reference Implementation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Reference Index</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Raisin64 Instruction Set</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#instruction-format">Instruction Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bit-formats">16-bit formats</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#r-16-bit-register-format">16R - 16-bit Register Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#i-16-bit-immediate-format">16I - 16-bit Immediate Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bit-opcode-table">16-bit OpCode Table</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">32/64-bit Formats</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#r-32-bit-register-format">32R - 32-bit Register Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#i-32-bit-immediate-format">32I - 32-bit Immediate Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#s-64-bit-standard-format">64S - 64-bit Standard Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#j-64-bit-jump-format">64J - 64-bit Jump Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#and-64-bit-unit-op-table">32 and 64-bit Unit/Op Table</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#instructions">Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="isa/add.html">ADD - Integer Add</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/addi.html">ADDI - Integer Add Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/and.html">AND - Bitwise AND</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/andi.html">ANDI - Bitwise AND Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/beq.html">BEQ - Branch if Equal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/beqal.html">BEQAL - Branch if Equal And Link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/div.html">DIV - Integer Divide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/divu.html">DIVU - Unsigned Integer Divide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/f.html">F* - FPU Call</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/j.html">J - Jump</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/jal.html">JAL - Jump and Link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/jali.html">JALI - Jump and Link Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/ji.html">JI - Jump Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/l16.html">L16 - Load 16-bit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/l16s.html">L16S - Load 16-bit Sign-Extend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/l32.html">L32 - Load 32-bit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/l32s.html">L32S - Load 32-bit Sign-Extend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/l8.html">L8 - Load 8-bit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/l8s.html">L8S - Load 8-bit Sign-Extend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/lui.html">LUI - Load Upper Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/lw.html">LW - Load 64-bit Word</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/mul.html">MUL - Integer Multiply</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/mulu.html">MULU - Unsigned Integer Multiply</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/nor.html">NOR - Bitwise NOR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/nori.html">NORI - Bitwise NOR Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/or.html">OR - Bitwise OR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/ori.html">ORI - Bitwise OR Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/s16.html">S16 - Store 16-bit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/s32.html">S32 - Store 32-bit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/s8.html">S8 - Store 8-bit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sgt.html">SGT - Set 1 if Greater Than</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sgti.html">SGTI - Set 1 if Greater Than Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sgtiu.html">SGTIU - Set 1 if Greater Than Immediate Unsigned</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sgtu.html">SGTU - Set 1 if Greater Than Unsigned</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sll.html">SLL - Shift Left Logical</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/slli.html">SLLI - Shift Left Logical Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/slt.html">SLT - Set 1 if Less Than</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/slti.html">SLTI - Set 1 if Less Than Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sltiu.html">SLTIU - Set 1 if Less Than Immediate Unsigned</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sltu.html">SLTU - Set 1 if Less Than Unsigned</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sra.html">SRA - Shift Right Arithmetic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/srai.html">SRAI - Shift Right Arithmetic Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/srl.html">SRL - Shift Right Logical</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/srli.html">SRLI - Shift Right Logical Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sub.html">SUB - Integer Subtract</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/subi.html">SUBI - Integer Subtract Immediate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/sw.html">SW - Store 64-bit Word</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/syscall.html">SYSCALL - System Call</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/xor.html">XOR - Bitwise XOR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="isa/xori.html">XORI - Bitwise XOR Immediate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html">Verilog Module Index</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../cpu.html">Raisin64 CPU</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../software.html">Code Snippets and Software</a></li>
@@ -231,7 +313,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="raisin64-instruction-set">
-<h1>Raisin64 Instruction Set<a class="headerlink" href="#raisin64-instruction-set" title="Permalink to this headline">¶</a></h1>
+<span id="isa"></span><h1>Raisin64 Instruction Set<a class="headerlink" href="#raisin64-instruction-set" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#overview" id="id9">Overview</a></li>
@@ -413,9 +495,9 @@
 </tr>
 <tr class="row-even"><td>1 - F* (FPU Call) <a class="footnote-reference" href="#id7" id="id2">[1]</a> <a class="footnote-reference" href="#id8" id="id3">[2]</a></td>
 </tr>
-<tr class="row-odd"><td>2 - JAL</td>
+<tr class="row-odd"><td>2 - J</td>
 </tr>
-<tr class="row-even"><td>3 - J</td>
+<tr class="row-even"><td>3 - JAL</td>
 </tr>
 <tr class="row-odd"><td rowspan="29">1</td>
 <td rowspan="2">0 - Basic Integer Math</td>
@@ -480,9 +562,9 @@
 </tr>
 <tr class="row-odd"><td>1 - BEQAL</td>
 </tr>
-<tr class="row-even"><td>2 - JALI <a class="footnote-reference" href="#id7" id="id5">[1]</a></td>
+<tr class="row-even"><td>2 - JI <a class="footnote-reference" href="#id7" id="id5">[1]</a></td>
 </tr>
-<tr class="row-odd"><td>3 - JI <a class="footnote-reference" href="#id7" id="id6">[1]</a></td>
+<tr class="row-odd"><td>3 - JALI <a class="footnote-reference" href="#id7" id="id6">[1]</a></td>
 </tr>
 </tbody>
 </table>
@@ -604,7 +686,6 @@
         <script type="text/javascript" src="../_static/jquery.js"></script>
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

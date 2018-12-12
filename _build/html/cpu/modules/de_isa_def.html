@@ -82,7 +82,27 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../cpu.html">Raisin64 CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software.html">Code Snippets and Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nexysddr.html">Nexys 4 DDR Reference Implementation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../modules.html">Reference Index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../isa.html">Raisin64 Instruction Set</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../modules.html">Verilog Module Index</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="de_badDetect.html">de_badDetect.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="de_canonicalize.html">de_canonicalize.v</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">de_isa_def.vh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_advint.html">ex_advint.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_alu.html">ex_alu.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raisin64.html">Raisin64.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rf_reg.html">rf_reg.v</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../cpu.html">Raisin64 CPU</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../software.html">Code Snippets and Software</a></li>
@@ -172,161 +192,6 @@
             
   <div class="section" id="de-isa-def-vh">
 <h1>de_isa_def.vh<a class="headerlink" href="#de-isa-def-vh" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-verilog notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">//Defines related to the ISA</span>
-
-<span class="c1">//16-bit Opcodes</span>
-<span class="cp">`define OP16_ADD     3&#39;h0</span>
-<span class="cp">`define OP16_SUB     3&#39;h1</span>
-<span class="cp">`define OP16_ADDI    3&#39;h2</span>
-<span class="cp">`define OP16_SUBI    3&#39;h3</span>
-<span class="cp">`define OP16_SYSCALL 3&#39;h4</span>
-<span class="cp">`define OP16_J       3&#39;h5</span>
-<span class="cp">`define OP16_JAL     3&#39;h6</span>
-<span class="cp">`define OP16_ADD     3&#39;h7</span>
-
-<span class="c1">//32 and 64-bit Opcodes</span>
-<span class="cp">`define OP_ADD            6&#39;h00</span>
-<span class="cp">`define OP_SUB            6&#39;h01</span>
-<span class="cp">`define OP_BAD_02         6&#39;h02</span>
-<span class="cp">`define OP_BAD_03         6&#39;h03</span>
-<span class="cp">`define OP_SLT            6&#39;h04</span>
-<span class="cp">`define OP_SLTU           6&#39;h05</span>
-<span class="cp">`define OP_SGT            6&#39;h06</span>
-<span class="cp">`define OP_SGTU           6&#39;h07</span>
-<span class="cp">`define OP_SLL            6&#39;h08</span>
-<span class="cp">`define OP_SRA            6&#39;h09</span>
-<span class="cp">`define OP_SRL            6&#39;h0a</span>
-<span class="cp">`define OP_BAD_0B         6&#39;h0b</span>
-<span class="cp">`define OP_AND            6&#39;h0c</span>
-<span class="cp">`define OP_NOR            6&#39;h0d</span>
-<span class="cp">`define OP_OR             6&#39;h0e</span>
-<span class="cp">`define OP_XOR            6&#39;h0f</span>
-<span class="cp">`define OP_MUL            6&#39;h10</span>
-<span class="cp">`define OP_MULU           6&#39;h11</span>
-<span class="cp">`define OP_DIV            6&#39;h12</span>
-<span class="cp">`define OP_DIVU           6&#39;h13</span>
-<span class="cp">`define OP_BAD_14         6&#39;h14</span>
-<span class="cp">`define OP_BAD_15         6&#39;h15</span>
-<span class="cp">`define OP_BAD_16         6&#39;h16</span>
-<span class="cp">`define OP_BAD_17         6&#39;h17</span>
-<span class="cp">`define OP_BAD_18         6&#39;h18</span>
-<span class="cp">`define OP_BAD_19         6&#39;h19</span>
-<span class="cp">`define OP_BAD_1A         6&#39;h1a</span>
-<span class="cp">`define OP_BAD_1B         6&#39;h1b</span>
-<span class="cp">`define OP_SYSCALL        6&#39;h1c</span>
-<span class="cp">`define OP_F*             6&#39;h1d</span>
-<span class="cp">`define OP_JAL            6&#39;h1e</span>
-<span class="cp">`define OP_J              6&#39;h1f</span>
-<span class="cp">`define OP_ADDI           6&#39;h20</span>
-<span class="cp">`define OP_SUBI           6&#39;h21</span>
-<span class="cp">`define OP_BAD_22         6&#39;h22</span>
-<span class="cp">`define OP_BAD_23         6&#39;h23</span>
-<span class="cp">`define OP_SLTI           6&#39;h24</span>
-<span class="cp">`define OP_SLTIU          6&#39;h25</span>
-<span class="cp">`define OP_SGTI           6&#39;h26</span>
-<span class="cp">`define OP_SGTIU          6&#39;h27</span>
-<span class="cp">`define OP_SLLI           6&#39;h28</span>
-<span class="cp">`define OP_SRAI           6&#39;h29</span>
-<span class="cp">`define OP_SRLI           6&#39;h2a</span>
-<span class="cp">`define OP_BAD_2B         6&#39;h2b</span>
-<span class="cp">`define OP_ANDI           6&#39;h2c</span>
-<span class="cp">`define OP_NORI           6&#39;h2d</span>
-<span class="cp">`define OP_ORI            6&#39;h2e</span>
-<span class="cp">`define OP_XORI           6&#39;h2f</span>
-<span class="cp">`define OP_LW             6&#39;h30</span>
-<span class="cp">`define OP_L32            6&#39;h31</span>
-<span class="cp">`define OP_L16            6&#39;h32</span>
-<span class="cp">`define OP_L8             6&#39;h33</span>
-<span class="cp">`define OP_LUI            6&#39;h34</span>
-<span class="cp">`define OP_L32S           6&#39;h35</span>
-<span class="cp">`define OP_L16S           6&#39;h36</span>
-<span class="cp">`define OP_L8S            6&#39;h37</span>
-<span class="cp">`define OP_SW             6&#39;h38</span>
-<span class="cp">`define OP_S32            6&#39;h39</span>
-<span class="cp">`define OP_S16            6&#39;h3a</span>
-<span class="cp">`define OP_S8             6&#39;h3b</span>
-<span class="cp">`define OP_BEQ            6&#39;h3c</span>
-<span class="cp">`define OP_BEQAL          6&#39;h3d</span>
-<span class="cp">`define OP_JALI           6&#39;h3e</span>
-<span class="cp">`define OP_JI             6&#39;h3f</span>
-</pre></div>
-</td></tr></table></div>
 </div>
 
 
@@ -374,7 +239,6 @@
         <script type="text/javascript" src="../../_static/jquery.js"></script>
         <script type="text/javascript" src="../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

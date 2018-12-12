@@ -86,11 +86,29 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Raisin64 CPU</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pipeline-stages">Pipeline Stages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#caches">Caches</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#mmu">MMU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#interrupt-unit">Interrupt Unit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pipeline-stages">Pipeline Stages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fetch-unit">Fetch Unit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#decode-unit">Decode Unit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#register-file">Register File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#schedule-unit">Schedule Unit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#execution-units">Execution Units</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#integer-unit">Integer Unit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#advanced-integer-unit">Advanced Integer Unit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#branch-unit">Branch Unit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#memory-unit">Memory Unit</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#commit-unit">Commit Unit</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#debug-unit">Debug Unit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#proposed-extensions">Proposed Extensions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mmu">MMU</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#interrupt-unit">Interrupt Unit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#caches">Caches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="software.html">Code Snippets and Software</a></li>
@@ -163,27 +181,178 @@
             
   <div class="section" id="raisin64-cpu">
 <h1>Raisin64 CPU<a class="headerlink" href="#raisin64-cpu" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#overview" id="id8">Overview</a></li>
+<li><a class="reference internal" href="#pipeline-stages" id="id9">Pipeline Stages</a><ul>
+<li><a class="reference internal" href="#fetch-unit" id="id10">Fetch Unit</a></li>
+<li><a class="reference internal" href="#decode-unit" id="id11">Decode Unit</a></li>
+<li><a class="reference internal" href="#register-file" id="id12">Register File</a></li>
+<li><a class="reference internal" href="#schedule-unit" id="id13">Schedule Unit</a></li>
+<li><a class="reference internal" href="#execution-units" id="id14">Execution Units</a><ul>
+<li><a class="reference internal" href="#integer-unit" id="id15">Integer Unit</a></li>
+<li><a class="reference internal" href="#advanced-integer-unit" id="id16">Advanced Integer Unit</a></li>
+<li><a class="reference internal" href="#branch-unit" id="id17">Branch Unit</a></li>
+<li><a class="reference internal" href="#memory-unit" id="id18">Memory Unit</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#commit-unit" id="id19">Commit Unit</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#debug-unit" id="id20">Debug Unit</a></li>
+<li><a class="reference internal" href="#proposed-extensions" id="id21">Proposed Extensions</a><ul>
+<li><a class="reference internal" href="#mmu" id="id22">MMU</a></li>
+<li><a class="reference internal" href="#interrupt-unit" id="id23">Interrupt Unit</a></li>
+<li><a class="reference internal" href="#caches" id="id24">Caches</a></li>
+<li><a class="reference internal" href="#references" id="id25">References</a></li>
+</ul>
+</li>
+</ul>
+</div>
 <div class="section" id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id8">Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="pipeline-stages">
-<h2>Pipeline Stages<a class="headerlink" href="#pipeline-stages" title="Permalink to this headline">¶</a></h2>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">In general, all functional units are coded as combinational logic, with explicit register stages dividing up the processing pipeline.  This was done intentionally to allow expermintation and easy combining/splitting of functionality into however many registered stages are necessary to meet timing.  The pipeline register modules/files are suffexed with &lt;name&gt;_reg.</p>
+<h2><a class="toc-backref" href="#id9">Pipeline Stages</a><a class="headerlink" href="#pipeline-stages" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="fetch-unit">
+<h3><a class="toc-backref" href="#id10">Fetch Unit</a><a class="headerlink" href="#fetch-unit" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="decode-unit">
+<h3><a class="toc-backref" href="#id11">Decode Unit</a><a class="headerlink" href="#decode-unit" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="register-file">
+<h3><a class="toc-backref" href="#id12">Register File</a><a class="headerlink" href="#register-file" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="schedule-unit">
+<h3><a class="toc-backref" href="#id13">Schedule Unit</a><a class="headerlink" href="#schedule-unit" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="execution-units">
+<h3><a class="toc-backref" href="#id14">Execution Units</a><a class="headerlink" href="#execution-units" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="integer-unit">
+<h4><a class="toc-backref" href="#id15">Integer Unit</a><a class="headerlink" href="#integer-unit" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="advanced-integer-unit">
+<h4><a class="toc-backref" href="#id16">Advanced Integer Unit</a><a class="headerlink" href="#advanced-integer-unit" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="branch-unit">
+<h4><a class="toc-backref" href="#id17">Branch Unit</a><a class="headerlink" href="#branch-unit" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="memory-unit">
+<h4><a class="toc-backref" href="#id18">Memory Unit</a><a class="headerlink" href="#memory-unit" title="Permalink to this headline">¶</a></h4>
 </div>
 </div>
-<div class="section" id="caches">
-<h2>Caches<a class="headerlink" href="#caches" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="commit-unit">
+<h3><a class="toc-backref" href="#id19">Commit Unit</a><a class="headerlink" href="#commit-unit" title="Permalink to this headline">¶</a></h3>
 </div>
-<div class="section" id="mmu">
-<h2>MMU<a class="headerlink" href="#mmu" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="interrupt-unit">
-<h2>Interrupt Unit<a class="headerlink" href="#interrupt-unit" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="debug-unit">
-<h2>Debug Unit<a class="headerlink" href="#debug-unit" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id20">Debug Unit</a><a class="headerlink" href="#debug-unit" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="proposed-extensions">
+<h2><a class="toc-backref" href="#id21">Proposed Extensions</a><a class="headerlink" href="#proposed-extensions" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-future-work admonition">
+<p class="first admonition-title">Future Work</p>
+<p>While out-of-scope for the present period of the project, some initial development was done on <a class="reference internal" href="#caches">Caches</a>, an <a class="reference internal" href="#mmu">MMU</a>, and <a class="reference internal" href="#interrupt-unit">Interrupt Unit</a>, primarily to ensure that they can be integrated into the design without significant modification to the processing pipeline.</p>
+<p class="last">These extensions will make the processor capable of running a general purpose operating system (such as Linux) without resorting to software emulation of customarily present hardware.</p>
+</div>
+<div class="section" id="mmu">
+<h3><a class="toc-backref" href="#id22">MMU</a><a class="headerlink" href="#mmu" title="Permalink to this headline">¶</a></h3>
+<p>Nearly all general purpose operating systems depend on a <a class="reference external" href="https://en.wikipedia.org/wiki/Memory_management_unit">Memory Management Unit</a> to provide the virtual addressing used by userspace processes <a class="footnote-reference" href="#id4" id="id1">[1]</a> <a class="footnote-reference" href="#id5" id="id2">[2]</a>.  The MMU presents each process with an illusory linear address space potentially overlapping with many other processes.  Along with the <a class="reference external" href="https://en.wikipedia.org/wiki/Translation_lookaside_buffer">Translation Lookaside Buffer</a>, an MMU critically allows processes to be placed at arbitrary physical addresses (wherever the RAM happens to be free), with pages of that physical memory mapped at whatever virtual addresses the process expects.</p>
+<p>In the Raisin64, the MMU also acts as the first point where the instruction and data caches have a unified window into physical memory, making the processor a split-cache Harvard architecture.  Beyond the <a class="reference external" href="https://en.wikipedia.org/wiki/Page_table">page tables</a> which are conventionally placed in main memory, the MMU control registers will be present in the machine’s memory-map and be accessible in a kernel-mode un-mapped region (that is, the memory addresses used to access the registers will never be mapped by the MMU and will always be passed through without translation).</p>
+<p><strong>Proposed MMU Specs:</strong></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Page Size:</th><td class="field-body">16KB Fixed</td>
+</tr>
+<tr class="field-even field"><th class="field-name">VA Width:</th><td class="field-body">47-Bits sign-extended</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Page Table:</th><td class="field-body">Three Level (3x 11-bit entries and 15-bit offset)</td>
+</tr>
+</tbody>
+</table>
+<p>The virtual addressing scheme takes inspiration from several modern processor designs as a way to constrain the number of legal virtual addresses while not inhibiting the physical address space available to the MMU.  While the virtual addresses are 64-bits, bits 63:47 must be sign-extended (i.e. replicated) from bit 46.  This breaks the address space into several proposed regions:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="53%" />
+<col width="47%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Address</td>
+<td>Purpose</td>
+</tr>
+<tr class="row-even"><td>0xFFFFFFFF_FFFFFFFF - 0xFFFFC000_00000000</td>
+<td>Kernel-Mode Mapped</td>
+</tr>
+<tr class="row-odd"><td>0xFFFFBFFF_FFFFFFFF - 0xFFFF8000_00000000</td>
+<td>Kernel-Mode Unmapped</td>
+</tr>
+<tr class="row-even"><td>0xFFFF7FFF_FFFFFFFF - 0x00008000_00000000</td>
+<td>Invalid</td>
+</tr>
+<tr class="row-odd"><td>0x00007FFF_FFFFFFFF - 0x00000000_00000000</td>
+<td>User-Mode Mapped</td>
+</tr>
+</tbody>
+</table>
+<p>The following figure from ARM on the MIPS processor’s memory map conveys the general principle of using the kernel-mode unmapped segment to allow access to IO registers (MMU configuration included) which are present at a fixed physical address:</p>
+<div class="figure" id="id7">
+<img alt="MIPS Memory Segments" src="_images/mipsmap.png" />
+<p class="caption"><span class="caption-text">From ARM AN235 Section 3.4 <a class="footnote-reference" href="#id6" id="id3">[3]</a></span></p>
+</div>
+</div>
+<div class="section" id="interrupt-unit">
+<h3><a class="toc-backref" href="#id23">Interrupt Unit</a><a class="headerlink" href="#interrupt-unit" title="Permalink to this headline">¶</a></h3>
+<p>An Interrupt/Exception unit will be necessary to properly implement virtual memory.  Attempting to access an unmapped, evicted, or privilaged page from a userspace process should cause the operating system to take over and mitigate the situation (either by loading the page or terminating the process).</p>
+<p>The Raisin64’s processing pipeline will need some modifications to the <a class="reference internal" href="#commit-unit">Commit Unit</a> although first steps have already been taken to add a mechanism allowing register and memory writes to be deferred and re-ordered.  This can be expanded with program counter tracking information to ensure that the precise location of an interrupt can be recovered and the processor did not commit the pending results of an issued instruction later in the (now aborted) instruction stream.</p>
+</div>
+<div class="section" id="caches">
+<h3><a class="toc-backref" href="#id24">Caches</a><a class="headerlink" href="#caches" title="Permalink to this headline">¶</a></h3>
+<p>Relatively simple compared to the MMU or Interrupt Unit, caches will likely have the largest impact on performance of the processor.  As the processing pipeline uses a Harvard architecture, the first level of caching is made up of a separate Instruction and Data cache.  Each will sit on their respective data ports and provide a small number of highly/fully associative entries that are <a class="reference external" href="https://en.wikipedia.org/wiki/CPU_cache#Address_translation">virtually indexed and virtually tagged</a>.</p>
+<p>This scheme will necessitate the flushing of the cache on a context switch, but as the only known implementations of the Raisin64 are on FPGAs (without the benefit of hardware content-addressable memory), the caches need to be small regardless and flushing their content on a context-switch will affect only a small number of entries.</p>
+<p><strong>Proposed Cache Specs:</strong></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">L1 Cache:</th><td class="field-body">Split Instruction/Data</td>
+</tr>
+<tr class="field-even field"><th class="field-name">L1 Data:</th><td class="field-body">Small N-Way/Fully Associative</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">L1 Instruction:</th><td class="field-body">Small N-Way/Fully Associative</td>
+</tr>
+<tr class="field-even field"><th class="field-name">L1 Tag Scheme:</th><td class="field-body">Virtually Indexed, Virtually Tagged</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">L2 Cache:</th><td class="field-body">Large Unified 2-Way Set Associative</td>
+</tr>
+<tr class="field-even field"><th class="field-name">L2 Tag Scheme:</th><td class="field-body">Physically Indexed, Physically Tagged</td>
+</tr>
+</tbody>
+</table>
+<p>While a second level cache between the MMU and main memory may be advantageous, the (comparatively) slow clock rates available from an FPGA but with full speed hardware-accelerated RAM access may eliminate any benefit of another cache.</p>
+</div>
+<div class="section" id="references">
+<h3><a class="toc-backref" href="#id25">References</a><a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="https://www.kernel.org/doc/Documentation/nommu-mmap.txt">https://www.kernel.org/doc/Documentation/nommu-mmap.txt</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td><a class="reference external" href="https://wiki.netbsd.org/projects/project/mmu-less/">https://wiki.netbsd.org/projects/project/mmu-less/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td><a class="reference external" href="http://infocenter.arm.com/help/topic/com.arm.doc.dai0235c/index.html#arm_toc13">http://infocenter.arm.com/help/topic/com.arm.doc.dai0235c/index.html#arm_toc13</a></td></tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 
@@ -232,7 +401,6 @@
         <script type="text/javascript" src="_static/jquery.js"></script>
         <script type="text/javascript" src="_static/underscore.js"></script>
         <script type="text/javascript" src="_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

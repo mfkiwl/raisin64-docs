@@ -6,7 +6,9 @@
 Welcome to Raisin64's documentation!
 ====================================
 
-Raisin64 (*RISC Architecture with In-order Superscalar INterlocked-pipeline*) is a pure 64-bit CPU design created as part of an educational project.  Architecturally similar to the `MIPS R10000 <https://en.wikipedia.org/wiki/R10000>`_ and `POWER3 <https://en.wikipedia.org/wiki/POWER3>`_, Raisin64 is a superscalar design that employs multiple specialized pipelines for integer operations, floating point, load/store, etc.  Unlike most superscalar designs, Raisin64 does not re-order instructions but instead provides a larger architectural register file of 64x64-bit registers.
+Raisin64 (*RISC Architecture with In-order Superscalar INterlocked-pipeline*) is a pure 64-bit CPU design created as part of an educational project.  Inspired by the architecture of  the `MIPS R10000 <https://en.wikipedia.org/wiki/R10000>`_ and `POWER3 <https://en.wikipedia.org/wiki/POWER3>`_, Raisin64 employs multiple specialized pipelines for integer operations, branching, load/store, etc presently using a simplified issue system appropriate for the scope of a semester-long project.
+
+Unlike most superscalar designs, Raisin64 does not re-order instructions or use register renaming [1]_ but instead provides a larger architectural register file of 63x64-bit registers.
 
 .. image:: _static/temp_block.svg
     :width: 100%
@@ -14,22 +16,38 @@ Raisin64 (*RISC Architecture with In-order Superscalar INterlocked-pipeline*) is
 
 Major features of the Raisin64 include:
 
-- **Bits:** 64-bit
-- **Design:** RISC
-- **Type:** Register-Register
-- **Branching:** Condition Code
-- **Endianness:** Big
-- **Page Size:** 16KB Fixed
-- **Virtual Address Size:** 47-Bits
-- **Page Table:** Three Level
-- **Registers:** 61 (R0 = 0)
+:Bits: 64-bit
+:`Instructions <isa>`_: 50 Opcodes (with 16, 32, and 64-bit formats)
+:Design: RISC (Harvard Architecture [2]_)
+:Type: Register-Register
+:Branching: Compare and Branch
+:Endianness: Big
+:Registers: 63 (R0 = 0)
 
+.. Full TOC for the PDF and index
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 4
+   :hidden:
    
    cpu
    software
    tools
    nexysddr
    modules
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   cpu
+   software
+   tools
+   nexysddr
+   modules
+
+Footnotes
+---------
+
+.. [1] Raisin64 will issue instructions out-of-order assuming subsequent instructions are dependancy-free and the appropriate execution unit is available.
+.. [2] `Split-Cache Modified Harvard <https://en.wikipedia.org/wiki/Modified_Harvard_architecture>`_ when
+        :ref:`proposed caches and MMU <cpu:Proposed Extensions>` are introduced.

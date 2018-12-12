@@ -27,3 +27,8 @@ Encoding
 :32-bit Opcode: 0x81
 :64-bit Opcode: 0xC1
 
+
+.. raw:: latex
+
+    \clearpage
+

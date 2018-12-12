@@ -173,7 +173,7 @@
   <div class="section" id="de-canonicalize-v">
 <h1>de_canonicalize.v<a class="headerlink" href="#de-canonicalize-v" title="Permalink to this headline">¶</a></h1>
 <div class="figure align-center" id="id1">
-<object data="../../_images/symbol-c6e477dd4a75d57376f637e23dae3d4e07c8e8f4.svg" type="image/svg+xml">
+<object data="../../_images/symbol-9bf243b0d9f8b64cdd27eeb4d009f6eb4861d823.svg" type="image/svg+xml">
             <p class="warning">de_canonicalize.v</p></object>
 <p class="caption"><span class="caption-text">de_canonicalize.v</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
@@ -257,75 +257,75 @@
 
 <span class="k">module</span> <span class="n">de_canonicalize</span><span class="p">(</span>
     <span class="c1">//# {{data|Instruction Data}}</span>
-    <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">opcodeIn</span><span class="p">,</span>
-    <span class="k">output</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">opcodeOut</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">instIn</span><span class="p">,</span>
+    <span class="k">output</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">instOut</span>
     <span class="p">);</span>
 
     <span class="no">`include</span> <span class="s">&quot;de_isa_def.vh&quot;</span>
 
-    <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">opcodeOut_pre</span><span class="p">;</span>
-    <span class="k">assign</span> <span class="n">opcodeOut</span> <span class="o">=</span> <span class="n">opcodeOut_pre</span><span class="p">;</span>
+    <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">instOut_pre</span><span class="p">;</span>
+    <span class="k">assign</span> <span class="n">instOut</span> <span class="o">=</span> <span class="n">instOut_pre</span><span class="p">;</span>
 
     <span class="c1">//Expands input instruction into full 64-bit format</span>
     <span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span>
     <span class="k">begin</span>
-        <span class="n">opcodeOut_pre</span> <span class="o">=</span> <span class="mh">64&#39;h0</span><span class="p">;</span>
+        <span class="n">instOut_pre</span> <span class="o">=</span> <span class="mh">64&#39;h0</span><span class="p">;</span>
 
         <span class="c1">//Set the output size field appropriately</span>
-        <span class="n">opcodeOut_pre</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">62</span><span class="p">]</span> <span class="o">=</span> <span class="mh">2&#39;h3</span><span class="p">;</span>
+        <span class="n">instOut_pre</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">62</span><span class="p">]</span> <span class="o">=</span> <span class="mh">2&#39;h3</span><span class="p">;</span>
 
         <span class="c1">//16-Bit input instructions</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">opcodeIn</span><span class="p">[</span><span class="mh">63</span><span class="p">])</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">instIn</span><span class="p">[</span><span class="mh">63</span><span class="p">])</span>
         <span class="k">begin</span>
             <span class="c1">//Switch on Opcode field</span>
-            <span class="k">case</span><span class="p">(</span><span class="n">opcodeIn</span><span class="p">[</span><span class="mh">62</span><span class="o">:</span><span class="mh">60</span><span class="p">])</span>
-                <span class="no">`OP16_ADD</span><span class="o">:</span>     <span class="n">opcodeOut_pre</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">]</span> <span class="o">=</span> <span class="no">`OP_ADD</span><span class="p">;</span> <span class="c1">//ADD Rd = Rd + Rs</span>
-                <span class="no">`OP16_SUB</span><span class="o">:</span>     <span class="n">opcodeOut_pre</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">]</span> <span class="o">=</span> <span class="no">`OP_SUB</span><span class="p">;</span> <span class="c1">//SUB Rd = Rd - Rs</span>
-                <span class="no">`OP16_ADDI</span><span class="o">:</span>    <span class="n">opcodeOut_pre</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">]</span> <span class="o">=</span> <span class="no">`OP_ADDI</span><span class="p">;</span> <span class="c1">//ADDI Rd = Rd + sign_extend(imm)</span>
-                <span class="no">`OP16_SUBI</span><span class="o">:</span>    <span class="n">opcodeOut_pre</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">]</span> <span class="o">=</span> <span class="no">`OP_SUBI</span><span class="p">;</span> <span class="c1">//SUBI Rd = Rd - imm</span>
-                <span class="no">`OP16_SYSCALL</span><span class="o">:</span> <span class="n">opcodeOut_pre</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">]</span> <span class="o">=</span> <span class="no">`OP_SYSCALL</span><span class="p">;</span> <span class="c1">//SYSCALL</span>
-                <span class="no">`OP16_J</span><span class="o">:</span>       <span class="n">opcodeOut_pre</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">]</span> <span class="o">=</span> <span class="no">`OP_J</span><span class="p">;</span> <span class="c1">//J Rs</span>
-                <span class="no">`OP16_JAL</span><span class="o">:</span>     <span class="n">opcodeOut_pre</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">]</span> <span class="o">=</span> <span class="no">`OP_JAL</span><span class="p">;</span> <span class="c1">//JAL Rs</span>
+            <span class="k">case</span><span class="p">(</span><span class="n">instIn</span><span class="p">[</span><span class="mh">62</span><span class="o">:</span><span class="mh">60</span><span class="p">])</span>
+                <span class="no">`OP16_ADD</span><span class="o">:</span>     <span class="n">instOut_pre</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">]</span> <span class="o">=</span> <span class="no">`OP_ADD</span><span class="p">;</span> <span class="c1">//ADD Rd = Rd + Rs</span>
+                <span class="no">`OP16_SUB</span><span class="o">:</span>     <span class="n">instOut_pre</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">]</span> <span class="o">=</span> <span class="no">`OP_SUB</span><span class="p">;</span> <span class="c1">//SUB Rd = Rd - Rs</span>
+                <span class="no">`OP16_ADDI</span><span class="o">:</span>    <span class="n">instOut_pre</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">]</span> <span class="o">=</span> <span class="no">`OP_ADDI</span><span class="p">;</span> <span class="c1">//ADDI Rd = Rd + sign_extend(imm)</span>
+                <span class="no">`OP16_SUBI</span><span class="o">:</span>    <span class="n">instOut_pre</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">]</span> <span class="o">=</span> <span class="no">`OP_SUBI</span><span class="p">;</span> <span class="c1">//SUBI Rd = Rd - imm</span>
+                <span class="no">`OP16_SYSCALL</span><span class="o">:</span> <span class="n">instOut_pre</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">]</span> <span class="o">=</span> <span class="no">`OP_SYSCALL</span><span class="p">;</span> <span class="c1">//SYSCALL</span>
+                <span class="no">`OP16_J</span><span class="o">:</span>       <span class="n">instOut_pre</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">]</span> <span class="o">=</span> <span class="no">`OP_J</span><span class="p">;</span> <span class="c1">//J Rs</span>
+                <span class="no">`OP16_JAL</span><span class="o">:</span>     <span class="n">instOut_pre</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">]</span> <span class="o">=</span> <span class="no">`OP_JAL</span><span class="p">;</span> <span class="c1">//JAL Rs</span>
             <span class="k">endcase</span>
 
-            <span class="n">opcodeOut_pre</span><span class="p">[</span><span class="mh">55</span><span class="o">:</span><span class="mh">50</span><span class="p">]</span> <span class="o">=</span> <span class="n">opcodeIn</span><span class="p">[</span><span class="mh">59</span><span class="o">:</span><span class="mh">54</span><span class="p">];</span> <span class="c1">//Put the Rd/Rs1 into Rd</span>
-            <span class="n">opcodeOut_pre</span><span class="p">[</span><span class="mh">49</span><span class="o">:</span><span class="mh">44</span><span class="p">]</span> <span class="o">=</span> <span class="mh">6&#39;h0</span><span class="p">;</span> <span class="c1">//Rd2 is not used in this format</span>
-            <span class="n">opcodeOut_pre</span><span class="p">[</span><span class="mh">43</span><span class="o">:</span><span class="mh">38</span><span class="p">]</span> <span class="o">=</span> <span class="n">opcodeIn</span><span class="p">[</span><span class="mh">59</span><span class="o">:</span><span class="mh">54</span><span class="p">];</span> <span class="c1">//Put the Rd/Rs1 into Rs1</span>
-            <span class="n">opcodeOut_pre</span><span class="p">[</span><span class="mh">37</span><span class="o">:</span><span class="mh">32</span><span class="p">]</span> <span class="o">=</span> <span class="n">opcodeIn</span><span class="p">[</span><span class="mh">53</span><span class="o">:</span><span class="mh">48</span><span class="p">];</span> <span class="c1">//Populate Rs2 (imm type instructions ignore this)</span>
+            <span class="n">instOut_pre</span><span class="p">[</span><span class="mh">55</span><span class="o">:</span><span class="mh">50</span><span class="p">]</span> <span class="o">=</span> <span class="n">instIn</span><span class="p">[</span><span class="mh">59</span><span class="o">:</span><span class="mh">54</span><span class="p">];</span> <span class="c1">//Put the Rd/Rs1 into Rd</span>
+            <span class="n">instOut_pre</span><span class="p">[</span><span class="mh">49</span><span class="o">:</span><span class="mh">44</span><span class="p">]</span> <span class="o">=</span> <span class="mh">6&#39;h0</span><span class="p">;</span> <span class="c1">//Rd2 is not used in this format</span>
+            <span class="n">instOut_pre</span><span class="p">[</span><span class="mh">43</span><span class="o">:</span><span class="mh">38</span><span class="p">]</span> <span class="o">=</span> <span class="n">instIn</span><span class="p">[</span><span class="mh">59</span><span class="o">:</span><span class="mh">54</span><span class="p">];</span> <span class="c1">//Put the Rd/Rs1 into Rs1</span>
+            <span class="n">instOut_pre</span><span class="p">[</span><span class="mh">37</span><span class="o">:</span><span class="mh">32</span><span class="p">]</span> <span class="o">=</span> <span class="n">instIn</span><span class="p">[</span><span class="mh">53</span><span class="o">:</span><span class="mh">48</span><span class="p">];</span> <span class="c1">//Populate Rs2 (imm type instructions ignore this)</span>
 
             <span class="c1">//Sign extended immediate field and populate</span>
-            <span class="n">opcodeOut_pre</span><span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span>  <span class="o">=</span> <span class="p">{{</span><span class="mh">26</span><span class="p">{</span><span class="n">opcodeIn</span><span class="p">[</span><span class="mh">53</span><span class="p">]}},</span><span class="n">opcodeIn</span><span class="p">[</span><span class="mh">53</span><span class="o">:</span><span class="mh">48</span><span class="p">]};</span> <span class="c1">//reg type instructions ignore this</span>
+            <span class="n">instOut_pre</span><span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span>  <span class="o">=</span> <span class="p">{{</span><span class="mh">26</span><span class="p">{</span><span class="n">instIn</span><span class="p">[</span><span class="mh">53</span><span class="p">]}},</span><span class="n">instIn</span><span class="p">[</span><span class="mh">53</span><span class="o">:</span><span class="mh">48</span><span class="p">]};</span> <span class="c1">//reg type instructions ignore this</span>
         <span class="k">end</span>
 
         <span class="c1">//32-bit instructions</span>
-        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">opcodeIn</span><span class="p">[</span><span class="mh">62</span><span class="p">])</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">instIn</span><span class="p">[</span><span class="mh">62</span><span class="p">])</span>
         <span class="k">begin</span>
-            <span class="n">opcodeOut_pre</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">]</span> <span class="o">=</span> <span class="n">opcodeIn</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">];</span> <span class="c1">//Set Type/Unit/Op fields</span>
-            <span class="n">opcodeOut_pre</span><span class="p">[</span><span class="mh">55</span><span class="o">:</span><span class="mh">50</span><span class="p">]</span> <span class="o">=</span> <span class="n">opcodeIn</span><span class="p">[</span><span class="mh">55</span><span class="o">:</span><span class="mh">50</span><span class="p">];</span> <span class="c1">//Set Rd</span>
+            <span class="n">instOut_pre</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">]</span> <span class="o">=</span> <span class="n">instIn</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">];</span> <span class="c1">//Set Type/Unit/Op fields</span>
+            <span class="n">instOut_pre</span><span class="p">[</span><span class="mh">55</span><span class="o">:</span><span class="mh">50</span><span class="p">]</span> <span class="o">=</span> <span class="n">instIn</span><span class="p">[</span><span class="mh">55</span><span class="o">:</span><span class="mh">50</span><span class="p">];</span> <span class="c1">//Set Rd</span>
 
             <span class="c1">//32I-Type instruction</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">opcodeIn</span><span class="p">[</span><span class="mh">61</span><span class="p">])</span> <span class="k">begin</span>
-                <span class="n">opcodeOut_pre</span><span class="p">[</span><span class="mh">43</span><span class="o">:</span><span class="mh">38</span><span class="p">]</span> <span class="o">=</span> <span class="n">opcodeIn</span><span class="p">[</span><span class="mh">49</span><span class="o">:</span><span class="mh">44</span><span class="p">];</span> <span class="c1">//Set Rs1</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">instIn</span><span class="p">[</span><span class="mh">61</span><span class="p">])</span> <span class="k">begin</span>
+                <span class="n">instOut_pre</span><span class="p">[</span><span class="mh">43</span><span class="o">:</span><span class="mh">38</span><span class="p">]</span> <span class="o">=</span> <span class="n">instIn</span><span class="p">[</span><span class="mh">49</span><span class="o">:</span><span class="mh">44</span><span class="p">];</span> <span class="c1">//Set Rs1</span>
 
                 <span class="c1">//Sign-Extended type</span>
-                <span class="k">if</span><span class="p">(</span><span class="n">opcodeIn</span><span class="p">[</span><span class="mh">60</span><span class="p">]</span> <span class="o">||</span> <span class="c1">//Most sign-extended Ops</span>
-                   <span class="n">opcodeIn</span><span class="p">[</span><span class="mh">60</span><span class="o">:</span><span class="mh">58</span><span class="p">]</span><span class="o">==</span><span class="mh">3&#39;h0</span> <span class="o">||</span> <span class="c1">//ADDI/SUBI</span>
-                   <span class="n">opcodeIn</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">]</span><span class="o">==</span><span class="no">`OP_SLTI</span> <span class="o">||</span>
-                   <span class="n">opcodeIn</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">]</span><span class="o">==</span><span class="no">`OP_SGTI</span><span class="p">)</span>
-                      <span class="n">opcodeOut_pre</span><span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">{{</span><span class="mh">20</span><span class="p">{</span><span class="n">opcodeIn</span><span class="p">[</span><span class="mh">43</span><span class="p">]}},</span><span class="n">opcodeIn</span><span class="p">[</span><span class="mh">43</span><span class="o">:</span><span class="mh">32</span><span class="p">]};</span> 
+                <span class="k">if</span><span class="p">(</span><span class="n">instIn</span><span class="p">[</span><span class="mh">60</span><span class="p">]</span> <span class="o">||</span> <span class="c1">//Most sign-extended Ops (remember, JALI and JI are invalid for 32I)</span>
+                   <span class="n">instIn</span><span class="p">[</span><span class="mh">60</span><span class="o">:</span><span class="mh">58</span><span class="p">]</span><span class="o">==</span><span class="mh">3&#39;h0</span> <span class="o">||</span> <span class="c1">//ADDI/SUBI signed versions sign extend</span>
+                   <span class="n">instIn</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">]</span><span class="o">==</span><span class="no">`OP_SLTI</span> <span class="o">||</span> <span class="c1">//SLTI and SGTI are signed and sign extend</span>
+                   <span class="n">instIn</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">]</span><span class="o">==</span><span class="no">`OP_SGTI</span><span class="p">)</span>
+                      <span class="n">instOut_pre</span><span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">{{</span><span class="mh">20</span><span class="p">{</span><span class="n">instIn</span><span class="p">[</span><span class="mh">43</span><span class="p">]}},</span><span class="n">instIn</span><span class="p">[</span><span class="mh">43</span><span class="o">:</span><span class="mh">32</span><span class="p">]};</span> 
                 <span class="c1">//Non Sign-extended type</span>
-                <span class="k">else</span> <span class="n">opcodeOut_pre</span><span class="p">[</span><span class="mh">11</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">opcodeIn</span><span class="p">[</span><span class="mh">43</span><span class="o">:</span><span class="mh">32</span><span class="p">];</span>
+                <span class="k">else</span> <span class="n">instOut_pre</span><span class="p">[</span><span class="mh">11</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">instIn</span><span class="p">[</span><span class="mh">43</span><span class="o">:</span><span class="mh">32</span><span class="p">];</span>
 
             <span class="c1">//32R-Type instructions</span>
             <span class="k">end</span> <span class="k">else</span> <span class="k">begin</span>
                 <span class="c1">//Set the other operands</span>
-                <span class="n">opcodeOut_pre</span><span class="p">[</span><span class="mh">49</span><span class="o">:</span><span class="mh">32</span><span class="p">]</span> <span class="o">=</span> <span class="n">opcodeIn</span><span class="p">[</span><span class="mh">49</span><span class="o">:</span><span class="mh">32</span><span class="p">];</span>
+                <span class="n">instOut_pre</span><span class="p">[</span><span class="mh">49</span><span class="o">:</span><span class="mh">32</span><span class="p">]</span> <span class="o">=</span> <span class="n">instIn</span><span class="p">[</span><span class="mh">49</span><span class="o">:</span><span class="mh">32</span><span class="p">];</span>
 
                 <span class="c1">//No immediate</span>
             <span class="k">end</span>
         <span class="k">end</span>
         <span class="c1">//64-bit instructions</span>
-        <span class="k">else</span> <span class="n">opcodeOut_pre</span> <span class="o">=</span> <span class="n">opcodeIn</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">instOut_pre</span> <span class="o">=</span> <span class="n">instIn</span><span class="p">;</span>
     <span class="k">end</span>
 <span class="k">endmodule</span>
 </pre></div>
@@ -377,7 +377,6 @@
         <script type="text/javascript" src="../../_static/jquery.js"></script>
         <script type="text/javascript" src="../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

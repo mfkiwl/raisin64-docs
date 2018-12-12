@@ -173,7 +173,7 @@
   <div class="section" id="ex-alu-v">
 <h1>ex_alu.v<a class="headerlink" href="#ex-alu-v" title="Permalink to this headline">¶</a></h1>
 <div class="figure align-center" id="id1">
-<object data="../../_images/symbol-9eed722c6b26f4c83e4f26b66ef4cd97a333fe9e.svg" type="image/svg+xml">
+<object data="../../_images/symbol-566da4d410f1f13f6e1fd103094eb724153e4f8d.svg" type="image/svg+xml">
             <p class="warning">ex_alu.v</p></object>
 <p class="caption"><span class="caption-text">ex_alu.v</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
@@ -225,54 +225,66 @@
 46
 47
 48
-49</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">//Raisin64 Execute Unit - Integer ALU</span>
+49
+50
+51
+52
+53
+54
+55</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">//Raisin64 Execute Unit - Integer ALU</span>
 
 <span class="k">module</span> <span class="n">ex_alu</span><span class="p">(</span>
+    <span class="c1">//# {{clocks|Clocking}}</span>
+    <span class="k">input</span> <span class="n">clk</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">rst_n</span><span class="p">,</span>
+
     <span class="c1">//# {{data|ALU Data}}</span>
     <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">in1</span><span class="p">,</span>
     <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">in2</span><span class="p">,</span>
-    <span class="k">output</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">out</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">out</span><span class="p">,</span>
 
-    <span class="c1">//# {{control|Control Signals}}</span>
-    <span class="k">input</span> <span class="n">enable</span><span class="p">,</span>
+    <span class="c1">//# {{control|Dispatch Control Signals}}</span>
+    <span class="k">input</span> <span class="n">ex_enable</span><span class="p">,</span>
+    <span class="k">output</span> <span class="n">ex_busy</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">rd_in_rn</span><span class="p">,</span>
     <span class="k">input</span><span class="p">[</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">unit</span><span class="p">,</span>
-    <span class="k">input</span><span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">op</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">op</span><span class="p">,</span>
+
+    <span class="c1">//# {{control|Commit Control Signals}}</span>
+    <span class="k">output</span> <span class="kt">reg</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">rd_out_rn</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span> <span class="n">valid</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">stall</span>
     <span class="p">);</span>
 
-    <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">out_pre</span><span class="p">;</span>
-    <span class="k">assign</span> <span class="n">out</span> <span class="o">=</span> <span class="n">out_pre</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">out_pre</span><span class="p">;</span>
 
-    <span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span>
+    <span class="c1">//We allow the next result to register when we aren&#39;t explicitly beign</span>
+    <span class="c1">//stalled by the next stage (i.e. our result has somewhere to go).</span>
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">rst_n</span><span class="p">)</span>
     <span class="k">begin</span>
-        <span class="n">out_pre</span> <span class="o">=</span> <span class="mh">64&#39;h0</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">enable</span><span class="p">)</span> <span class="k">case</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span>
-            <span class="mh">3&#39;h0</span><span class="o">:</span> <span class="c1">//Basic integer math</span>
-                <span class="k">case</span><span class="p">(</span><span class="n">op</span><span class="p">[</span><span class="mh">0</span><span class="p">])</span>
-                    <span class="mh">0</span><span class="p">,</span><span class="mh">2</span><span class="o">:</span> <span class="n">out_pre</span> <span class="o">=</span> <span class="n">in1</span> <span class="o">+</span> <span class="n">in2</span><span class="p">;</span> <span class="c1">//ADD</span>
-                    <span class="mh">1</span><span class="p">,</span><span class="mh">3</span><span class="o">:</span> <span class="n">out_pre</span> <span class="o">=</span> <span class="n">in1</span> <span class="o">-</span> <span class="n">in2</span><span class="p">;</span> <span class="c1">//SUB</span>
-                <span class="k">endcase</span>
-            <span class="mh">3&#39;h1</span><span class="o">:</span> <span class="c1">//Compare/Set</span>
-                <span class="k">case</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
-                    <span class="mh">0</span><span class="o">:</span> <span class="n">out_pre</span> <span class="o">=</span> <span class="n">$signed</span><span class="p">(</span><span class="n">in1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">$signed</span><span class="p">(</span><span class="n">in2</span><span class="p">)</span> <span class="o">?</span> <span class="mh">64&#39;h1</span> <span class="o">:</span> <span class="mh">64&#39;h0</span><span class="p">;</span> <span class="c1">//SLT</span>
-                    <span class="mh">1</span><span class="o">:</span> <span class="n">out_pre</span> <span class="o">=</span> <span class="n">in1</span> <span class="o">&lt;</span> <span class="n">in2</span> <span class="o">?</span> <span class="mh">64&#39;h1</span> <span class="o">:</span> <span class="mh">64&#39;h0</span><span class="p">;</span> <span class="c1">//SLTU</span>
-                    <span class="mh">2</span><span class="o">:</span> <span class="n">out_pre</span> <span class="o">=</span> <span class="n">$signed</span><span class="p">(</span><span class="n">in1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">$signed</span><span class="p">(</span><span class="n">in2</span><span class="p">)</span> <span class="o">?</span> <span class="mh">64&#39;h1</span> <span class="o">:</span> <span class="mh">64&#39;h0</span><span class="p">;</span> <span class="c1">//SGT</span>
-                    <span class="mh">3</span><span class="o">:</span> <span class="n">out_pre</span> <span class="o">=</span> <span class="n">in1</span> <span class="o">&gt;</span> <span class="n">in2</span> <span class="o">?</span> <span class="mh">64&#39;h1</span> <span class="o">:</span> <span class="mh">64&#39;h0</span><span class="p">;</span> <span class="c1">//SGTU</span>
-                <span class="k">endcase</span>
-            <span class="mh">3&#39;h2</span><span class="o">:</span> <span class="c1">//Shift</span>
-                <span class="k">case</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
-                    <span class="mh">0</span><span class="o">:</span> <span class="n">out_pre</span> <span class="o">=</span> <span class="n">in1</span> <span class="o">&lt;&lt;</span> <span class="p">{</span><span class="o">|</span><span class="n">in2</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">6</span><span class="p">],</span> <span class="n">in2</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]};</span> <span class="c1">//SLL</span>
-                    <span class="mh">1</span><span class="o">:</span> <span class="n">out_pre</span> <span class="o">=</span> <span class="n">in1</span> <span class="o">&gt;&gt;&gt;</span> <span class="p">{</span><span class="o">|</span><span class="n">in2</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">6</span><span class="p">],</span> <span class="n">in2</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]};</span> <span class="c1">//SRA</span>
-                    <span class="mh">2</span><span class="p">,</span><span class="mh">3</span><span class="o">:</span> <span class="n">out_pre</span> <span class="o">=</span> <span class="n">in1</span> <span class="o">&gt;&gt;</span> <span class="p">{</span><span class="o">|</span><span class="n">in2</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">6</span><span class="p">],</span> <span class="n">in2</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]};</span> <span class="c1">//SRL</span>
-                <span class="k">endcase</span>
-            <span class="mh">3&#39;h3</span><span class="o">:</span> <span class="c1">//Bitwise Operations</span>
-                <span class="k">case</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
-                    <span class="mh">0</span><span class="o">:</span> <span class="n">out_pre</span> <span class="o">=</span> <span class="n">in1</span> <span class="o">&amp;</span> <span class="n">in2</span><span class="p">;</span> <span class="c1">//AND</span>
-                    <span class="mh">1</span><span class="o">:</span> <span class="n">out_pre</span> <span class="o">=</span> <span class="n">in1</span> <span class="o">~|</span> <span class="n">in2</span><span class="p">;</span> <span class="c1">//NOR</span>
-                    <span class="mh">2</span><span class="o">:</span> <span class="n">out_pre</span> <span class="o">=</span> <span class="n">in1</span> <span class="o">|</span> <span class="n">in2</span><span class="p">;</span> <span class="c1">//OR</span>
-                    <span class="mh">3</span><span class="o">:</span> <span class="n">out_pre</span> <span class="o">=</span> <span class="n">in1</span> <span class="o">^</span> <span class="n">in2</span><span class="p">;</span> <span class="c1">//XOR</span>
-                <span class="k">endcase</span>
-        <span class="k">endcase</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="n">valid</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="n">out</span> <span class="o">&lt;=</span> <span class="mh">64&#39;h0</span><span class="p">;</span>
+            <span class="n">rd_out_rn</span> <span class="o">&lt;=</span> <span class="mh">6&#39;h0</span><span class="p">;</span>
+        <span class="k">end</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">stall</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="n">valid</span> <span class="o">&lt;=</span> <span class="n">ex_enable</span><span class="p">;</span>
+            <span class="n">out</span> <span class="o">&lt;=</span> <span class="n">out_pre</span><span class="p">;</span>
+            <span class="n">rd_out_rn</span> <span class="o">&lt;=</span> <span class="n">rd_in_rn</span><span class="p">;</span>
+        <span class="k">end</span>
     <span class="k">end</span>
+
+    <span class="k">initial</span> <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">stall</span><span class="o">&amp;</span><span class="n">ex_enable</span><span class="p">)</span> <span class="n">$error</span><span class="p">(</span><span class="s">&quot;Told to execute ALU when commit was stalled&quot;</span><span class="p">);</span>
+    <span class="k">end</span>
+
+    <span class="c1">//As this is a one-cycle stage, busy is simple</span>
+    <span class="k">assign</span> <span class="n">ex_busy</span> <span class="o">=</span> <span class="n">stall</span><span class="p">;</span>
+
+    <span class="n">ex_alu_s1</span> <span class="n">ex_alu_s1_1</span><span class="p">(</span>
+        <span class="p">.</span><span class="n">in1</span><span class="p">(</span><span class="n">in1</span><span class="p">),</span> <span class="p">.</span><span class="n">in2</span><span class="p">(</span><span class="n">in2</span><span class="p">),</span> <span class="p">.</span><span class="n">out</span><span class="p">(</span><span class="n">out_pre</span><span class="p">),</span> <span class="p">.</span><span class="n">enable</span><span class="p">(</span><span class="n">ex_enable</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">unit</span><span class="p">(</span><span class="n">unit</span><span class="p">),</span> <span class="p">.</span><span class="n">op</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+        <span class="p">);</span>
+
 <span class="k">endmodule</span>
 </pre></div>
 </td></tr></table></div>
@@ -323,7 +335,6 @@
         <script type="text/javascript" src="../../_static/jquery.js"></script>
         <script type="text/javascript" src="../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

@@ -81,7 +81,27 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../cpu.html">Raisin64 CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software.html">Code Snippets and Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nexysddr.html">Nexys 4 DDR Reference Implementation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../modules.html">Reference Index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../isa.html">Raisin64 Instruction Set</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../modules.html">Verilog Module Index</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="de_badDetect.html">de_badDetect.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="de_canonicalize.html">de_canonicalize.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="de_isa_def.html">de_isa_def.vh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_advint.html">ex_advint.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_alu.html">ex_alu.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raisin64.html">Raisin64.v</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">rf_reg.v</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../cpu.html">Raisin64 CPU</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../software.html">Code Snippets and Software</a></li>
@@ -171,110 +191,6 @@
             
   <div class="section" id="rf-reg-v">
 <h1>rf_reg.v<a class="headerlink" href="#rf-reg-v" title="Permalink to this headline">¶</a></h1>
-<div class="figure align-center" id="id1">
-<object data="../../_images/symbol-85358bd339d5fa531a5d0e2de8d07607cc07f5b1.svg" type="image/svg+xml">
-            <p class="warning">rf_reg.v</p></object>
-<p class="caption"><span class="caption-text">rf_reg.v</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
-<div class="highlight-verilog notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">//Raisin64 Register File</span>
-<span class="c1">//Registered dual-ported register file two read, one write port</span>
-
-<span class="k">module</span> <span class="n">rf_reg</span><span class="p">(</span>
-    <span class="c1">//# {{clocks|Clocking}}</span>
-    <span class="k">input</span> <span class="n">clk</span><span class="p">,</span>
-    <span class="k">input</span> <span class="n">rst_n</span><span class="p">,</span>
-
-    <span class="c1">//# {{data|Register Interface}}</span>
-    <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">w_data</span><span class="p">,</span>
-    <span class="k">input</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">w_rn</span><span class="p">,</span>
-    <span class="k">output</span> <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">r1_data</span><span class="p">,</span>
-    <span class="k">output</span> <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">r2_data</span><span class="p">,</span>
-    <span class="k">input</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">r1_rn</span><span class="p">,</span>
-    <span class="k">input</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">r2_rn</span><span class="p">,</span>
-
-    <span class="c1">//# {{control|Control Signals}}</span>
-    <span class="k">input</span> <span class="n">w_en</span>
-
-    <span class="c1">//# {{debug|Debug Signals}}</span>
-    <span class="p">);</span>
-
-    <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">file</span><span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">63</span><span class="p">];</span>
-    <span class="k">integer</span> <span class="n">i</span><span class="p">;</span>
-
-    <span class="c1">//TODO if place-route isn&#39;t smart enough to figure it out and use block ram, have two register files with write ports cross connected so we get &quot;two&quot; read ports on a clock cycle using multiple simple dual-port rams.</span>
-    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">rst_n</span><span class="p">)</span>
-    <span class="k">begin</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span> <span class="k">begin</span>
-            <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mh">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mh">64</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mh">1</span><span class="p">)</span> <span class="n">file</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mh">64&#39;h0</span><span class="p">;</span>
-        <span class="k">end</span> <span class="k">else</span> <span class="k">begin</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">w_en</span> <span class="o">&amp;&amp;</span> <span class="n">w_rn</span><span class="o">!=</span><span class="mh">6&#39;h0</span><span class="p">)</span> <span class="n">file</span><span class="p">[</span><span class="n">w_rn</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">w_data</span><span class="p">;</span> 
-        <span class="k">end</span>
-    <span class="k">end</span>
-
-    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">rst_n</span><span class="p">)</span>
-    <span class="k">begin</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span> <span class="n">r1_data</span> <span class="o">&lt;=</span> <span class="mh">64&#39;h0</span><span class="p">;</span>
-        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">r1_rn</span><span class="o">==</span><span class="mh">6&#39;h0</span><span class="p">)</span> <span class="n">r1_data</span> <span class="o">&lt;=</span> <span class="mh">64&#39;h0</span><span class="p">;</span>
-        <span class="k">else</span> <span class="n">r1_data</span> <span class="o">&lt;=</span> <span class="n">file</span><span class="p">[</span><span class="n">r1_rn</span><span class="p">];</span>
-    <span class="k">end</span>
-
-    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">rst_n</span><span class="p">)</span>
-    <span class="k">begin</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span> <span class="n">r2_data</span> <span class="o">&lt;=</span> <span class="mh">64&#39;h0</span><span class="p">;</span>
-        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">r2_rn</span><span class="o">==</span><span class="mh">6&#39;h0</span><span class="p">)</span> <span class="n">r2_data</span> <span class="o">&lt;=</span> <span class="mh">64&#39;h0</span><span class="p">;</span>
-        <span class="k">else</span> <span class="n">r2_data</span> <span class="o">&lt;=</span> <span class="n">file</span><span class="p">[</span><span class="n">r2_rn</span><span class="p">];</span>
-    <span class="k">end</span>
-<span class="k">endmodule</span>
-</pre></div>
-</td></tr></table></div>
 </div>
 
 
@@ -320,7 +236,6 @@
         <script type="text/javascript" src="../../_static/jquery.js"></script>
         <script type="text/javascript" src="../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

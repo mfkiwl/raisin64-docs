@@ -81,7 +81,14 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="cpu.html">Raisin64 CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="software.html">Code Snippets and Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nexysddr.html">Nexys 4 DDR Reference Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Reference Index</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cpu.html">Raisin64 CPU</a></li>
 <li class="toctree-l1"><a class="reference internal" href="software.html">Code Snippets and Software</a></li>
@@ -154,30 +161,40 @@
             
   <div class="section" id="welcome-to-raisin64-s-documentation">
 <h1>Welcome to Raisin64’s documentation!<a class="headerlink" href="#welcome-to-raisin64-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Raisin64 (<em>RISC Architecture with In-order Superscalar INterlocked-pipeline</em>) is a pure 64-bit CPU design created as part of an educational project.  Architecturally similar to the <a class="reference external" href="https://en.wikipedia.org/wiki/R10000">MIPS R10000</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/POWER3">POWER3</a>, Raisin64 is a superscalar design that employs multiple specialized pipelines for integer operations, floating point, load/store, etc.  Unlike most superscalar designs, Raisin64 does not re-order instructions but instead provides a larger architectural register file of 64x64-bit registers.</p>
+<p>Raisin64 (<em>RISC Architecture with In-order Superscalar INterlocked-pipeline</em>) is a pure 64-bit CPU design created as part of an educational project.  Inspired by the architecture of  the <a class="reference external" href="https://en.wikipedia.org/wiki/R10000">MIPS R10000</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/POWER3">POWER3</a>, Raisin64 employs multiple specialized pipelines for integer operations, branching, load/store, etc presently using a simplified issue system appropriate for the scope of a semester-long project.</p>
+<p>Unlike most superscalar designs, Raisin64 does not re-order instructions or use register renaming <a class="footnote-reference" href="#id3" id="id1">[1]</a> but instead provides a larger architectural register file of 63x64-bit registers.</p>
 <a class="reference internal image-reference" href="_images/temp_block.svg"><img alt="High-level CPU block diagram" src="_images/temp_block.svg" width="100%" /></a>
 <p>Major features of the Raisin64 include:</p>
-<ul class="simple">
-<li><strong>Bits:</strong> 64-bit</li>
-<li><strong>Design:</strong> RISC</li>
-<li><strong>Type:</strong> Register-Register</li>
-<li><strong>Branching:</strong> Condition Code</li>
-<li><strong>Endianness:</strong> Big</li>
-<li><strong>Page Size:</strong> 16KB Fixed</li>
-<li><strong>Virtual Address Size:</strong> 47-Bits</li>
-<li><strong>Page Table:</strong> Three Level</li>
-<li><strong>Registers:</strong> 61 (R0 = 0)</li>
-</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Bits:</th><td class="field-body">64-bit</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><a class="reference external" href="isa">Instructions</a>:</th><td class="field-body">50 Opcodes (with 16, 32, and 64-bit formats)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Design:</th><td class="field-body">RISC (Harvard Architecture <a class="footnote-reference" href="#id4" id="id2">[2]</a>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body">Register-Register</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Branching:</th><td class="field-body">Compare and Branch</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Endianness:</th><td class="field-body">Big</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Registers:</th><td class="field-body">63 (R0 = 0)</td>
+</tr>
+</tbody>
+</table>
+<div class="toctree-wrapper compound">
+</div>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cpu.html">Raisin64 CPU</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cpu.html#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cpu.html#pipeline-stages">Pipeline Stages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cpu.html#caches">Caches</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cpu.html#mmu">MMU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cpu.html#interrupt-unit">Interrupt Unit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cpu.html#debug-unit">Debug Unit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cpu.html#proposed-extensions">Proposed Extensions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="software.html">Code Snippets and Software</a><ul>
@@ -202,6 +219,22 @@
 </ul>
 </li>
 </ul>
+</div>
+<div class="section" id="footnotes">
+<h2>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h2>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Raisin64 will issue instructions out-of-order assuming subsequent instructions are dependancy-free and the appropriate execution unit is available.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td><a class="reference external" href="https://en.wikipedia.org/wiki/Modified_Harvard_architecture">Split-Cache Modified Harvard</a> when
+<a class="reference internal" href="cpu.html#proposed-extensions"><span class="std std-ref">proposed caches and MMU</span></a> are introduced.</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 
@@ -248,7 +281,6 @@
         <script type="text/javascript" src="_static/jquery.js"></script>
         <script type="text/javascript" src="_static/underscore.js"></script>
         <script type="text/javascript" src="_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

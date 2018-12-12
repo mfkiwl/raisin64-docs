@@ -173,33 +173,193 @@
   <div class="section" id="raisin64-v">
 <h1>Raisin64.v<a class="headerlink" href="#raisin64-v" title="Permalink to this headline">¶</a></h1>
 <div class="figure align-center" id="id1">
-<object data="../../_images/symbol-dd434b59860551d233aa6964f31b5318e1df6357.svg" type="image/svg+xml">
+<object data="../../_images/symbol-abc5946fc42805f451facd38aa22b477693c24b7.svg" type="image/svg+xml">
             <p class="warning">Raisin64.v</p></object>
 <p class="caption"><span class="caption-text">Raisin64.v</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
-<div class="highlight-verilog notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<div class="highlight-verilog notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cm">/*</span>
 <span class="cm"> * Raisin64 CPU</span>
 <span class="cm"> */</span>
 
@@ -211,15 +371,175 @@
     <span class="c1">//# {{data|Memory Interface}}</span>
     <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">mem_din</span><span class="p">,</span>
     <span class="k">output</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">mem_dout</span><span class="p">,</span>
-    <span class="k">output</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">mem_add</span><span class="p">,</span>
+    <span class="k">output</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">mem_addr</span><span class="p">,</span>
 
     <span class="c1">//# {{control|Control Signals}}</span>
     <span class="k">output</span> <span class="n">mem_addr_valid</span><span class="p">,</span>
-    <span class="k">output</span> <span class="n">mem_dout_write</span>
+    <span class="k">output</span> <span class="n">mem_dout_write</span><span class="p">,</span>
     <span class="k">input</span> <span class="n">mem_din_ready</span><span class="p">,</span>
 
     <span class="c1">//# {{debug|Debug Signals}}</span>
-    <span class="k">input</span> <span class="n">halt</span><span class="p">);</span>
+    <span class="k">input</span> <span class="n">jtag_tck</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">jtag_tms</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">jtag_tdi</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">jtag_trst</span><span class="p">,</span>
+    <span class="k">output</span> <span class="n">jtag_tdo</span>
+    <span class="p">);</span>
+
+    <span class="k">parameter</span> <span class="no">IMEM_INIT</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+    <span class="k">parameter</span> <span class="no">DMEM_INIT</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+
+    <span class="c1">//// Debug Signals ////</span>
+    <span class="kt">wire</span> <span class="n">dbg_resetn_cpu</span><span class="p">,</span> <span class="n">dbg_halt_cpu</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">cpu_rst_n</span><span class="p">;</span>
+    <span class="k">assign</span> <span class="n">cpu_rst_n</span> <span class="o">=</span> <span class="n">rst_n</span> <span class="o">&amp;</span> <span class="n">dbg_resetn_cpu</span><span class="p">;</span>
+
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">dbg_imem_addr</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">dbg_imem_to_ram</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">dbg_imem_ce</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">dbg_imem_we</span><span class="p">;</span>
+
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">dbg_dmem_addr</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">dbg_dmem_to_ram</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">dbg_dmem_ce</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">dbg_dmem_we</span><span class="p">;</span>
+
+
+    <span class="c1">//////////  Instruction RAM  //////////</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">effective_imem_addr</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">effective_imem_data_to_cpu</span><span class="p">;</span>
+
+    <span class="kt">reg</span> <span class="n">imem_data_ready</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">imem_addr_valid</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">imem_addr</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">imem_data</span><span class="p">;</span>
+
+    <span class="k">assign</span> <span class="n">effective_imem_addr</span>        <span class="o">=</span> <span class="n">dbg_halt_cpu</span> <span class="o">?</span> <span class="n">dbg_imem_addr</span> <span class="o">:</span> <span class="n">imem_addr</span><span class="p">;</span>
+    <span class="k">assign</span> <span class="n">effective_imem_data_to_cpu</span> <span class="o">=</span> <span class="n">dbg_halt_cpu</span> <span class="o">?</span> <span class="mh">64&#39;h0</span> <span class="o">:</span> <span class="n">imem_data</span><span class="p">;</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">rst_n</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span> <span class="n">imem_data_ready</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">imem_data_ready</span> <span class="o">&lt;=</span> <span class="n">imem_addr_valid</span><span class="p">;</span>
+    <span class="k">end</span>
+
+    <span class="n">ram</span> <span class="p">#(</span>
+        <span class="p">.</span><span class="no">NUM_BYTES</span><span class="p">(</span><span class="mh">2</span><span class="o">*</span><span class="mh">1024</span><span class="p">),</span>
+        <span class="p">.</span><span class="no">INIT_FILE</span><span class="p">(</span><span class="no">IMEM_INIT</span><span class="p">)</span>
+        <span class="p">)</span> <span class="n">imem</span> <span class="p">(</span>
+        <span class="p">.</span><span class="n">clk</span><span class="p">(</span><span class="n">clk</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">we</span><span class="p">(</span><span class="n">dbg_imem_we</span><span class="p">),</span> <span class="p">.</span><span class="n">cs</span><span class="p">(</span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">write_width</span><span class="p">(</span><span class="mh">2&#39;h0</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">addr</span><span class="p">(</span><span class="n">effective_imem_addr</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">data_in</span><span class="p">(</span><span class="n">dbg_imem_to_ram</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">data_out</span><span class="p">(</span><span class="n">imem_data</span><span class="p">)</span>
+        <span class="p">);</span>
+
+
+    <span class="c1">//////////  Data RAM  //////////</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">effective_dmem_addr</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">effective_dmem_to_ram</span><span class="p">;</span>
+
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">dmem_addr</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">dmem_to_ram</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">dmem_to_cpu</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">dmem_from_ram</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">dmem_write_width</span><span class="p">;</span>
+    <span class="kt">reg</span> <span class="n">dmem_cycle_complete</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">dmem_rstrobe</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">dmem_wstrobe</span><span class="p">;</span>
+
+    <span class="kt">wire</span> <span class="n">io_space</span><span class="p">;</span>
+
+    <span class="k">assign</span> <span class="n">effective_dmem_addr</span>        <span class="o">=</span> <span class="n">dbg_halt_cpu</span> <span class="o">?</span> <span class="n">dbg_dmem_addr</span> <span class="o">:</span> <span class="n">dmem_addr</span><span class="p">;</span>
+    <span class="k">assign</span> <span class="n">effective_dmem_to_ram</span>      <span class="o">=</span> <span class="n">dbg_halt_cpu</span> <span class="o">?</span> <span class="n">dbg_dmem_to_ram</span> <span class="o">:</span> <span class="n">dmem_to_ram</span><span class="p">;</span>
+
+    <span class="c1">//TODO For now, the external memory bus is just for data memory.  When the time</span>
+    <span class="c1">//comes for caches, this will change to the unified external memory bus.</span>
+    <span class="k">assign</span> <span class="n">dmem_to_cpu</span>                <span class="o">=</span> <span class="n">io_space</span> <span class="o">?</span> <span class="n">mem_din</span> <span class="o">:</span> <span class="n">dmem_from_ram</span><span class="p">;</span>
+    <span class="k">assign</span> <span class="n">mem_dout</span>                   <span class="o">=</span> <span class="n">effective_dmem_to_ram</span><span class="p">;</span>
+    <span class="k">assign</span> <span class="n">mem_addr</span>                   <span class="o">=</span> <span class="n">effective_dmem_addr</span><span class="p">;</span>
+    <span class="k">assign</span> <span class="n">mem_addr_valid</span>             <span class="o">=</span> <span class="mh">1</span><span class="p">;</span>
+    <span class="k">assign</span> <span class="n">mem_dout_write</span>             <span class="o">=</span> <span class="n">dbg_halt_cpu</span> <span class="o">?</span> <span class="n">dbg_dmem_we</span> <span class="o">:</span> <span class="n">dmem_wstrobe</span><span class="p">;</span>
+
+    <span class="c1">//Because the memory interface will change dramatically in the next revision, there</span>
+    <span class="c1">//is no reason to create special logic to handle misaligned accesses into data space</span>
+    <span class="c1">//in case an IO unit requires it (the ram modules handle this condition internally).</span>
+    <span class="c1">//Instead we simply state misaligned IO access it is unsupported (for now).</span>
+    <span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="k">if</span><span class="p">((</span><span class="n">dmem_rstrobe</span><span class="o">|</span><span class="n">dmem_wstrobe</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">io_space</span> <span class="o">&amp;</span> <span class="o">|</span><span class="n">dmem_write_width</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">clk</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="nb">$display</span><span class="p">(</span><span class="s">&quot;Unaligned data IO access not supported in this revision&quot;</span><span class="p">);</span>
+            <span class="nb">$finish</span><span class="p">;</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="n">memory_map</span> <span class="n">memory_map_internal</span><span class="p">(</span>
+        <span class="p">.</span><span class="n">addr</span><span class="p">(</span><span class="n">mem_addr</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">io</span><span class="p">(</span><span class="n">io_space</span><span class="p">)</span>
+        <span class="p">);</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">cpu_rst_n</span><span class="p">)</span>
+    <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">cpu_rst_n</span><span class="p">)</span> <span class="n">dmem_cycle_complete</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">io_space</span> <span class="o">&amp;</span> <span class="n">mem_din_ready</span><span class="p">)</span> <span class="n">dmem_cycle_complete</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">dmem_rstrobe</span><span class="p">)</span> <span class="n">dmem_cycle_complete</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">dmem_wstrobe</span><span class="p">)</span> <span class="n">dmem_cycle_complete</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">dmem_cycle_complete</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+    <span class="k">end</span>
+
+    <span class="n">ram</span> <span class="p">#(</span>
+        <span class="p">.</span><span class="no">NUM_BYTES</span><span class="p">(</span><span class="mh">512</span><span class="p">),</span>
+        <span class="p">.</span><span class="no">INIT_FILE</span><span class="p">(</span><span class="no">DMEM_INIT</span><span class="p">)</span>
+        <span class="p">)</span> <span class="n">dmem</span> <span class="p">(</span>
+        <span class="p">.</span><span class="n">clk</span><span class="p">(</span><span class="n">clk</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">we</span><span class="p">(</span><span class="o">~</span><span class="n">io_space</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">dmem_wstrobe</span><span class="o">|</span><span class="n">dbg_dmem_we</span><span class="p">)),</span> <span class="p">.</span><span class="n">cs</span><span class="p">(</span><span class="o">~</span><span class="n">io_space</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">dmem_wstrobe</span><span class="o">|</span><span class="n">dmem_rstrobe</span><span class="o">|</span><span class="n">dbg_dmem_ce</span><span class="p">)),</span>
+        <span class="p">.</span><span class="n">write_width</span><span class="p">(</span><span class="n">dmem_write_width</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">addr</span><span class="p">(</span><span class="n">effective_dmem_addr</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">data_in</span><span class="p">(</span><span class="n">effective_dmem_to_ram</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">data_out</span><span class="p">(</span><span class="n">dmem_from_ram</span><span class="p">)</span>
+        <span class="p">);</span>
+
+
+    <span class="c1">//////////  Raisin64 Execution Core  //////////</span>
+    <span class="n">pipeline</span> <span class="n">pipeline1</span><span class="p">(</span>
+        <span class="p">.</span><span class="n">clk</span><span class="p">(</span><span class="n">clk</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">rst_n</span><span class="p">(</span><span class="n">cpu_rst_n</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">imem_addr</span><span class="p">(</span><span class="n">imem_addr</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">imem_data</span><span class="p">(</span><span class="n">effective_imem_data_to_cpu</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">imem_data_valid</span><span class="p">(</span><span class="n">imem_data_ready</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">imem_addr_valid</span><span class="p">(</span><span class="n">imem_addr_valid</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">dmem_addr</span><span class="p">(</span><span class="n">dmem_addr</span><span class="p">),</span> <span class="p">.</span><span class="n">dmem_dout</span><span class="p">(</span><span class="n">dmem_to_ram</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">dmem_din</span><span class="p">(</span><span class="n">dmem_to_cpu</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">dmem_cycle_complete</span><span class="p">(</span><span class="n">dmem_cycle_complete</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">dmem_rstrobe</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">dmem_wstrobe</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">dmem_write_width</span><span class="p">(</span><span class="n">dmem_write_width</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">dmem_rstrobe</span><span class="p">(</span><span class="n">dmem_rstrobe</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">dmem_wstrobe</span><span class="p">(</span><span class="n">dmem_wstrobe</span><span class="p">)</span>
+        <span class="p">);</span>
+
+
+    <span class="c1">//////////  JTAG Module  //////////</span>
+    <span class="n">debug_control</span> <span class="n">debug_if</span><span class="p">(</span>
+        <span class="p">.</span><span class="n">jtag_tck</span><span class="p">(</span><span class="n">jtag_tck</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">jtag_tms</span><span class="p">(</span><span class="n">jtag_tms</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">jtag_tdo</span><span class="p">(</span><span class="n">jtag_tdo</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">jtag_tdi</span><span class="p">(</span><span class="n">jtag_tdi</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">jtag_trst</span><span class="p">(</span><span class="n">jtag_trst</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">cpu_clk</span><span class="p">(</span><span class="n">clk</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">sys_rstn</span><span class="p">(</span><span class="n">rst_n</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">cpu_imem_addr</span><span class="p">(</span><span class="n">dbg_imem_addr</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">cpu_debug_to_imem_data</span><span class="p">(</span><span class="n">dbg_imem_to_ram</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">cpu_imem_to_debug_data</span><span class="p">(</span><span class="n">imem_data</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">cpu_imem_we</span><span class="p">(</span><span class="n">dbg_imem_we</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">cpu_imem_ce</span><span class="p">(</span><span class="n">dbg_imem_ce</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">cpu_dmem_addr</span><span class="p">(</span><span class="n">dbg_dmem_addr</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">cpu_debug_to_dmem_data</span><span class="p">(</span><span class="n">dbg_dmem_to_ram</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">cpu_imem_to_debug_data_ready</span><span class="p">(</span><span class="n">dbg_imem_ce</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">dbg_imem_we</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">cpu_dmem_to_debug_data_ready</span><span class="p">(</span><span class="n">dbg_dmem_ce</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">dbg_dmem_we</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">cpu_dmem_to_debug_data</span><span class="p">(</span><span class="n">dmem_to_cpu</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">cpu_dmem_we</span><span class="p">(</span><span class="n">dbg_dmem_we</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">cpu_dmem_ce</span><span class="p">(</span><span class="n">dbg_dmem_ce</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">cpu_resetn_cpu</span><span class="p">(</span><span class="n">dbg_resetn_cpu</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">cpu_halt_cpu</span><span class="p">(</span><span class="n">dbg_halt_cpu</span><span class="p">)</span>
+        <span class="p">);</span>
 
 <span class="k">endmodule</span>
 </pre></div>
@@ -271,7 +591,6 @@
         <script type="text/javascript" src="../../_static/jquery.js"></script>
         <script type="text/javascript" src="../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

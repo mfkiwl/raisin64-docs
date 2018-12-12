@@ -173,7 +173,7 @@
   <div class="section" id="de-baddetect-v">
 <h1>de_badDetect.v<a class="headerlink" href="#de-baddetect-v" title="Permalink to this headline">¶</a></h1>
 <div class="figure align-center" id="id1">
-<object data="../../_images/symbol-d84ecd75c661f4448c8b1aadd2dd90463b0a9620.svg" type="image/svg+xml">
+<object data="../../_images/symbol-a7e88668ee46a4f55f9ba35c2c3fa85d5fee2716.svg" type="image/svg+xml">
             <p class="warning">de_badDetect.v</p></object>
 <p class="caption"><span class="caption-text">de_badDetect.v</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
@@ -218,7 +218,7 @@
 
 <span class="k">module</span> <span class="n">de_badDetect</span><span class="p">(</span>
     <span class="c1">//# {{data|Instruction Data}}</span>
-    <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">opcodeIn</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">56</span><span class="p">]</span> <span class="n">instOpByteIn</span><span class="p">,</span>
 
     <span class="c1">//# {{control|Control Signals}}</span>
     <span class="k">output</span> <span class="n">badOpcode</span>
@@ -231,23 +231,23 @@
 
     <span class="k">assign</span> <span class="n">badOpcode</span> <span class="o">=</span> <span class="n">badOpcode_pre</span><span class="p">;</span>
 
-    <span class="k">assign</span> <span class="n">is16</span> <span class="o">=</span> <span class="o">~</span><span class="n">opcodeIn</span><span class="p">[</span><span class="mh">63</span><span class="p">];</span>
-    <span class="k">assign</span> <span class="n">is32</span> <span class="o">=</span> <span class="n">opcodeIn</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">62</span><span class="p">]</span> <span class="o">==</span> <span class="mh">2&#39;h2</span><span class="p">;</span>
-    <span class="k">assign</span> <span class="n">is64</span> <span class="o">=</span> <span class="n">opcodeIn</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">62</span><span class="p">]</span> <span class="o">==</span> <span class="mh">2&#39;h3</span><span class="p">;</span>
+    <span class="k">assign</span> <span class="n">is16</span> <span class="o">=</span> <span class="o">~</span><span class="n">instOpByteIn</span><span class="p">[</span><span class="mh">63</span><span class="p">];</span>
+    <span class="k">assign</span> <span class="n">is32</span> <span class="o">=</span> <span class="n">instOpByteIn</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">62</span><span class="p">]</span> <span class="o">==</span> <span class="mh">2&#39;h2</span><span class="p">;</span>
+    <span class="k">assign</span> <span class="n">is64</span> <span class="o">=</span> <span class="n">instOpByteIn</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">62</span><span class="p">]</span> <span class="o">==</span> <span class="mh">2&#39;h3</span><span class="p">;</span>
 
     <span class="c1">//Detects and flags invalid opcodes</span>
     <span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span>
     <span class="k">begin</span>
         <span class="n">badOpcode_pre</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span>
 
-        <span class="k">if</span><span class="p">(</span><span class="n">is16</span> <span class="o">&amp;&amp;</span> <span class="n">opcodeIn</span><span class="p">[</span><span class="mh">62</span><span class="o">:</span><span class="mh">60</span><span class="p">]</span> <span class="o">==</span> <span class="mh">3&#39;h7</span><span class="p">)</span> <span class="n">badOpcode_pre</span> <span class="o">=</span> <span class="mh">1</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">is16</span> <span class="o">&amp;&amp;</span> <span class="n">instOpByteIn</span><span class="p">[</span><span class="mh">62</span><span class="o">:</span><span class="mh">60</span><span class="p">]</span> <span class="o">==</span> <span class="mh">3&#39;h7</span><span class="p">)</span> <span class="n">badOpcode_pre</span> <span class="o">=</span> <span class="mh">1</span><span class="p">;</span>
         <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">is32</span> <span class="o">|</span> <span class="n">is64</span><span class="p">)</span>
         <span class="k">begin</span>
-            <span class="k">case</span><span class="p">(</span><span class="n">opcodeIn</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">])</span>
+            <span class="k">case</span><span class="p">(</span><span class="n">instOpByteIn</span><span class="p">[</span><span class="mh">61</span><span class="o">:</span><span class="mh">56</span><span class="p">])</span>
                 <span class="no">`OP_BAD_02</span><span class="p">,</span> <span class="no">`OP_BAD_03</span><span class="p">,</span> <span class="no">`OP_BAD_0B</span><span class="p">,</span> <span class="no">`OP_BAD_14</span><span class="p">,</span> <span class="no">`OP_BAD_15</span><span class="p">,</span>
                 <span class="no">`OP_BAD_16</span><span class="p">,</span> <span class="no">`OP_BAD_17</span><span class="p">,</span> <span class="no">`OP_BAD_18</span><span class="p">,</span> <span class="no">`OP_BAD_19</span><span class="p">,</span> <span class="no">`OP_BAD_1A</span><span class="p">,</span>
                 <span class="no">`OP_BAD_1B</span><span class="p">,</span> <span class="no">`OP_BAD_22</span><span class="p">,</span> <span class="no">`OP_BAD_23</span><span class="p">,</span> <span class="no">`OP_BAD_2B</span><span class="o">:</span> <span class="n">badOpcode_pre</span> <span class="o">=</span> <span class="mh">1</span><span class="p">;</span>
-                <span class="no">`OP_F</span><span class="o">*</span><span class="p">,</span> <span class="no">`OP_LUI</span><span class="p">,</span> <span class="no">`OP_JALI</span><span class="p">,</span> <span class="no">`OP_JI</span><span class="o">:</span> <span class="k">if</span><span class="p">(</span><span class="n">is32</span><span class="p">)</span> <span class="n">badOpcode_pre</span> <span class="o">=</span> <span class="mh">1</span><span class="p">;</span>
+                <span class="no">`OP_FSTAR</span><span class="p">,</span> <span class="no">`OP_LUI</span><span class="p">,</span> <span class="no">`OP_JALI</span><span class="p">,</span> <span class="no">`OP_JI</span><span class="o">:</span> <span class="k">if</span><span class="p">(</span><span class="n">is32</span><span class="p">)</span> <span class="n">badOpcode_pre</span> <span class="o">=</span> <span class="mh">1</span><span class="p">;</span>
             <span class="k">endcase</span>
         <span class="k">end</span>
     <span class="k">end</span>
@@ -301,7 +301,6 @@
         <script type="text/javascript" src="../../_static/jquery.js"></script>
         <script type="text/javascript" src="../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   
