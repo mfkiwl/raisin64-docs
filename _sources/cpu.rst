@@ -1,10 +1,10 @@
 Raisin64 CPU
 ============
 
-.. contents:: :local:
-
 Overview
 --------
+
+The Raisin64 CPU
 
 Pipeline Stages
 ---------------

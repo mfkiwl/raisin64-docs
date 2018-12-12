@@ -3,8 +3,6 @@
 Raisin64 Instruction Set
 ========================
 
-.. contents:: :local:
-
 Overview
 --------
 
@@ -248,7 +246,7 @@ A special jump format for large displacement JI and JALI, the 64J format allows 
 +---------+--------------------------------------+-----------------------------------------+
 
 .. [1] 64-bit format only
-.. [2] The F* instruction uses the immediate field of 64S to request a specific enumerated service from the FPU.  These instructions are documented TODO::ref::here.
+.. [2] The F* instruction uses the immediate field of 64S to request a specific enumerated service from the FPU.  These instructions (and FPU) do not yet exist.
 
 .. raw:: latex
 

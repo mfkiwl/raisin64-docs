@@ -35,16 +35,6 @@ Major features of the Raisin64 include:
    nexysddr
    modules
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-   cpu
-   software
-   tools
-   nexysddr
-   modules
-
 Footnotes
 ---------
 
