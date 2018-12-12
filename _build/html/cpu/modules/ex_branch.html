@@ -1,0 +1,454 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ex_branch.v &mdash; Raisin64 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ex_memory.v" href="ex_memory.html" />
+    <link rel="prev" title="ex_alu_s1.v" href="ex_alu_s1.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Raisin64
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../cpu.html">Raisin64 CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software.html">Code Snippets and Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nexysddr.html">Nexys 4 DDR Reference Implementation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../modules.html">Reference Index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../isa.html">Raisin64 Instruction Set</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../modules.html">Verilog Module Index</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="commit.html">commit.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="de_canonicalize.html">de_canonicalize.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug_control.html">debug_control.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="decode.html">decode.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_advint.html">ex_advint.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_advint_s1.html">ex_advint_s1.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_alu.html">ex_alu.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_alu_s1.html">ex_alu_s1.v</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ex_branch.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_memory.html">ex_memory.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fetch.html">fetch.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ff_sync.html">ff_sync.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag_reg.html">schedule.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag_state_machine.html">jtag_state_machine.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtaglet.html">jtaglet.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory_map.html">memory_map.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline.html">pipeline.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raisin64.html">raisin64.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ram.html">ram.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regfile.html">regfile.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schedule.html">schedule.v</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Raisin64</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../modules.html">Reference Index</a> &raquo;</li>
+        
+          <li><a href="../modules.html">Verilog Module Index</a> &raquo;</li>
+        
+      <li>ex_branch.v</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/cpu/modules/ex_branch.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ex-branch-v">
+<h1>ex_branch.v<a class="headerlink" href="#ex-branch-v" title="Permalink to this headline">¶</a></h1>
+<object data="../../_images/symbol-b6faafa5fcd771eeef51364fce754c2a84680926.svg" type="image/svg+xml">
+            <p class="warning">//Raisin64 Execute Unit - Branch and Jump Unit
+
+module ex_branch(
+    //# {{clocks|Clocking}}
+    input clk,
+    input rst_n,
+
+    //# {{data|Branch Data}}
+    input[63:0] in1,
+    input[63:0] in2,
+    input[63:0] imm,
+    input[63:0] next_pc,
+    output reg[63:0] jump_pc,
+    output reg do_jump,
+
+    output reg[63:0] r63,
+    output reg r63_update,
+
+    //# {{control|Dispatch Control Signals}}
+    input ex_enable,
+    output ex_busy,
+    input[1:0] op,
+    input type,
+
+    //# {{control|Commit Control Signals}}
+    input stall
+    );
+
+    wire op_eq;
+    assign op_eq = (in1 == in2);
+
+    always &#64;(posedge clk or negedge rst_n)
+    begin
+        if(~rst_n) begin
+            jump_pc &lt;= 64'h0;
+            do_jump &lt;= 0;
+            r63 &lt;= 64'h0;
+            r63_update &lt;= 0;
+        end else begin
+            jump_pc &lt;= 64'h0;
+            do_jump &lt;= 0;
+            r63 &lt;= 64'h0;
+            r63_update &lt;= 0;
+
+            if(ex_enable) begin
+                if(op[1]) begin //Jump
+                    //Input is already properly shifted by the time it gets here
+                    jump_pc &lt;= type ? imm : in1;
+                    do_jump &lt;= 1;
+                    if(op[0]) begin //And Link
+                        r63_update &lt;= 1;
+                        r63 &lt;= next_pc;
+                    end
+                end else if (~op[1] &amp; op_eq) begin //Branch
+                    jump_pc &lt;= next_pc + (imm&lt;&lt;1);
+                    do_jump &lt;= 1;
+                    if(op[0]) begin //And Link
+                        r63_update &lt;= 1;
+                        r63 &lt;= next_pc;
+                    end
+                end
+            end
+        end
+    end
+
+    assign ex_busy = ex_enable | stall;
+
+endmodule</p></object>
+<div class="highlight-verilog notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">//Raisin64 Execute Unit - Branch and Jump Unit</span>
+
+<span class="k">module</span> <span class="n">ex_branch</span><span class="p">(</span>
+    <span class="c1">//# {{clocks|Clocking}}</span>
+    <span class="k">input</span> <span class="n">clk</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">rst_n</span><span class="p">,</span>
+
+    <span class="c1">//# {{data|Branch Data}}</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">in1</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">in2</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">imm</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">next_pc</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">jump_pc</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span> <span class="n">do_jump</span><span class="p">,</span>
+
+    <span class="k">output</span> <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">r63</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span> <span class="n">r63_update</span><span class="p">,</span>
+
+    <span class="c1">//# {{control|Dispatch Control Signals}}</span>
+    <span class="k">input</span> <span class="n">ex_enable</span><span class="p">,</span>
+    <span class="k">output</span> <span class="n">ex_busy</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">op</span><span class="p">,</span>
+    <span class="k">input</span> <span class="k">type</span><span class="p">,</span>
+
+    <span class="c1">//# {{control|Commit Control Signals}}</span>
+    <span class="k">input</span> <span class="n">stall</span>
+    <span class="p">);</span>
+
+    <span class="kt">wire</span> <span class="n">op_eq</span><span class="p">;</span>
+    <span class="k">assign</span> <span class="n">op_eq</span> <span class="o">=</span> <span class="p">(</span><span class="n">in1</span> <span class="o">==</span> <span class="n">in2</span><span class="p">);</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">rst_n</span><span class="p">)</span>
+    <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="n">jump_pc</span> <span class="o">&lt;=</span> <span class="mh">64&#39;h0</span><span class="p">;</span>
+            <span class="n">do_jump</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="n">r63</span> <span class="o">&lt;=</span> <span class="mh">64&#39;h0</span><span class="p">;</span>
+            <span class="n">r63_update</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+        <span class="k">end</span> <span class="k">else</span> <span class="k">begin</span>
+            <span class="n">jump_pc</span> <span class="o">&lt;=</span> <span class="mh">64&#39;h0</span><span class="p">;</span>
+            <span class="n">do_jump</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="n">r63</span> <span class="o">&lt;=</span> <span class="mh">64&#39;h0</span><span class="p">;</span>
+            <span class="n">r63_update</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+
+            <span class="k">if</span><span class="p">(</span><span class="n">ex_enable</span><span class="p">)</span> <span class="k">begin</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">op</span><span class="p">[</span><span class="mh">1</span><span class="p">])</span> <span class="k">begin</span> <span class="c1">//Jump</span>
+                    <span class="c1">//Input is already properly shifted by the time it gets here</span>
+                    <span class="n">jump_pc</span> <span class="o">&lt;=</span> <span class="k">type</span> <span class="o">?</span> <span class="n">imm</span> <span class="o">:</span> <span class="n">in1</span><span class="p">;</span>
+                    <span class="n">do_jump</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">op</span><span class="p">[</span><span class="mh">0</span><span class="p">])</span> <span class="k">begin</span> <span class="c1">//And Link</span>
+                        <span class="n">r63_update</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                        <span class="n">r63</span> <span class="o">&lt;=</span> <span class="n">next_pc</span><span class="p">;</span>
+                    <span class="k">end</span>
+                <span class="k">end</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">~</span><span class="n">op</span><span class="p">[</span><span class="mh">1</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">op_eq</span><span class="p">)</span> <span class="k">begin</span> <span class="c1">//Branch</span>
+                    <span class="n">jump_pc</span> <span class="o">&lt;=</span> <span class="n">next_pc</span> <span class="o">+</span> <span class="p">(</span><span class="n">imm</span><span class="o">&lt;&lt;</span><span class="mh">1</span><span class="p">);</span>
+                    <span class="n">do_jump</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">op</span><span class="p">[</span><span class="mh">0</span><span class="p">])</span> <span class="k">begin</span> <span class="c1">//And Link</span>
+                        <span class="n">r63_update</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                        <span class="n">r63</span> <span class="o">&lt;=</span> <span class="n">next_pc</span><span class="p">;</span>
+                    <span class="k">end</span>
+                <span class="k">end</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="k">assign</span> <span class="n">ex_busy</span> <span class="o">=</span> <span class="n">ex_enable</span> <span class="o">|</span> <span class="n">stall</span><span class="p">;</span>
+
+<span class="k">endmodule</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ex_memory.html" class="btn btn-neutral float-right" title="ex_memory.v" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ex_alu_s1.html" class="btn btn-neutral" title="ex_alu_s1.v" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Christopher Parish
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

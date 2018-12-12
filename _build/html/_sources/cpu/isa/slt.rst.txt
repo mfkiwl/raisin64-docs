@@ -1,19 +1,24 @@
 SLT - Set 1 if Less Than
 ========================
 
+Sets ``$rd`` as 1 if the signed representation of ``$rs1`` is less than the signed representation of ``$rs2``, 0 otherwise.
+
 Usage
 -----
 
 .. code-block:: asm
 
-   todo
+   slt $rd, $rs1, $rs2
 
 Operation
 ---------
 
 .. code-block:: c
 
-   todo;
+   if((signed)rs1 < (signed)rs2)
+      rd = 1;
+   else
+      rd = 0;
    advance_pc();
 
 Encoding

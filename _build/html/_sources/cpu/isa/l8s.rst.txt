@@ -1,19 +1,22 @@
 L8S - Load 8-bit Sign-Extend
 ============================
 
+Loads 8-bit word from address ``$rs1`` offset by a signed immediate value and places it into ``$rd``.
+
 Usage
 -----
 
 .. code-block:: asm
 
-   todo
+   l8s $rd, imm($rs1)
 
 Operation
 ---------
 
 .. code-block:: c
 
-   todo;
+   rd[63:8] = sign_bit(*(rs+imm));
+   rd[7:0]  = *(rs+imm);
    advance_pc();
 
 Encoding

@@ -1,0 +1,493 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ram.v &mdash; Raisin64 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="regfile.v" href="regfile.html" />
+    <link rel="prev" title="raisin64.v" href="raisin64.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Raisin64
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../cpu.html">Raisin64 CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software.html">Code Snippets and Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nexysddr.html">Nexys 4 DDR Reference Implementation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../modules.html">Reference Index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../isa.html">Raisin64 Instruction Set</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../modules.html">Verilog Module Index</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="commit.html">commit.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="de_canonicalize.html">de_canonicalize.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug_control.html">debug_control.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="decode.html">decode.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_advint.html">ex_advint.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_advint_s1.html">ex_advint_s1.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_alu.html">ex_alu.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_alu_s1.html">ex_alu_s1.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_branch.html">ex_branch.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_memory.html">ex_memory.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fetch.html">fetch.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ff_sync.html">ff_sync.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag_reg.html">schedule.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag_state_machine.html">jtag_state_machine.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtaglet.html">jtaglet.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory_map.html">memory_map.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline.html">pipeline.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raisin64.html">raisin64.v</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ram.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regfile.html">regfile.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schedule.html">schedule.v</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Raisin64</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../modules.html">Reference Index</a> &raquo;</li>
+        
+          <li><a href="../modules.html">Verilog Module Index</a> &raquo;</li>
+        
+      <li>ram.v</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/cpu/modules/ram.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ram-v">
+<h1>ram.v<a class="headerlink" href="#ram-v" title="Permalink to this headline">¶</a></h1>
+<object data="../../_images/symbol-8a2ec5ccb5758086155833eedcf4ae30bcf1a7dc.svg" type="image/svg+xml">
+            <p class="warning">//Test RAM
+
+`include &quot;io_def.vh&quot;
+
+module ram(input clk,
+            input we,
+            input cs,
+            input[63:0] addr,
+            input[63:0] data_in,
+            input[1:0] write_width, //0==64bit, 1==32bit, 2==16bit, 3==8bit
+            output reg[63:0] data_out);
+
+    parameter NUM_BYTES = 0;
+    parameter INIT_FILE = &quot;&quot;;
+
+    reg[63:0] ram[0:(NUM_BYTES/8)-1]; //Nx64 RAM
+
+    reg[63:0] ramA_result, ramB_result;
+
+    reg[7:0] weA_b; //Which byte lines are write-enabled
+    reg[7:0] weB_b;
+
+    always &#64;(*) begin
+        weA_b = 8'h00;
+        weB_b = 8'h00;
+        if(we) begin
+            case(write_width)
+            `RAM_WIDTH64: {weA_b,weB_b} = 16'hFF00 &gt;&gt; addr[2:0];
+            `RAM_WIDTH32: {weA_b,weB_b} = 16'hF000 &gt;&gt; addr[2:0];
+            `RAM_WIDTH16: {weA_b,weB_b} = 16'hC000 &gt;&gt; addr[2:0];
+            `RAM_WIDTH8: {weA_b,weB_b} = 16'h8000 &gt;&gt; addr[2:0];
+            endcase
+        end
+    end
+
+    wire[127:0] data_in_shift;
+    assign data_in_shift = {data_in, 64'h0} &gt;&gt; addr[2:0]*8;
+
+    generate
+    genvar i;
+    for(i = 0; i &lt; 8; i = i+1) begin
+        always &#64;(posedge clk)
+            if(cs)
+                if(weA_b[i]) begin
+                    ram[addr[63:3]][(i+1)*8-1:i*8] &lt;= data_in_shift[64+(i+1)*8-1:64+i*8];
+                end
+        end
+
+    for(i = 0; i &lt; 8; i = i+1) begin
+        always &#64;(posedge clk)
+            if(cs)
+                if(weB_b[i]) begin
+                    ram[addr[63:3]+1][(i+1)*8-1:i*8] &lt;= data_in_shift[(i+1)*8-1:i*8];
+                end
+        end
+    endgenerate
+
+    //Registered read (ready by next clock cycle)
+    always &#64;(posedge clk) begin
+        if(cs) begin
+            ramA_result &lt;= ram[addr[63:3]];
+            ramB_result &lt;= ram[addr[63:3]+1];
+        end
+    end
+
+    reg[2:0] addr_lsb;
+    always &#64;(posedge clk) begin
+        addr_lsb &lt;= addr[2:0];
+    end
+
+    always &#64;(*) begin
+        data_out = ({ramA_result,ramB_result} &gt;&gt; ((8-addr_lsb)*8)) &amp; 64'hFFFFFFFFFFFFFFFF;
+    end
+
+    //Populate our program memory with the user-provided hex file
+    initial begin
+        $readmemh(INIT_FILE, ram);
+    end
+
+
+endmodule</p></object>
+<div class="highlight-verilog notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">//Test RAM</span>
+
+<span class="no">`include</span> <span class="s">&quot;io_def.vh&quot;</span>
+
+<span class="k">module</span> <span class="n">ram</span><span class="p">(</span><span class="k">input</span> <span class="n">clk</span><span class="p">,</span>
+            <span class="k">input</span> <span class="n">we</span><span class="p">,</span>
+            <span class="k">input</span> <span class="n">cs</span><span class="p">,</span>
+            <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">addr</span><span class="p">,</span>
+            <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">data_in</span><span class="p">,</span>
+            <span class="k">input</span><span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">write_width</span><span class="p">,</span> <span class="c1">//0==64bit, 1==32bit, 2==16bit, 3==8bit</span>
+            <span class="k">output</span> <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">data_out</span><span class="p">);</span>
+
+    <span class="k">parameter</span> <span class="no">NUM_BYTES</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span>
+    <span class="k">parameter</span> <span class="no">INIT_FILE</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+
+    <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">ram</span><span class="p">[</span><span class="mh">0</span><span class="o">:</span><span class="p">(</span><span class="no">NUM_BYTES</span><span class="o">/</span><span class="mh">8</span><span class="p">)</span><span class="o">-</span><span class="mh">1</span><span class="p">];</span> <span class="c1">//Nx64 RAM</span>
+
+    <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">ramA_result</span><span class="p">,</span> <span class="n">ramB_result</span><span class="p">;</span>
+
+    <span class="kt">reg</span><span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">weA_b</span><span class="p">;</span> <span class="c1">//Which byte lines are write-enabled</span>
+    <span class="kt">reg</span><span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">weB_b</span><span class="p">;</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="n">weA_b</span> <span class="o">=</span> <span class="mh">8&#39;h00</span><span class="p">;</span>
+        <span class="n">weB_b</span> <span class="o">=</span> <span class="mh">8&#39;h00</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">we</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="k">case</span><span class="p">(</span><span class="n">write_width</span><span class="p">)</span>
+            <span class="no">`RAM_WIDTH64</span><span class="o">:</span> <span class="p">{</span><span class="n">weA_b</span><span class="p">,</span><span class="n">weB_b</span><span class="p">}</span> <span class="o">=</span> <span class="mh">16&#39;hFF00</span> <span class="o">&gt;&gt;</span> <span class="n">addr</span><span class="p">[</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">];</span>
+            <span class="no">`RAM_WIDTH32</span><span class="o">:</span> <span class="p">{</span><span class="n">weA_b</span><span class="p">,</span><span class="n">weB_b</span><span class="p">}</span> <span class="o">=</span> <span class="mh">16&#39;hF000</span> <span class="o">&gt;&gt;</span> <span class="n">addr</span><span class="p">[</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">];</span>
+            <span class="no">`RAM_WIDTH16</span><span class="o">:</span> <span class="p">{</span><span class="n">weA_b</span><span class="p">,</span><span class="n">weB_b</span><span class="p">}</span> <span class="o">=</span> <span class="mh">16&#39;hC000</span> <span class="o">&gt;&gt;</span> <span class="n">addr</span><span class="p">[</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">];</span>
+            <span class="no">`RAM_WIDTH8</span><span class="o">:</span> <span class="p">{</span><span class="n">weA_b</span><span class="p">,</span><span class="n">weB_b</span><span class="p">}</span> <span class="o">=</span> <span class="mh">16&#39;h8000</span> <span class="o">&gt;&gt;</span> <span class="n">addr</span><span class="p">[</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">];</span>
+            <span class="k">endcase</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">127</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">data_in_shift</span><span class="p">;</span>
+    <span class="k">assign</span> <span class="n">data_in_shift</span> <span class="o">=</span> <span class="p">{</span><span class="n">data_in</span><span class="p">,</span> <span class="mh">64&#39;h0</span><span class="p">}</span> <span class="o">&gt;&gt;</span> <span class="n">addr</span><span class="p">[</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="o">*</span><span class="mh">8</span><span class="p">;</span>
+
+    <span class="k">generate</span>
+    <span class="k">genvar</span> <span class="n">i</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mh">8</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mh">1</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">cs</span><span class="p">)</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">weA_b</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">begin</span>
+                    <span class="n">ram</span><span class="p">[</span><span class="n">addr</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">3</span><span class="p">]][(</span><span class="n">i</span><span class="o">+</span><span class="mh">1</span><span class="p">)</span><span class="o">*</span><span class="mh">8</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="n">i</span><span class="o">*</span><span class="mh">8</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">data_in_shift</span><span class="p">[</span><span class="mh">64</span><span class="o">+</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mh">1</span><span class="p">)</span><span class="o">*</span><span class="mh">8</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="mh">64</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="mh">8</span><span class="p">];</span>
+                <span class="k">end</span>
+        <span class="k">end</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mh">8</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mh">1</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">cs</span><span class="p">)</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">weB_b</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">begin</span>
+                    <span class="n">ram</span><span class="p">[</span><span class="n">addr</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">3</span><span class="p">]</span><span class="o">+</span><span class="mh">1</span><span class="p">][(</span><span class="n">i</span><span class="o">+</span><span class="mh">1</span><span class="p">)</span><span class="o">*</span><span class="mh">8</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="n">i</span><span class="o">*</span><span class="mh">8</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">data_in_shift</span><span class="p">[(</span><span class="n">i</span><span class="o">+</span><span class="mh">1</span><span class="p">)</span><span class="o">*</span><span class="mh">8</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="n">i</span><span class="o">*</span><span class="mh">8</span><span class="p">];</span>
+                <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">endgenerate</span>
+
+    <span class="c1">//Registered read (ready by next clock cycle)</span>
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">cs</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="n">ramA_result</span> <span class="o">&lt;=</span> <span class="n">ram</span><span class="p">[</span><span class="n">addr</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">3</span><span class="p">]];</span>
+            <span class="n">ramB_result</span> <span class="o">&lt;=</span> <span class="n">ram</span><span class="p">[</span><span class="n">addr</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">3</span><span class="p">]</span><span class="o">+</span><span class="mh">1</span><span class="p">];</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="kt">reg</span><span class="p">[</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">addr_lsb</span><span class="p">;</span>
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="n">addr_lsb</span> <span class="o">&lt;=</span> <span class="n">addr</span><span class="p">[</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">];</span>
+    <span class="k">end</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="n">data_out</span> <span class="o">=</span> <span class="p">({</span><span class="n">ramA_result</span><span class="p">,</span><span class="n">ramB_result</span><span class="p">}</span> <span class="o">&gt;&gt;</span> <span class="p">((</span><span class="mh">8</span><span class="o">-</span><span class="n">addr_lsb</span><span class="p">)</span><span class="o">*</span><span class="mh">8</span><span class="p">))</span> <span class="o">&amp;</span> <span class="mh">64&#39;hFFFFFFFFFFFFFFFF</span><span class="p">;</span>
+    <span class="k">end</span>
+
+    <span class="c1">//Populate our program memory with the user-provided hex file</span>
+    <span class="k">initial</span> <span class="k">begin</span>
+        <span class="nb">$readmemh</span><span class="p">(</span><span class="no">INIT_FILE</span><span class="p">,</span> <span class="n">ram</span><span class="p">);</span>
+    <span class="k">end</span>
+
+
+<span class="k">endmodule</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="regfile.html" class="btn btn-neutral float-right" title="regfile.v" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="raisin64.html" class="btn btn-neutral" title="raisin64.v" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Christopher Parish
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

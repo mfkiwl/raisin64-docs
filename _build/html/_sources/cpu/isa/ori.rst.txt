@@ -1,19 +1,21 @@
 ORI - Bitwise OR Immediate
 ==========================
 
+ORs ``$rs1`` with an immediate value, placing the result in ``$rd``.
+
 Usage
 -----
 
 .. code-block:: asm
 
-   todo
+   ori $rd, $rs1, imm
 
 Operation
 ---------
 
 .. code-block:: c
 
-   todo;
+   rd = rs1 | imm;
    advance_pc();
 
 Encoding

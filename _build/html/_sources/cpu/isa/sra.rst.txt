@@ -1,19 +1,21 @@
 SRA - Shift Right Arithmetic
 ============================
 
+Shift the contents of register ``$rs1`` right by a number of bits specified in ``$rs2``, sign-extending the value from ``$rs1`` and storing the result in ``$rd``
+
 Usage
 -----
 
 .. code-block:: asm
 
-   todo
+   sra $rd, $rs1, $rs2
 
 Operation
 ---------
 
 .. code-block:: c
 
-   todo;
+   rd = sign_extend(rs1)>>rs2;
    advance_pc();
 
 Encoding

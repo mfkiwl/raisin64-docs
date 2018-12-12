@@ -1,0 +1,640 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>jtaglet.v &mdash; Raisin64 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="memory_map.v" href="memory_map.html" />
+    <link rel="prev" title="jtag_state_machine.v" href="jtag_state_machine.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Raisin64
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../cpu.html">Raisin64 CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software.html">Code Snippets and Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nexysddr.html">Nexys 4 DDR Reference Implementation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../modules.html">Reference Index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../isa.html">Raisin64 Instruction Set</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../modules.html">Verilog Module Index</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="commit.html">commit.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="de_canonicalize.html">de_canonicalize.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug_control.html">debug_control.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="decode.html">decode.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_advint.html">ex_advint.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_advint_s1.html">ex_advint_s1.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_alu.html">ex_alu.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_alu_s1.html">ex_alu_s1.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_branch.html">ex_branch.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_memory.html">ex_memory.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fetch.html">fetch.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ff_sync.html">ff_sync.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag_reg.html">schedule.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag_state_machine.html">jtag_state_machine.v</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">jtaglet.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory_map.html">memory_map.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline.html">pipeline.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raisin64.html">raisin64.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ram.html">ram.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regfile.html">regfile.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schedule.html">schedule.v</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Raisin64</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../modules.html">Reference Index</a> &raquo;</li>
+        
+          <li><a href="../modules.html">Verilog Module Index</a> &raquo;</li>
+        
+      <li>jtaglet.v</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/cpu/modules/jtaglet.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="jtaglet-v">
+<h1>jtaglet.v<a class="headerlink" href="#jtaglet-v" title="Permalink to this headline">¶</a></h1>
+<object data="../../_images/symbol-4533d840591eaca79bbd50d278e826f0799984fd.svg" type="image/svg+xml">
+            <p class="warning">/* jtaglet.v
+ *
+ * Top module for the JTAGlet JTAG TAP project
+ *
+ *------------------------------------------------------------------------------
+ *
+ * Copyright 2018 Christopher Parish
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+module jtaglet #(
+    parameter IR_LEN = 4,
+    parameter ID_PARTVER = 4'h0,
+    parameter ID_PARTNUM = 16'h0000,
+    parameter ID_MANF = 11'h000,
+    parameter USERDATA_LEN = 32,
+    parameter USEROP_LEN = 8
+    )(
+    input tck,
+    input tms,
+    input tdi,
+    output reg tdo,
+    input trst,
+
+    input[USERDATA_LEN-1:0] userData_in,
+    output[USERDATA_LEN-1:0] userData_out,
+    output[USEROP_LEN-1:0] userOp,
+    output userOp_ready
+    );
+
+    localparam USERDATA_OP = 4'b1000;
+    localparam USEROP_OP = 4'b1001;
+    localparam IDCODE_OP = {{(IR_LEN-1){1'b1}},1'b0}; //e.g. b1110
+    localparam BYPASS_OP = {IR_LEN{1'b1}};// e.g. b1111 (required bit pattern per spec)
+
+    wire[31:0] idcode = {ID_PARTVER, ID_PARTNUM, ID_MANF, 1'b1};
+
+    wire state_tlr, state_capturedr, state_captureir, state_shiftdr, state_shiftir,
+        state_updatedr, state_updateir;
+
+    jtag_state_machine jsm(.tck(tck), .tms(tms), .trst(trst), .state_tlr(state_tlr),
+        .state_capturedr(state_capturedr), .state_captureir(state_captureir),
+        .state_shiftdr(state_shiftdr), .state_shiftir(state_shiftir),
+        .state_updatedr(state_updatedr), .state_updateir(state_updateir));
+
+    reg[IR_LEN-1:0] ir_reg;
+
+    //USERDATA - DR becomes a USERDATA_LEN bit user data register passed out of the module
+    wire userData_tdo;
+    jtag_reg #(.IR_LEN(IR_LEN), .DR_LEN(USERDATA_LEN), .IR_OPCODE(USERDATA_OP)) userData_reg
+        (.tck(tck), .trst(trst), .tdi(tdi), .tdo(userData_tdo), .state_tlr(state_tlr),
+         .state_capturedr(state_capturedr), .state_shiftdr(state_shiftdr),
+         .state_updatedr(state_updatedr), .ir_reg(ir_reg), .dr_dataOut(userData_out),
+         .dr_dataIn(userData_in), .dr_dataOutReady());
+
+    //USEROPCODE - DR becomes an 8 bit operation select/initiate register passed out of the module
+    wire userOp_tdo;
+    jtag_reg #(.IR_LEN(IR_LEN), .DR_LEN(USEROP_LEN), .IR_OPCODE(USEROP_OP)) userOp_reg
+        (.tck(tck), .trst(trst), .tdi(tdi), .tdo(userOp_tdo), .state_tlr(state_tlr),
+         .state_capturedr(state_capturedr), .state_shiftdr(state_shiftdr),
+         .state_updatedr(state_updatedr), .ir_reg(ir_reg), .dr_dataOut(userOp),
+         .dr_dataIn(8'b0), .dr_dataOutReady(userOp_ready));
+
+    //IDCODE - DR is pre-loaded with the 32 bit identification code of this part
+    wire idcode_tdo;
+    jtag_reg #(.IR_LEN(IR_LEN), .DR_LEN(32), .IR_OPCODE(IDCODE_OP)) idcode_reg
+        (.tck(tck), .trst(trst), .tdi(tdi), .tdo(idcode_tdo), .state_tlr(state_tlr),
+         .state_capturedr(state_capturedr), .state_shiftdr(state_shiftdr),
+         .state_updatedr(1'b0), .ir_reg(ir_reg), .dr_dataOut(),
+         .dr_dataIn(idcode), .dr_dataOutReady());
+
+    //BYPASS - DR becomes a 1 bit wide register, suitable for bypassing this part
+    wire bypass_tdo;
+    jtag_reg #(.IR_LEN(IR_LEN), .DR_LEN(1), .IR_OPCODE(BYPASS_OP)) bypass_reg
+         (.tck(tck), .trst(trst), .tdi(tdi), .tdo(bypass_tdo), .state_tlr(state_tlr),
+          .state_capturedr(state_capturedr), .state_shiftdr(state_shiftdr),
+          .state_updatedr(1'b0), .ir_reg(ir_reg), .dr_dataOut(),
+          .dr_dataIn(1'b0), .dr_dataOutReady());
+
+    //Instruction Register
+    wire ir_tdo;
+    assign ir_tdo = ir_reg[0];
+    always &#64;(posedge tck or negedge trst) begin
+        if(~trst) begin
+            ir_reg &lt;= IDCODE_OP;
+        end else if(state_tlr) begin
+            ir_reg &lt;= IDCODE_OP;
+        end else if(state_captureir) begin
+            //We need to load the BYPASS reg with seq ending in 01.
+            ir_reg &lt;= {{(IR_LEN-1){1'b0}},1'b1}; //e.g. b0001
+        end else if(state_shiftir) begin
+            ir_reg &lt;= {tdi, ir_reg[IR_LEN-1:1]};
+        end
+    end
+
+    //IR selects the appropriate DR
+    reg tdo_pre;
+    always &#64;(*) begin
+        tdo_pre = 0;
+        if(state_shiftdr) begin
+            case(ir_reg)
+                IDCODE_OP:      tdo_pre = idcode_tdo;
+                BYPASS_OP:      tdo_pre = bypass_tdo;
+                USERDATA_OP:    tdo_pre = userData_tdo;
+                USEROP_OP:      tdo_pre = userOp_tdo;
+                default:        tdo_pre = bypass_tdo;
+            endcase
+        end else if(state_shiftir) begin
+            tdo_pre = ir_tdo;
+        end
+    end
+
+    //TDO updates on the negative edge according to the spec
+    always &#64;(negedge tck)
+    begin
+        tdo &lt;= tdo_pre;
+    end
+
+endmodule</p></object>
+<div class="highlight-verilog notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cm">/* jtaglet.v</span>
+<span class="cm"> *</span>
+<span class="cm"> * Top module for the JTAGlet JTAG TAP project</span>
+<span class="cm"> *</span>
+<span class="cm"> *------------------------------------------------------------------------------</span>
+<span class="cm"> *</span>
+<span class="cm"> * Copyright 2018 Christopher Parish</span>
+<span class="cm"> *</span>
+<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm"> * you may not use this file except in compliance with the License.</span>
+<span class="cm"> * You may obtain a copy of the License at</span>
+<span class="cm"> *</span>
+<span class="cm"> *   http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> *</span>
+<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm"> * See the License for the specific language governing permissions and</span>
+<span class="cm"> * limitations under the License.</span>
+<span class="cm"> */</span>
+
+<span class="k">module</span> <span class="n">jtaglet</span> <span class="p">#(</span>
+    <span class="k">parameter</span> <span class="no">IR_LEN</span> <span class="o">=</span> <span class="mh">4</span><span class="p">,</span>
+    <span class="k">parameter</span> <span class="no">ID_PARTVER</span> <span class="o">=</span> <span class="mh">4&#39;h0</span><span class="p">,</span>
+    <span class="k">parameter</span> <span class="no">ID_PARTNUM</span> <span class="o">=</span> <span class="mh">16&#39;h0000</span><span class="p">,</span>
+    <span class="k">parameter</span> <span class="no">ID_MANF</span> <span class="o">=</span> <span class="mh">11&#39;h000</span><span class="p">,</span>
+    <span class="k">parameter</span> <span class="no">USERDATA_LEN</span> <span class="o">=</span> <span class="mh">32</span><span class="p">,</span>
+    <span class="k">parameter</span> <span class="no">USEROP_LEN</span> <span class="o">=</span> <span class="mh">8</span>
+    <span class="p">)(</span>
+    <span class="k">input</span> <span class="n">tck</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">tms</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">tdi</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span> <span class="n">tdo</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">trst</span><span class="p">,</span>
+
+    <span class="k">input</span><span class="p">[</span><span class="no">USERDATA_LEN</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">userData_in</span><span class="p">,</span>
+    <span class="k">output</span><span class="p">[</span><span class="no">USERDATA_LEN</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">userData_out</span><span class="p">,</span>
+    <span class="k">output</span><span class="p">[</span><span class="no">USEROP_LEN</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">userOp</span><span class="p">,</span>
+    <span class="k">output</span> <span class="n">userOp_ready</span>
+    <span class="p">);</span>
+
+    <span class="k">localparam</span> <span class="no">USERDATA_OP</span> <span class="o">=</span> <span class="mh">4</span><span class="mb">&#39;b1000</span><span class="p">;</span>
+    <span class="k">localparam</span> <span class="no">USEROP_OP</span> <span class="o">=</span> <span class="mh">4</span><span class="mb">&#39;b1001</span><span class="p">;</span>
+    <span class="k">localparam</span> <span class="no">IDCODE_OP</span> <span class="o">=</span> <span class="p">{{(</span><span class="no">IR_LEN</span><span class="o">-</span><span class="mh">1</span><span class="p">){</span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">}},</span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">};</span> <span class="c1">//e.g. b1110</span>
+    <span class="k">localparam</span> <span class="no">BYPASS_OP</span> <span class="o">=</span> <span class="p">{</span><span class="no">IR_LEN</span><span class="p">{</span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">}};</span><span class="c1">// e.g. b1111 (required bit pattern per spec)</span>
+
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">idcode</span> <span class="o">=</span> <span class="p">{</span><span class="no">ID_PARTVER</span><span class="p">,</span> <span class="no">ID_PARTNUM</span><span class="p">,</span> <span class="no">ID_MANF</span><span class="p">,</span> <span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">};</span>
+
+    <span class="kt">wire</span> <span class="n">state_tlr</span><span class="p">,</span> <span class="n">state_capturedr</span><span class="p">,</span> <span class="n">state_captureir</span><span class="p">,</span> <span class="n">state_shiftdr</span><span class="p">,</span> <span class="n">state_shiftir</span><span class="p">,</span>
+        <span class="n">state_updatedr</span><span class="p">,</span> <span class="n">state_updateir</span><span class="p">;</span>
+
+    <span class="n">jtag_state_machine</span> <span class="n">jsm</span><span class="p">(.</span><span class="n">tck</span><span class="p">(</span><span class="n">tck</span><span class="p">),</span> <span class="p">.</span><span class="n">tms</span><span class="p">(</span><span class="n">tms</span><span class="p">),</span> <span class="p">.</span><span class="n">trst</span><span class="p">(</span><span class="n">trst</span><span class="p">),</span> <span class="p">.</span><span class="n">state_tlr</span><span class="p">(</span><span class="n">state_tlr</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">state_capturedr</span><span class="p">(</span><span class="n">state_capturedr</span><span class="p">),</span> <span class="p">.</span><span class="n">state_captureir</span><span class="p">(</span><span class="n">state_captureir</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">state_shiftdr</span><span class="p">(</span><span class="n">state_shiftdr</span><span class="p">),</span> <span class="p">.</span><span class="n">state_shiftir</span><span class="p">(</span><span class="n">state_shiftir</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">state_updatedr</span><span class="p">(</span><span class="n">state_updatedr</span><span class="p">),</span> <span class="p">.</span><span class="n">state_updateir</span><span class="p">(</span><span class="n">state_updateir</span><span class="p">));</span>
+
+    <span class="kt">reg</span><span class="p">[</span><span class="no">IR_LEN</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">ir_reg</span><span class="p">;</span>
+
+    <span class="c1">//USERDATA - DR becomes a USERDATA_LEN bit user data register passed out of the module</span>
+    <span class="kt">wire</span> <span class="n">userData_tdo</span><span class="p">;</span>
+    <span class="n">jtag_reg</span> <span class="p">#(.</span><span class="no">IR_LEN</span><span class="p">(</span><span class="no">IR_LEN</span><span class="p">),</span> <span class="p">.</span><span class="no">DR_LEN</span><span class="p">(</span><span class="no">USERDATA_LEN</span><span class="p">),</span> <span class="p">.</span><span class="no">IR_OPCODE</span><span class="p">(</span><span class="no">USERDATA_OP</span><span class="p">))</span> <span class="n">userData_reg</span>
+        <span class="p">(.</span><span class="n">tck</span><span class="p">(</span><span class="n">tck</span><span class="p">),</span> <span class="p">.</span><span class="n">trst</span><span class="p">(</span><span class="n">trst</span><span class="p">),</span> <span class="p">.</span><span class="n">tdi</span><span class="p">(</span><span class="n">tdi</span><span class="p">),</span> <span class="p">.</span><span class="n">tdo</span><span class="p">(</span><span class="n">userData_tdo</span><span class="p">),</span> <span class="p">.</span><span class="n">state_tlr</span><span class="p">(</span><span class="n">state_tlr</span><span class="p">),</span>
+         <span class="p">.</span><span class="n">state_capturedr</span><span class="p">(</span><span class="n">state_capturedr</span><span class="p">),</span> <span class="p">.</span><span class="n">state_shiftdr</span><span class="p">(</span><span class="n">state_shiftdr</span><span class="p">),</span>
+         <span class="p">.</span><span class="n">state_updatedr</span><span class="p">(</span><span class="n">state_updatedr</span><span class="p">),</span> <span class="p">.</span><span class="n">ir_reg</span><span class="p">(</span><span class="n">ir_reg</span><span class="p">),</span> <span class="p">.</span><span class="n">dr_dataOut</span><span class="p">(</span><span class="n">userData_out</span><span class="p">),</span>
+         <span class="p">.</span><span class="n">dr_dataIn</span><span class="p">(</span><span class="n">userData_in</span><span class="p">),</span> <span class="p">.</span><span class="n">dr_dataOutReady</span><span class="p">());</span>
+
+    <span class="c1">//USEROPCODE - DR becomes an 8 bit operation select/initiate register passed out of the module</span>
+    <span class="kt">wire</span> <span class="n">userOp_tdo</span><span class="p">;</span>
+    <span class="n">jtag_reg</span> <span class="p">#(.</span><span class="no">IR_LEN</span><span class="p">(</span><span class="no">IR_LEN</span><span class="p">),</span> <span class="p">.</span><span class="no">DR_LEN</span><span class="p">(</span><span class="no">USEROP_LEN</span><span class="p">),</span> <span class="p">.</span><span class="no">IR_OPCODE</span><span class="p">(</span><span class="no">USEROP_OP</span><span class="p">))</span> <span class="n">userOp_reg</span>
+        <span class="p">(.</span><span class="n">tck</span><span class="p">(</span><span class="n">tck</span><span class="p">),</span> <span class="p">.</span><span class="n">trst</span><span class="p">(</span><span class="n">trst</span><span class="p">),</span> <span class="p">.</span><span class="n">tdi</span><span class="p">(</span><span class="n">tdi</span><span class="p">),</span> <span class="p">.</span><span class="n">tdo</span><span class="p">(</span><span class="n">userOp_tdo</span><span class="p">),</span> <span class="p">.</span><span class="n">state_tlr</span><span class="p">(</span><span class="n">state_tlr</span><span class="p">),</span>
+         <span class="p">.</span><span class="n">state_capturedr</span><span class="p">(</span><span class="n">state_capturedr</span><span class="p">),</span> <span class="p">.</span><span class="n">state_shiftdr</span><span class="p">(</span><span class="n">state_shiftdr</span><span class="p">),</span>
+         <span class="p">.</span><span class="n">state_updatedr</span><span class="p">(</span><span class="n">state_updatedr</span><span class="p">),</span> <span class="p">.</span><span class="n">ir_reg</span><span class="p">(</span><span class="n">ir_reg</span><span class="p">),</span> <span class="p">.</span><span class="n">dr_dataOut</span><span class="p">(</span><span class="n">userOp</span><span class="p">),</span>
+         <span class="p">.</span><span class="n">dr_dataIn</span><span class="p">(</span><span class="mh">8</span><span class="mb">&#39;b0</span><span class="p">),</span> <span class="p">.</span><span class="n">dr_dataOutReady</span><span class="p">(</span><span class="n">userOp_ready</span><span class="p">));</span>
+
+    <span class="c1">//IDCODE - DR is pre-loaded with the 32 bit identification code of this part</span>
+    <span class="kt">wire</span> <span class="n">idcode_tdo</span><span class="p">;</span>
+    <span class="n">jtag_reg</span> <span class="p">#(.</span><span class="no">IR_LEN</span><span class="p">(</span><span class="no">IR_LEN</span><span class="p">),</span> <span class="p">.</span><span class="no">DR_LEN</span><span class="p">(</span><span class="mh">32</span><span class="p">),</span> <span class="p">.</span><span class="no">IR_OPCODE</span><span class="p">(</span><span class="no">IDCODE_OP</span><span class="p">))</span> <span class="n">idcode_reg</span>
+        <span class="p">(.</span><span class="n">tck</span><span class="p">(</span><span class="n">tck</span><span class="p">),</span> <span class="p">.</span><span class="n">trst</span><span class="p">(</span><span class="n">trst</span><span class="p">),</span> <span class="p">.</span><span class="n">tdi</span><span class="p">(</span><span class="n">tdi</span><span class="p">),</span> <span class="p">.</span><span class="n">tdo</span><span class="p">(</span><span class="n">idcode_tdo</span><span class="p">),</span> <span class="p">.</span><span class="n">state_tlr</span><span class="p">(</span><span class="n">state_tlr</span><span class="p">),</span>
+         <span class="p">.</span><span class="n">state_capturedr</span><span class="p">(</span><span class="n">state_capturedr</span><span class="p">),</span> <span class="p">.</span><span class="n">state_shiftdr</span><span class="p">(</span><span class="n">state_shiftdr</span><span class="p">),</span>
+         <span class="p">.</span><span class="n">state_updatedr</span><span class="p">(</span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">),</span> <span class="p">.</span><span class="n">ir_reg</span><span class="p">(</span><span class="n">ir_reg</span><span class="p">),</span> <span class="p">.</span><span class="n">dr_dataOut</span><span class="p">(),</span>
+         <span class="p">.</span><span class="n">dr_dataIn</span><span class="p">(</span><span class="n">idcode</span><span class="p">),</span> <span class="p">.</span><span class="n">dr_dataOutReady</span><span class="p">());</span>
+
+    <span class="c1">//BYPASS - DR becomes a 1 bit wide register, suitable for bypassing this part</span>
+    <span class="kt">wire</span> <span class="n">bypass_tdo</span><span class="p">;</span>
+    <span class="n">jtag_reg</span> <span class="p">#(.</span><span class="no">IR_LEN</span><span class="p">(</span><span class="no">IR_LEN</span><span class="p">),</span> <span class="p">.</span><span class="no">DR_LEN</span><span class="p">(</span><span class="mh">1</span><span class="p">),</span> <span class="p">.</span><span class="no">IR_OPCODE</span><span class="p">(</span><span class="no">BYPASS_OP</span><span class="p">))</span> <span class="n">bypass_reg</span>
+         <span class="p">(.</span><span class="n">tck</span><span class="p">(</span><span class="n">tck</span><span class="p">),</span> <span class="p">.</span><span class="n">trst</span><span class="p">(</span><span class="n">trst</span><span class="p">),</span> <span class="p">.</span><span class="n">tdi</span><span class="p">(</span><span class="n">tdi</span><span class="p">),</span> <span class="p">.</span><span class="n">tdo</span><span class="p">(</span><span class="n">bypass_tdo</span><span class="p">),</span> <span class="p">.</span><span class="n">state_tlr</span><span class="p">(</span><span class="n">state_tlr</span><span class="p">),</span>
+          <span class="p">.</span><span class="n">state_capturedr</span><span class="p">(</span><span class="n">state_capturedr</span><span class="p">),</span> <span class="p">.</span><span class="n">state_shiftdr</span><span class="p">(</span><span class="n">state_shiftdr</span><span class="p">),</span>
+          <span class="p">.</span><span class="n">state_updatedr</span><span class="p">(</span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">),</span> <span class="p">.</span><span class="n">ir_reg</span><span class="p">(</span><span class="n">ir_reg</span><span class="p">),</span> <span class="p">.</span><span class="n">dr_dataOut</span><span class="p">(),</span>
+          <span class="p">.</span><span class="n">dr_dataIn</span><span class="p">(</span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">),</span> <span class="p">.</span><span class="n">dr_dataOutReady</span><span class="p">());</span>
+
+    <span class="c1">//Instruction Register</span>
+    <span class="kt">wire</span> <span class="n">ir_tdo</span><span class="p">;</span>
+    <span class="k">assign</span> <span class="n">ir_tdo</span> <span class="o">=</span> <span class="n">ir_reg</span><span class="p">[</span><span class="mh">0</span><span class="p">];</span>
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">tck</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">trst</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">trst</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="n">ir_reg</span> <span class="o">&lt;=</span> <span class="no">IDCODE_OP</span><span class="p">;</span>
+        <span class="k">end</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">state_tlr</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="n">ir_reg</span> <span class="o">&lt;=</span> <span class="no">IDCODE_OP</span><span class="p">;</span>
+        <span class="k">end</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">state_captureir</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="c1">//We need to load the BYPASS reg with seq ending in 01.</span>
+            <span class="n">ir_reg</span> <span class="o">&lt;=</span> <span class="p">{{(</span><span class="no">IR_LEN</span><span class="o">-</span><span class="mh">1</span><span class="p">){</span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">}},</span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">};</span> <span class="c1">//e.g. b0001</span>
+        <span class="k">end</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">state_shiftir</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="n">ir_reg</span> <span class="o">&lt;=</span> <span class="p">{</span><span class="n">tdi</span><span class="p">,</span> <span class="n">ir_reg</span><span class="p">[</span><span class="no">IR_LEN</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="mh">1</span><span class="p">]};</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="c1">//IR selects the appropriate DR</span>
+    <span class="kt">reg</span> <span class="n">tdo_pre</span><span class="p">;</span>
+    <span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="n">tdo_pre</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">state_shiftdr</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="k">case</span><span class="p">(</span><span class="n">ir_reg</span><span class="p">)</span>
+                <span class="nl">IDCODE_OP:</span>      <span class="n">tdo_pre</span> <span class="o">=</span> <span class="n">idcode_tdo</span><span class="p">;</span>
+                <span class="nl">BYPASS_OP:</span>      <span class="n">tdo_pre</span> <span class="o">=</span> <span class="n">bypass_tdo</span><span class="p">;</span>
+                <span class="nl">USERDATA_OP:</span>    <span class="n">tdo_pre</span> <span class="o">=</span> <span class="n">userData_tdo</span><span class="p">;</span>
+                <span class="nl">USEROP_OP:</span>      <span class="n">tdo_pre</span> <span class="o">=</span> <span class="n">userOp_tdo</span><span class="p">;</span>
+                <span class="k">default</span><span class="o">:</span>        <span class="n">tdo_pre</span> <span class="o">=</span> <span class="n">bypass_tdo</span><span class="p">;</span>
+            <span class="k">endcase</span>
+        <span class="k">end</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">state_shiftir</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="n">tdo_pre</span> <span class="o">=</span> <span class="n">ir_tdo</span><span class="p">;</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="c1">//TDO updates on the negative edge according to the spec</span>
+    <span class="k">always</span> <span class="p">@(</span><span class="k">negedge</span> <span class="n">tck</span><span class="p">)</span>
+    <span class="k">begin</span>
+        <span class="n">tdo</span> <span class="o">&lt;=</span> <span class="n">tdo_pre</span><span class="p">;</span>
+    <span class="k">end</span>
+
+<span class="k">endmodule</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="memory_map.html" class="btn btn-neutral float-right" title="memory_map.v" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="jtag_state_machine.html" class="btn btn-neutral" title="jtag_state_machine.v" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Christopher Parish
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

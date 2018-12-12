@@ -1,21 +1,21 @@
 ADD - Integer Add
 =================
 
-Adds registers ``Rs1`` and ``Rs2``, placing the result in ``Rd``.
+Adds registers ``$rs1`` and ``$rs2``, placing the result in ``$rd``.
 
 Usage
 -----
 
 .. code-block:: asm
 
-   add Rd, Rs1, Rs2
+   add $rd, $rs1, $rs2
 
 Operation
 ---------
 
 .. code-block:: c
 
-   Rd = Rs1 + Rs2;
+   rd = rs1 + rs2;
    advance_pc();
 
 Encoding

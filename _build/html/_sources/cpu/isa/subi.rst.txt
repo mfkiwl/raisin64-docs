@@ -1,19 +1,21 @@
 SUBI - Integer Subtract Immediate
 =================================
 
+Subtracts a sign-extended immediate value from register ``$rs1``, placing the result in ``$rd``.
+
 Usage
 -----
 
 .. code-block:: asm
 
-   todo
+   subi Rd, Rs1, imm
 
 Operation
 ---------
 
 .. code-block:: c
 
-   todo;
+   Rd = Rs1 - sign_extend(imm);
    advance_pc();
 
 Encoding

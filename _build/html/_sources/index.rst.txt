@@ -10,7 +10,7 @@ Raisin64 (*RISC Architecture with In-order Superscalar INterlocked-pipeline*) is
 
 Unlike most superscalar designs, Raisin64 does not re-order instructions or use register renaming [1]_ but instead provides a larger architectural register file of 63x64-bit registers.
 
-.. image:: _static/temp_block.svg
+.. image:: _static/raisin64block.png
     :width: 100%
     :alt: High-level CPU block diagram
 

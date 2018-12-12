@@ -1,19 +1,22 @@
 MULU - Unsigned Integer Multiply
 ================================
 
+Multiplies registers ``$rs1`` and ``$rs2``, and places the results in ``$rd`` and ``$rd2``, treating operands as unsigned.
+
 Usage
 -----
 
 .. code-block:: asm
 
-   todo
+   mulu $rd, $rd2, $rs1, $rs2
 
 Operation
 ---------
 
 .. code-block:: c
 
-   todo;
+   rd = bottom_64bits(rs1 * rs2);
+   rd2 = upper_64bits(rs1 * rs2);
    advance_pc();
 
 Encoding

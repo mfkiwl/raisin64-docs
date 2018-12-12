@@ -1,19 +1,24 @@
 SLTIU - Set 1 if Less Than Immediate Unsigned
 =============================================
 
+Sets ``$rd`` as 1 if the unsigned representation of ``$rs1`` is less than the unsigned immediate field, 0 otherwise.
+
 Usage
 -----
 
 .. code-block:: asm
 
-   todo
+   sltiu $rd, $rs1, imm
 
 Operation
 ---------
 
 .. code-block:: c
 
-   todo;
+   if((unsigned)rs1 < (unsigned)imm)
+      rd = 1;
+   else
+      rd = 0;
    advance_pc();
 
 Encoding

@@ -1,0 +1,1114 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pipeline.v &mdash; Raisin64 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="raisin64.v" href="raisin64.html" />
+    <link rel="prev" title="memory_map.v" href="memory_map.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Raisin64
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../cpu.html">Raisin64 CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software.html">Code Snippets and Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nexysddr.html">Nexys 4 DDR Reference Implementation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../modules.html">Reference Index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../isa.html">Raisin64 Instruction Set</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../modules.html">Verilog Module Index</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="commit.html">commit.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="de_canonicalize.html">de_canonicalize.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug_control.html">debug_control.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="decode.html">decode.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_advint.html">ex_advint.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_advint_s1.html">ex_advint_s1.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_alu.html">ex_alu.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_alu_s1.html">ex_alu_s1.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_branch.html">ex_branch.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_memory.html">ex_memory.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fetch.html">fetch.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ff_sync.html">ff_sync.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag_reg.html">schedule.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag_state_machine.html">jtag_state_machine.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtaglet.html">jtaglet.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory_map.html">memory_map.v</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pipeline.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raisin64.html">raisin64.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ram.html">ram.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regfile.html">regfile.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schedule.html">schedule.v</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Raisin64</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../modules.html">Reference Index</a> &raquo;</li>
+        
+          <li><a href="../modules.html">Verilog Module Index</a> &raquo;</li>
+        
+      <li>pipeline.v</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/cpu/modules/pipeline.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pipeline-v">
+<h1>pipeline.v<a class="headerlink" href="#pipeline-v" title="Permalink to this headline">¶</a></h1>
+<object data="../../_images/symbol-0ba6b1d0b27f049e6330019ee5aa9a06f6ced0cf.svg" type="image/svg+xml">
+            <p class="warning">//Raisin64 - Pipeline
+
+module pipeline(
+    //# {{clocks|Clocking}}
+    input clk,
+    input rst_n,
+
+    //# {{data|Instruction Memory Bus}}
+    output[63:0] imem_addr,
+    input[63:0] imem_data,
+
+    //# {{control|Instruction Memory Bus Control}}
+    input imem_data_valid,
+    output imem_addr_valid,
+
+    //# {{data|Data Memory Bus}}
+    output[63:0] dmem_addr,
+    output[63:0] dmem_dout,
+    input[63:0] dmem_din,
+
+    //# {{control|Data Memory Bus Control}}
+    input dmem_cycle_complete,
+    output[1:0] dmem_write_width,
+    output dmem_rstrobe,
+    output dmem_wstrobe
+    );
+
+    wire sc_ready;
+    wire[63:0] jump_pc;
+    wire do_jump;
+    wire cancel_now;
+    assign cancel_now = do_jump;
+
+    //////////  FETCH    //////////
+    wire[63:0] fe_inst;
+    wire[63:0] fe_next_pc;
+
+    fetch fetch1(
+        .clk(clk),
+        .rst_n(rst_n),
+        .imem_addr(imem_addr),
+        .imem_data(imem_data),
+        .imem_data_valid(imem_data_valid),
+        .imem_addr_valid(imem_addr_valid),
+        .inst_data(fe_inst),
+        .next_jump_pc(fe_next_pc),
+        .jump_pc(jump_pc), .do_jump(do_jump),
+        .stall(~sc_ready)
+        );
+
+    reg fe_cancelled;
+    always &#64;(posedge clk or negedge rst_n) begin
+        if(~rst_n) fe_cancelled &lt;= 0;
+        else fe_cancelled &lt;= cancel_now;
+    end
+
+    //////////  DECODE   //////////
+
+    wire de_type;
+    wire[2:0] de_unit;
+    wire[1:0] de_op;
+    wire[5:0] de_rd_rn;
+    wire[5:0] de_rd2_rn;
+    wire[5:0] de_rs1_rn;
+    wire[5:0] de_rs2_rn;
+    wire[63:0] de_imm_data;
+
+    wire[5:0] de_r1_rn;
+    wire[5:0] de_r2_rn;
+
+    decode decode1(
+        .clk(clk), .rst_n(rst_n),
+        .instIn(fe_inst),
+        .type(de_type),
+        .unit(de_unit),
+        .op(de_op),
+        .rs1_rn(de_rs1_rn), .rs2_rn(de_rs2_rn),
+        .rd_rn(de_rd_rn), .rd2_rn(de_rd2_rn),
+        .imm_data(de_imm_data),
+        .r1_rn(de_r1_rn), .r2_rn(de_r2_rn),
+        .stall(~sc_ready), .cancel(cancel_now|fe_cancelled)
+        );
+
+    //Delay the Next PC to the schedule stage
+    reg[63:0] de_next_pc;
+    reg de_cancelled;
+
+    always &#64;(posedge clk or negedge rst_n)
+    begin
+        if(~rst_n) begin
+            de_next_pc &lt;= 64'h0;
+            de_cancelled &lt;= 0;
+        end else begin
+            de_cancelled &lt;= cancel_now|fe_cancelled;
+            if (sc_ready) begin
+                if(cancel_now|fe_cancelled) de_next_pc &lt;= 64'h0;
+                else de_next_pc &lt;= fe_next_pc;
+            end
+        end
+    end
+
+    ////////// REG FILE  //////////
+    //Concurrent with Schedule phase
+
+    wire[63:0] rf_writeback;
+    wire[63:0] rf_data1;
+    wire[63:0] rf_data2;
+    wire[5:0] rf_writeback_rn;
+
+    //Register file selected by the scheduler, registered in the execute stage
+    //and written to during commit.
+    regfile regfile1(
+        .clk(clk), .rst_n(rst_n), .w_data(rf_writeback), .r1_data(rf_data1),
+        .r2_data(rf_data2), .r1_rn(de_r1_rn), .r2_rn(de_r2_rn),
+        .w_rn(rf_writeback_rn), .w_en(|rf_writeback_rn)
+        );
+
+    ////////// SCHEDULE  //////////
+    //Concurrent with Register File
+
+    wire sc_alu1_en;
+    wire sc_alu2_en;
+    wire sc_advint_en;
+    wire sc_memunit_en;
+    wire sc_branch_en;
+
+    wire sc_alu1_busy;
+    wire sc_alu2_busy;
+    wire sc_advint_busy;
+    wire sc_memunit_busy;
+    wire sc_branch_busy;
+
+    wire[5:0] sc_rd_rn;
+    wire[5:0] sc_rd2_rn;
+
+    schedule schedule1(
+        .clk(clk), .rst_n(rst_n),
+        .type(de_type), .unit(cancel_now|de_cancelled ? 3'h0 : de_unit),
+        .r1_in_rn(de_r1_rn), .r2_in_rn(de_r2_rn),
+        .rd_in_rn(cancel_now|de_cancelled ? 6'h0 : de_rd_rn),
+        .rd2_in_rn(cancel_now|de_cancelled ? 6'h0 : de_rd2_rn),
+        .sc_ready(sc_ready),
+        .rd_out_rn(sc_rd_rn), .rd2_out_rn(sc_rd2_rn),
+
+        .reg1_finished(rf_writeback_rn), .reg2_finished(6'h0),
+
+        .alu1_en(sc_alu1_en), .alu2_en(sc_alu2_en), .advint_en(sc_advint_en),
+        .memunit_en(sc_memunit_en), .branch_en(sc_branch_en),
+
+        .alu1_busy(sc_alu1_busy), .alu2_busy(sc_alu2_busy),
+        .advint_busy(sc_advint_busy), .memunit_busy(sc_memunit_busy),
+        .branch_busy(sc_branch_busy)
+        );
+
+    //Delay the relevant decode data used by execution through the schedule phase
+    reg sc_type;
+    reg[2:0] sc_unit;
+    reg[1:0] sc_op;
+    reg[63:0] sc_imm_data;
+    reg[63:0] sc_next_pc;
+
+    always &#64;(posedge clk or negedge rst_n)
+    begin
+        if(~rst_n) begin
+            sc_type &lt;= 0;
+            sc_unit &lt;= 3'h0;
+            sc_op &lt;= 2'h0;
+            sc_imm_data &lt;= 64'h0;
+            sc_next_pc &lt;= 64'h0;
+        end else begin
+            if(cancel_now|de_cancelled) sc_unit &lt;= 3'h0;
+            else sc_unit &lt;= de_unit;
+
+            sc_type &lt;= de_type;
+            sc_op &lt;= de_op;
+            sc_imm_data &lt;= de_imm_data;
+            sc_next_pc &lt;= de_next_pc;
+        end
+    end
+
+    //////////  EXECUTE  //////////
+
+    wire[63:0] ex_alu1_result;
+    wire[63:0] ex_alu2_result;
+    wire[63:0] ex_advint_result;
+    wire[63:0] ex_advint_result2;
+    wire[63:0] ex_memunit_result;
+    wire[63:0] ex_branch_r63;
+
+    wire[5:0] ex_alu1_rd_rn;
+    wire[5:0] ex_alu2_rd_rn;
+    wire[5:0] ex_advint_rd_rn;
+    wire[5:0] ex_advint_rd2_rn;
+    wire[5:0] ex_memunit_rd_rn;
+    wire ex_branch_r63_update;
+
+    wire ex_alu1_valid;
+    wire ex_alu2_valid;
+    wire ex_advint_valid;
+    wire ex_memunit_valid;
+
+    wire ex_alu1_stall;
+    wire ex_alu2_stall;
+    wire ex_advint_stall;
+    wire ex_memunit_stall;
+    wire ex_branch_stall;
+
+    ex_alu ex_alu1(
+        .clk(clk), .rst_n(rst_n), .in1(rf_data1), .in2(sc_type ? sc_imm_data : rf_data2), .out(ex_alu1_result),
+        .ex_enable(sc_alu1_en), .ex_busy(sc_alu1_busy), .rd_in_rn(sc_rd_rn), .unit(sc_unit),
+        .op(sc_op), .rd_out_rn(ex_alu1_rd_rn), .valid(ex_alu1_valid), .stall(ex_alu1_stall)
+        );
+
+    ex_alu ex_alu2(
+        .clk(clk), .rst_n(rst_n), .in1(rf_data1), .in2(sc_type ? sc_imm_data : rf_data2), .out(ex_alu2_result),
+        .ex_enable(sc_alu2_en), .ex_busy(sc_alu2_busy), .rd_in_rn(sc_rd_rn), .unit(sc_unit),
+        .op(sc_op), .rd_out_rn(ex_alu2_rd_rn), .valid(ex_alu2_valid), .stall(ex_alu2_stall)
+        );
+
+    ex_advint ex_advint(
+        .clk(clk), .rst_n(rst_n),
+        .in1(rf_data1), .in2(rf_data2),
+        .out(ex_advint_result), .out2(ex_advint_result2),
+        .ex_enable(sc_advint_en), .ex_busy(sc_advint_busy),
+        .rd_in_rn(sc_rd_rn), .rd2_in_rn(sc_rd2_rn),
+        .unit(sc_unit), .op(sc_op),
+        .rd_out_rn(ex_advint_rd_rn), .rd2_out_rn(ex_advint_rd2_rn),
+        .valid(ex_advint_valid), .stall(ex_advint_stall)
+        );
+
+    ex_memory ex_memory1(
+        .clk(clk), .rst_n(rst_n),
+        .dmem_din(dmem_din), .dmem_dout(dmem_dout), .dmem_addr(dmem_addr),
+        .dmem_cycle_complete(dmem_cycle_complete),
+        .dmem_width(dmem_write_width),
+        .dmem_rstrobe(dmem_rstrobe), .dmem_wstrobe(dmem_wstrobe),
+        .base(rf_data1), .data(rf_data2), .offset(sc_imm_data[31:0]),
+        .out(ex_memunit_result),
+        .ex_enable(sc_memunit_en), .ex_busy(sc_memunit_busy),
+        .rd_in_rn(sc_rd_rn), .unit(sc_unit), .op(sc_op),
+        .rd_out_rn(ex_memunit_rd_rn), .valid(ex_memunit_valid),
+        .stall(ex_memunit_stall)
+        );
+
+    ex_branch ex_branch1(
+        .clk(clk), .rst_n(rst_n),
+        .in1(rf_data1), .in2(rf_data2), .imm(sc_imm_data),
+        .next_pc(sc_next_pc), .jump_pc(jump_pc), .do_jump(do_jump),
+        .r63(ex_branch_r63), .r63_update(ex_branch_r63_update),
+        .ex_enable(sc_branch_en), .ex_busy(sc_branch_busy),
+        .stall(ex_branch_stall),
+        .op(sc_op), .type(sc_type)
+        );
+
+    //////////  COMMIT   //////////
+
+    commit commit1(
+        .clk(clk), .rst_n(rst_n),
+
+        .alu1_result(ex_alu1_result),
+        .alu2_result(ex_alu2_result),
+        .advint_result(ex_advint_result),
+        .advint_result2(ex_advint_result2),
+        .memunit_result(ex_memunit_result),
+        .branch_result(ex_branch_r63),
+
+        .alu1_rn(ex_alu1_rd_rn),
+        .alu2_rn(ex_alu2_rd_rn),
+        .advint_rn(ex_advint_rd_rn),
+        .advint_rn2(ex_advint_rd2_rn),
+        .memunit_rn(ex_memunit_rd_rn),
+
+        .alu1_valid(ex_alu1_valid),
+        .alu2_valid(ex_alu2_valid),
+        .advint_valid(ex_advint_valid),
+        .memunit_valid(ex_memunit_valid),
+        .branch_valid(ex_branch_r63_update),
+
+        .alu1_stall(ex_alu1_stall),
+        .alu2_stall(ex_alu2_stall),
+        .advint_stall(ex_advint_stall),
+        .memunit_stall(ex_memunit_stall),
+        .branch_stall(ex_branch_stall),
+
+        .write_data(rf_writeback), .write_rn(rf_writeback_rn)
+        );
+
+endmodule</p></object>
+<div class="highlight-verilog notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">//Raisin64 - Pipeline</span>
+
+<span class="k">module</span> <span class="n">pipeline</span><span class="p">(</span>
+    <span class="c1">//# {{clocks|Clocking}}</span>
+    <span class="k">input</span> <span class="n">clk</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">rst_n</span><span class="p">,</span>
+
+    <span class="c1">//# {{data|Instruction Memory Bus}}</span>
+    <span class="k">output</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">imem_addr</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">imem_data</span><span class="p">,</span>
+
+    <span class="c1">//# {{control|Instruction Memory Bus Control}}</span>
+    <span class="k">input</span> <span class="n">imem_data_valid</span><span class="p">,</span>
+    <span class="k">output</span> <span class="n">imem_addr_valid</span><span class="p">,</span>
+
+    <span class="c1">//# {{data|Data Memory Bus}}</span>
+    <span class="k">output</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">dmem_addr</span><span class="p">,</span>
+    <span class="k">output</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">dmem_dout</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">dmem_din</span><span class="p">,</span>
+
+    <span class="c1">//# {{control|Data Memory Bus Control}}</span>
+    <span class="k">input</span> <span class="n">dmem_cycle_complete</span><span class="p">,</span>
+    <span class="k">output</span><span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">dmem_write_width</span><span class="p">,</span>
+    <span class="k">output</span> <span class="n">dmem_rstrobe</span><span class="p">,</span>
+    <span class="k">output</span> <span class="n">dmem_wstrobe</span>
+    <span class="p">);</span>
+
+    <span class="kt">wire</span> <span class="n">sc_ready</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">jump_pc</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">do_jump</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">cancel_now</span><span class="p">;</span>
+    <span class="k">assign</span> <span class="n">cancel_now</span> <span class="o">=</span> <span class="n">do_jump</span><span class="p">;</span>
+
+    <span class="c1">//////////  FETCH    //////////</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">fe_inst</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">fe_next_pc</span><span class="p">;</span>
+
+    <span class="n">fetch</span> <span class="n">fetch1</span><span class="p">(</span>
+        <span class="p">.</span><span class="n">clk</span><span class="p">(</span><span class="n">clk</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">rst_n</span><span class="p">(</span><span class="n">rst_n</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">imem_addr</span><span class="p">(</span><span class="n">imem_addr</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">imem_data</span><span class="p">(</span><span class="n">imem_data</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">imem_data_valid</span><span class="p">(</span><span class="n">imem_data_valid</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">imem_addr_valid</span><span class="p">(</span><span class="n">imem_addr_valid</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">inst_data</span><span class="p">(</span><span class="n">fe_inst</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">next_jump_pc</span><span class="p">(</span><span class="n">fe_next_pc</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">jump_pc</span><span class="p">(</span><span class="n">jump_pc</span><span class="p">),</span> <span class="p">.</span><span class="n">do_jump</span><span class="p">(</span><span class="n">do_jump</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">stall</span><span class="p">(</span><span class="o">~</span><span class="n">sc_ready</span><span class="p">)</span>
+        <span class="p">);</span>
+
+    <span class="kt">reg</span> <span class="n">fe_cancelled</span><span class="p">;</span>
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">rst_n</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span> <span class="n">fe_cancelled</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">fe_cancelled</span> <span class="o">&lt;=</span> <span class="n">cancel_now</span><span class="p">;</span>
+    <span class="k">end</span>
+
+    <span class="c1">//////////  DECODE   //////////</span>
+
+    <span class="kt">wire</span> <span class="n">de_type</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">de_unit</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">de_op</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">de_rd_rn</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">de_rd2_rn</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">de_rs1_rn</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">de_rs2_rn</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">de_imm_data</span><span class="p">;</span>
+
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">de_r1_rn</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">de_r2_rn</span><span class="p">;</span>
+
+    <span class="n">decode</span> <span class="n">decode1</span><span class="p">(</span>
+        <span class="p">.</span><span class="n">clk</span><span class="p">(</span><span class="n">clk</span><span class="p">),</span> <span class="p">.</span><span class="n">rst_n</span><span class="p">(</span><span class="n">rst_n</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">instIn</span><span class="p">(</span><span class="n">fe_inst</span><span class="p">),</span>
+        <span class="p">.</span><span class="k">type</span><span class="p">(</span><span class="n">de_type</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">unit</span><span class="p">(</span><span class="n">de_unit</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">op</span><span class="p">(</span><span class="n">de_op</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">rs1_rn</span><span class="p">(</span><span class="n">de_rs1_rn</span><span class="p">),</span> <span class="p">.</span><span class="n">rs2_rn</span><span class="p">(</span><span class="n">de_rs2_rn</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">rd_rn</span><span class="p">(</span><span class="n">de_rd_rn</span><span class="p">),</span> <span class="p">.</span><span class="n">rd2_rn</span><span class="p">(</span><span class="n">de_rd2_rn</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">imm_data</span><span class="p">(</span><span class="n">de_imm_data</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">r1_rn</span><span class="p">(</span><span class="n">de_r1_rn</span><span class="p">),</span> <span class="p">.</span><span class="n">r2_rn</span><span class="p">(</span><span class="n">de_r2_rn</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">stall</span><span class="p">(</span><span class="o">~</span><span class="n">sc_ready</span><span class="p">),</span> <span class="p">.</span><span class="n">cancel</span><span class="p">(</span><span class="n">cancel_now</span><span class="o">|</span><span class="n">fe_cancelled</span><span class="p">)</span>
+        <span class="p">);</span>
+
+    <span class="c1">//Delay the Next PC to the schedule stage</span>
+    <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">de_next_pc</span><span class="p">;</span>
+    <span class="kt">reg</span> <span class="n">de_cancelled</span><span class="p">;</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">rst_n</span><span class="p">)</span>
+    <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="n">de_next_pc</span> <span class="o">&lt;=</span> <span class="mh">64&#39;h0</span><span class="p">;</span>
+            <span class="n">de_cancelled</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+        <span class="k">end</span> <span class="k">else</span> <span class="k">begin</span>
+            <span class="n">de_cancelled</span> <span class="o">&lt;=</span> <span class="n">cancel_now</span><span class="o">|</span><span class="n">fe_cancelled</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">sc_ready</span><span class="p">)</span> <span class="k">begin</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">cancel_now</span><span class="o">|</span><span class="n">fe_cancelled</span><span class="p">)</span> <span class="n">de_next_pc</span> <span class="o">&lt;=</span> <span class="mh">64&#39;h0</span><span class="p">;</span>
+                <span class="k">else</span> <span class="n">de_next_pc</span> <span class="o">&lt;=</span> <span class="n">fe_next_pc</span><span class="p">;</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="c1">////////// REG FILE  //////////</span>
+    <span class="c1">//Concurrent with Schedule phase</span>
+
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">rf_writeback</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">rf_data1</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">rf_data2</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">rf_writeback_rn</span><span class="p">;</span>
+
+    <span class="c1">//Register file selected by the scheduler, registered in the execute stage</span>
+    <span class="c1">//and written to during commit.</span>
+    <span class="n">regfile</span> <span class="n">regfile1</span><span class="p">(</span>
+        <span class="p">.</span><span class="n">clk</span><span class="p">(</span><span class="n">clk</span><span class="p">),</span> <span class="p">.</span><span class="n">rst_n</span><span class="p">(</span><span class="n">rst_n</span><span class="p">),</span> <span class="p">.</span><span class="n">w_data</span><span class="p">(</span><span class="n">rf_writeback</span><span class="p">),</span> <span class="p">.</span><span class="n">r1_data</span><span class="p">(</span><span class="n">rf_data1</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">r2_data</span><span class="p">(</span><span class="n">rf_data2</span><span class="p">),</span> <span class="p">.</span><span class="n">r1_rn</span><span class="p">(</span><span class="n">de_r1_rn</span><span class="p">),</span> <span class="p">.</span><span class="n">r2_rn</span><span class="p">(</span><span class="n">de_r2_rn</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">w_rn</span><span class="p">(</span><span class="n">rf_writeback_rn</span><span class="p">),</span> <span class="p">.</span><span class="n">w_en</span><span class="p">(</span><span class="o">|</span><span class="n">rf_writeback_rn</span><span class="p">)</span>
+        <span class="p">);</span>
+
+    <span class="c1">////////// SCHEDULE  //////////</span>
+    <span class="c1">//Concurrent with Register File</span>
+
+    <span class="kt">wire</span> <span class="n">sc_alu1_en</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">sc_alu2_en</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">sc_advint_en</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">sc_memunit_en</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">sc_branch_en</span><span class="p">;</span>
+
+    <span class="kt">wire</span> <span class="n">sc_alu1_busy</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">sc_alu2_busy</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">sc_advint_busy</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">sc_memunit_busy</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">sc_branch_busy</span><span class="p">;</span>
+
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">sc_rd_rn</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">sc_rd2_rn</span><span class="p">;</span>
+
+    <span class="n">schedule</span> <span class="n">schedule1</span><span class="p">(</span>
+        <span class="p">.</span><span class="n">clk</span><span class="p">(</span><span class="n">clk</span><span class="p">),</span> <span class="p">.</span><span class="n">rst_n</span><span class="p">(</span><span class="n">rst_n</span><span class="p">),</span>
+        <span class="p">.</span><span class="k">type</span><span class="p">(</span><span class="n">de_type</span><span class="p">),</span> <span class="p">.</span><span class="n">unit</span><span class="p">(</span><span class="n">cancel_now</span><span class="o">|</span><span class="n">de_cancelled</span> <span class="o">?</span> <span class="mh">3&#39;h0</span> <span class="o">:</span> <span class="n">de_unit</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">r1_in_rn</span><span class="p">(</span><span class="n">de_r1_rn</span><span class="p">),</span> <span class="p">.</span><span class="n">r2_in_rn</span><span class="p">(</span><span class="n">de_r2_rn</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">rd_in_rn</span><span class="p">(</span><span class="n">cancel_now</span><span class="o">|</span><span class="n">de_cancelled</span> <span class="o">?</span> <span class="mh">6&#39;h0</span> <span class="o">:</span> <span class="n">de_rd_rn</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">rd2_in_rn</span><span class="p">(</span><span class="n">cancel_now</span><span class="o">|</span><span class="n">de_cancelled</span> <span class="o">?</span> <span class="mh">6&#39;h0</span> <span class="o">:</span> <span class="n">de_rd2_rn</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">sc_ready</span><span class="p">(</span><span class="n">sc_ready</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">rd_out_rn</span><span class="p">(</span><span class="n">sc_rd_rn</span><span class="p">),</span> <span class="p">.</span><span class="n">rd2_out_rn</span><span class="p">(</span><span class="n">sc_rd2_rn</span><span class="p">),</span>
+
+        <span class="p">.</span><span class="n">reg1_finished</span><span class="p">(</span><span class="n">rf_writeback_rn</span><span class="p">),</span> <span class="p">.</span><span class="n">reg2_finished</span><span class="p">(</span><span class="mh">6&#39;h0</span><span class="p">),</span>
+
+        <span class="p">.</span><span class="n">alu1_en</span><span class="p">(</span><span class="n">sc_alu1_en</span><span class="p">),</span> <span class="p">.</span><span class="n">alu2_en</span><span class="p">(</span><span class="n">sc_alu2_en</span><span class="p">),</span> <span class="p">.</span><span class="n">advint_en</span><span class="p">(</span><span class="n">sc_advint_en</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">memunit_en</span><span class="p">(</span><span class="n">sc_memunit_en</span><span class="p">),</span> <span class="p">.</span><span class="n">branch_en</span><span class="p">(</span><span class="n">sc_branch_en</span><span class="p">),</span>
+
+        <span class="p">.</span><span class="n">alu1_busy</span><span class="p">(</span><span class="n">sc_alu1_busy</span><span class="p">),</span> <span class="p">.</span><span class="n">alu2_busy</span><span class="p">(</span><span class="n">sc_alu2_busy</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">advint_busy</span><span class="p">(</span><span class="n">sc_advint_busy</span><span class="p">),</span> <span class="p">.</span><span class="n">memunit_busy</span><span class="p">(</span><span class="n">sc_memunit_busy</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">branch_busy</span><span class="p">(</span><span class="n">sc_branch_busy</span><span class="p">)</span>
+        <span class="p">);</span>
+
+    <span class="c1">//Delay the relevant decode data used by execution through the schedule phase</span>
+    <span class="kt">reg</span> <span class="n">sc_type</span><span class="p">;</span>
+    <span class="kt">reg</span><span class="p">[</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">sc_unit</span><span class="p">;</span>
+    <span class="kt">reg</span><span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">sc_op</span><span class="p">;</span>
+    <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">sc_imm_data</span><span class="p">;</span>
+    <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">sc_next_pc</span><span class="p">;</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">rst_n</span><span class="p">)</span>
+    <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="n">sc_type</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="n">sc_unit</span> <span class="o">&lt;=</span> <span class="mh">3&#39;h0</span><span class="p">;</span>
+            <span class="n">sc_op</span> <span class="o">&lt;=</span> <span class="mh">2&#39;h0</span><span class="p">;</span>
+            <span class="n">sc_imm_data</span> <span class="o">&lt;=</span> <span class="mh">64&#39;h0</span><span class="p">;</span>
+            <span class="n">sc_next_pc</span> <span class="o">&lt;=</span> <span class="mh">64&#39;h0</span><span class="p">;</span>
+        <span class="k">end</span> <span class="k">else</span> <span class="k">begin</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">cancel_now</span><span class="o">|</span><span class="n">de_cancelled</span><span class="p">)</span> <span class="n">sc_unit</span> <span class="o">&lt;=</span> <span class="mh">3&#39;h0</span><span class="p">;</span>
+            <span class="k">else</span> <span class="n">sc_unit</span> <span class="o">&lt;=</span> <span class="n">de_unit</span><span class="p">;</span>
+
+            <span class="n">sc_type</span> <span class="o">&lt;=</span> <span class="n">de_type</span><span class="p">;</span>
+            <span class="n">sc_op</span> <span class="o">&lt;=</span> <span class="n">de_op</span><span class="p">;</span>
+            <span class="n">sc_imm_data</span> <span class="o">&lt;=</span> <span class="n">de_imm_data</span><span class="p">;</span>
+            <span class="n">sc_next_pc</span> <span class="o">&lt;=</span> <span class="n">de_next_pc</span><span class="p">;</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="c1">//////////  EXECUTE  //////////</span>
+
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">ex_alu1_result</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">ex_alu2_result</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">ex_advint_result</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">ex_advint_result2</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">ex_memunit_result</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">ex_branch_r63</span><span class="p">;</span>
+
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">ex_alu1_rd_rn</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">ex_alu2_rd_rn</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">ex_advint_rd_rn</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">ex_advint_rd2_rn</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">ex_memunit_rd_rn</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">ex_branch_r63_update</span><span class="p">;</span>
+
+    <span class="kt">wire</span> <span class="n">ex_alu1_valid</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">ex_alu2_valid</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">ex_advint_valid</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">ex_memunit_valid</span><span class="p">;</span>
+
+    <span class="kt">wire</span> <span class="n">ex_alu1_stall</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">ex_alu2_stall</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">ex_advint_stall</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">ex_memunit_stall</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">ex_branch_stall</span><span class="p">;</span>
+
+    <span class="n">ex_alu</span> <span class="n">ex_alu1</span><span class="p">(</span>
+        <span class="p">.</span><span class="n">clk</span><span class="p">(</span><span class="n">clk</span><span class="p">),</span> <span class="p">.</span><span class="n">rst_n</span><span class="p">(</span><span class="n">rst_n</span><span class="p">),</span> <span class="p">.</span><span class="n">in1</span><span class="p">(</span><span class="n">rf_data1</span><span class="p">),</span> <span class="p">.</span><span class="n">in2</span><span class="p">(</span><span class="n">sc_type</span> <span class="o">?</span> <span class="n">sc_imm_data</span> <span class="o">:</span> <span class="n">rf_data2</span><span class="p">),</span> <span class="p">.</span><span class="n">out</span><span class="p">(</span><span class="n">ex_alu1_result</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">ex_enable</span><span class="p">(</span><span class="n">sc_alu1_en</span><span class="p">),</span> <span class="p">.</span><span class="n">ex_busy</span><span class="p">(</span><span class="n">sc_alu1_busy</span><span class="p">),</span> <span class="p">.</span><span class="n">rd_in_rn</span><span class="p">(</span><span class="n">sc_rd_rn</span><span class="p">),</span> <span class="p">.</span><span class="n">unit</span><span class="p">(</span><span class="n">sc_unit</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">op</span><span class="p">(</span><span class="n">sc_op</span><span class="p">),</span> <span class="p">.</span><span class="n">rd_out_rn</span><span class="p">(</span><span class="n">ex_alu1_rd_rn</span><span class="p">),</span> <span class="p">.</span><span class="n">valid</span><span class="p">(</span><span class="n">ex_alu1_valid</span><span class="p">),</span> <span class="p">.</span><span class="n">stall</span><span class="p">(</span><span class="n">ex_alu1_stall</span><span class="p">)</span>
+        <span class="p">);</span>
+
+    <span class="n">ex_alu</span> <span class="n">ex_alu2</span><span class="p">(</span>
+        <span class="p">.</span><span class="n">clk</span><span class="p">(</span><span class="n">clk</span><span class="p">),</span> <span class="p">.</span><span class="n">rst_n</span><span class="p">(</span><span class="n">rst_n</span><span class="p">),</span> <span class="p">.</span><span class="n">in1</span><span class="p">(</span><span class="n">rf_data1</span><span class="p">),</span> <span class="p">.</span><span class="n">in2</span><span class="p">(</span><span class="n">sc_type</span> <span class="o">?</span> <span class="n">sc_imm_data</span> <span class="o">:</span> <span class="n">rf_data2</span><span class="p">),</span> <span class="p">.</span><span class="n">out</span><span class="p">(</span><span class="n">ex_alu2_result</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">ex_enable</span><span class="p">(</span><span class="n">sc_alu2_en</span><span class="p">),</span> <span class="p">.</span><span class="n">ex_busy</span><span class="p">(</span><span class="n">sc_alu2_busy</span><span class="p">),</span> <span class="p">.</span><span class="n">rd_in_rn</span><span class="p">(</span><span class="n">sc_rd_rn</span><span class="p">),</span> <span class="p">.</span><span class="n">unit</span><span class="p">(</span><span class="n">sc_unit</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">op</span><span class="p">(</span><span class="n">sc_op</span><span class="p">),</span> <span class="p">.</span><span class="n">rd_out_rn</span><span class="p">(</span><span class="n">ex_alu2_rd_rn</span><span class="p">),</span> <span class="p">.</span><span class="n">valid</span><span class="p">(</span><span class="n">ex_alu2_valid</span><span class="p">),</span> <span class="p">.</span><span class="n">stall</span><span class="p">(</span><span class="n">ex_alu2_stall</span><span class="p">)</span>
+        <span class="p">);</span>
+
+    <span class="n">ex_advint</span> <span class="n">ex_advint</span><span class="p">(</span>
+        <span class="p">.</span><span class="n">clk</span><span class="p">(</span><span class="n">clk</span><span class="p">),</span> <span class="p">.</span><span class="n">rst_n</span><span class="p">(</span><span class="n">rst_n</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">in1</span><span class="p">(</span><span class="n">rf_data1</span><span class="p">),</span> <span class="p">.</span><span class="n">in2</span><span class="p">(</span><span class="n">rf_data2</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">out</span><span class="p">(</span><span class="n">ex_advint_result</span><span class="p">),</span> <span class="p">.</span><span class="n">out2</span><span class="p">(</span><span class="n">ex_advint_result2</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">ex_enable</span><span class="p">(</span><span class="n">sc_advint_en</span><span class="p">),</span> <span class="p">.</span><span class="n">ex_busy</span><span class="p">(</span><span class="n">sc_advint_busy</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">rd_in_rn</span><span class="p">(</span><span class="n">sc_rd_rn</span><span class="p">),</span> <span class="p">.</span><span class="n">rd2_in_rn</span><span class="p">(</span><span class="n">sc_rd2_rn</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">unit</span><span class="p">(</span><span class="n">sc_unit</span><span class="p">),</span> <span class="p">.</span><span class="n">op</span><span class="p">(</span><span class="n">sc_op</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">rd_out_rn</span><span class="p">(</span><span class="n">ex_advint_rd_rn</span><span class="p">),</span> <span class="p">.</span><span class="n">rd2_out_rn</span><span class="p">(</span><span class="n">ex_advint_rd2_rn</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">valid</span><span class="p">(</span><span class="n">ex_advint_valid</span><span class="p">),</span> <span class="p">.</span><span class="n">stall</span><span class="p">(</span><span class="n">ex_advint_stall</span><span class="p">)</span>
+        <span class="p">);</span>
+
+    <span class="n">ex_memory</span> <span class="n">ex_memory1</span><span class="p">(</span>
+        <span class="p">.</span><span class="n">clk</span><span class="p">(</span><span class="n">clk</span><span class="p">),</span> <span class="p">.</span><span class="n">rst_n</span><span class="p">(</span><span class="n">rst_n</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">dmem_din</span><span class="p">(</span><span class="n">dmem_din</span><span class="p">),</span> <span class="p">.</span><span class="n">dmem_dout</span><span class="p">(</span><span class="n">dmem_dout</span><span class="p">),</span> <span class="p">.</span><span class="n">dmem_addr</span><span class="p">(</span><span class="n">dmem_addr</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">dmem_cycle_complete</span><span class="p">(</span><span class="n">dmem_cycle_complete</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">dmem_width</span><span class="p">(</span><span class="n">dmem_write_width</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">dmem_rstrobe</span><span class="p">(</span><span class="n">dmem_rstrobe</span><span class="p">),</span> <span class="p">.</span><span class="n">dmem_wstrobe</span><span class="p">(</span><span class="n">dmem_wstrobe</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">base</span><span class="p">(</span><span class="n">rf_data1</span><span class="p">),</span> <span class="p">.</span><span class="n">data</span><span class="p">(</span><span class="n">rf_data2</span><span class="p">),</span> <span class="p">.</span><span class="n">offset</span><span class="p">(</span><span class="n">sc_imm_data</span><span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]),</span>
+        <span class="p">.</span><span class="n">out</span><span class="p">(</span><span class="n">ex_memunit_result</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">ex_enable</span><span class="p">(</span><span class="n">sc_memunit_en</span><span class="p">),</span> <span class="p">.</span><span class="n">ex_busy</span><span class="p">(</span><span class="n">sc_memunit_busy</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">rd_in_rn</span><span class="p">(</span><span class="n">sc_rd_rn</span><span class="p">),</span> <span class="p">.</span><span class="n">unit</span><span class="p">(</span><span class="n">sc_unit</span><span class="p">),</span> <span class="p">.</span><span class="n">op</span><span class="p">(</span><span class="n">sc_op</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">rd_out_rn</span><span class="p">(</span><span class="n">ex_memunit_rd_rn</span><span class="p">),</span> <span class="p">.</span><span class="n">valid</span><span class="p">(</span><span class="n">ex_memunit_valid</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">stall</span><span class="p">(</span><span class="n">ex_memunit_stall</span><span class="p">)</span>
+        <span class="p">);</span>
+
+    <span class="n">ex_branch</span> <span class="n">ex_branch1</span><span class="p">(</span>
+        <span class="p">.</span><span class="n">clk</span><span class="p">(</span><span class="n">clk</span><span class="p">),</span> <span class="p">.</span><span class="n">rst_n</span><span class="p">(</span><span class="n">rst_n</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">in1</span><span class="p">(</span><span class="n">rf_data1</span><span class="p">),</span> <span class="p">.</span><span class="n">in2</span><span class="p">(</span><span class="n">rf_data2</span><span class="p">),</span> <span class="p">.</span><span class="n">imm</span><span class="p">(</span><span class="n">sc_imm_data</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">next_pc</span><span class="p">(</span><span class="n">sc_next_pc</span><span class="p">),</span> <span class="p">.</span><span class="n">jump_pc</span><span class="p">(</span><span class="n">jump_pc</span><span class="p">),</span> <span class="p">.</span><span class="n">do_jump</span><span class="p">(</span><span class="n">do_jump</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">r63</span><span class="p">(</span><span class="n">ex_branch_r63</span><span class="p">),</span> <span class="p">.</span><span class="n">r63_update</span><span class="p">(</span><span class="n">ex_branch_r63_update</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">ex_enable</span><span class="p">(</span><span class="n">sc_branch_en</span><span class="p">),</span> <span class="p">.</span><span class="n">ex_busy</span><span class="p">(</span><span class="n">sc_branch_busy</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">stall</span><span class="p">(</span><span class="n">ex_branch_stall</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">op</span><span class="p">(</span><span class="n">sc_op</span><span class="p">),</span> <span class="p">.</span><span class="k">type</span><span class="p">(</span><span class="n">sc_type</span><span class="p">)</span>
+        <span class="p">);</span>
+
+    <span class="c1">//////////  COMMIT   //////////</span>
+
+    <span class="n">commit</span> <span class="n">commit1</span><span class="p">(</span>
+        <span class="p">.</span><span class="n">clk</span><span class="p">(</span><span class="n">clk</span><span class="p">),</span> <span class="p">.</span><span class="n">rst_n</span><span class="p">(</span><span class="n">rst_n</span><span class="p">),</span>
+
+        <span class="p">.</span><span class="n">alu1_result</span><span class="p">(</span><span class="n">ex_alu1_result</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">alu2_result</span><span class="p">(</span><span class="n">ex_alu2_result</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">advint_result</span><span class="p">(</span><span class="n">ex_advint_result</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">advint_result2</span><span class="p">(</span><span class="n">ex_advint_result2</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">memunit_result</span><span class="p">(</span><span class="n">ex_memunit_result</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">branch_result</span><span class="p">(</span><span class="n">ex_branch_r63</span><span class="p">),</span>
+
+        <span class="p">.</span><span class="n">alu1_rn</span><span class="p">(</span><span class="n">ex_alu1_rd_rn</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">alu2_rn</span><span class="p">(</span><span class="n">ex_alu2_rd_rn</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">advint_rn</span><span class="p">(</span><span class="n">ex_advint_rd_rn</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">advint_rn2</span><span class="p">(</span><span class="n">ex_advint_rd2_rn</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">memunit_rn</span><span class="p">(</span><span class="n">ex_memunit_rd_rn</span><span class="p">),</span>
+
+        <span class="p">.</span><span class="n">alu1_valid</span><span class="p">(</span><span class="n">ex_alu1_valid</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">alu2_valid</span><span class="p">(</span><span class="n">ex_alu2_valid</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">advint_valid</span><span class="p">(</span><span class="n">ex_advint_valid</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">memunit_valid</span><span class="p">(</span><span class="n">ex_memunit_valid</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">branch_valid</span><span class="p">(</span><span class="n">ex_branch_r63_update</span><span class="p">),</span>
+
+        <span class="p">.</span><span class="n">alu1_stall</span><span class="p">(</span><span class="n">ex_alu1_stall</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">alu2_stall</span><span class="p">(</span><span class="n">ex_alu2_stall</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">advint_stall</span><span class="p">(</span><span class="n">ex_advint_stall</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">memunit_stall</span><span class="p">(</span><span class="n">ex_memunit_stall</span><span class="p">),</span>
+        <span class="p">.</span><span class="n">branch_stall</span><span class="p">(</span><span class="n">ex_branch_stall</span><span class="p">),</span>
+
+        <span class="p">.</span><span class="n">write_data</span><span class="p">(</span><span class="n">rf_writeback</span><span class="p">),</span> <span class="p">.</span><span class="n">write_rn</span><span class="p">(</span><span class="n">rf_writeback_rn</span><span class="p">)</span>
+        <span class="p">);</span>
+
+<span class="k">endmodule</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="raisin64.html" class="btn btn-neutral float-right" title="raisin64.v" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="memory_map.html" class="btn btn-neutral" title="memory_map.v" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Christopher Parish
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,19 +1,21 @@
 SRLI - Shift Right Logical Immediate
 ====================================
 
+Shift the contents of register ``$rs1`` right by a number of bits specified in the immediate field, storing the result in ``$rd``
+
 Usage
 -----
 
 .. code-block:: asm
 
-   todo
+   srli $rd, $rs1, imm
 
 Operation
 ---------
 
 .. code-block:: c
 
-   todo;
+   rd = rs1>>imm;
    advance_pc();
 
 Encoding

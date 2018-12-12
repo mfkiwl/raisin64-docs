@@ -1,19 +1,24 @@
 S32 - Store 32-bit
 ==================
 
+Store least significant 32 bits of ``$rd`` into the address located in ``$rs1`` offset by a signed immediate value.
+
 Usage
 -----
 
 .. code-block:: asm
 
-   todo
+   s32 $rd, imm($rs1)
 
 Operation
 ---------
 
 .. code-block:: c
 
-   todo;
+   *(rs+imm)   = rd[31:24];
+   *(rs+imm+1) = rd[23:16];
+   *(rs+imm+2) = rd[15:8];
+   *(rs+imm+3) = rd[7:0];
    advance_pc();
 
 Encoding

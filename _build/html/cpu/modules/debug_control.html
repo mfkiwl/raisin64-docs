@@ -1,0 +1,835 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>debug_control.v &mdash; Raisin64 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="decode.v" href="decode.html" />
+    <link rel="prev" title="de_canonicalize.v" href="de_canonicalize.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Raisin64
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../cpu.html">Raisin64 CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software.html">Code Snippets and Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nexysddr.html">Nexys 4 DDR Reference Implementation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../modules.html">Reference Index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../isa.html">Raisin64 Instruction Set</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../modules.html">Verilog Module Index</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="commit.html">commit.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="de_canonicalize.html">de_canonicalize.v</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">debug_control.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="decode.html">decode.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_advint.html">ex_advint.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_advint_s1.html">ex_advint_s1.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_alu.html">ex_alu.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_alu_s1.html">ex_alu_s1.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_branch.html">ex_branch.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_memory.html">ex_memory.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fetch.html">fetch.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ff_sync.html">ff_sync.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag_reg.html">schedule.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag_state_machine.html">jtag_state_machine.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtaglet.html">jtaglet.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory_map.html">memory_map.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline.html">pipeline.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raisin64.html">raisin64.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ram.html">ram.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regfile.html">regfile.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schedule.html">schedule.v</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Raisin64</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../modules.html">Reference Index</a> &raquo;</li>
+        
+          <li><a href="../modules.html">Verilog Module Index</a> &raquo;</li>
+        
+      <li>debug_control.v</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/cpu/modules/debug_control.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="debug-control-v">
+<h1>debug_control.v<a class="headerlink" href="#debug-control-v" title="Permalink to this headline">¶</a></h1>
+<object data="../../_images/symbol-f0186ab77420dbef6ec3a0d8ee25d251a0df4b83.svg" type="image/svg+xml">
+            <p class="warning">/* debug_control.v
+ *
+ * Example Debug Controller for a simple CPU using the JTAGlet interface
+ *
+ *------------------------------------------------------------------------------
+ *
+ * Copyright 2018 Christopher Parish
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+module debug_control(
+    input jtag_tck,
+    input jtag_tms,
+    input jtag_tdi,
+    input jtag_trst,
+    output jtag_tdo,
+
+    input sys_rstn, //System reset. Should NOT be externally tied to our cpu_resetn_cpu output
+
+    input cpu_clk,
+
+    output reg[63:0] cpu_imem_addr,
+    output reg[63:0] cpu_debug_to_imem_data,
+    input[63:0] cpu_imem_to_debug_data,
+    input cpu_imem_to_debug_data_ready,
+    output reg cpu_imem_ce,
+    output reg cpu_imem_we,
+
+    output reg[63:0] cpu_dmem_addr,
+    output reg[63:0] cpu_debug_to_dmem_data,
+    input[63:0] cpu_dmem_to_debug_data,
+    input cpu_dmem_to_debug_data_ready,
+    output reg cpu_dmem_ce,
+    output reg cpu_dmem_we,
+
+    output reg cpu_halt_cpu,
+    output cpu_resetn_cpu
+    );
+
+    //Signals from the JTAG TAP to the synchronizer
+    wire jtag_userOp_ready;
+
+    //Resulting signal in the CPU domain
+    wire cpu_userOp_ready;
+
+    //Requested operation/data from the TAP in the JTAG domain
+    wire[7:0] jtag_userOp;
+    wire[63:0] jtag_userData;
+
+    reg[63:0] cpu_userData;
+
+    //The Jtaglet JTAG TAP
+    jtaglet #(.ID_PARTVER(4'h1), .ID_PARTNUM(16'hCAFE), .ID_MANF(11'h035), .USERDATA_LEN(64)) jtag_if
+        (.tck(jtag_tck), .tms(jtag_tms), .tdo(jtag_tdo), .tdi(jtag_tdi), .trst(jtag_trst),
+         .userData_out(jtag_userData), .userData_in(cpu_userData), .userOp(jtag_userOp),
+         .userOp_ready(jtag_userOp_ready));
+
+    //Synchronizer to take the userOp ready signal into the CPU clock domain
+    ff_sync #(.WIDTH(1)) userOpReady_toCPUDomain
+        (.clk(cpu_clk), .rst_p(~sys_rstn), .in_async(jtag_userOp_ready), .out(cpu_userOp_ready));
+
+    //Stateless debug operations (which ignore debug register contents)
+    localparam DEBUGOP_NOOP_OP      = 8'h00;
+    localparam DEBUGOP_CPUHALT_OP   = 8'h01;
+    localparam DEBUGOP_CPURESUME_OP = 8'h02;
+    localparam DEBUGOP_CPURESET_OP  = 8'h03;
+
+    //Debug operations (use previously stored data to carry out an operation)
+    localparam DEBUGOP_READIMEM_OP  = 8'h04;
+    localparam DEBUGOP_WRITEIMEM_OP = 8'h05;
+    localparam DEBUGOP_READDMEM_OP  = 8'h06;
+    localparam DEBUGOP_WRITEDMEM_OP = 8'h07;
+
+    //Load/store debug operations (have no side-effects apart from
+    //loading/storing the appropriate debug register)
+    localparam DEBUGOP_IADDR_REG     = 8'h80;
+    localparam DEBUGOP_IDATA_REG     = 8'h81;
+    localparam DEBUGOP_DADDR_REG     = 8'h82;
+    localparam DEBUGOP_DDATA_REG     = 8'h83;
+    localparam DEBUGOP_CPUFLAGS_REG  = 8'h84;
+
+    reg cpu_userOp_ready_last;
+    wire execUserOp = ~cpu_userOp_ready_last &amp; cpu_userOp_ready;
+
+    always &#64;(posedge cpu_clk or negedge sys_rstn) begin
+        if(~sys_rstn) cpu_userOp_ready_last &lt;= 0;
+        else cpu_userOp_ready_last &lt;= cpu_userOp_ready;
+    end
+
+    always &#64;(posedge cpu_clk or negedge sys_rstn) begin
+        if(~sys_rstn) begin
+            cpu_imem_we &lt;= 0;
+            cpu_imem_ce &lt;= 0;
+        end else begin
+            cpu_imem_we &lt;= 0;
+            cpu_imem_ce &lt;= 0;
+            if(execUserOp) case(jtag_userOp)
+                DEBUGOP_READIMEM_OP: cpu_imem_ce &lt;= 1;
+                DEBUGOP_WRITEIMEM_OP: begin
+                    cpu_imem_we &lt;= 1;
+                    cpu_imem_ce &lt;= 1;
+                end
+            endcase
+        end
+    end
+
+    always &#64;(posedge cpu_clk or negedge sys_rstn) begin
+        if(~sys_rstn) begin
+            cpu_dmem_we &lt;= 0;
+            cpu_dmem_ce &lt;= 0;
+        end else begin
+            cpu_dmem_we &lt;= 0;
+            cpu_dmem_ce &lt;= 0;
+            if(execUserOp) case(jtag_userOp)
+                DEBUGOP_READDMEM_OP: cpu_dmem_ce &lt;= 1;
+                DEBUGOP_WRITEDMEM_OP: begin
+                    cpu_dmem_we &lt;= 1;
+                    cpu_dmem_ce &lt;= 1;
+                end
+            endcase
+        end
+    end
+
+    always &#64;(posedge cpu_clk) begin
+        if(execUserOp) case(jtag_userOp)
+            DEBUGOP_IADDR_REG: cpu_imem_addr &lt;= jtag_userData;
+        endcase
+    end
+
+    always &#64;(posedge cpu_clk) begin
+        if(execUserOp) case(jtag_userOp)
+            DEBUGOP_IDATA_REG: cpu_debug_to_imem_data &lt;= jtag_userData;
+        endcase
+    end
+
+    always &#64;(posedge cpu_clk) begin
+        if(execUserOp) case(jtag_userOp)
+            DEBUGOP_DADDR_REG: cpu_dmem_addr &lt;= jtag_userData;
+        endcase
+    end
+
+    always &#64;(posedge cpu_clk) begin
+        if(execUserOp) case(jtag_userOp)
+            DEBUGOP_DDATA_REG: cpu_debug_to_dmem_data &lt;= jtag_userData;
+        endcase
+    end
+
+    always &#64;(posedge cpu_clk or negedge sys_rstn) begin
+        if(~sys_rstn) begin
+            cpu_userData &lt;= 0;
+        end else begin
+            if(cpu_imem_to_debug_data_ready) cpu_userData &lt;= cpu_imem_to_debug_data;
+            else if(cpu_dmem_to_debug_data_ready) cpu_userData &lt;= cpu_dmem_to_debug_data;
+        end
+    end
+
+    //Reset Stretcher
+    reg requestReset;
+    reg[9:0] resetStretch;
+    assign cpu_resetn_cpu = ~(|resetStretch);
+    always &#64;(posedge cpu_clk or negedge sys_rstn) begin
+        if(~sys_rstn) resetStretch &lt;= 10'b0;
+        else if(requestReset) resetStretch &lt;= {10{1'b1}};
+        else if(resetStretch != 0) resetStretch &lt;= resetStretch - 1;
+    end
+
+    always &#64;(posedge cpu_clk or negedge sys_rstn) begin
+        if(~sys_rstn) begin
+            cpu_halt_cpu &lt;= 0;
+            requestReset &lt;= 0;
+        end else begin
+            requestReset &lt;= 0;
+            if(execUserOp) case(jtag_userOp)
+                DEBUGOP_CPUHALT_OP: cpu_halt_cpu &lt;= 1;
+                DEBUGOP_CPURESUME_OP: cpu_halt_cpu &lt;= 0;
+                DEBUGOP_CPURESET_OP: begin
+                    cpu_halt_cpu &lt;= 0;
+                    requestReset &lt;= 1;
+                end
+            endcase
+        end
+    end
+
+endmodule</p></object>
+<div class="highlight-verilog notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cm">/* debug_control.v</span>
+<span class="cm"> *</span>
+<span class="cm"> * Example Debug Controller for a simple CPU using the JTAGlet interface</span>
+<span class="cm"> *</span>
+<span class="cm"> *------------------------------------------------------------------------------</span>
+<span class="cm"> *</span>
+<span class="cm"> * Copyright 2018 Christopher Parish</span>
+<span class="cm"> *</span>
+<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm"> * you may not use this file except in compliance with the License.</span>
+<span class="cm"> * You may obtain a copy of the License at</span>
+<span class="cm"> *</span>
+<span class="cm"> *   http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> *</span>
+<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm"> * See the License for the specific language governing permissions and</span>
+<span class="cm"> * limitations under the License.</span>
+<span class="cm"> */</span>
+
+<span class="k">module</span> <span class="n">debug_control</span><span class="p">(</span>
+    <span class="k">input</span> <span class="n">jtag_tck</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">jtag_tms</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">jtag_tdi</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">jtag_trst</span><span class="p">,</span>
+    <span class="k">output</span> <span class="n">jtag_tdo</span><span class="p">,</span>
+
+    <span class="k">input</span> <span class="n">sys_rstn</span><span class="p">,</span> <span class="c1">//System reset. Should NOT be externally tied to our cpu_resetn_cpu output</span>
+
+    <span class="k">input</span> <span class="n">cpu_clk</span><span class="p">,</span>
+
+    <span class="k">output</span> <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">cpu_imem_addr</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">cpu_debug_to_imem_data</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">cpu_imem_to_debug_data</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">cpu_imem_to_debug_data_ready</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span> <span class="n">cpu_imem_ce</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span> <span class="n">cpu_imem_we</span><span class="p">,</span>
+
+    <span class="k">output</span> <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">cpu_dmem_addr</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">cpu_debug_to_dmem_data</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">cpu_dmem_to_debug_data</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">cpu_dmem_to_debug_data_ready</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span> <span class="n">cpu_dmem_ce</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span> <span class="n">cpu_dmem_we</span><span class="p">,</span>
+
+    <span class="k">output</span> <span class="kt">reg</span> <span class="n">cpu_halt_cpu</span><span class="p">,</span>
+    <span class="k">output</span> <span class="n">cpu_resetn_cpu</span>
+    <span class="p">);</span>
+
+    <span class="c1">//Signals from the JTAG TAP to the synchronizer</span>
+    <span class="kt">wire</span> <span class="n">jtag_userOp_ready</span><span class="p">;</span>
+
+    <span class="c1">//Resulting signal in the CPU domain</span>
+    <span class="kt">wire</span> <span class="n">cpu_userOp_ready</span><span class="p">;</span>
+
+    <span class="c1">//Requested operation/data from the TAP in the JTAG domain</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">jtag_userOp</span><span class="p">;</span>
+    <span class="kt">wire</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">jtag_userData</span><span class="p">;</span>
+
+    <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">cpu_userData</span><span class="p">;</span>
+
+    <span class="c1">//The Jtaglet JTAG TAP</span>
+    <span class="n">jtaglet</span> <span class="p">#(.</span><span class="no">ID_PARTVER</span><span class="p">(</span><span class="mh">4&#39;h1</span><span class="p">),</span> <span class="p">.</span><span class="no">ID_PARTNUM</span><span class="p">(</span><span class="mh">16&#39;hCAFE</span><span class="p">),</span> <span class="p">.</span><span class="no">ID_MANF</span><span class="p">(</span><span class="mh">11&#39;h035</span><span class="p">),</span> <span class="p">.</span><span class="no">USERDATA_LEN</span><span class="p">(</span><span class="mh">64</span><span class="p">))</span> <span class="n">jtag_if</span>
+        <span class="p">(.</span><span class="n">tck</span><span class="p">(</span><span class="n">jtag_tck</span><span class="p">),</span> <span class="p">.</span><span class="n">tms</span><span class="p">(</span><span class="n">jtag_tms</span><span class="p">),</span> <span class="p">.</span><span class="n">tdo</span><span class="p">(</span><span class="n">jtag_tdo</span><span class="p">),</span> <span class="p">.</span><span class="n">tdi</span><span class="p">(</span><span class="n">jtag_tdi</span><span class="p">),</span> <span class="p">.</span><span class="n">trst</span><span class="p">(</span><span class="n">jtag_trst</span><span class="p">),</span>
+         <span class="p">.</span><span class="n">userData_out</span><span class="p">(</span><span class="n">jtag_userData</span><span class="p">),</span> <span class="p">.</span><span class="n">userData_in</span><span class="p">(</span><span class="n">cpu_userData</span><span class="p">),</span> <span class="p">.</span><span class="n">userOp</span><span class="p">(</span><span class="n">jtag_userOp</span><span class="p">),</span>
+         <span class="p">.</span><span class="n">userOp_ready</span><span class="p">(</span><span class="n">jtag_userOp_ready</span><span class="p">));</span>
+
+    <span class="c1">//Synchronizer to take the userOp ready signal into the CPU clock domain</span>
+    <span class="n">ff_sync</span> <span class="p">#(.</span><span class="no">WIDTH</span><span class="p">(</span><span class="mh">1</span><span class="p">))</span> <span class="n">userOpReady_toCPUDomain</span>
+        <span class="p">(.</span><span class="n">clk</span><span class="p">(</span><span class="n">cpu_clk</span><span class="p">),</span> <span class="p">.</span><span class="n">rst_p</span><span class="p">(</span><span class="o">~</span><span class="n">sys_rstn</span><span class="p">),</span> <span class="p">.</span><span class="n">in_async</span><span class="p">(</span><span class="n">jtag_userOp_ready</span><span class="p">),</span> <span class="p">.</span><span class="n">out</span><span class="p">(</span><span class="n">cpu_userOp_ready</span><span class="p">));</span>
+
+    <span class="c1">//Stateless debug operations (which ignore debug register contents)</span>
+    <span class="k">localparam</span> <span class="no">DEBUGOP_NOOP_OP</span>      <span class="o">=</span> <span class="mh">8&#39;h00</span><span class="p">;</span>
+    <span class="k">localparam</span> <span class="no">DEBUGOP_CPUHALT_OP</span>   <span class="o">=</span> <span class="mh">8&#39;h01</span><span class="p">;</span>
+    <span class="k">localparam</span> <span class="no">DEBUGOP_CPURESUME_OP</span> <span class="o">=</span> <span class="mh">8&#39;h02</span><span class="p">;</span>
+    <span class="k">localparam</span> <span class="no">DEBUGOP_CPURESET_OP</span>  <span class="o">=</span> <span class="mh">8&#39;h03</span><span class="p">;</span>
+
+    <span class="c1">//Debug operations (use previously stored data to carry out an operation)</span>
+    <span class="k">localparam</span> <span class="no">DEBUGOP_READIMEM_OP</span>  <span class="o">=</span> <span class="mh">8&#39;h04</span><span class="p">;</span>
+    <span class="k">localparam</span> <span class="no">DEBUGOP_WRITEIMEM_OP</span> <span class="o">=</span> <span class="mh">8&#39;h05</span><span class="p">;</span>
+    <span class="k">localparam</span> <span class="no">DEBUGOP_READDMEM_OP</span>  <span class="o">=</span> <span class="mh">8&#39;h06</span><span class="p">;</span>
+    <span class="k">localparam</span> <span class="no">DEBUGOP_WRITEDMEM_OP</span> <span class="o">=</span> <span class="mh">8&#39;h07</span><span class="p">;</span>
+
+    <span class="c1">//Load/store debug operations (have no side-effects apart from</span>
+    <span class="c1">//loading/storing the appropriate debug register)</span>
+    <span class="k">localparam</span> <span class="no">DEBUGOP_IADDR_REG</span>     <span class="o">=</span> <span class="mh">8&#39;h80</span><span class="p">;</span>
+    <span class="k">localparam</span> <span class="no">DEBUGOP_IDATA_REG</span>     <span class="o">=</span> <span class="mh">8&#39;h81</span><span class="p">;</span>
+    <span class="k">localparam</span> <span class="no">DEBUGOP_DADDR_REG</span>     <span class="o">=</span> <span class="mh">8&#39;h82</span><span class="p">;</span>
+    <span class="k">localparam</span> <span class="no">DEBUGOP_DDATA_REG</span>     <span class="o">=</span> <span class="mh">8&#39;h83</span><span class="p">;</span>
+    <span class="k">localparam</span> <span class="no">DEBUGOP_CPUFLAGS_REG</span>  <span class="o">=</span> <span class="mh">8&#39;h84</span><span class="p">;</span>
+
+    <span class="kt">reg</span> <span class="n">cpu_userOp_ready_last</span><span class="p">;</span>
+    <span class="kt">wire</span> <span class="n">execUserOp</span> <span class="o">=</span> <span class="o">~</span><span class="n">cpu_userOp_ready_last</span> <span class="o">&amp;</span> <span class="n">cpu_userOp_ready</span><span class="p">;</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">cpu_clk</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">sys_rstn</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">sys_rstn</span><span class="p">)</span> <span class="n">cpu_userOp_ready_last</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">cpu_userOp_ready_last</span> <span class="o">&lt;=</span> <span class="n">cpu_userOp_ready</span><span class="p">;</span>
+    <span class="k">end</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">cpu_clk</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">sys_rstn</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">sys_rstn</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="n">cpu_imem_we</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="n">cpu_imem_ce</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+        <span class="k">end</span> <span class="k">else</span> <span class="k">begin</span>
+            <span class="n">cpu_imem_we</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="n">cpu_imem_ce</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">execUserOp</span><span class="p">)</span> <span class="k">case</span><span class="p">(</span><span class="n">jtag_userOp</span><span class="p">)</span>
+                <span class="nl">DEBUGOP_READIMEM_OP:</span> <span class="n">cpu_imem_ce</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                <span class="nl">DEBUGOP_WRITEIMEM_OP:</span> <span class="k">begin</span>
+                    <span class="n">cpu_imem_we</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                    <span class="n">cpu_imem_ce</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                <span class="k">end</span>
+            <span class="k">endcase</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">cpu_clk</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">sys_rstn</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">sys_rstn</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="n">cpu_dmem_we</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="n">cpu_dmem_ce</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+        <span class="k">end</span> <span class="k">else</span> <span class="k">begin</span>
+            <span class="n">cpu_dmem_we</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="n">cpu_dmem_ce</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">execUserOp</span><span class="p">)</span> <span class="k">case</span><span class="p">(</span><span class="n">jtag_userOp</span><span class="p">)</span>
+                <span class="nl">DEBUGOP_READDMEM_OP:</span> <span class="n">cpu_dmem_ce</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                <span class="nl">DEBUGOP_WRITEDMEM_OP:</span> <span class="k">begin</span>
+                    <span class="n">cpu_dmem_we</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                    <span class="n">cpu_dmem_ce</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                <span class="k">end</span>
+            <span class="k">endcase</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">cpu_clk</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">execUserOp</span><span class="p">)</span> <span class="k">case</span><span class="p">(</span><span class="n">jtag_userOp</span><span class="p">)</span>
+            <span class="nl">DEBUGOP_IADDR_REG:</span> <span class="n">cpu_imem_addr</span> <span class="o">&lt;=</span> <span class="n">jtag_userData</span><span class="p">;</span>
+        <span class="k">endcase</span>
+    <span class="k">end</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">cpu_clk</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">execUserOp</span><span class="p">)</span> <span class="k">case</span><span class="p">(</span><span class="n">jtag_userOp</span><span class="p">)</span>
+            <span class="nl">DEBUGOP_IDATA_REG:</span> <span class="n">cpu_debug_to_imem_data</span> <span class="o">&lt;=</span> <span class="n">jtag_userData</span><span class="p">;</span>
+        <span class="k">endcase</span>
+    <span class="k">end</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">cpu_clk</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">execUserOp</span><span class="p">)</span> <span class="k">case</span><span class="p">(</span><span class="n">jtag_userOp</span><span class="p">)</span>
+            <span class="nl">DEBUGOP_DADDR_REG:</span> <span class="n">cpu_dmem_addr</span> <span class="o">&lt;=</span> <span class="n">jtag_userData</span><span class="p">;</span>
+        <span class="k">endcase</span>
+    <span class="k">end</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">cpu_clk</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">execUserOp</span><span class="p">)</span> <span class="k">case</span><span class="p">(</span><span class="n">jtag_userOp</span><span class="p">)</span>
+            <span class="nl">DEBUGOP_DDATA_REG:</span> <span class="n">cpu_debug_to_dmem_data</span> <span class="o">&lt;=</span> <span class="n">jtag_userData</span><span class="p">;</span>
+        <span class="k">endcase</span>
+    <span class="k">end</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">cpu_clk</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">sys_rstn</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">sys_rstn</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="n">cpu_userData</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+        <span class="k">end</span> <span class="k">else</span> <span class="k">begin</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">cpu_imem_to_debug_data_ready</span><span class="p">)</span> <span class="n">cpu_userData</span> <span class="o">&lt;=</span> <span class="n">cpu_imem_to_debug_data</span><span class="p">;</span>
+            <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">cpu_dmem_to_debug_data_ready</span><span class="p">)</span> <span class="n">cpu_userData</span> <span class="o">&lt;=</span> <span class="n">cpu_dmem_to_debug_data</span><span class="p">;</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="c1">//Reset Stretcher</span>
+    <span class="kt">reg</span> <span class="n">requestReset</span><span class="p">;</span>
+    <span class="kt">reg</span><span class="p">[</span><span class="mh">9</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">resetStretch</span><span class="p">;</span>
+    <span class="k">assign</span> <span class="n">cpu_resetn_cpu</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">|</span><span class="n">resetStretch</span><span class="p">);</span>
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">cpu_clk</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">sys_rstn</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">sys_rstn</span><span class="p">)</span> <span class="n">resetStretch</span> <span class="o">&lt;=</span> <span class="mh">10</span><span class="mb">&#39;b0</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">requestReset</span><span class="p">)</span> <span class="n">resetStretch</span> <span class="o">&lt;=</span> <span class="p">{</span><span class="mh">10</span><span class="p">{</span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">}};</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">resetStretch</span> <span class="o">!=</span> <span class="mh">0</span><span class="p">)</span> <span class="n">resetStretch</span> <span class="o">&lt;=</span> <span class="n">resetStretch</span> <span class="o">-</span> <span class="mh">1</span><span class="p">;</span>
+    <span class="k">end</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">cpu_clk</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">sys_rstn</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">sys_rstn</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="n">cpu_halt_cpu</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="n">requestReset</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+        <span class="k">end</span> <span class="k">else</span> <span class="k">begin</span>
+            <span class="n">requestReset</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">execUserOp</span><span class="p">)</span> <span class="k">case</span><span class="p">(</span><span class="n">jtag_userOp</span><span class="p">)</span>
+                <span class="nl">DEBUGOP_CPUHALT_OP:</span> <span class="n">cpu_halt_cpu</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                <span class="nl">DEBUGOP_CPURESUME_OP:</span> <span class="n">cpu_halt_cpu</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+                <span class="nl">DEBUGOP_CPURESET_OP:</span> <span class="k">begin</span>
+                    <span class="n">cpu_halt_cpu</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+                    <span class="n">requestReset</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                <span class="k">end</span>
+            <span class="k">endcase</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+<span class="k">endmodule</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="decode.html" class="btn btn-neutral float-right" title="decode.v" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="de_canonicalize.html" class="btn btn-neutral" title="de_canonicalize.v" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Christopher Parish
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,21 +1,21 @@
 ANDI - Bitwise AND Immediate
 ============================
 
-Bitwise ANDs register ``Rs1`` and an immediate value, placing the result in ``Rd``.
+ANDs ``$rs1`` with an immediate value, placing the result in ``$rd``.
 
 Usage
 -----
 
 .. code-block:: asm
 
-   andi Rd, Rs1, imm
+   and $rd, $rs1, imm
 
 Operation
 ---------
 
 .. code-block:: c
 
-   Rd = Rs1 & imm;
+   rd = rs1 & imm;
    advance_pc();
 
 Encoding

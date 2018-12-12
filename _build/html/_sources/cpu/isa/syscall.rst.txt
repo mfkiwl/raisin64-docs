@@ -1,12 +1,14 @@
 SYSCALL - System Call
 =====================
 
+Request for kernel service (presently unimplemented pending addition of interrupts).
+
 Usage
 -----
 
 .. code-block:: asm
 
-   todo
+   syscall
 
 Operation
 ---------

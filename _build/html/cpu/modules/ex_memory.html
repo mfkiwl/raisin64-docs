@@ -1,0 +1,739 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ex_memory.v &mdash; Raisin64 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="fetch.v" href="fetch.html" />
+    <link rel="prev" title="ex_branch.v" href="ex_branch.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Raisin64
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../cpu.html">Raisin64 CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software.html">Code Snippets and Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nexysddr.html">Nexys 4 DDR Reference Implementation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../modules.html">Reference Index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../isa.html">Raisin64 Instruction Set</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../modules.html">Verilog Module Index</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="commit.html">commit.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="de_canonicalize.html">de_canonicalize.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug_control.html">debug_control.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="decode.html">decode.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_advint.html">ex_advint.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_advint_s1.html">ex_advint_s1.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_alu.html">ex_alu.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_alu_s1.html">ex_alu_s1.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_branch.html">ex_branch.v</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ex_memory.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fetch.html">fetch.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ff_sync.html">ff_sync.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag_reg.html">schedule.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag_state_machine.html">jtag_state_machine.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtaglet.html">jtaglet.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory_map.html">memory_map.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline.html">pipeline.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raisin64.html">raisin64.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ram.html">ram.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regfile.html">regfile.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schedule.html">schedule.v</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Raisin64</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../modules.html">Reference Index</a> &raquo;</li>
+        
+          <li><a href="../modules.html">Verilog Module Index</a> &raquo;</li>
+        
+      <li>ex_memory.v</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/cpu/modules/ex_memory.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ex-memory-v">
+<h1>ex_memory.v<a class="headerlink" href="#ex-memory-v" title="Permalink to this headline">¶</a></h1>
+<object data="../../_images/symbol-613fac4c40dbadfa4aa20e5e89002bd4927ca171.svg" type="image/svg+xml">
+            <p class="warning">//Raisin64 Execute Unit - Memory Unit
+
+`include &quot;io_def.vh&quot;
+
+module ex_memory(
+    input clk,
+    input rst_n,
+
+    //# {{data|Memory Data}}
+    input[63:0] dmem_din,
+    output reg[63:0] dmem_dout,
+    output reg[63:0] dmem_addr,
+
+    //# {{control|Memory Control Signals}}
+    input dmem_cycle_complete,
+    output[1:0] dmem_width,
+    output reg dmem_rstrobe,
+    output reg dmem_wstrobe,
+
+    //# {{data|Register Data}}
+    input[63:0] base, //R1
+    input[63:0] data, //R2
+    input[31:0] offset,
+    output reg[63:0] out,
+
+    //# {{control|Dispatch Control Signals}}
+    input ex_enable,
+    output ex_busy,
+    input[5:0] rd_in_rn,
+    input[2:0] unit,
+    input[1:0] op,
+
+    //# {{control|Commit Control Signals}}
+    output reg[5:0] rd_out_rn,
+    output reg valid,
+    input stall
+    );
+
+    localparam START = 2'h0;
+    localparam READ_WAIT = 2'h1;
+    localparam WRITE_WAIT = 2'h2;
+
+    ////////////////////////////////////////
+    //// Registering of control signals ////
+    ////////////////////////////////////////
+
+    reg[5:0] rd_in_rn_reg;
+    reg[2:0] unit_reg;
+    reg[1:0] op_reg;
+
+    always &#64;(posedge clk or negedge rst_n)
+    begin
+        if(~rst_n) begin
+            rd_in_rn_reg &lt;= 6'h0;
+            unit_reg &lt;= 3'h0;
+            op_reg &lt;= 2'h0;
+        end else if(ex_enable) begin
+            rd_in_rn_reg &lt;= rd_in_rn;
+            unit_reg &lt;= unit;
+            op_reg &lt;= op;
+        end
+    end
+
+    //Signals associated with the incoming instruction (and only valid at ex_enable)
+    wire load, store, lui;
+    assign load = (unit == 3'h4 || //Regular load
+                  (unit == 3'h5 &amp;&amp; op != 2'h0)); //Sign-Extend load except LUI
+
+    assign store = (unit == 3'h6); //Store
+    assign lui = (unit == 3'h5 &amp;&amp; op == 2'h0); //LUI
+
+    //Signals using the registered control signals
+    wire sign_extend_reg;
+    assign sign_extend_reg = (unit_reg == 3'h5 &amp;&amp; op_reg != 2'h0); //Sign-Extend load except LUI
+
+    assign dmem_width = op_reg;
+
+    ///////////////////////////////
+    //// State machine control ////
+    ///////////////////////////////
+
+    reg[1:0] state;
+
+    assign ex_busy = ex_enable || stall || (state != START &amp;&amp; ~dmem_cycle_complete);
+
+    always &#64;(posedge clk or negedge rst_n)
+    begin
+        if(~rst_n) begin
+            state &lt;= START;
+            out &lt;= 64'h0;
+            valid &lt;= 1'b0;
+            rd_out_rn &lt;= 6'h0;
+            dmem_dout &lt;= 64'h0;
+            dmem_addr &lt;= 64'h0;
+            dmem_rstrobe &lt;= 1'b0;
+            dmem_wstrobe &lt;= 1'b0;
+        end else begin
+
+            case(state)
+            START: begin
+                valid &lt;= 0;
+                rd_out_rn &lt;= 6'h0;
+                dmem_rstrobe &lt;= 0;
+                dmem_wstrobe &lt;= 0;
+
+                if(ex_enable) begin
+                    if(load) begin
+                        state &lt;= READ_WAIT;
+                        dmem_addr &lt;= base + offset;
+                        dmem_rstrobe &lt;= 1;
+                    end else if(store) begin
+                        dmem_addr &lt;= base + offset;
+                        dmem_dout &lt;= data;
+                        dmem_wstrobe &lt;= 1;
+                        state &lt;= WRITE_WAIT;
+                    end else if(lui) begin
+                        out &lt;= {offset,{32{1'b0}}};
+                        valid &lt;= 1;
+                        rd_out_rn &lt;= rd_in_rn;
+                    end
+                end
+            end
+
+            READ_WAIT: begin
+                dmem_rstrobe &lt;= 0;
+                if(dmem_cycle_complete) begin
+                    valid &lt;= 1;
+                    rd_out_rn &lt;= rd_in_rn_reg;
+                    case(op_reg)
+                    //64-Bit load
+                    `RAM_WIDTH64: out &lt;= dmem_din;
+
+                    //32-Bit load
+                    `RAM_WIDTH32: out &lt;= sign_extend_reg ? {{32{dmem_din[63]}},dmem_din[63:32]} :
+                                                {{32{1'b0}},dmem_din[63:32]};
+
+                    //16-Bit load
+                    `RAM_WIDTH16: out &lt;= sign_extend_reg ? {{48{dmem_din[63]}},dmem_din[63:48]} :
+                                                {{48{1'b0}},dmem_din[63:48]};
+
+                    //8-Bit load
+                    `RAM_WIDTH8: out &lt;= sign_extend_reg ? {{56{dmem_din[63]}},dmem_din[63:56]} :
+                                                {{56{1'b0}},dmem_din[63:56]};
+                    endcase
+                    state &lt;= START;
+                end
+            end
+
+            WRITE_WAIT: begin
+                dmem_wstrobe &lt;= 0;
+                if(dmem_cycle_complete) begin
+                    valid &lt;= 1;
+                    state &lt;= START;
+                end
+            end
+
+            default: begin
+                state &lt;= START; //TODO Throw exception
+            end
+            endcase
+        end
+    end
+endmodule</p></object>
+<div class="highlight-verilog notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">//Raisin64 Execute Unit - Memory Unit</span>
+
+<span class="no">`include</span> <span class="s">&quot;io_def.vh&quot;</span>
+
+<span class="k">module</span> <span class="n">ex_memory</span><span class="p">(</span>
+    <span class="k">input</span> <span class="n">clk</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">rst_n</span><span class="p">,</span>
+
+    <span class="c1">//# {{data|Memory Data}}</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">dmem_din</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">dmem_dout</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">dmem_addr</span><span class="p">,</span>
+
+    <span class="c1">//# {{control|Memory Control Signals}}</span>
+    <span class="k">input</span> <span class="n">dmem_cycle_complete</span><span class="p">,</span>
+    <span class="k">output</span><span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">dmem_width</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span> <span class="n">dmem_rstrobe</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span> <span class="n">dmem_wstrobe</span><span class="p">,</span>
+
+    <span class="c1">//# {{data|Register Data}}</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">base</span><span class="p">,</span> <span class="c1">//R1</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">data</span><span class="p">,</span> <span class="c1">//R2</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">offset</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">out</span><span class="p">,</span>
+
+    <span class="c1">//# {{control|Dispatch Control Signals}}</span>
+    <span class="k">input</span> <span class="n">ex_enable</span><span class="p">,</span>
+    <span class="k">output</span> <span class="n">ex_busy</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">rd_in_rn</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">unit</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">op</span><span class="p">,</span>
+
+    <span class="c1">//# {{control|Commit Control Signals}}</span>
+    <span class="k">output</span> <span class="kt">reg</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">rd_out_rn</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span> <span class="n">valid</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">stall</span>
+    <span class="p">);</span>
+
+    <span class="k">localparam</span> <span class="no">START</span> <span class="o">=</span> <span class="mh">2&#39;h0</span><span class="p">;</span>
+    <span class="k">localparam</span> <span class="no">READ_WAIT</span> <span class="o">=</span> <span class="mh">2&#39;h1</span><span class="p">;</span>
+    <span class="k">localparam</span> <span class="no">WRITE_WAIT</span> <span class="o">=</span> <span class="mh">2&#39;h2</span><span class="p">;</span>
+
+    <span class="c1">////////////////////////////////////////</span>
+    <span class="c1">//// Registering of control signals ////</span>
+    <span class="c1">////////////////////////////////////////</span>
+
+    <span class="kt">reg</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">rd_in_rn_reg</span><span class="p">;</span>
+    <span class="kt">reg</span><span class="p">[</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">unit_reg</span><span class="p">;</span>
+    <span class="kt">reg</span><span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">op_reg</span><span class="p">;</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">rst_n</span><span class="p">)</span>
+    <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="n">rd_in_rn_reg</span> <span class="o">&lt;=</span> <span class="mh">6&#39;h0</span><span class="p">;</span>
+            <span class="n">unit_reg</span> <span class="o">&lt;=</span> <span class="mh">3&#39;h0</span><span class="p">;</span>
+            <span class="n">op_reg</span> <span class="o">&lt;=</span> <span class="mh">2&#39;h0</span><span class="p">;</span>
+        <span class="k">end</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">ex_enable</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="n">rd_in_rn_reg</span> <span class="o">&lt;=</span> <span class="n">rd_in_rn</span><span class="p">;</span>
+            <span class="n">unit_reg</span> <span class="o">&lt;=</span> <span class="n">unit</span><span class="p">;</span>
+            <span class="n">op_reg</span> <span class="o">&lt;=</span> <span class="n">op</span><span class="p">;</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="c1">//Signals associated with the incoming instruction (and only valid at ex_enable)</span>
+    <span class="kt">wire</span> <span class="n">load</span><span class="p">,</span> <span class="n">store</span><span class="p">,</span> <span class="n">lui</span><span class="p">;</span>
+    <span class="k">assign</span> <span class="n">load</span> <span class="o">=</span> <span class="p">(</span><span class="n">unit</span> <span class="o">==</span> <span class="mh">3&#39;h4</span> <span class="o">||</span> <span class="c1">//Regular load</span>
+                  <span class="p">(</span><span class="n">unit</span> <span class="o">==</span> <span class="mh">3&#39;h5</span> <span class="o">&amp;&amp;</span> <span class="n">op</span> <span class="o">!=</span> <span class="mh">2&#39;h0</span><span class="p">));</span> <span class="c1">//Sign-Extend load except LUI</span>
+
+    <span class="k">assign</span> <span class="n">store</span> <span class="o">=</span> <span class="p">(</span><span class="n">unit</span> <span class="o">==</span> <span class="mh">3&#39;h6</span><span class="p">);</span> <span class="c1">//Store</span>
+    <span class="k">assign</span> <span class="n">lui</span> <span class="o">=</span> <span class="p">(</span><span class="n">unit</span> <span class="o">==</span> <span class="mh">3&#39;h5</span> <span class="o">&amp;&amp;</span> <span class="n">op</span> <span class="o">==</span> <span class="mh">2&#39;h0</span><span class="p">);</span> <span class="c1">//LUI</span>
+
+    <span class="c1">//Signals using the registered control signals</span>
+    <span class="kt">wire</span> <span class="n">sign_extend_reg</span><span class="p">;</span>
+    <span class="k">assign</span> <span class="n">sign_extend_reg</span> <span class="o">=</span> <span class="p">(</span><span class="n">unit_reg</span> <span class="o">==</span> <span class="mh">3&#39;h5</span> <span class="o">&amp;&amp;</span> <span class="n">op_reg</span> <span class="o">!=</span> <span class="mh">2&#39;h0</span><span class="p">);</span> <span class="c1">//Sign-Extend load except LUI</span>
+
+    <span class="k">assign</span> <span class="n">dmem_width</span> <span class="o">=</span> <span class="n">op_reg</span><span class="p">;</span>
+
+    <span class="c1">///////////////////////////////</span>
+    <span class="c1">//// State machine control ////</span>
+    <span class="c1">///////////////////////////////</span>
+
+    <span class="kt">reg</span><span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">state</span><span class="p">;</span>
+
+    <span class="k">assign</span> <span class="n">ex_busy</span> <span class="o">=</span> <span class="n">ex_enable</span> <span class="o">||</span> <span class="n">stall</span> <span class="o">||</span> <span class="p">(</span><span class="n">state</span> <span class="o">!=</span> <span class="no">START</span> <span class="o">&amp;&amp;</span> <span class="o">~</span><span class="n">dmem_cycle_complete</span><span class="p">);</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">rst_n</span><span class="p">)</span>
+    <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="n">state</span> <span class="o">&lt;=</span> <span class="no">START</span><span class="p">;</span>
+            <span class="n">out</span> <span class="o">&lt;=</span> <span class="mh">64&#39;h0</span><span class="p">;</span>
+            <span class="n">valid</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+            <span class="n">rd_out_rn</span> <span class="o">&lt;=</span> <span class="mh">6&#39;h0</span><span class="p">;</span>
+            <span class="n">dmem_dout</span> <span class="o">&lt;=</span> <span class="mh">64&#39;h0</span><span class="p">;</span>
+            <span class="n">dmem_addr</span> <span class="o">&lt;=</span> <span class="mh">64&#39;h0</span><span class="p">;</span>
+            <span class="n">dmem_rstrobe</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+            <span class="n">dmem_wstrobe</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+        <span class="k">end</span> <span class="k">else</span> <span class="k">begin</span>
+
+            <span class="k">case</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+            <span class="nl">START:</span> <span class="k">begin</span>
+                <span class="n">valid</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+                <span class="n">rd_out_rn</span> <span class="o">&lt;=</span> <span class="mh">6&#39;h0</span><span class="p">;</span>
+                <span class="n">dmem_rstrobe</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+                <span class="n">dmem_wstrobe</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+
+                <span class="k">if</span><span class="p">(</span><span class="n">ex_enable</span><span class="p">)</span> <span class="k">begin</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">load</span><span class="p">)</span> <span class="k">begin</span>
+                        <span class="n">state</span> <span class="o">&lt;=</span> <span class="no">READ_WAIT</span><span class="p">;</span>
+                        <span class="n">dmem_addr</span> <span class="o">&lt;=</span> <span class="n">base</span> <span class="o">+</span> <span class="n">offset</span><span class="p">;</span>
+                        <span class="n">dmem_rstrobe</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                    <span class="k">end</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">store</span><span class="p">)</span> <span class="k">begin</span>
+                        <span class="n">dmem_addr</span> <span class="o">&lt;=</span> <span class="n">base</span> <span class="o">+</span> <span class="n">offset</span><span class="p">;</span>
+                        <span class="n">dmem_dout</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">;</span>
+                        <span class="n">dmem_wstrobe</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                        <span class="n">state</span> <span class="o">&lt;=</span> <span class="no">WRITE_WAIT</span><span class="p">;</span>
+                    <span class="k">end</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">lui</span><span class="p">)</span> <span class="k">begin</span>
+                        <span class="n">out</span> <span class="o">&lt;=</span> <span class="p">{</span><span class="n">offset</span><span class="p">,{</span><span class="mh">32</span><span class="p">{</span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">}}};</span>
+                        <span class="n">valid</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                        <span class="n">rd_out_rn</span> <span class="o">&lt;=</span> <span class="n">rd_in_rn</span><span class="p">;</span>
+                    <span class="k">end</span>
+                <span class="k">end</span>
+            <span class="k">end</span>
+
+            <span class="nl">READ_WAIT:</span> <span class="k">begin</span>
+                <span class="n">dmem_rstrobe</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">dmem_cycle_complete</span><span class="p">)</span> <span class="k">begin</span>
+                    <span class="n">valid</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                    <span class="n">rd_out_rn</span> <span class="o">&lt;=</span> <span class="n">rd_in_rn_reg</span><span class="p">;</span>
+                    <span class="k">case</span><span class="p">(</span><span class="n">op_reg</span><span class="p">)</span>
+                    <span class="c1">//64-Bit load</span>
+                    <span class="no">`RAM_WIDTH64</span><span class="o">:</span> <span class="n">out</span> <span class="o">&lt;=</span> <span class="n">dmem_din</span><span class="p">;</span>
+
+                    <span class="c1">//32-Bit load</span>
+                    <span class="no">`RAM_WIDTH32</span><span class="o">:</span> <span class="n">out</span> <span class="o">&lt;=</span> <span class="n">sign_extend_reg</span> <span class="o">?</span> <span class="p">{{</span><span class="mh">32</span><span class="p">{</span><span class="n">dmem_din</span><span class="p">[</span><span class="mh">63</span><span class="p">]}},</span><span class="n">dmem_din</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">32</span><span class="p">]}</span> <span class="o">:</span>
+                                                <span class="p">{{</span><span class="mh">32</span><span class="p">{</span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">}},</span><span class="n">dmem_din</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">32</span><span class="p">]};</span>
+
+                    <span class="c1">//16-Bit load</span>
+                    <span class="no">`RAM_WIDTH16</span><span class="o">:</span> <span class="n">out</span> <span class="o">&lt;=</span> <span class="n">sign_extend_reg</span> <span class="o">?</span> <span class="p">{{</span><span class="mh">48</span><span class="p">{</span><span class="n">dmem_din</span><span class="p">[</span><span class="mh">63</span><span class="p">]}},</span><span class="n">dmem_din</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">48</span><span class="p">]}</span> <span class="o">:</span>
+                                                <span class="p">{{</span><span class="mh">48</span><span class="p">{</span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">}},</span><span class="n">dmem_din</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">48</span><span class="p">]};</span>
+
+                    <span class="c1">//8-Bit load</span>
+                    <span class="no">`RAM_WIDTH8</span><span class="o">:</span> <span class="n">out</span> <span class="o">&lt;=</span> <span class="n">sign_extend_reg</span> <span class="o">?</span> <span class="p">{{</span><span class="mh">56</span><span class="p">{</span><span class="n">dmem_din</span><span class="p">[</span><span class="mh">63</span><span class="p">]}},</span><span class="n">dmem_din</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">56</span><span class="p">]}</span> <span class="o">:</span>
+                                                <span class="p">{{</span><span class="mh">56</span><span class="p">{</span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">}},</span><span class="n">dmem_din</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">56</span><span class="p">]};</span>
+                    <span class="k">endcase</span>
+                    <span class="n">state</span> <span class="o">&lt;=</span> <span class="no">START</span><span class="p">;</span>
+                <span class="k">end</span>
+            <span class="k">end</span>
+
+            <span class="nl">WRITE_WAIT:</span> <span class="k">begin</span>
+                <span class="n">dmem_wstrobe</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">dmem_cycle_complete</span><span class="p">)</span> <span class="k">begin</span>
+                    <span class="n">valid</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                    <span class="n">state</span> <span class="o">&lt;=</span> <span class="no">START</span><span class="p">;</span>
+                <span class="k">end</span>
+            <span class="k">end</span>
+
+            <span class="k">default</span><span class="o">:</span> <span class="k">begin</span>
+                <span class="n">state</span> <span class="o">&lt;=</span> <span class="no">START</span><span class="p">;</span> <span class="c1">//TODO Throw exception</span>
+            <span class="k">end</span>
+            <span class="k">endcase</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">endmodule</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="fetch.html" class="btn btn-neutral float-right" title="fetch.v" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ex_branch.html" class="btn btn-neutral" title="ex_branch.v" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Christopher Parish
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,19 +1,21 @@
 SLL - Shift Left Logical
 ========================
 
+Shift the contents of register ``$rs1`` left by a number of bits specified in ``$rs2``, storing the result in ``$rd``
+
 Usage
 -----
 
 .. code-block:: asm
 
-   todo
+   sll $rd, $rs1, $rs2
 
 Operation
 ---------
 
 .. code-block:: c
 
-   todo;
+   rd = rs1<<rs2;
    advance_pc();
 
 Encoding

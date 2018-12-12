@@ -1,0 +1,379 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ex_advint_s1.v &mdash; Raisin64 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ex_alu.v" href="ex_alu.html" />
+    <link rel="prev" title="ex_advint.v" href="ex_advint.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Raisin64
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../cpu.html">Raisin64 CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software.html">Code Snippets and Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nexysddr.html">Nexys 4 DDR Reference Implementation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../modules.html">Reference Index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../isa.html">Raisin64 Instruction Set</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../modules.html">Verilog Module Index</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="commit.html">commit.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="de_canonicalize.html">de_canonicalize.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug_control.html">debug_control.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="decode.html">decode.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_advint.html">ex_advint.v</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ex_advint_s1.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_alu.html">ex_alu.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_alu_s1.html">ex_alu_s1.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_branch.html">ex_branch.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_memory.html">ex_memory.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fetch.html">fetch.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ff_sync.html">ff_sync.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag_reg.html">schedule.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag_state_machine.html">jtag_state_machine.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtaglet.html">jtaglet.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory_map.html">memory_map.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline.html">pipeline.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raisin64.html">raisin64.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ram.html">ram.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regfile.html">regfile.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schedule.html">schedule.v</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Raisin64</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../modules.html">Reference Index</a> &raquo;</li>
+        
+          <li><a href="../modules.html">Verilog Module Index</a> &raquo;</li>
+        
+      <li>ex_advint_s1.v</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/cpu/modules/ex_advint_s1.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ex-advint-s1-v">
+<h1>ex_advint_s1.v<a class="headerlink" href="#ex-advint-s1-v" title="Permalink to this headline">¶</a></h1>
+<object data="../../_images/symbol-49af396e0fb12eb503a54fa239027155de2a8cc4.svg" type="image/svg+xml">
+            <p class="warning">//Raisin64 Execute Unit - Advanced Integer Unit - Stage 1
+
+//For now, we just use the intrinsic * and / operations.  These do have the
+//advantage of mapping to DSP hard-blocks on our example SoC design.
+
+module ex_advint_s1(
+    //# {{data|ALU Data}}
+    input[63:0] in1,
+    input[63:0] in2,
+    output[63:0] out,
+    output[63:0] out2,
+
+    //# {{control|Control Signals}}
+    input enable,
+    input[2:0] unit,
+    input[1:0] op
+    );
+
+    reg[127:0] out_pre;
+    assign out = out_pre[63:0];
+    assign out2 = out_pre[127:64];
+
+    always &#64;(*)
+    begin
+        out_pre = 128'h0;
+
+        if(enable &amp; unit==3'h4) begin
+            case(op)
+                0: out_pre = $signed(in1) * $signed(in2); //MUL
+                1: out_pre = in1 * in2; //MULU
+                2,3: out_pre = {in2, in1}; //TODO div stubbed for now
+//              2: begin //DIV
+//                  out_pre[63:0] = $signed(in1) / $signed(in2);
+//                  out_pre[127:64] = $signed(in1) % $signed(in2);
+//                 end
+//              3: begin //DIVU
+//                  out_pre[63:0] = in1 / in2;
+//                  out_pre[127:64] = in1 % in2;
+//                 end
+            endcase
+        end
+    end
+endmodule</p></object>
+<div class="highlight-verilog notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">//Raisin64 Execute Unit - Advanced Integer Unit - Stage 1</span>
+
+<span class="c1">//For now, we just use the intrinsic * and / operations.  These do have the</span>
+<span class="c1">//advantage of mapping to DSP hard-blocks on our example SoC design.</span>
+
+<span class="k">module</span> <span class="n">ex_advint_s1</span><span class="p">(</span>
+    <span class="c1">//# {{data|ALU Data}}</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">in1</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">in2</span><span class="p">,</span>
+    <span class="k">output</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">out</span><span class="p">,</span>
+    <span class="k">output</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">out2</span><span class="p">,</span>
+
+    <span class="c1">//# {{control|Control Signals}}</span>
+    <span class="k">input</span> <span class="n">enable</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">unit</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">op</span>
+    <span class="p">);</span>
+
+    <span class="kt">reg</span><span class="p">[</span><span class="mh">127</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">out_pre</span><span class="p">;</span>
+    <span class="k">assign</span> <span class="n">out</span> <span class="o">=</span> <span class="n">out_pre</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">];</span>
+    <span class="k">assign</span> <span class="n">out2</span> <span class="o">=</span> <span class="n">out_pre</span><span class="p">[</span><span class="mh">127</span><span class="o">:</span><span class="mh">64</span><span class="p">];</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span>
+    <span class="k">begin</span>
+        <span class="n">out_pre</span> <span class="o">=</span> <span class="mh">128&#39;h0</span><span class="p">;</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">enable</span> <span class="o">&amp;</span> <span class="n">unit</span><span class="o">==</span><span class="mh">3&#39;h4</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="k">case</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+                <span class="mh">0</span><span class="o">:</span> <span class="n">out_pre</span> <span class="o">=</span> <span class="n">$signed</span><span class="p">(</span><span class="n">in1</span><span class="p">)</span> <span class="o">*</span> <span class="n">$signed</span><span class="p">(</span><span class="n">in2</span><span class="p">);</span> <span class="c1">//MUL</span>
+                <span class="mh">1</span><span class="o">:</span> <span class="n">out_pre</span> <span class="o">=</span> <span class="n">in1</span> <span class="o">*</span> <span class="n">in2</span><span class="p">;</span> <span class="c1">//MULU</span>
+                <span class="mh">2</span><span class="p">,</span><span class="mh">3</span><span class="o">:</span> <span class="n">out_pre</span> <span class="o">=</span> <span class="p">{</span><span class="n">in2</span><span class="p">,</span> <span class="n">in1</span><span class="p">};</span> <span class="c1">//TODO div stubbed for now</span>
+<span class="c1">//              2: begin //DIV</span>
+<span class="c1">//                  out_pre[63:0] = $signed(in1) / $signed(in2);</span>
+<span class="c1">//                  out_pre[127:64] = $signed(in1) % $signed(in2);</span>
+<span class="c1">//                 end</span>
+<span class="c1">//              3: begin //DIVU</span>
+<span class="c1">//                  out_pre[63:0] = in1 / in2;</span>
+<span class="c1">//                  out_pre[127:64] = in1 % in2;</span>
+<span class="c1">//                 end</span>
+            <span class="k">endcase</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">endmodule</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ex_alu.html" class="btn btn-neutral float-right" title="ex_alu.v" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ex_advint.html" class="btn btn-neutral" title="ex_advint.v" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Christopher Parish
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

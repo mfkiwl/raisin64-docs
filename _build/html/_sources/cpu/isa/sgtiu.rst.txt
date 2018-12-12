@@ -1,19 +1,24 @@
 SGTIU - Set 1 if Greater Than Immediate Unsigned
 ================================================
 
+Sets ``$rd`` as 1 if the unsigned representation of ``$rs1`` is greater than the unsigned immediate field, 0 otherwise.
+
 Usage
 -----
 
 .. code-block:: asm
 
-   todo
+   sgtiu $rd, $rs1, imm
 
 Operation
 ---------
 
 .. code-block:: c
 
-   todo;
+   if((unsigned)rs1 > (unsigned)imm)
+      rd = 1;
+   else
+      rd = 0;
    advance_pc();
 
 Encoding

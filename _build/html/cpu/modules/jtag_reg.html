@@ -1,0 +1,694 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>schedule.v &mdash; Raisin64 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="jtag_state_machine.v" href="jtag_state_machine.html" />
+    <link rel="prev" title="ff_sync.v" href="ff_sync.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Raisin64
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../cpu.html">Raisin64 CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software.html">Code Snippets and Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nexysddr.html">Nexys 4 DDR Reference Implementation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../modules.html">Reference Index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../isa.html">Raisin64 Instruction Set</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../modules.html">Verilog Module Index</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="commit.html">commit.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="de_canonicalize.html">de_canonicalize.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug_control.html">debug_control.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="decode.html">decode.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_advint.html">ex_advint.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_advint_s1.html">ex_advint_s1.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_alu.html">ex_alu.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_alu_s1.html">ex_alu_s1.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_branch.html">ex_branch.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_memory.html">ex_memory.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fetch.html">fetch.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ff_sync.html">ff_sync.v</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">schedule.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag_state_machine.html">jtag_state_machine.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtaglet.html">jtaglet.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory_map.html">memory_map.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline.html">pipeline.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raisin64.html">raisin64.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ram.html">ram.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regfile.html">regfile.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schedule.html">schedule.v</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Raisin64</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../modules.html">Reference Index</a> &raquo;</li>
+        
+          <li><a href="../modules.html">Verilog Module Index</a> &raquo;</li>
+        
+      <li>schedule.v</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/cpu/modules/jtag_reg.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="schedule-v">
+<h1>schedule.v<a class="headerlink" href="#schedule-v" title="Permalink to this headline">¶</a></h1>
+<object data="../../_images/symbol-d78a581d68b5558b9ab31a29b655c8d213e8f262.svg" type="image/svg+xml">
+            <p class="warning">//Raisin64 Instruction Scheduler
+//Schedules a ready instruction to a free execution unit capiable of servicing it
+
+module schedule(
+    //# {{clocks|Clocking}}
+    input clk,
+    input rst_n,
+
+    //# {{data|Decoded Instruction Data}}
+    input type,
+    input[2:0] unit,
+    input[5:0] r1_in_rn,
+    input[5:0] r2_in_rn,
+    input[5:0] rd_in_rn,
+    input[5:0] rd2_in_rn,
+
+    //# {{control|Decoded Instruction Control}}
+    output reg sc_ready,
+
+    //# {{control|Register Control}}
+    input[5:0] reg1_finished,
+    input[5:0] reg2_finished,
+
+    //# {{data|Execution Units Register Data}}
+    output reg[5:0] rd_out_rn,
+    output reg[5:0] rd2_out_rn,
+
+    //# {{control|Execution Units Control Signals}}
+    output reg alu1_en,
+    output reg alu2_en,
+    output reg advint_en,
+    output reg memunit_en,
+    output reg branch_en,
+
+    input alu1_busy,
+    input alu2_busy,
+    input advint_busy,
+    input memunit_busy,
+    input branch_busy
+    );
+
+    reg[63:0] reg_busy;
+
+    wire alu_type, advint_type, memunit_type, branch_type;
+    assign alu_type = ~unit[2];
+    assign advint_type = ~type &amp;&amp; unit==3'h4;
+    assign memunit_type = type &amp;&amp; (unit==3'h4 | unit==3'h5 | unit==3'h6);
+    assign branch_type = unit==3'h7;
+
+    wire instIssued;
+    assign instIssued = alu1_en | alu2_en | advint_en | memunit_en | branch_en;
+
+    reg operand_unavailable;
+
+    always &#64;(*)
+    begin
+        operand_unavailable = 0;
+
+        //The register was previously busy
+        if(reg_busy[r1_in_rn] &amp;&amp; r1_in_rn!=reg1_finished &amp;&amp; r1_in_rn!=reg2_finished) operand_unavailable = 1;
+        else if(reg_busy[r2_in_rn] &amp;&amp; r2_in_rn!=reg2_finished &amp;&amp; r2_in_rn!=reg1_finished) operand_unavailable = 1;
+
+        //We just issued something to an execution unit
+        else if(instIssued) begin
+            //The incoming source register is non-zero
+            if(|r1_in_rn) begin
+                //And it matches the previous destination register number.  We
+                //will stall here until it is picked up by reg_busy next cycle
+                if(rd_out_rn==r1_in_rn) operand_unavailable = 1;
+                else if(rd2_out_rn==r1_in_rn) operand_unavailable = 1;
+
+            end
+            if(|r2_in_rn) begin
+                if(rd_out_rn==r2_in_rn) operand_unavailable = 1;
+                else if(rd2_out_rn==r2_in_rn) operand_unavailable = 1;
+            end
+        end
+    end
+
+    always &#64;(*)
+    begin
+        sc_ready = 0;
+        if(~operand_unavailable &amp; ~branch_busy) begin //TODO Branch busy condition can probably be moved outside the module via muxing of the unit_en lines with the operation cancel signal
+            if(alu_type &amp; (~alu1_busy | ~alu2_busy)) sc_ready = 1;
+            else if(advint_type &amp; ~advint_busy) sc_ready = 1;
+            else if(memunit_type &amp; ~memunit_busy) sc_ready = 1;
+            else if(branch_type) sc_ready = 1;
+        end
+    end
+
+    always &#64;(posedge clk or negedge rst_n)
+    begin
+        if(~rst_n) begin
+            alu1_en &lt;= 0;
+            alu2_en &lt;= 0;
+            advint_en &lt;= 0;
+            memunit_en &lt;= 0;
+            branch_en &lt;= 0;
+            rd_out_rn &lt;= 6'h0;
+            rd2_out_rn &lt;= 6'h0;
+            reg_busy &lt;= 64'h0;
+
+        end else begin
+            //Only allow the scheduling of instructions if the source registers
+            //aren't the destination of in-progress instructions.
+            alu1_en &lt;= 0;
+            alu2_en &lt;= 0;
+            advint_en &lt;= 0;
+            memunit_en &lt;= 0;
+            branch_en &lt;= 0;
+
+            reg_busy[reg1_finished] &lt;= 0;
+            reg_busy[reg2_finished] &lt;= 0;
+
+            if(~operand_unavailable &amp; ~branch_busy) begin
+                if(alu_type &amp; ~alu1_busy) begin
+                    alu1_en &lt;= 1;
+                    rd_out_rn &lt;= rd_in_rn;
+                    if(|rd_in_rn) reg_busy[rd_in_rn] &lt;= 1;
+
+                end else if(alu_type &amp; ~alu2_busy) begin
+                    alu2_en &lt;= 1;
+                    rd_out_rn &lt;= rd_in_rn;
+                    if(|rd_in_rn) reg_busy[rd_in_rn] &lt;= 1;
+
+                end else if(advint_type &amp; ~advint_busy) begin
+                    advint_en &lt;= 1;
+                    rd_out_rn &lt;= rd_in_rn;
+                    rd2_out_rn &lt;= rd2_in_rn;
+                    if(|rd_in_rn) reg_busy[rd_in_rn] &lt;= 1;
+                    if(|rd2_in_rn) reg_busy[rd2_in_rn] &lt;= 1;
+
+                end else if(memunit_type &amp; ~memunit_busy) begin
+                    memunit_en &lt;= 1;
+                    rd_out_rn &lt;= rd_in_rn;
+                    if(|rd_in_rn &amp;&amp; unit!=3'h6) reg_busy[rd_in_rn] &lt;= 1;
+
+                end else if(branch_type) begin
+                    branch_en &lt;= 1;
+                    rd_out_rn &lt;= rd_in_rn;
+                    //No need to mark R63 busy. If the branch is taken, other
+                    //instructions in the pipeline are cancelled.
+                end
+            end
+        end
+    end
+
+endmodule</p></object>
+<div class="highlight-verilog notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">//Raisin64 Instruction Scheduler</span>
+<span class="c1">//Schedules a ready instruction to a free execution unit capiable of servicing it</span>
+
+<span class="k">module</span> <span class="n">schedule</span><span class="p">(</span>
+    <span class="c1">//# {{clocks|Clocking}}</span>
+    <span class="k">input</span> <span class="n">clk</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">rst_n</span><span class="p">,</span>
+
+    <span class="c1">//# {{data|Decoded Instruction Data}}</span>
+    <span class="k">input</span> <span class="k">type</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">unit</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">r1_in_rn</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">r2_in_rn</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">rd_in_rn</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">rd2_in_rn</span><span class="p">,</span>
+
+    <span class="c1">//# {{control|Decoded Instruction Control}}</span>
+    <span class="k">output</span> <span class="kt">reg</span> <span class="n">sc_ready</span><span class="p">,</span>
+
+    <span class="c1">//# {{control|Register Control}}</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">reg1_finished</span><span class="p">,</span>
+    <span class="k">input</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">reg2_finished</span><span class="p">,</span>
+
+    <span class="c1">//# {{data|Execution Units Register Data}}</span>
+    <span class="k">output</span> <span class="kt">reg</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">rd_out_rn</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span><span class="p">[</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">rd2_out_rn</span><span class="p">,</span>
+
+    <span class="c1">//# {{control|Execution Units Control Signals}}</span>
+    <span class="k">output</span> <span class="kt">reg</span> <span class="n">alu1_en</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span> <span class="n">alu2_en</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span> <span class="n">advint_en</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span> <span class="n">memunit_en</span><span class="p">,</span>
+    <span class="k">output</span> <span class="kt">reg</span> <span class="n">branch_en</span><span class="p">,</span>
+
+    <span class="k">input</span> <span class="n">alu1_busy</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">alu2_busy</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">advint_busy</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">memunit_busy</span><span class="p">,</span>
+    <span class="k">input</span> <span class="n">branch_busy</span>
+    <span class="p">);</span>
+
+    <span class="kt">reg</span><span class="p">[</span><span class="mh">63</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">reg_busy</span><span class="p">;</span>
+
+    <span class="kt">wire</span> <span class="n">alu_type</span><span class="p">,</span> <span class="n">advint_type</span><span class="p">,</span> <span class="n">memunit_type</span><span class="p">,</span> <span class="n">branch_type</span><span class="p">;</span>
+    <span class="k">assign</span> <span class="n">alu_type</span> <span class="o">=</span> <span class="o">~</span><span class="n">unit</span><span class="p">[</span><span class="mh">2</span><span class="p">];</span>
+    <span class="k">assign</span> <span class="n">advint_type</span> <span class="o">=</span> <span class="o">~</span><span class="k">type</span> <span class="o">&amp;&amp;</span> <span class="n">unit</span><span class="o">==</span><span class="mh">3&#39;h4</span><span class="p">;</span>
+    <span class="k">assign</span> <span class="n">memunit_type</span> <span class="o">=</span> <span class="k">type</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">unit</span><span class="o">==</span><span class="mh">3&#39;h4</span> <span class="o">|</span> <span class="n">unit</span><span class="o">==</span><span class="mh">3&#39;h5</span> <span class="o">|</span> <span class="n">unit</span><span class="o">==</span><span class="mh">3&#39;h6</span><span class="p">);</span>
+    <span class="k">assign</span> <span class="n">branch_type</span> <span class="o">=</span> <span class="n">unit</span><span class="o">==</span><span class="mh">3&#39;h7</span><span class="p">;</span>
+
+    <span class="kt">wire</span> <span class="n">instIssued</span><span class="p">;</span>
+    <span class="k">assign</span> <span class="n">instIssued</span> <span class="o">=</span> <span class="n">alu1_en</span> <span class="o">|</span> <span class="n">alu2_en</span> <span class="o">|</span> <span class="n">advint_en</span> <span class="o">|</span> <span class="n">memunit_en</span> <span class="o">|</span> <span class="n">branch_en</span><span class="p">;</span>
+
+    <span class="kt">reg</span> <span class="n">operand_unavailable</span><span class="p">;</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span>
+    <span class="k">begin</span>
+        <span class="n">operand_unavailable</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span>
+
+        <span class="c1">//The register was previously busy</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">reg_busy</span><span class="p">[</span><span class="n">r1_in_rn</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">r1_in_rn</span><span class="o">!=</span><span class="n">reg1_finished</span> <span class="o">&amp;&amp;</span> <span class="n">r1_in_rn</span><span class="o">!=</span><span class="n">reg2_finished</span><span class="p">)</span> <span class="n">operand_unavailable</span> <span class="o">=</span> <span class="mh">1</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">reg_busy</span><span class="p">[</span><span class="n">r2_in_rn</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">r2_in_rn</span><span class="o">!=</span><span class="n">reg2_finished</span> <span class="o">&amp;&amp;</span> <span class="n">r2_in_rn</span><span class="o">!=</span><span class="n">reg1_finished</span><span class="p">)</span> <span class="n">operand_unavailable</span> <span class="o">=</span> <span class="mh">1</span><span class="p">;</span>
+
+        <span class="c1">//We just issued something to an execution unit</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">instIssued</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="c1">//The incoming source register is non-zero</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">|</span><span class="n">r1_in_rn</span><span class="p">)</span> <span class="k">begin</span>
+                <span class="c1">//And it matches the previous destination register number.  We</span>
+                <span class="c1">//will stall here until it is picked up by reg_busy next cycle</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">rd_out_rn</span><span class="o">==</span><span class="n">r1_in_rn</span><span class="p">)</span> <span class="n">operand_unavailable</span> <span class="o">=</span> <span class="mh">1</span><span class="p">;</span>
+                <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">rd2_out_rn</span><span class="o">==</span><span class="n">r1_in_rn</span><span class="p">)</span> <span class="n">operand_unavailable</span> <span class="o">=</span> <span class="mh">1</span><span class="p">;</span>
+
+            <span class="k">end</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">|</span><span class="n">r2_in_rn</span><span class="p">)</span> <span class="k">begin</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">rd_out_rn</span><span class="o">==</span><span class="n">r2_in_rn</span><span class="p">)</span> <span class="n">operand_unavailable</span> <span class="o">=</span> <span class="mh">1</span><span class="p">;</span>
+                <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">rd2_out_rn</span><span class="o">==</span><span class="n">r2_in_rn</span><span class="p">)</span> <span class="n">operand_unavailable</span> <span class="o">=</span> <span class="mh">1</span><span class="p">;</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span>
+    <span class="k">begin</span>
+        <span class="n">sc_ready</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">operand_unavailable</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">branch_busy</span><span class="p">)</span> <span class="k">begin</span> <span class="c1">//TODO Branch busy condition can probably be moved outside the module via muxing of the unit_en lines with the operation cancel signal</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">alu_type</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">~</span><span class="n">alu1_busy</span> <span class="o">|</span> <span class="o">~</span><span class="n">alu2_busy</span><span class="p">))</span> <span class="n">sc_ready</span> <span class="o">=</span> <span class="mh">1</span><span class="p">;</span>
+            <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">advint_type</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">advint_busy</span><span class="p">)</span> <span class="n">sc_ready</span> <span class="o">=</span> <span class="mh">1</span><span class="p">;</span>
+            <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">memunit_type</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">memunit_busy</span><span class="p">)</span> <span class="n">sc_ready</span> <span class="o">=</span> <span class="mh">1</span><span class="p">;</span>
+            <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">branch_type</span><span class="p">)</span> <span class="n">sc_ready</span> <span class="o">=</span> <span class="mh">1</span><span class="p">;</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">rst_n</span><span class="p">)</span>
+    <span class="k">begin</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span> <span class="k">begin</span>
+            <span class="n">alu1_en</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="n">alu2_en</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="n">advint_en</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="n">memunit_en</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="n">branch_en</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="n">rd_out_rn</span> <span class="o">&lt;=</span> <span class="mh">6&#39;h0</span><span class="p">;</span>
+            <span class="n">rd2_out_rn</span> <span class="o">&lt;=</span> <span class="mh">6&#39;h0</span><span class="p">;</span>
+            <span class="n">reg_busy</span> <span class="o">&lt;=</span> <span class="mh">64&#39;h0</span><span class="p">;</span>
+
+        <span class="k">end</span> <span class="k">else</span> <span class="k">begin</span>
+            <span class="c1">//Only allow the scheduling of instructions if the source registers</span>
+            <span class="c1">//aren&#39;t the destination of in-progress instructions.</span>
+            <span class="n">alu1_en</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="n">alu2_en</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="n">advint_en</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="n">memunit_en</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="n">branch_en</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+
+            <span class="n">reg_busy</span><span class="p">[</span><span class="n">reg1_finished</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+            <span class="n">reg_busy</span><span class="p">[</span><span class="n">reg2_finished</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>
+
+            <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">operand_unavailable</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">branch_busy</span><span class="p">)</span> <span class="k">begin</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">alu_type</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">alu1_busy</span><span class="p">)</span> <span class="k">begin</span>
+                    <span class="n">alu1_en</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                    <span class="n">rd_out_rn</span> <span class="o">&lt;=</span> <span class="n">rd_in_rn</span><span class="p">;</span>
+                    <span class="k">if</span><span class="p">(</span><span class="o">|</span><span class="n">rd_in_rn</span><span class="p">)</span> <span class="n">reg_busy</span><span class="p">[</span><span class="n">rd_in_rn</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+
+                <span class="k">end</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">alu_type</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">alu2_busy</span><span class="p">)</span> <span class="k">begin</span>
+                    <span class="n">alu2_en</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                    <span class="n">rd_out_rn</span> <span class="o">&lt;=</span> <span class="n">rd_in_rn</span><span class="p">;</span>
+                    <span class="k">if</span><span class="p">(</span><span class="o">|</span><span class="n">rd_in_rn</span><span class="p">)</span> <span class="n">reg_busy</span><span class="p">[</span><span class="n">rd_in_rn</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+
+                <span class="k">end</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">advint_type</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">advint_busy</span><span class="p">)</span> <span class="k">begin</span>
+                    <span class="n">advint_en</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                    <span class="n">rd_out_rn</span> <span class="o">&lt;=</span> <span class="n">rd_in_rn</span><span class="p">;</span>
+                    <span class="n">rd2_out_rn</span> <span class="o">&lt;=</span> <span class="n">rd2_in_rn</span><span class="p">;</span>
+                    <span class="k">if</span><span class="p">(</span><span class="o">|</span><span class="n">rd_in_rn</span><span class="p">)</span> <span class="n">reg_busy</span><span class="p">[</span><span class="n">rd_in_rn</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                    <span class="k">if</span><span class="p">(</span><span class="o">|</span><span class="n">rd2_in_rn</span><span class="p">)</span> <span class="n">reg_busy</span><span class="p">[</span><span class="n">rd2_in_rn</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+
+                <span class="k">end</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">memunit_type</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">memunit_busy</span><span class="p">)</span> <span class="k">begin</span>
+                    <span class="n">memunit_en</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                    <span class="n">rd_out_rn</span> <span class="o">&lt;=</span> <span class="n">rd_in_rn</span><span class="p">;</span>
+                    <span class="k">if</span><span class="p">(</span><span class="o">|</span><span class="n">rd_in_rn</span> <span class="o">&amp;&amp;</span> <span class="n">unit</span><span class="o">!=</span><span class="mh">3&#39;h6</span><span class="p">)</span> <span class="n">reg_busy</span><span class="p">[</span><span class="n">rd_in_rn</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+
+                <span class="k">end</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">branch_type</span><span class="p">)</span> <span class="k">begin</span>
+                    <span class="n">branch_en</span> <span class="o">&lt;=</span> <span class="mh">1</span><span class="p">;</span>
+                    <span class="n">rd_out_rn</span> <span class="o">&lt;=</span> <span class="n">rd_in_rn</span><span class="p">;</span>
+                    <span class="c1">//No need to mark R63 busy. If the branch is taken, other</span>
+                    <span class="c1">//instructions in the pipeline are cancelled.</span>
+                <span class="k">end</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+<span class="k">endmodule</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="jtag_state_machine.html" class="btn btn-neutral float-right" title="jtag_state_machine.v" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ff_sync.html" class="btn btn-neutral" title="ff_sync.v" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Christopher Parish
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

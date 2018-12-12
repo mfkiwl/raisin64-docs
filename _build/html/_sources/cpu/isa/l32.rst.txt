@@ -1,19 +1,25 @@
 L32 - Load 32-bit
 =================
 
+Loads 32-bit word from address ``$rs1`` offset by a signed immediate value and places it into ``$rd``.
+
 Usage
 -----
 
 .. code-block:: asm
 
-   todo
+   l32 $rd, imm($rs1)
 
 Operation
 ---------
 
 .. code-block:: c
 
-   todo;
+   rd[63:32] = 0;
+   rd[31:24] = *(rs+imm);
+   rd[23:16] = *(rs+imm+1);
+   rd[15:8]  = *(rs+imm+2);
+   rd[7:0]   = *(rs+imm+3);
    advance_pc();
 
 Encoding
