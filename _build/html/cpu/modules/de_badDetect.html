@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>de_badDetect.v &mdash; Raisin64 0.1 documentation</title>
+  <title>de_badDetect.v &mdash; Raisin64 0.2 documentation</title>
   
 
   
@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="de_canonicalize.v" href="de_canonicalize.html" />
-    <link rel="prev" title="Verilog Module Index" href="../modules.html" /> 
+    <link rel="prev" title="commit.v" href="commit.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.1
+                0.2
               </div>
             
           
@@ -90,13 +90,28 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../modules.html">Reference Index</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../isa.html">Raisin64 Instruction Set</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../modules.html">Verilog Module Index</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="commit.html">commit.v</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">de_badDetect.v</a></li>
 <li class="toctree-l3"><a class="reference internal" href="de_canonicalize.html">de_canonicalize.v</a></li>
-<li class="toctree-l3"><a class="reference internal" href="de_isa_def.html">de_isa_def.vh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug_control.html">debug_control.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="decode.html">decode.v</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ex_advint.html">ex_advint.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_advint_s1.html">ex_advint_s1.v</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ex_alu.html">ex_alu.v</a></li>
-<li class="toctree-l3"><a class="reference internal" href="raisin64.html">Raisin64.v</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rf_reg.html">rf_reg.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_alu_s1.html">ex_alu_s1.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_branch.html">ex_branch.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ex_memory.html">ex_memory.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fetch.html">fetch.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ff_sync.html">ff_sync.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag_reg.html">schedule.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag_state_machine.html">jtag_state_machine.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtaglet.html">jtaglet.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory_map.html">memory_map.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeline.html">pipeline.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raisin64.html">raisin64.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ram.html">ram.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regfile.html">regfile.v</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schedule.html">schedule.v</a></li>
 </ul>
 </li>
 </ul>
@@ -171,11 +186,45 @@
             
   <div class="section" id="de-baddetect-v">
 <h1>de_badDetect.v<a class="headerlink" href="#de-baddetect-v" title="Permalink to this headline">¶</a></h1>
-<div class="figure align-center" id="id1">
 <object data="../../_images/symbol-a7e88668ee46a4f55f9ba35c2c3fa85d5fee2716.svg" type="image/svg+xml">
-            <p class="warning">de_badDetect.v</p></object>
-<p class="caption"><span class="caption-text">de_badDetect.v</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
+            <p class="warning">//Raisin64 Decode Unit - Bad Opcode Detector
+
+module de_badDetect(
+    //# {{data|Instruction Data}}
+    input[63:56] instOpByteIn,
+
+    //# {{control|Control Signals}}
+    output badOpcode
+    );
+
+    `include &quot;de_isa_def.vh&quot;
+
+    reg badOpcode_pre;
+    wire is16, is32, is64;
+
+    assign badOpcode = badOpcode_pre;
+
+    assign is16 = ~instOpByteIn[63];
+    assign is32 = instOpByteIn[63:62] == 2'h2;
+    assign is64 = instOpByteIn[63:62] == 2'h3;
+
+    //Detects and flags invalid opcodes
+    always &#64;(*)
+    begin
+        badOpcode_pre = 0;
+
+        if(is16 &amp;&amp; instOpByteIn[62:60] == 3'h7) badOpcode_pre = 1;
+        else if(is32 | is64)
+        begin
+            case(instOpByteIn[61:56])
+                `OP_BAD_02, `OP_BAD_03, `OP_BAD_0B, `OP_BAD_14, `OP_BAD_15,
+                `OP_BAD_16, `OP_BAD_17, `OP_BAD_18, `OP_BAD_19, `OP_BAD_1A,
+                `OP_BAD_1B, `OP_BAD_22, `OP_BAD_23, `OP_BAD_2B: badOpcode_pre = 1;
+                `OP_FSTAR, `OP_LUI, `OP_JALI, `OP_JI: if(is32) badOpcode_pre = 1;
+            endcase
+        end
+    end
+endmodule</p></object>
 <div class="highlight-verilog notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -266,7 +315,7 @@
         <a href="de_canonicalize.html" class="btn btn-neutral float-right" title="de_canonicalize.v" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../modules.html" class="btn btn-neutral" title="Verilog Module Index" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="commit.html" class="btn btn-neutral" title="commit.v" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
