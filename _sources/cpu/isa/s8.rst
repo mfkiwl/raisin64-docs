@@ -1,19 +1,21 @@
 S8 - Store 8-bit
 ================
 
+Store least significant 8 bits of ``$rd`` into the address located in ``$rs1`` offset by a signed immediate value.
+
 Usage
 -----
 
 .. code-block:: asm
 
-   todo
+   s8 $rd, imm($rs1)
 
 Operation
 ---------
 
 .. code-block:: c
 
-   todo;
+   *(rs+imm) = rd[7:0];
    advance_pc();
 
 Encoding

@@ -1,23 +1,23 @@
 BEQ - Branch if Equal
 =====================
 
-If the ``Rs`` register is equal to the ``Rd`` register, the program branches by the signed immediate displacement.  As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.
+If the ``$rs1`` register is equal to the ``$rd`` register, the program branches by the signed immediate displacement.  As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.
 
-.. tip:: An unconditional branch can be accomplished by comparing ``r0`` with itself.
+.. tip:: An unconditional branch can be accomplished by comparing ``$zero`` with itself.
 
 Usage
 -----
 
 .. code-block:: asm
 
-   beq Rd, Rs, imm
+   beq $rd, $rs1, imm
 
 Operation
 ---------
 
 .. code-block:: c
 
-   if(Rd == Rs)
+   if(rd == rs)
       pc = pc+(imm<<1);
    else
       advance_pc();

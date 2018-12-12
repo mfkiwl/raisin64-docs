@@ -1,21 +1,21 @@
 AND - Bitwise AND
 =================
 
-Bitwise ANDs registers ``Rs1`` and ``Rs2``, placing the result in ``Rd``.
+ANDs ``$rs1`` with ``$rs2``, placing the result in ``$rd``.
 
 Usage
 -----
 
 .. code-block:: asm
 
-   and Rd, Rs1, Rs2
+   and $rd, $rs1, $rs2
 
 Operation
 ---------
 
 .. code-block:: c
 
-   Rd = Rs1 & Rs2;
+   rd = rs1 & rs2;
    advance_pc();
 
 Encoding

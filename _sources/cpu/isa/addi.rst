@@ -1,7 +1,7 @@
 ADDI - Integer Add Immediate
 ============================
 
-Adds registers ``Rs1`` and a sign-extended immediate value, placing the result in ``Rd``.
+Adds registers ``$rs1`` and a sign-extended immediate value, placing the result in ``$rd``.
 
 Usage
 -----

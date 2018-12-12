@@ -1,22 +1,22 @@
 DIVU - Unsigned Integer Divide
 ==============================
 
-Divides registers ``Rs1`` by ``Rs2``, and places the quotient in ``Rd`` and the remainder in ``Rd2``, treating operands as unsigned.
+Divides registers ``$rs1`` by ``$rs2``, and places the quotient in ``$rd`` and the remainder in ``$rd2``, treating operands as unsigned.
 
 Usage
 -----
 
 .. code-block:: asm
 
-   div Rd, Rd2, Rs1, Rs2
+   divu $rd, $rd2, $rs1, $rs2
 
 Operation
 ---------
 
 .. code-block:: c
 
-   Rd = Rs1 / Rs2;
-   Rd2 = Rs1 % Rs2;
+   rd = rs1 / rs2;
+   rd2 = rs1 % rs2;
    advance_pc();
 
 Encoding

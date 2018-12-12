@@ -1,19 +1,21 @@
 SRAI - Shift Right Arithmetic Immediate
 =======================================
 
+Shift the contents of register ``$rs1`` right by a number of bits specified in the immediate field, sign-extending the value from ``$rs1`` and storing the result in ``$rd``
+
 Usage
 -----
 
 .. code-block:: asm
 
-   todo
+   srai $rd, $rs1, imm
 
 Operation
 ---------
 
 .. code-block:: c
 
-   todo;
+   rd = sign_extend(rs1)>>imm;
    advance_pc();
 
 Encoding

@@ -1,19 +1,22 @@
 S16 - Store 16-bit
 ==================
 
+Store least significant 16 bits of ``$rd`` into the address located in ``$rs1`` offset by a signed immediate value.
+
 Usage
 -----
 
 .. code-block:: asm
 
-   todo
+   s16 $rd, imm($rs1)
 
 Operation
 ---------
 
 .. code-block:: c
 
-   todo;
+   *(rs+imm)   = rd[15:8];
+   *(rs+imm+1) = rd[7:0];
    advance_pc();
 
 Encoding

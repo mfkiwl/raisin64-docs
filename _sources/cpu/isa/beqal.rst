@@ -1,16 +1,16 @@
 BEQAL - Branch if Equal And Link
 ================================
 
-If the ``Rs`` register is equal to the ``Rd`` register, the program branches by the signed immediate displacement.  The address of the next linear instruction is placed as a return address in ``r63``.  As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.
+If the ``$rs1`` register is equal to the ``$rd`` register, the program branches by the signed immediate displacement.  The address of the next linear instruction is placed as a return address in ``r63``.  As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.
 
-.. tip:: An unconditional branch can be accomplished by comparing ``r0`` with itself.
+.. tip:: An unconditional branch can be accomplished by comparing ``$zero`` with itself.
 
 Usage
 -----
 
 .. code-block:: asm
 
-   beqal Rd, Rs, imm
+   beqal $rd, $rs1, imm
 
 Operation
 ---------

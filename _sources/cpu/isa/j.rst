@@ -1,21 +1,21 @@
 J - Jump
 ========
 
-Unconditional jump to the instruction in ``Rs``.  As instructions must be aligned to 16-bit boundaries, the immediate value is left shifted by 1 before the jump.
+Unconditional jump to the instruction in ``$rs1``.
 
 Usage
 -----
 
 .. code-block:: asm
 
-   j Rs
+   j $rs1
 
 Operation
 ---------
 
 .. code-block:: c
 
-   pc = Rs;
+   pc = rs1;
 
 Encoding
 --------

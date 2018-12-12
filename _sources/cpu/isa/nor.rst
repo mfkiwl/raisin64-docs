@@ -1,19 +1,21 @@
 NOR - Bitwise NOR
 =================
 
+NORs ``$rs1`` with ``$rs2``, placing the result in ``$rd``.
+
 Usage
 -----
 
 .. code-block:: asm
 
-   todo
+   nor $rd, $rs1, $rs2
 
 Operation
 ---------
 
 .. code-block:: c
 
-   todo;
+   rd = ~(rs1|rs2);
    advance_pc();
 
 Encoding

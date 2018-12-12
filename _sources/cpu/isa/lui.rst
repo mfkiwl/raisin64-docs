@@ -1,19 +1,21 @@
 LUI - Load Upper Immediate
 ==========================
 
+Loads the immediate value into the upper 32 bits of ``$rd``.
+
 Usage
 -----
 
 .. code-block:: asm
 
-   todo
+   lui $rd, imm
 
 Operation
 ---------
 
 .. code-block:: c
 
-   todo;
+   rd = imm << 32;
    advance_pc();
 
 Encoding
