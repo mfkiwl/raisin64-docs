@@ -82,8 +82,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="cpu.html">Raisin64 CPU</a></li>
 <li class="toctree-l1"><a class="reference internal" href="software.html">Code Snippets and Software</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
@@ -160,14 +159,224 @@
             
   <div class="section" id="nexys-4-ddr-reference-implementation">
 <h1>Nexys 4 DDR Reference Implementation<a class="headerlink" href="#nexys-4-ddr-reference-implementation" title="Permalink to this headline">¶</a></h1>
+<p>The Nexys 4 DDR (Using a <a class="reference external" href="https://www.xilinx.com/products/silicon-devices/fpga/artix-7.html">Xilinx Artix-7</a> series XC7A100T-1CSG324C) was chosen as the reference implementation due to its copious hardware resources, interactive IO, and sufficient memory for a general purpose operating system to run using the onboard resources.  The Raisin64 was connected to memory-mapped peripherals providing access to the LEDs, Switches, and a custom written character oriented VGA controller.</p>
 <div class="section" id="soc-peripherals">
 <h2>SoC Peripherals<a class="headerlink" href="#soc-peripherals" title="Permalink to this headline">¶</a></h2>
+<p>Included are several trivial IO devices such as the switch and LED interface.  These simply wait to be enabled based on the present address and a simple memory map decoder, carrying out the input or output as dictated by the processor output enable and write signals.</p>
+<p><strong>IO Memory Map:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="60%" />
+<col width="40%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Name</td>
+<td>Base Address</td>
+</tr>
+<tr class="row-even"><td>LED Output</td>
+<td>0xFFFFC000_00004000</td>
+</tr>
+<tr class="row-odd"><td>Switch Input</td>
+<td>0xFFFFC000_00008000</td>
+</tr>
+<tr class="row-even"><td>VGA Character/Attribute RAM</td>
+<td>0xFFFFC000_00040000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Simple IO Control:</strong></p>
+<div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="c1">//////////  IO  //////////</span>
+<span class="kt">wire</span> <span class="n">led_en</span><span class="p">,</span> <span class="n">sw_en</span><span class="p">,</span> <span class="n">vga_en</span><span class="p">;</span>
+<span class="n">memory_map</span> <span class="n">memory_map_external</span><span class="p">(</span>
+    <span class="p">.</span><span class="n">addr</span><span class="p">(</span><span class="n">mem_addr_valid</span> <span class="o">?</span> <span class="n">mem_addr</span> <span class="o">:</span> <span class="mh">64&#39;h0</span><span class="p">),</span>
+    <span class="p">.</span><span class="n">led</span><span class="p">(</span><span class="n">led_en</span><span class="p">),</span>
+    <span class="p">.</span><span class="n">sw</span><span class="p">(</span><span class="n">sw_en</span><span class="p">),</span>
+    <span class="p">.</span><span class="n">vga</span><span class="p">(</span><span class="n">vga_en</span><span class="p">)</span>
+    <span class="p">);</span>
+
+<span class="c1">//As noted in raisin64.v because our IO architecture will need to be completely</span>
+<span class="c1">//re-written with the introduction of caches, we only support 64-bit aligned</span>
+<span class="c1">//access to IO space for now.</span>
+<span class="kt">reg</span><span class="p">[</span><span class="mh">15</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">led_reg</span><span class="p">;</span>
+<span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk_dig</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">rst_n</span><span class="p">)</span> <span class="k">begin</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span> <span class="n">led_reg</span> <span class="o">&lt;=</span> <span class="mh">16&#39;h0</span><span class="p">;</span>
+    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">led_en</span> <span class="o">&amp;</span> <span class="n">mem_from_cpu_write</span><span class="p">)</span> <span class="n">led_reg</span> <span class="o">&lt;=</span> <span class="n">mem_from_cpu</span><span class="p">;</span>
+<span class="k">end</span>
+
+<span class="k">assign</span> <span class="no">LED</span> <span class="o">=</span> <span class="n">led_reg</span><span class="p">;</span>
+
+<span class="c1">//SW uses a small synchronizer</span>
+<span class="kt">reg</span><span class="p">[</span><span class="mh">15</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">sw_pre0</span><span class="p">,</span> <span class="n">sw_pre1</span><span class="p">;</span>
+<span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk_dig</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">rst_n</span><span class="p">)</span> <span class="k">begin</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span> <span class="k">begin</span>
+        <span class="n">sw_pre0</span> <span class="o">&lt;=</span> <span class="mh">16&#39;h0</span><span class="p">;</span>
+        <span class="n">sw_pre1</span> <span class="o">&lt;=</span> <span class="mh">16&#39;h0</span><span class="p">;</span>
+    <span class="k">end</span> <span class="k">else</span> <span class="k">begin</span>
+        <span class="n">sw_pre0</span> <span class="o">&lt;=</span> <span class="n">sw_pre1</span><span class="p">;</span>
+        <span class="n">sw_pre1</span> <span class="o">&lt;=</span> <span class="no">SW</span><span class="p">;</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1">//Data selection</span>
+<span class="k">assign</span> <span class="n">mem_to_cpu_ready</span> <span class="o">=</span> <span class="n">mem_addr_valid</span><span class="p">;</span>
+<span class="k">assign</span> <span class="n">mem_to_cpu</span> <span class="o">=</span> <span class="n">sw_en</span> <span class="o">?</span> <span class="n">sw_pre0</span> <span class="o">:</span>
+                    <span class="n">vga_en</span> <span class="o">?</span> <span class="n">vga_dout</span> <span class="o">:</span>
+                    <span class="mh">64&#39;h0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The VGA controller is a much more complicated device, although it presents a simple interface to the CPU.  Each “cell” in the video memory is a combined 16-bit character/attribute word, with the least significant 8-bits containing the ASCII character to draw and the most significant 8-bits containing the character’s color attributes.</p>
+<p><strong>VGA Controller Block Diagram:</strong></p>
+<a class="reference internal image-reference" href="_images/vgablock.png"><img alt="VGA Controller Block Diagram" src="_images/vgablock.png" style="width: 100%;" /></a>
+<p>More information is available at <a class="reference external" href="https://github.com/ChrisPVille/VGA-CharGen">https://github.com/ChrisPVille/VGA-CharGen</a></p>
 </div>
 <div class="section" id="required-hardware">
 <h2>Required Hardware<a class="headerlink" href="#required-hardware" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://store.digilentinc.com/nexys-4-ddr-artix-7-fpga-trainer-board-recommended-for-ece-curriculum/">Nexys 4 DDR</a> (Also known as Nexys A7)</li>
+<li><a class="reference external" href="http://dangerousprototypes.com/docs/Bus_Blaster">Bus Blaster</a> (or another OpenOCD compatible JTAG Probe)</li>
+<li>VGA Monitor/Adapter</li>
+</ul>
 </div>
 <div class="section" id="synthesizing-the-core">
 <h2>Synthesizing the Core<a class="headerlink" href="#synthesizing-the-core" title="Permalink to this headline">¶</a></h2>
+<p>The Vivado 2018.2 project can either be cloned from the <a class="reference external" href="https://github.com/ChrisPVille/raisin64-nexys4ddr">project repository</a> (<strong>don’t forget</strong> to use the recursive flag), or a pre-packaged release can be downloaded from the <a class="reference external" href="https://github.com/ChrisPVille/raisin64-nexys4ddr/releases">release page</a> .</p>
+<p>When opening the .xpr in Vivado, it should re-scan the source directories and update its module hierarchy.  The project is configured for default non-aggressive implementation options to speed synthesis and place/route.  With these defaults, it should only take one or two minutes to get through implementation on a reasonably fast machine.  The resulting utilization should be similar or less than:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="47%" />
+<col width="10%" />
+<col width="12%" />
+<col width="19%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Site Type</th>
+<th class="head">Used</th>
+<th class="head">Fixed</th>
+<th class="head">Available</th>
+<th class="head">Util%</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Slice LUTs</td>
+<td>4109</td>
+<td>0</td>
+<td>63400</td>
+<td>6.48</td>
+</tr>
+<tr class="row-odd"><td><ul class="first last simple">
+<li>LUT as Logic</li>
+</ul>
+</td>
+<td>3910</td>
+<td>0</td>
+<td>63400</td>
+<td>6.17</td>
+</tr>
+<tr class="row-even"><td><ul class="first last simple">
+<li>LUT as Memory</li>
+</ul>
+</td>
+<td>199</td>
+<td>0</td>
+<td>19000</td>
+<td>1.05</td>
+</tr>
+<tr class="row-odd"><td><ul class="first last simple">
+<li>LUT as Distributed RAM</li>
+</ul>
+</td>
+<td>176</td>
+<td>0</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><ul class="first last simple">
+<li>LUT as Shift Register</li>
+</ul>
+</td>
+<td>23</td>
+<td>0</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Slice Registers</td>
+<td>2363</td>
+<td>0</td>
+<td>126800</td>
+<td>1.86</td>
+</tr>
+<tr class="row-even"><td><ul class="first last simple">
+<li>Register as Flip Flop</li>
+</ul>
+</td>
+<td>2363</td>
+<td>0</td>
+<td>126800</td>
+<td>1.86</td>
+</tr>
+<tr class="row-odd"><td><ul class="first last simple">
+<li>Register as Latch</li>
+</ul>
+</td>
+<td>0</td>
+<td>0</td>
+<td>126800</td>
+<td>0.00</td>
+</tr>
+<tr class="row-even"><td>F7 Muxes</td>
+<td>73</td>
+<td>0</td>
+<td>31700</td>
+<td>0.23</td>
+</tr>
+<tr class="row-odd"><td>F8 Muxes</td>
+<td>0</td>
+<td>0</td>
+<td>15850</td>
+<td>0.00</td>
+</tr>
+<tr class="row-even"><td>Block RAM Tile</td>
+<td>13</td>
+<td>0</td>
+<td>135</td>
+<td>9.63</td>
+</tr>
+<tr class="row-odd"><td><ul class="first last simple">
+<li>RAMB36E1</li>
+</ul>
+</td>
+<td>13</td>
+<td>0</td>
+<td>135</td>
+<td>9.63</td>
+</tr>
+<tr class="row-even"><td><ul class="first last simple">
+<li>RAMB18</li>
+</ul>
+</td>
+<td>0</td>
+<td>0</td>
+<td>270</td>
+<td>0.00</td>
+</tr>
+<tr class="row-odd"><td>DSPs</td>
+<td>16</td>
+<td>0</td>
+<td>240</td>
+<td>6.67</td>
+</tr>
+<tr class="row-even"><td><ul class="first last simple">
+<li>DSP48E1 only</li>
+</ul>
+</td>
+<td>16</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 

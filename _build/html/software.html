@@ -467,7 +467,7 @@ fin_loop:
     beqal $r16, $r5, reset_finloop
     ji    fin_loop             #Repeat
 reset_finloop:
-    addi  $r16, $zero, COL*40
+    addi  $r16, $zero, COL*40  #Start at row 40
     j     $lr
 
 #Clears display
