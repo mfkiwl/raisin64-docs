@@ -1,20 +1,20 @@
 Tools
 =====
 
-Being a completely new computer architecture and instruction set, there are were no ready-made tools available for assembly, disassembly, linking, debugging, etc.  In the spirit of bootstrapping a new system, it was decided early that if the eventual goal is to run a general purpose operating system on the machine, GCC will be required.  GCC leverages `binutils <https://www.gnu.org/software/binutils/>`_, a collection of assembly tools, ELF and object file manipulation utilities, as well as a powerful linker.
+As a completely new computer architecture and instruction set, there were no ready-made tools available for assembly, disassembly, linking, debugging, etc.  In the spirit of bootstrapping a new system, it was decided early that given the eventual goal to run a general purpose operating system, GCC will be required.  GCC leverages `binutils <https://www.gnu.org/software/binutils/>`_, a collection of assembly tools, object file manipulation utilities, as well as a powerful linker.
 
-Using the preliminary instruction set decided early in the semester, binutils was ported to the Raisin64 ISA while the processor was still being designed.  Using an existing target (the `moxie <http://moxielogic.org/blog/pages/architecture.html>`_ as a template, the initial port of binutils was made functional by creating/modifying 26 files across the source.
+Using the preliminary instruction set defined early in the semester, binutils was ported to the Raisin64 ISA while the processor was still being developed.  With an existing target (the `moxie <http://moxielogic.org/blog/pages/architecture.html>`_) as a template, the initial port of binutils was made functional by creating/modifying 26 files across the source.
 
 .. admonition:: Future Work
 
    The current Raisin64 GNU Assembler port only constructs the 64-bit version of the instruction set.  While the linker, disassembler, and other infrastructure tools should support the smaller instruction words (with some testing done to that effect), the assembler will require significant work outside the scope of the present semester.
 
-While the template architecture was noted for it's reasonable size (architecture definitions and assembler were in the many-hundred-line range instead of the tens-of-thousands range for MIPS and X86), the Raisin64 is quite dissimilar being 64-bit with an entirely different instruction scheme.  The `actual assembler core <https://github.com/ChrisPVille/raisin64-binutils/blob/raisin64/gas/config/tc-raisin64.c>`_ was largely rewritten in what became a deep exploration of the binutils architecture.
+The software architecture of the template was noted for it's reasonable size (ISA definitions and assembler were in the many-hundred-line range instead of the tens-of-thousands range for MIPS and X86), the Raisin64 is quite dissimilar being 64-bit with an entirely different instruction scheme.  The `actual assembler core <https://github.com/ChrisPVille/raisin64-binutils/blob/raisin64/gas/config/tc-raisin64.c>`_ was largely rewritten in what became a deep exploration of the binutils architecture.
 
 Assembler
 ---------
 
-Being a port of binutils, the Raisin64 assembler should be familiar and comfortable to use for an assembly language programmer supporting the full set of `GNU As <https://sourceware.org/binutils/docs/as/index.html>`_ features.  An effort was made to support MIPS-like syntax with ``$r0`` or ``$zero`` register numbering
+Being a port of binutils, the Raisin64 assembler should be familiar and comfortable to use for an assembly language programmer supporting the full set of `GNU As <https://sourceware.org/binutils/docs/as/index.html>`_ features.  An effort was made to support MIPS-like syntax with ``$r0`` or ``$zero`` style register numbering and a ``opcode $dest, $src1, $src2`` format.
 
 **Named Registers:**
 
@@ -31,9 +31,9 @@ The assembler can be invoked as usual for GNU As:
 .. parsed-literal::
    raisin64-elf-as <input file> -o <output.elf>
 
-which will produce an ELF that can be manipulated with objdump, objcopy, etc.
+This will produce an ELF that can be manipulated with objdump, objcopy, etc.
 
-An example of the assembly process is in `assemble.sh <https://github.com/ChrisPVille/raisin64-cpu/blob/master/support/assemble.sh>`_ which takes an input assembly file, produces the assembled ELF, extracts the ``.text`` and ``.data`` sections (containing the instruction and data memories respectively), and converts them from hex to ASCII using the xxd utility.  The result is suitable for the ``$readmemh`` Verilog commands:
+An example of the assembly process is in `assemble.sh <https://github.com/ChrisPVille/raisin64-cpu/blob/master/support/assemble.sh>`_ which takes an input assembly file, produces the assembled ELF, extracts the ``.text`` and ``.data`` sections (containing the instruction and data memories respectively), finally converting them from hex to ASCII using the xxd utility.  The result is suitable for the ``$readmemh`` Verilog command:
 
 .. code-block:: shell
 
@@ -64,7 +64,7 @@ Binutils is mostly free from external dependencies out of necessity, so it shoul
 Debugging
 ---------
 
-As the Raisin64 was designed with a from-scratch JTAG controller I wrote recently (the `JTAGlet <https://github.com/ChrisPVille/jtaglet>`_), there was no existing support in any tools.  Not that JTAG core support would help much given the new ISA, but keeping with the bootstrap theme, a custom configuration script for `OpenOCD <http://openocd.org/>`_ was created that uses/misuses the scripting interface to provide communication with the processor's JTAG interface, program the memories, and examine the state of the machine.
+As the Raisin64 was designed with a home grown JTAG controller I wrote recently (the `JTAGlet <https://github.com/ChrisPVille/jtaglet>`_), there was no existing support in any tools.  Not that JTAG core support would help much given the new ISA, but keeping with the bootstrap theme, a custom configuration script for `OpenOCD <http://openocd.org/>`_ was created that uses/misuses the scripting interface to provide communication with the processor's JTAG interface, program the memories, and examine the state of the machine.
 
 .. admonition:: Future Work
 
@@ -95,5 +95,6 @@ Getting OpenOCD
 ^^^^^^^^^^^^^^^
 
 As the present time, any modern version of OpenOCD can be used along with the script file for the Raisin64.
+
 Official releases are at: `<http://openocd.org/getting-openocd/>`_
 The future Raisin64 version will be located: `<https://github.com/ChrisPVille/raisin64-openocd>`_

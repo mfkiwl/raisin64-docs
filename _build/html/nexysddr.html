@@ -159,10 +159,10 @@
             
   <div class="section" id="nexys-4-ddr-reference-implementation">
 <h1>Nexys 4 DDR Reference Implementation<a class="headerlink" href="#nexys-4-ddr-reference-implementation" title="Permalink to this headline">¶</a></h1>
-<p>The Nexys 4 DDR (Using a <a class="reference external" href="https://www.xilinx.com/products/silicon-devices/fpga/artix-7.html">Xilinx Artix-7</a> series XC7A100T-1CSG324C) was chosen as the reference implementation due to its copious hardware resources, interactive IO, and sufficient memory for a general purpose operating system to run using the onboard resources.  The Raisin64 was connected to memory-mapped peripherals providing access to the LEDs, Switches, and a custom written character oriented VGA controller.</p>
+<p>The Nexys 4 DDR (Using a <a class="reference external" href="https://www.xilinx.com/products/silicon-devices/fpga/artix-7.html">Xilinx Artix-7</a> series XC7A100T-1CSG324C) was chosen as the reference implementation due to its copious hardware resources, interactive IO, and sufficient memory for a general purpose operating system using the onboard resources.  The Raisin64 was connected to memory-mapped peripherals providing access to the LEDs, Switches, and a custom written character oriented VGA controller.</p>
 <div class="section" id="soc-peripherals">
 <h2>SoC Peripherals<a class="headerlink" href="#soc-peripherals" title="Permalink to this headline">¶</a></h2>
-<p>Included are several trivial IO devices such as the switch and LED interface.  These simply wait to be enabled based on the present address and a simple memory map decoder, carrying out the input or output as dictated by the processor output enable and write signals.</p>
+<p>Included are several trivial IO devices such as the switch and LED interface.  These simply wait to be enabled based on the present address and a simple memory map decoder, carrying out the input or output as dictated by the processor’s output enable and write signals.</p>
 <p><strong>IO Memory Map:</strong></p>
 <table border="1" class="docutils">
 <colgroup>

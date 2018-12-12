@@ -1,14 +1,14 @@
 Code Snippets and Software
 ==========================
 
-Each `instruction <isa>`_ page contains an example of how to use that specific opcode which will not be repeated here.  Instead, a few simple programs will pre presented that work with the :ref:`Nexys 4 DDR Reference Implementation <nexysddr:Nexys 4 DDR Reference Implementation>` demonstrating aspects of the ISA or use of the hardware.
+Each `instruction <isa>`_ detail page contains an example of how to use that specific opcode which will not be repeated here.  Instead, a few simple programs will presented that work with the :ref:`Nexys 4 DDR Reference Implementation <nexysddr:Nexys 4 DDR Reference Implementation>`, demonstrating aspects of the ISA or use of the hardware.
 
-While having a completely different opcode format and compact instruction support, the Raisin64 drew inspiration from MIPS for it's instruction set and mnemonics.  As a result, several programs I created for a previous academic MIPS design were easily ported to the Raisin64.
+While containing a completely different opcode format and compact instruction support, the Raisin64 drew inspiration from MIPS for its instruction set and mnemonics.  As a result, several programs I created for a previous academic MIPS design were easily ported to the Raisin64.
 
 Switch to LED
 -------------
 
-The Switch to LED program is the simplest proof of life for the Nexys 4 DDR board, reading the present position of the switches, and mirroring them onto the array of LEDs located immediately above them.
+The Switch to LED program is the simplest proof-of-life for the Nexys 4 DDR board, reading the present position of the switches, and mirroring them onto the array of LEDs located immediately above.
 
 .. code-block:: gas
 
@@ -33,7 +33,7 @@ The Switch to LED program is the simplest proof of life for the Nexys 4 DDR boar
     :width: 100%
     :alt: Switch to LED sim
 
-From a simulation of the external hardware, the LED port can be seen tracking the SW (switch) port soon after it changes.  This can be run on the real hardware with the same result:
+From a simulation of the external hardware, the LED port is seen tracking the SW (switch) port soon after it changes.  This can be run on the real hardware with the same result:
 
 .. image:: _static/swtoledreal.jpg
     :width: 100%
@@ -42,9 +42,9 @@ From a simulation of the external hardware, the LED port can be seen tracking th
 VGA Demo Program
 ----------------
 
-As a non-trivial test of the processor, a demo program was created exercising the VGA subsystem of the Nexys 4 DDR board located at 0xFFFFC000_0004xxxx on the data memory bus.  In addition to the switch to LED functionality above, it draws a hello world string and continuously iterates through the character set and color options on the lower half of the display.
+As a non-trivial test of the processor, a demo program was created exercising the VGA subsystem of the Nexys 4 DDR board located at 0xFFFFC000_0004xxxx on the data memory bus.  In addition to the switch-to-LED functionality above, it draws a hello world string and continuously iterates through the character set on the lower half of the display.
 
-The assembly demonstrates the use of a stack, as well as useful GNU assembler tools like defines, macros, data labels, alignment, etc.  Also available at: `<https://github.com/ChrisPVille/raisin64-nexys4ddr/blob/master/software/demo.S>`_
+The assembly demonstrates the use of a stack, as well as useful GNU assembler syntax like defines, macros, data labels, alignment, etc.  Also available at: `<https://github.com/ChrisPVille/raisin64-nexys4ddr/blob/master/software/demo.S>`_
 
 .. code-block:: gas
     :linenos:

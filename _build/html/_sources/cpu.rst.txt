@@ -4,15 +4,15 @@ Raisin64 CPU
 Purpose
 -------
 
-The Raisin64, like most computer processors, is a collection of various processing elements and memories, creating what is presently a pipelined 64-bit Harvard RISC architecture.  While the initial semester of work focused on getting the design off the ground, designing the instruction set, laying out the execution pipeline, preparing the tools, etc.  The eventual goal is to create a CPU capable of running a modern general purpose operating system along with porting all the debug utilities, assembler, compiler, and other tools necessary for this platform.
+The Raisin64, like most computer processors, is a collection of various processing elements and memories, creating what is presently a pipelined 64-bit Harvard RISC architecture.  While the initial semester of work focused on getting the design off the ground, designing the instruction set, laying out the execution pipeline, preparing the tools, etc., the eventual goal is to create a CPU capable of running a modern general purpose operating system along with porting all the debug utilities, assembler, compiler, and other tools necessary for this platform.
 
-Given the relative paucity of new ISAs, there seems to be little in the way of academic coursework and technical documentation on the bootstrapping process which must occur to make a new architecture useful.  This project is the result of that observation, providing me with experience in more than just computer architecture, but in all those other software and hardware tasks necessary to actually do something with a CPU.
+Given the relative paucity of new ISAs, there seems to be little in the way of academic coursework and technical documentation on the bootstrapping process which must occur to make a new architecture useful.  This project is the result of those observations, and provides me with experience beyond just computer architecture, including those software and hardware tasks necessary to actually do something useful with a CPU.
 
 All of that said, the Raisin64 is an initial attempt at understanding pipelined processors, the trades between register count, opcode density, and speed, as well as being a platform for further experimentation.  Envisioned as a pure 64-bit machine, the Raisin64 has no legacy instruction set to support and can start as a clean slate.
 
-Anticipating that an out-of-order design with register renaming is too much work for a semester long project, the Raisin64 ISA instead has a larger architectural register set with 63 64-bit registers (Register 0 is always 0).  These additional registers have consequences for the instruction format, requiring 6 bits to represent.  While a 64-bit instruction word can easily store that, a fixed 64-bit instruction size would be immensely wasteful in terms of memory and cache utilization.
+Anticipating that an out-of-order design with register renaming would be too much work for a semester long project, the Raisin64 ISA has a larger architectural register set with 63 64-bit registers instead (Register 0 is always 0).  These additional registers have consequences for the instruction format, requiring 6 bits to represent.  While a 64-bit instruction word can easily store that, a fixed 64-bit instruction size would be immensely wasteful in terms of memory and cache utilization.
 
-It was decided to create a compact instruction format that allows certain instructions to have a 16-bit representation and nearly all to have 32-bit representations with only a few actually requiring the full 64-bit word (such as :ref:`Jump Immediate <cpu/isa/ji:JI - Jump Immediate>`).  Of course, a fixed instruction word is convenient, so the Raisin64's decode state is designed to expand the 16 and 32-bit instructions into full 64-bit canonical form as it arrives.  This still allows us to save on cache and memory while having a much simpler internal processing pipeline.
+I decided to create a compact instruction format that allows certain instructions to have 16-bit representations and nearly all to have 32-bit representations, with only a few actually requiring the full 64-bit word (such as :ref:`Jump Immediate <cpu/isa/ji:JI - Jump Immediate>`).  Of course, a fixed instruction word is convenient, so the Raisin64's decode state is designed to expand the 16 and 32-bit instructions into the full 64-bit canonical form as it arrives.  This also allows savings on cache and memory while having a simpler internal processing pipeline.
 
 Full details on the instruction word formatting are documented in the :ref:`Raisin64 Instruction Set <cpu/isa:Raisin64 Instruction Set>` section.
 
@@ -25,7 +25,7 @@ Pipeline Stages
 
 The Raisin64 pipeline connects together the various processing elements detailed in later sections.  Having seen several academic and open-source processor designs, the processing pipeline tends to be one of the more confusing modules to look at, not because of algorithmic complexity but usually due to the sheer number of signals moving around the design.
 
-Special effort was made to minimize the number of delay registers and extraneous signals at the various pipeline stages to keep the design understandable and relatively easy to debug.
+Special effort was made to minimize the number of delay registers and extraneous signals at the various pipeline stages, keeping the design understandable and relatively easy to debug.
 
 Below is an example of the Raisin64 executing the :ref:`VGA Demo Program <software:VGA Demo Program>`:
 
@@ -33,33 +33,33 @@ Below is an example of the Raisin64 executing the :ref:`VGA Demo Program <softwa
     :width: 100%
     :alt: Raisin64 running in simulation
 
-To assist with organization, signals in :ref:`pipeline.v <cpu/modules/pipeline:pipeline.v>` are generally prefixed with who generated that signal:
+To assist with organization, signals in :ref:`pipeline.v <cpu/modules/pipeline:pipeline.v>` are generally prefixed with the module that generated the signal:
 
-============== ============
+============== =============
 **Stage:**     **Prefix:**
--------------- ------------
+-------------- -------------
 Fetch          fe_*
 Decode         de_*
 Register File  rf_*
 Scheduler      sc_*
 Execution Unit ex_unitName_*
-============== ============
+============== =============
 
 Fetch Unit
 ++++++++++
 
-The :ref:`fetch unit <cpu/modules/fetch:fetch.v>` is responsible for maintaining the program counter, calculating the next linear instruction's address based on the size of the present instruction and muxing in the command to jump/branch to a different address.
+The :ref:`fetch unit <cpu/modules/fetch:fetch.v>` is responsible for maintaining the program counter, calculating the next linear instruction's address based on the size of the present instruction, and muxing in the command to jump/branch to a different address.
 
 Fetch is relatively straightforward although it does need to support stalls from both the memory interface (as the data may not be ready) and from deeper in the pipeline (should an instruction need to wait for execution resources).
 
 Decode Unit
 +++++++++++
 
-The :ref:`decode unit <cpu/modules/decode:decode.v>` is presently the simplest in the design.  Taking one or more instruction words left-aligned in it's input from the fetch unit, the decode unit passes the instruction simultaneously to the :ref:`instruction canonicalizer <cpu/modules/de_canonicalize:de_canonicalize.v>` for conversion into the equivalent native 64-bit instruction word and an :ref:`invalid opcode detector <cpu/modules/de_badDetect:de_badDetect.v>` which is unused owing to the present lack of interrupts.
+The :ref:`decode unit <cpu/modules/decode:decode.v>` is presently the simplest in the design.  Taking one or more instruction words left-aligned in it's input from the fetch unit, the decode unit passes the instruction simultaneously to the :ref:`instruction canonicalizer <cpu/modules/de_canonicalize:de_canonicalize.v>` for conversion into the native 64-bit instruction word and an :ref:`invalid opcode detector <cpu/modules/de_badDetect:de_badDetect.v>` which is unused (owing to the present lack of interrupts).
 
-Presently, the decode unit only decodes a single instruction at a time, limiting the issue rate of the processor to 1 at most.  Given the overall complexity of the design for a single semester project, it was decided to defer the multi-issue capability until next semester when the caches and the fetch system will be written and adapted to wider access.
+Presently, the decode unit only decodes a single instruction at a time, limiting the issue rate of the processor to 1 at most.  Given the overall complexity of the design for a single semester project, it was decided to defer the multi-issue capability until next semester when the caches and fetch system will be written and adapted to wider access.
 
-The decode unit also selects the two source register numbers for any instruction.  While these generally map exactly to the ``$rs1`` and ``$rs2`` fields for most instructions, opcodes like :ref:`Branch if Equal <cpu/isa/BEQ:BEQ - Branch if Equal>` use two registers and an immediate field.  To avoid creating another instruction format, the usual :ref:`32R <cpu/isa:32R - 32-bit Register Format>` format can be used, loading from ``$rd`` instead.
+The decode unit also selects the two source register numbers for any instruction.  While these generally map exactly to the ``$rs1`` and ``$rs2`` fields for most instructions, opcodes like :ref:`Branch if Equal <cpu/isa/BEQ:BEQ - Branch if Equal>` use two registers and the immediate field.  To avoid creating another instruction format, the usual :ref:`32R <cpu/isa:32R - 32-bit Register Format>` format can be used, loading from ``$rd`` instead.
 
 There is no scenario where more than two registers are loaded, so the decode unit publishes zero, one, or two register numbers for the register file to load in the next stage.
 
@@ -73,11 +73,11 @@ The register file is also designed to allow write values to fall through to the 
 Schedule Unit
 +++++++++++++
 
-The :ref:`scheduler <cpu/modules/schedule:schedule.v>` (or issue unit as it is conventionally known) runs concurrent to the register file on a given time-step.  This allows the register file time to gather the data required for an operation while the scheduler is making a decision whether or not to issue an instruction.
+The :ref:`scheduler <cpu/modules/schedule:schedule.v>`, or issue unit as it is conventionally known, runs concurrent to the register file on a given time-step.  This allows the register file time to gather the data required for an operation while the scheduler is making a decision whether or not to issue that instruction.
 
-Because execution units are allowed to take more than one cycle to complete, the scheduler tries to issue instructions up to the point where there are either A. No free execution resources or B. One of the source operands is going to be written by an in-progress instruction that hasn't finished.
+As execution units are allowed to take more than one cycle to complete, the scheduler tries to issue instructions up to the point where there are either no free execution resources or one of the source operands is going to be written by an in-progress instruction that hasn't finished.
 
-This is accomplished marking those destination register numbers busy when they are issued and unmarking them when they get written back to the register file.  This does allow for very limited non-speculating in-order issue, out-of-order execution when the register numbers don't overlap.  Consider the following:
+This is accomplished by marking those destination register numbers busy when they are issued and unmarking them when they are written back to the register file.  This allows for a limited non-speculating in-order issue with out-of-order execution when the register numbers don't overlap.  Consider the following:
 
 .. code-block:: gas
 
@@ -85,12 +85,12 @@ This is accomplished marking those destination register numbers busy when they a
     add $r3, $r4, $r5
     add $r4, $r5, $r6
 
-It is very likely that the ADD instructions will finish executing before the Store Word as the scheduler identified that the result of the Store Word affects only ``$r2`` which is not used in the subsequent instructions.  Because instructions are always *issued* in order, the re-use of ``$r4`` is not a problem here either.  It will always be read from the register file before the final ADD instruction is issued.
+It is very likely that the ADD instructions will finish executing before the Store Word as the scheduler identified the result of the Store Word affects only ``$r2`` which is not used in the subsequent instructions.  Because instructions are always *issued* in order, the re-use of ``$r4`` is not a problem here either.  It will always be read from the register file before the final ADD instruction is issued.
 
 Execution Units
 +++++++++++++++
 
-The execution units in the Raisin64 are entirely independent modules with a standard set of control signals
+The execution units in the Raisin64 are entirely independent modules with a standard set of control signals:
 
 .. code-block:: verilog
 
@@ -112,18 +112,18 @@ The Raisin64 does allow execution units to have two output registers (which is u
 
 Integer Unit
 ^^^^^^^^^^^^
-The :ref:`integer unit/ALU <cpu/modules/ex_alu:ex_alu.v>` is the registering wrapper around the :ref:`combinational ALU implementation <cpu/modules/ex_alu_s1:ex_alu_s1.v>`.  As this project was not focused on computer arithmetic and knowing this design would generally target FPGAs, it was decided to leave the Verilog operators for addition and subtraction.  Synthesizers are can be quite good at using dedicated hardware IP or putting down whatever adder implementation will best satisfy the speed and area constraints, and the use of built-in simple math operators have been some of the fastest paths in the design.
+The :ref:`integer unit/ALU <cpu/modules/ex_alu:ex_alu.v>` is the registering wrapper around the :ref:`combinational ALU implementation <cpu/modules/ex_alu_s1:ex_alu_s1.v>`.  As this project was not focused on computer arithmetic and with the knowledge that the design would generally target FPGAs, it was decided to leave the Verilog operators for addition and subtraction.  Synthesizers can be quite good at using dedicated hardware IP or putting down whatever adder implementation will best satisfy the speed and area constraints.
 
 Advanced Integer Unit
 ^^^^^^^^^^^^^^^^^^^^^
-The :ref:`advanced integer unit <cpu/modules/ex_advint:ex_advint.v>` is the registering wrapper around the :ref:`combinational advanced integer unit implementation <cpu/modules/ex_advint_s1:ex_advint_s1.v>`.  Again, for similar reasons, the math operations were left Verilog operators in the hopes that they would map nicely to onboard hard-IP present in the FPGA.  The multiplier did so nicely, mapping to a DSP block containing a multiply accumulate unit.  Unfortunately there is no division hardware present on the FPGA family used for evaluation of the Raisin64.
+The :ref:`advanced integer unit <cpu/modules/ex_advint:ex_advint.v>` is the registering wrapper around the :ref:`combinational advanced integer unit implementation <cpu/modules/ex_advint_s1:ex_advint_s1.v>`.  Again, for similar reasons, the math operations were left Verilog operators in the hopes that they would map nicely to onboard hard-IP present in the FPGA.  The multiplier did so, mapping to a DSP block containing a multiply-accumulate unit.  Unfortunately there is no division hardware present on the FPGA family used for evaluation of the Raisin64.
 
-This will need to be converted to a pipelined division unit (or reciprocal/multiplication) at some point in the future, but for now division is disabled as execution pipeline stalls are already proven and the division instruction is very ancillary to the project's goals.
+This will need to be converted to a pipelined division unit (or reciprocal/multiplication) at some point in the future, but for now division is disabled as execution pipeline stalls are already proven and the division instruction is ancillary to the project's goals.
 
 Branch Unit
 ^^^^^^^^^^^
 
-The :ref:`branch unit/ALU <cpu/modules/ex_branch:ex_branch.v>` itself is simple although the implications for the pipeline are complicated.  The branch unit operates in either branch or jump mode, with jump being a trivial distillation of the branching mode.  The unit accepts two input words and an immediate displacement value as well as a delayed version of the next linear program counter from the fetch unit.  The two words are compared and if equal, the branch unit adds the displacement to the program counter during its execution cycle.
+The :ref:`branch unit/ALU <cpu/modules/ex_branch:ex_branch.v>` itself is simple although the implications for the pipeline are complicated.  The branch unit operates in either branch or jump mode, with jump being a trivial distillation of the branching mode.  The unit accepts two input words and an immediate displacement value as well as a delayed version of the next linear program counter from the fetch unit.  If the two words are equal, the branch unit adds the displacement to the program counter during its execution cycle.
 
 On the next cycle, when results are typically presented to the commit unit, the branch unit will present ``$r63`` if appropriate for linking, and it will also signal the pipeline via ``do_jump`` that a jump is being issued.  This causes the pipeline to flush currently fetched and decoded instructions to a NOP value (effectively self-inserting the branch delay slot), canceling any non-issued instructions.
 
@@ -132,23 +132,23 @@ Because of the desire to allow the branch unit to take an arbitrary length of ti
 Memory Unit
 ^^^^^^^^^^^
 
-The :ref:`memory unit/ALU <cpu/modules/ex_memory:ex_memory.v>` is the processor core's only window into the data space.  Having a separate memory interface, the memory unit handles all load and store operations, calculating the effective address after adding the offsets, presenting the addresses on the bus, waiting for a response, and masking and sign-extending as required by the instruction before returning the result to the commit unit.
+The :ref:`memory unit/ALU <cpu/modules/ex_memory:ex_memory.v>` is the processor core's only window into the data space.  Having a separate memory interface, the memory unit handles all load and store operations, calculating the effective address after adding the offsets, presenting the addresses on the bus, waiting for a response, and masking/sign-extending as required by the instruction, before it returns the result to the commit unit.
 
-Currently designed with a minimum execution time of 3 cycles, the memory unit could be further optimized to reduce latency given some more analysis.  The offset calculation and masking/sign extension were intentionally put in their own stages preemptively for performance reasons.
+Currently designed with a minimum execution time of 3 cycles, the memory unit could be further optimized to reduce latency given more analysis.  The offset calculation and masking/sign-extension were intentionally put in their own stages preemptively for performance reasons.
 
 Commit Unit
 +++++++++++
 
-Given that results can arrive from many (possibly all) execution units simultaneously, the :ref:`commit unit/ALU <cpu/modules/commit:commit.v>` serves as a buffer between those results and the register file.  This prevents the need for a multi-ported write into the register file.  The exact order of the writes is non-deterministic based on the present state of the commit unit's writeback engine.  This does not present data consistency problems given that the scheduler has already taken care of resolving dependencies between the registers.
+As results can arrive from many (possibly all) execution units simultaneously, the :ref:`commit unit/ALU <cpu/modules/commit:commit.v>` serves as a buffer between those results and the register file.  This prevents the need for a multi-ported write into the register file.  The exact order of the writes is non-deterministic based on the present state of the commit unit's writeback engine.  This does not present data consistency problems given that the scheduler has already taken care of resolving dependencies between the registers.
 
-While it can only write back one register per cycle, it will continue to do so every cycle until empty, allowing it to drain faster that it will fill.  More analysis could be done on whether this is provably the case, but the commit unit will need to be rewritten to support precise interrupts and exceptions, allowing for an orderly (or at least traceable) change of processor state.
+While the commit unit can only write back one register per cycle, it will continue to do so every cycle until empty, allowing it to drain faster than it will fill.  More analysis could be done on whether this is provably the case, but the commit unit will need to be rewritten to support precise interrupts and exceptions, allowing for an orderly (or at least traceable) change of processor state.
 
 Debug Controller
 ----------------
 
 The `JTAGlet <https://github.com/ChrisPVille/jtaglet>`_ is a JTAG TAP written from scratch to allow for easy interfacing between a parallel interface (such as a processor bus) and hardware debug probes.  Sitting between Raisin64 and the JTAGlet JTAG TAP is :ref:`debug_control.v <cpu/modules/debug_control:debug_control.v>`.  This debug controller exposes JTAG registers from the TAP to the rest of the processor, allowing the debug controller to take over main memory for programming and inspection as well as halt and reset the CPU.
 
-This capability has several big advantages.  First, it allows for reprogramming the Raisin64 while it's running on an FPGA without waiting for re-synthesis just to change the software preloaded into RAM.  Second, it prevents the synthesizer from optimizing out parts of the processor design because they aren't reachable with whatever program was preloaded into the instruction RAM, which I have had happen before.
+This capability has several advantages.  First, it allows for reprogramming the Raisin64 while it's running on an FPGA without waiting for re-synthesis due to a software change.  Second, it prevents the synthesizer from optimizing out parts of the processor design that are not reachable with the program preloaded in the instruction RAM.
 
 Proposed Extensions
 -------------------
@@ -162,9 +162,9 @@ Proposed Extensions
 MMU
 +++
 
-Nearly all general purpose operating systems depend on a `Memory Management Unit <https://en.wikipedia.org/wiki/Memory_management_unit>`_ to provide the virtual addressing used by userspace processes [1]_ [2]_.  The MMU presents each process with an illusory linear address space potentially overlapping with many other processes.  Along with the `Translation Lookaside Buffer <https://en.wikipedia.org/wiki/Translation_lookaside_buffer>`_, an MMU critically allows processes to be placed at arbitrary physical addresses (wherever the RAM happens to be free), with pages of that physical memory mapped at whatever virtual addresses the process expects.
+Nearly all general purpose operating systems depend on a `Memory Management Unit <https://en.wikipedia.org/wiki/Memory_management_unit>`_ to provide the virtual addressing used by userspace processes [1]_ [2]_.  The MMU presents each process with an illusory linear address space potentially overlapping with many other processes.  Along with the `Translation Lookaside Buffer <https://en.wikipedia.org/wiki/Translation_lookaside_buffer>`_, an MMU critically allows processes to be placed at arbitrary physical addresses (wherever the RAM happens to be free), with pages of that physical memory mapped at the virtual addresses the process expects.
 
-In the Raisin64, the MMU also acts as the first point where the instruction and data caches have a unified window into physical memory, making the processor a split-cache Harvard architecture.  Beyond the `page tables <https://en.wikipedia.org/wiki/Page_table>`_ which are conventionally placed in main memory, the MMU control registers will be present in the machine's memory-map and be accessible in a kernel-mode un-mapped region (that is, the memory addresses used to access the registers will never be mapped by the MMU and will always be passed through without translation).
+In the Raisin64, the MMU also acts as the first point where the instruction and data caches have a unified window into physical memory, making the processor a split-cache Modified Harvard architecture.  Beyond the `page tables <https://en.wikipedia.org/wiki/Page_table>`_ which are conventionally placed in main memory, the MMU control registers will be present in the machine's memory-map and will be accessible in a kernel-mode unmapped region (that is, the memory addresses used to access the registers will never be mapped by the MMU and will always be passed through without translation).
 
 **Proposed MMU Specs:**
 
@@ -193,16 +193,16 @@ The following figure from ARM on the MIPS processor's memory map conveys the gen
 Interrupt Unit
 ++++++++++++++
 
-An Interrupt/Exception unit will be necessary to properly implement virtual memory.  Attempting to access an unmapped, evicted, or privilaged page from a userspace process should cause the operating system to take over and mitigate the situation (either by loading the page or terminating the process).
+An Interrupt/Exception unit will be necessary to properly implement virtual memory.  Attempting to access an unmapped, evicted, or privileged page from a userspace process should cause the operating system to take over and mitigate the situation (either by loading the page or terminating the process).
 
-The Raisin64's processing pipeline will need some modifications to the `Commit Unit`_ although first steps have already been taken to add a mechanism allowing register and memory writes to be deferred and re-ordered.  This can be expanded with program counter tracking information to ensure that the precise location of an interrupt can be recovered and the processor did not commit the pending results of an issued instruction later in the (now aborted) instruction stream.
+The Raisin64's processing pipeline will need some modifications to the `Commit Unit`_, although first steps have already been taken to add a mechanism allowing register and memory writes to be deferred and re-ordered.  This can be expanded with program counter tracking information to ensure that the precise location of an interrupt can be recovered and the processor will not commit the pending results of an issued instruction later in the (now aborted) instruction stream.
 
 Caches
 ++++++
 
-Relatively simple compared to the MMU or Interrupt Unit, caches will likely have the largest impact on performance of the processor.  As the processing pipeline uses a Harvard architecture, the first level of caching is made up of a separate Instruction and Data cache.  Each will sit on their respective data ports and provide a small number of highly/fully associative entries that are `virtually indexed and virtually tagged <https://en.wikipedia.org/wiki/CPU_cache#Address_translation>`_.
+Relatively simple compared to the MMU or Interrupt Unit, caches will likely have the largest impact on the performance of the processor.  As the processing pipeline uses a Harvard architecture, the first level of caching is made up of a separate Instruction and Data cache.  Each will sit on their respective data ports and provide a small number of highly/fully associative entries that are `virtually indexed and virtually tagged <https://en.wikipedia.org/wiki/CPU_cache#Address_translation>`_.
 
-This scheme will necessitate the flushing of the cache on a context switch, but as the only known implementations of the Raisin64 are on FPGAs (without the benefit of hardware content-addressable memory), the caches need to be small regardless and flushing their content on a context-switch will affect only a small number of entries.
+This scheme will necessitate the flushing of the cache on a context-switch, but as the only known implementations of the Raisin64 are on FPGAs (without the benefit of hardware content-addressable memory), the caches need to be small and flushing their content on a context-switch will only affect a small number of entries.
 
 **Proposed Cache Specs:**
 
@@ -213,7 +213,7 @@ This scheme will necessitate the flushing of the cache on a context switch, but 
 :L2 Cache: Large Unified 2-Way Set Associative
 :L2 Tag Scheme: Physically Indexed, Physically Tagged
 
-While a second level cache between the MMU and main memory may be advantageous, the (comparatively) slow clock rates available from an FPGA but with full speed hardware-accelerated RAM access may eliminate any benefit of another cache.
+While a second level cache between the MMU and main memory may be advantageous, the (comparatively) slow clock rates but high speed memory available on an FPGA may eliminate any benefit of another cache.
 
 References
 ++++++++++

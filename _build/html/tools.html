@@ -165,16 +165,16 @@
             
   <div class="section" id="tools">
 <h1>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h1>
-<p>Being a completely new computer architecture and instruction set, there are were no ready-made tools available for assembly, disassembly, linking, debugging, etc.  In the spirit of bootstrapping a new system, it was decided early that if the eventual goal is to run a general purpose operating system on the machine, GCC will be required.  GCC leverages <a class="reference external" href="https://www.gnu.org/software/binutils/">binutils</a>, a collection of assembly tools, ELF and object file manipulation utilities, as well as a powerful linker.</p>
-<p>Using the preliminary instruction set decided early in the semester, binutils was ported to the Raisin64 ISA while the processor was still being designed.  Using an existing target (the <a class="reference external" href="http://moxielogic.org/blog/pages/architecture.html">moxie</a> as a template, the initial port of binutils was made functional by creating/modifying 26 files across the source.</p>
+<p>As a completely new computer architecture and instruction set, there were no ready-made tools available for assembly, disassembly, linking, debugging, etc.  In the spirit of bootstrapping a new system, it was decided early that given the eventual goal to run a general purpose operating system, GCC will be required.  GCC leverages <a class="reference external" href="https://www.gnu.org/software/binutils/">binutils</a>, a collection of assembly tools, object file manipulation utilities, as well as a powerful linker.</p>
+<p>Using the preliminary instruction set defined early in the semester, binutils was ported to the Raisin64 ISA while the processor was still being developed.  With an existing target (the <a class="reference external" href="http://moxielogic.org/blog/pages/architecture.html">moxie</a>) as a template, the initial port of binutils was made functional by creating/modifying 26 files across the source.</p>
 <div class="admonition-future-work admonition">
 <p class="first admonition-title">Future Work</p>
 <p class="last">The current Raisin64 GNU Assembler port only constructs the 64-bit version of the instruction set.  While the linker, disassembler, and other infrastructure tools should support the smaller instruction words (with some testing done to that effect), the assembler will require significant work outside the scope of the present semester.</p>
 </div>
-<p>While the template architecture was noted for it’s reasonable size (architecture definitions and assembler were in the many-hundred-line range instead of the tens-of-thousands range for MIPS and X86), the Raisin64 is quite dissimilar being 64-bit with an entirely different instruction scheme.  The <a class="reference external" href="https://github.com/ChrisPVille/raisin64-binutils/blob/raisin64/gas/config/tc-raisin64.c">actual assembler core</a> was largely rewritten in what became a deep exploration of the binutils architecture.</p>
+<p>The software architecture of the template was noted for it’s reasonable size (ISA definitions and assembler were in the many-hundred-line range instead of the tens-of-thousands range for MIPS and X86), the Raisin64 is quite dissimilar being 64-bit with an entirely different instruction scheme.  The <a class="reference external" href="https://github.com/ChrisPVille/raisin64-binutils/blob/raisin64/gas/config/tc-raisin64.c">actual assembler core</a> was largely rewritten in what became a deep exploration of the binutils architecture.</p>
 <div class="section" id="assembler">
 <h2>Assembler<a class="headerlink" href="#assembler" title="Permalink to this headline">¶</a></h2>
-<p>Being a port of binutils, the Raisin64 assembler should be familiar and comfortable to use for an assembly language programmer supporting the full set of <a class="reference external" href="https://sourceware.org/binutils/docs/as/index.html">GNU As</a> features.  An effort was made to support MIPS-like syntax with <code class="docutils literal notranslate"><span class="pre">$r0</span></code> or <code class="docutils literal notranslate"><span class="pre">$zero</span></code> register numbering</p>
+<p>Being a port of binutils, the Raisin64 assembler should be familiar and comfortable to use for an assembly language programmer supporting the full set of <a class="reference external" href="https://sourceware.org/binutils/docs/as/index.html">GNU As</a> features.  An effort was made to support MIPS-like syntax with <code class="docutils literal notranslate"><span class="pre">$r0</span></code> or <code class="docutils literal notranslate"><span class="pre">$zero</span></code> style register numbering and a <code class="docutils literal notranslate"><span class="pre">opcode</span> <span class="pre">$dest,</span> <span class="pre">$src1,</span> <span class="pre">$src2</span></code> format.</p>
 <p><strong>Named Registers:</strong></p>
 <table border="1" class="docutils">
 <colgroup>
@@ -205,8 +205,8 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">raisin64</span><span class="o">-</span><span class="n">elf</span><span class="o">-</span><span class="k">as</span> <span class="o">&lt;</span><span class="nb">input</span> <span class="n">file</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">o</span> <span class="o">&lt;</span><span class="n">output</span><span class="o">.</span><span class="n">elf</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-<p>which will produce an ELF that can be manipulated with objdump, objcopy, etc.</p>
-<p>An example of the assembly process is in <a class="reference external" href="https://github.com/ChrisPVille/raisin64-cpu/blob/master/support/assemble.sh">assemble.sh</a> which takes an input assembly file, produces the assembled ELF, extracts the <code class="docutils literal notranslate"><span class="pre">.text</span></code> and <code class="docutils literal notranslate"><span class="pre">.data</span></code> sections (containing the instruction and data memories respectively), and converts them from hex to ASCII using the xxd utility.  The result is suitable for the <code class="docutils literal notranslate"><span class="pre">$readmemh</span></code> Verilog commands:</p>
+<p>This will produce an ELF that can be manipulated with objdump, objcopy, etc.</p>
+<p>An example of the assembly process is in <a class="reference external" href="https://github.com/ChrisPVille/raisin64-cpu/blob/master/support/assemble.sh">assemble.sh</a> which takes an input assembly file, produces the assembled ELF, extracts the <code class="docutils literal notranslate"><span class="pre">.text</span></code> and <code class="docutils literal notranslate"><span class="pre">.data</span></code> sections (containing the instruction and data memories respectively), finally converting them from hex to ASCII using the xxd utility.  The result is suitable for the <code class="docutils literal notranslate"><span class="pre">$readmemh</span></code> Verilog command:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>raisin64-elf-as <span class="nv">$1</span> -o prog.elf <span class="o">&amp;&amp;</span>
 raisin64-elf-objdump -s -j .data prog.elf <span class="o">&amp;&amp;</span>
 raisin64-elf-objdump -d -j .text prog.elf <span class="o">&amp;&amp;</span>
@@ -232,7 +232,7 @@ xxd -c <span class="m">8</span> -ps dmem.bin &gt; dmem.hex
 </div>
 <div class="section" id="debugging">
 <h2>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
-<p>As the Raisin64 was designed with a from-scratch JTAG controller I wrote recently (the <a class="reference external" href="https://github.com/ChrisPVille/jtaglet">JTAGlet</a>), there was no existing support in any tools.  Not that JTAG core support would help much given the new ISA, but keeping with the bootstrap theme, a custom configuration script for <a class="reference external" href="http://openocd.org/">OpenOCD</a> was created that uses/misuses the scripting interface to provide communication with the processor’s JTAG interface, program the memories, and examine the state of the machine.</p>
+<p>As the Raisin64 was designed with a home grown JTAG controller I wrote recently (the <a class="reference external" href="https://github.com/ChrisPVille/jtaglet">JTAGlet</a>), there was no existing support in any tools.  Not that JTAG core support would help much given the new ISA, but keeping with the bootstrap theme, a custom configuration script for <a class="reference external" href="http://openocd.org/">OpenOCD</a> was created that uses/misuses the scripting interface to provide communication with the processor’s JTAG interface, program the memories, and examine the state of the machine.</p>
 <div class="admonition-future-work admonition">
 <p class="first admonition-title">Future Work</p>
 <p class="last">While the scripting interface was a quick way to support my target, the conventional approach is to write support for targets and JTAG controller in C, releasing a new version of OpenOCD (much like I did with binutils).  This will be necessary to support remote debugging (via GDB) and will make future development easier.</p>
@@ -282,8 +282,8 @@ xxd -c <span class="m">8</span> -ps dmem.bin &gt; dmem.hex
 </table>
 <div class="section" id="getting-openocd">
 <h3>Getting OpenOCD<a class="headerlink" href="#getting-openocd" title="Permalink to this headline">¶</a></h3>
-<p>As the present time, any modern version of OpenOCD can be used along with the script file for the Raisin64.
-Official releases are at: <a class="reference external" href="http://openocd.org/getting-openocd/">http://openocd.org/getting-openocd/</a>
+<p>As the present time, any modern version of OpenOCD can be used along with the script file for the Raisin64.</p>
+<p>Official releases are at: <a class="reference external" href="http://openocd.org/getting-openocd/">http://openocd.org/getting-openocd/</a>
 The future Raisin64 version will be located: <a class="reference external" href="https://github.com/ChrisPVille/raisin64-openocd">https://github.com/ChrisPVille/raisin64-openocd</a></p>
 </div>
 </div>

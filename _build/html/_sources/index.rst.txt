@@ -6,7 +6,7 @@
 Welcome to Raisin64's documentation!
 ====================================
 
-Raisin64 (*RISC Architecture with In-order Superscalar INterlocked-pipeline*) is a pure 64-bit CPU design created as part of an educational project.  Inspired by the architecture of  the `MIPS R10000 <https://en.wikipedia.org/wiki/R10000>`_ and `POWER3 <https://en.wikipedia.org/wiki/POWER3>`_, Raisin64 employs multiple specialized pipelines for integer operations, branching, load/store, etc presently using a simplified issue system appropriate for the scope of a semester-long project.
+Raisin64 (*RISC Architecture with In-order Superscalar INterlocked-pipeline*) is a pure 64-bit CPU design created as part of an educational project.  Inspired by the architecture of  the `MIPS R10000 <https://en.wikipedia.org/wiki/R10000>`_ and `POWER3 <https://en.wikipedia.org/wiki/POWER3>`_, Raisin64 employs multiple specialized pipelines for integer operations, branching, load/store, etc. presently using a simplified issue system appropriate for the scope of a semester-long project.
 
 Unlike most superscalar designs, Raisin64 does not re-order instructions or use register renaming [1]_ but instead provides a larger architectural register file of 63x64-bit registers.
 

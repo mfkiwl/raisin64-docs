@@ -1,12 +1,12 @@
 Nexys 4 DDR Reference Implementation
 ====================================
 
-The Nexys 4 DDR (Using a `Xilinx Artix-7 <https://www.xilinx.com/products/silicon-devices/fpga/artix-7.html>`_ series XC7A100T-1CSG324C) was chosen as the reference implementation due to its copious hardware resources, interactive IO, and sufficient memory for a general purpose operating system to run using the onboard resources.  The Raisin64 was connected to memory-mapped peripherals providing access to the LEDs, Switches, and a custom written character oriented VGA controller.
+The Nexys 4 DDR (Using a `Xilinx Artix-7 <https://www.xilinx.com/products/silicon-devices/fpga/artix-7.html>`_ series XC7A100T-1CSG324C) was chosen as the reference implementation due to its copious hardware resources, interactive IO, and sufficient memory for a general purpose operating system using the onboard resources.  The Raisin64 was connected to memory-mapped peripherals providing access to the LEDs, Switches, and a custom written character oriented VGA controller.
 
 SoC Peripherals
 ---------------
 
-Included are several trivial IO devices such as the switch and LED interface.  These simply wait to be enabled based on the present address and a simple memory map decoder, carrying out the input or output as dictated by the processor output enable and write signals.
+Included are several trivial IO devices such as the switch and LED interface.  These simply wait to be enabled based on the present address and a simple memory map decoder, carrying out the input or output as dictated by the processor's output enable and write signals.
 
 **IO Memory Map:**
 

@@ -158,11 +158,11 @@
             
   <div class="section" id="code-snippets-and-software">
 <h1>Code Snippets and Software<a class="headerlink" href="#code-snippets-and-software" title="Permalink to this headline">¶</a></h1>
-<p>Each <a class="reference external" href="isa">instruction</a> page contains an example of how to use that specific opcode which will not be repeated here.  Instead, a few simple programs will pre presented that work with the <a class="reference internal" href="nexysddr.html#nexys-4-ddr-reference-implementation"><span class="std std-ref">Nexys 4 DDR Reference Implementation</span></a> demonstrating aspects of the ISA or use of the hardware.</p>
-<p>While having a completely different opcode format and compact instruction support, the Raisin64 drew inspiration from MIPS for it’s instruction set and mnemonics.  As a result, several programs I created for a previous academic MIPS design were easily ported to the Raisin64.</p>
+<p>Each <a class="reference external" href="isa">instruction</a> detail page contains an example of how to use that specific opcode which will not be repeated here.  Instead, a few simple programs will presented that work with the <a class="reference internal" href="nexysddr.html#nexys-4-ddr-reference-implementation"><span class="std std-ref">Nexys 4 DDR Reference Implementation</span></a>, demonstrating aspects of the ISA or use of the hardware.</p>
+<p>While containing a completely different opcode format and compact instruction support, the Raisin64 drew inspiration from MIPS for its instruction set and mnemonics.  As a result, several programs I created for a previous academic MIPS design were easily ported to the Raisin64.</p>
 <div class="section" id="switch-to-led">
 <h2>Switch to LED<a class="headerlink" href="#switch-to-led" title="Permalink to this headline">¶</a></h2>
-<p>The Switch to LED program is the simplest proof of life for the Nexys 4 DDR board, reading the present position of the switches, and mirroring them onto the array of LEDs located immediately above them.</p>
+<p>The Switch to LED program is the simplest proof-of-life for the Nexys 4 DDR board, reading the present position of the switches, and mirroring them onto the array of LEDs located immediately above.</p>
 <div class="highlight-gas notranslate"><div class="highlight"><pre><span></span><span class="na">.set</span> <span class="no">SW_LADR</span><span class="p">,</span> <span class="mi">0x00008000</span>
 <span class="na">.set</span> <span class="no">LED_LADR</span><span class="p">,</span> <span class="mi">0x00004000</span>
 
@@ -181,13 +181,13 @@
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/swtoledsim.png"><img alt="Switch to LED sim" src="_images/swtoledsim.png" style="width: 100%;" /></a>
-<p>From a simulation of the external hardware, the LED port can be seen tracking the SW (switch) port soon after it changes.  This can be run on the real hardware with the same result:</p>
+<p>From a simulation of the external hardware, the LED port is seen tracking the SW (switch) port soon after it changes.  This can be run on the real hardware with the same result:</p>
 <a class="reference internal image-reference" href="_images/swtoledreal.jpg"><img alt="Switch to LED on hardware" src="_images/swtoledreal.jpg" style="width: 100%;" /></a>
 </div>
 <div class="section" id="vga-demo-program">
 <h2>VGA Demo Program<a class="headerlink" href="#vga-demo-program" title="Permalink to this headline">¶</a></h2>
-<p>As a non-trivial test of the processor, a demo program was created exercising the VGA subsystem of the Nexys 4 DDR board located at 0xFFFFC000_0004xxxx on the data memory bus.  In addition to the switch to LED functionality above, it draws a hello world string and continuously iterates through the character set and color options on the lower half of the display.</p>
-<p>The assembly demonstrates the use of a stack, as well as useful GNU assembler tools like defines, macros, data labels, alignment, etc.  Also available at: <a class="reference external" href="https://github.com/ChrisPVille/raisin64-nexys4ddr/blob/master/software/demo.S">https://github.com/ChrisPVille/raisin64-nexys4ddr/blob/master/software/demo.S</a></p>
+<p>As a non-trivial test of the processor, a demo program was created exercising the VGA subsystem of the Nexys 4 DDR board located at 0xFFFFC000_0004xxxx on the data memory bus.  In addition to the switch-to-LED functionality above, it draws a hello world string and continuously iterates through the character set on the lower half of the display.</p>
+<p>The assembly demonstrates the use of a stack, as well as useful GNU assembler syntax like defines, macros, data labels, alignment, etc.  Also available at: <a class="reference external" href="https://github.com/ChrisPVille/raisin64-nexys4ddr/blob/master/software/demo.S">https://github.com/ChrisPVille/raisin64-nexys4ddr/blob/master/software/demo.S</a></p>
 <div class="highlight-gas notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
   2
   3
