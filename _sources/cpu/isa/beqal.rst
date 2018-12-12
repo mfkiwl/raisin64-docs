@@ -33,3 +33,8 @@ Encoding
 :16-bit Opcode: NONE
 :32-bit Opcode: 0xBD
 :64-bit Opcode: 0xFD
+
+.. raw:: latex
+
+    \clearpage
+

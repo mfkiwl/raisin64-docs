@@ -29,3 +29,8 @@ Encoding
 :16-bit Opcode: NONE
 :32-bit Opcode: 0x92
 :64-bit Opcode: 0xD2
+
+.. raw:: latex
+
+    \clearpage
+
