@@ -34,6 +34,7 @@ Nexys4DDR Example     `<https://github.com/ChrisPVille/raisin64-nexys4ddr>`_
 Binutils              `<https://github.com/ChrisPVille/raisin64-binutils>`_
 OpenOCD               `<https://github.com/ChrisPVille/raisin64-openocd>`_
 Docs Source           `<https://github.com/ChrisPVille/raisin64-docs>`_
+PDF Documentation     `<https://raisin64.fsys.io/_build/latex/Raisin64.pdf>`_
 ===================== ====================
 
 .. Full TOC for the PDF and index
