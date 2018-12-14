@@ -13,7 +13,7 @@ Unlike most superscalar designs, Raisin64 does not re-order instructions or use 
 Major features of the Raisin64 include:
 
 :Bits: 64-bit
-:`Instructions <isa>`_: 50 Opcodes (with 16, 32, and 64-bit formats)
+:Instructions: :ref:`50 Opcodes (with 16, 32, and 64-bit formats) <cpu/isa:Raisin64 Instruction Set>`
 :Design: RISC (Harvard Architecture [2]_)
 :Type: Register-Register
 :Branching: Compare and Branch
