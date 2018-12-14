@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tools &mdash; Raisin64 0.2 documentation</title>
+  <title>Tools &mdash; Raisin64 0.2a documentation</title>
   
 
   
@@ -171,10 +171,10 @@
 <p class="first admonition-title">Future Work</p>
 <p class="last">The current Raisin64 GNU Assembler port only constructs the 64-bit version of the instruction set.  While the linker, disassembler, and other infrastructure tools should support the smaller instruction words (with some testing done to that effect), the assembler will require significant work outside the scope of the present semester.</p>
 </div>
-<p>The software architecture of the template was noted for it’s reasonable size (ISA definitions and assembler were in the many-hundred-line range instead of the tens-of-thousands range for MIPS and X86), the Raisin64 is quite dissimilar being 64-bit with an entirely different instruction scheme.  The <a class="reference external" href="https://github.com/ChrisPVille/raisin64-binutils/blob/raisin64/gas/config/tc-raisin64.c">actual assembler core</a> was largely rewritten in what became a deep exploration of the binutils architecture.</p>
+<p>The software architecture of the template was noted for it’s reasonable size (ISA definitions and assembler were in the many-hundred-line range instead of the tens-of-thousands range for MIPS and x86), the Raisin64 is quite dissimilar being 64-bit with an entirely different instruction scheme.  The <a class="reference external" href="https://github.com/ChrisPVille/raisin64-binutils/blob/raisin64/gas/config/tc-raisin64.c">actual assembler core</a> was largely rewritten in what became a deep exploration of the binutils architecture.</p>
 <div class="section" id="assembler">
 <h2>Assembler<a class="headerlink" href="#assembler" title="Permalink to this headline">¶</a></h2>
-<p>Being a port of binutils, the Raisin64 assembler should be familiar and comfortable to use for an assembly language programmer supporting the full set of <a class="reference external" href="https://sourceware.org/binutils/docs/as/index.html">GNU As</a> features.  An effort was made to support MIPS-like syntax with <code class="docutils literal notranslate"><span class="pre">$r0</span></code> or <code class="docutils literal notranslate"><span class="pre">$zero</span></code> style register numbering and a <code class="docutils literal notranslate"><span class="pre">opcode</span> <span class="pre">$dest,</span> <span class="pre">$src1,</span> <span class="pre">$src2</span></code> format.</p>
+<p>Being a port of binutils, the Raisin64 assembler should be familiar to an assembly language programmer, supporting the full set of <a class="reference external" href="https://sourceware.org/binutils/docs/as/index.html">GNU As</a> features.  An effort was made to support MIPS-like syntax with <code class="docutils literal notranslate"><span class="pre">$r0</span></code> or <code class="docutils literal notranslate"><span class="pre">$zero</span></code> style register numbering and a <code class="docutils literal notranslate"><span class="pre">opcode</span> <span class="pre">$dest,</span> <span class="pre">$src1,</span> <span class="pre">$src2</span></code> instruction format.</p>
 <p><strong>Named Registers:</strong></p>
 <table border="1" class="docutils">
 <colgroup>
@@ -206,7 +206,7 @@
 </pre></div>
 </div>
 <p>This will produce an ELF that can be manipulated with objdump, objcopy, etc.</p>
-<p>An example of the assembly process is in <a class="reference external" href="https://github.com/ChrisPVille/raisin64-cpu/blob/master/support/assemble.sh">assemble.sh</a> which takes an input assembly file, produces the assembled ELF, extracts the <code class="docutils literal notranslate"><span class="pre">.text</span></code> and <code class="docutils literal notranslate"><span class="pre">.data</span></code> sections (containing the instruction and data memories respectively), finally converting them from hex to ASCII using the xxd utility.  The result is suitable for the <code class="docutils literal notranslate"><span class="pre">$readmemh</span></code> Verilog command:</p>
+<p>An example of the assembly process is in <a class="reference external" href="https://github.com/ChrisPVille/raisin64-cpu/blob/master/support/assemble.sh">assemble.sh</a> which takes an input assembly file, produces the assembled ELF, prints, and extracts the <code class="docutils literal notranslate"><span class="pre">.text</span></code> and <code class="docutils literal notranslate"><span class="pre">.data</span></code> sections (containing the instruction and data memories respectively).  Finally, it converts the converting the output files from hex to ASCII using the xxd utility.  The result is suitable for the <code class="docutils literal notranslate"><span class="pre">$readmemh</span></code> Verilog command:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>raisin64-elf-as <span class="nv">$1</span> -o prog.elf <span class="o">&amp;&amp;</span>
 raisin64-elf-objdump -s -j .data prog.elf <span class="o">&amp;&amp;</span>
 raisin64-elf-objdump -d -j .text prog.elf <span class="o">&amp;&amp;</span>
@@ -232,12 +232,12 @@ xxd -c <span class="m">8</span> -ps dmem.bin &gt; dmem.hex
 </div>
 <div class="section" id="debugging">
 <h2>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
-<p>As the Raisin64 was designed with a home grown JTAG controller I wrote recently (the <a class="reference external" href="https://github.com/ChrisPVille/jtaglet">JTAGlet</a>), there was no existing support in any tools.  Not that JTAG core support would help much given the new ISA, but keeping with the bootstrap theme, a custom configuration script for <a class="reference external" href="http://openocd.org/">OpenOCD</a> was created that uses/misuses the scripting interface to provide communication with the processor’s JTAG interface, program the memories, and examine the state of the machine.</p>
+<p>As the Raisin64 was designed with a home grown JTAG controller (the <a class="reference external" href="https://github.com/ChrisPVille/jtaglet">JTAGlet</a>), there was no existing support in any tools.  Not that JTAG core support would help much given the new ISA, but keeping with the bootstrap theme, a custom configuration script for <a class="reference external" href="http://openocd.org/">OpenOCD</a> was created that uses/misuses the scripting interface to provide communication with the processor’s JTAG interface, program the memories, and examine the state of the machine.</p>
 <div class="admonition-future-work admonition">
 <p class="first admonition-title">Future Work</p>
-<p class="last">While the scripting interface was a quick way to support my target, the conventional approach is to write support for targets and JTAG controller in C, releasing a new version of OpenOCD (much like I did with binutils).  This will be necessary to support remote debugging (via GDB) and will make future development easier.</p>
+<p class="last">While the scripting interface was a quick way to support my target, the conventional approach is to write support for the target and JTAG controller in C, releasing a new version of OpenOCD (much like I did with binutils).  This will be necessary to support remote debugging (via GDB) and will make future development easier.</p>
 </div>
-<p>The configuration script is too large to repeat here, but is accessible at <a class="reference external" href="https://github.com/ChrisPVille/raisin64-cpu/blob/master/support/jtag/raisin64_nodeps_openocd.cfg">https://github.com/ChrisPVille/raisin64-cpu/blob/master/support/jtag/raisin64_nodeps_openocd.cfg</a>.  It is currently configured for a <a class="reference external" href="https://www.seeedstudio.com/Bus-Blaster-v3-p-1415.html">Bus Blaster v3</a>, but can be easily reconfigured for other JTAG probes.</p>
+<p>The configuration script is accessible at <a class="reference external" href="https://github.com/ChrisPVille/raisin64-cpu/blob/master/support/jtag/raisin64_nodeps_openocd.cfg">https://github.com/ChrisPVille/raisin64-cpu/blob/master/support/jtag/raisin64_nodeps_openocd.cfg</a>.  Although it is currently configured for a <a class="reference external" href="https://www.seeedstudio.com/Bus-Blaster-v3-p-1415.html">Bus Blaster v3</a>, it can be easily reconfigured for other JTAG probes.</p>
 <p>This script is be invoked by the adjacent <code class="docutils literal notranslate"><span class="pre">programImemDmem.sh</span> <span class="pre">&lt;imem.hex&gt;</span> <span class="pre">&lt;optional</span> <span class="pre">dmem.hex&gt;</span></code> or as:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>openocd -f <span class="s2">&quot;raisin64_nodeps_openocd.cfg&quot;</span> -c <span class="s2">&quot;init; raisin64_program &lt;imem.hex&gt; &lt;optional dmem.hex&gt;; exit&quot;</span>
 </pre></div>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Raisin64 Instruction Set &mdash; Raisin64 0.2 documentation</title>
+  <title>Raisin64 Instruction Set &mdash; Raisin64 0.2a documentation</title>
   
 
   
@@ -233,7 +233,7 @@
 <span id="isa"></span><h1>Raisin64 Instruction Set<a class="headerlink" href="#raisin64-instruction-set" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>The Raisin64’s instruction set draws heavily from MIPS with some concepts graciously borrowed from ARM as well.  While the programmer’s model and instruction set are decoupled from the underlying microarchitecture of the specific implementation, it was nonetheless decided to design the instructions such that a hardwired control unit (see TODO:ref:<cite>Instruction Decode</cite>) could process and set the appropriate signals.</p>
+<p>The Raisin64’s instruction set draws heavily from MIPS with some concepts graciously borrowed from ARM as well.  While the programmer’s model and instruction set are decoupled from the underlying microarchitecture of the specific implementation, it was nonetheless decided to design the instructions such that a hardwired control unit (see <a class="reference internal" href="../cpu.html#decode-unit"><span class="std std-ref">Decode Unit</span></a>) could process and set the appropriate signals.</p>
 <p>Instructions are variable length (16-64) bit, and some have multiple forms like the <a class="reference internal" href="isa/add.html#add-integer-add"><span class="std std-ref">ADD Instruction</span></a>.  When an instruction has multiple encodings, the opcode is usually the same between the alternate length versions of that instruction, but in all cases the processor expands the 16 and 32-bit versions of the instruction into their canonical 64-bit form, which has a regular encoding.  The general instruction formats and opcodes are described below.</p>
 <div class="admonition-but-why admonition">
 <p class="first admonition-title">But Why?</p>
@@ -252,7 +252,7 @@
 <h3>16R - 16-bit Register Format<a class="headerlink" href="#r-16-bit-register-format" title="Permalink to this headline">¶</a></h3>
 <div align="center" class="align-center"><img src="../_images/symbol-793980dab287b15841ca153baf97827e2bb88511.svg" alt="None" />
 </div>
-<p>The 16-bit regsiter format is a compact expression of select instructions operating with one source and one destination register.  Instructions normally operating on three registers, such as ADD, instead operate in 2-register mode (i.e. Rd = Rd + Rs).</p>
+<p>The 16-bit regsiter format is a compact expression of select instructions operating with one source and one destination register.  Instructions normally operating on three registers, such as ADD, instead operate in 2-register mode (i.e. <code class="docutils literal notranslate"><span class="pre">$rd</span></code> = <code class="docutils literal notranslate"><span class="pre">$rd</span></code> + <code class="docutils literal notranslate"><span class="pre">$rs</span></code>).</p>
 </div>
 <div class="section" id="i-16-bit-immediate-format">
 <h3>16I - 16-bit Immediate Format<a class="headerlink" href="#i-16-bit-immediate-format" title="Permalink to this headline">¶</a></h3>

@@ -219,7 +219,7 @@ The assembly demonstrates the use of a stack, as well as useful GNU assembler sy
 
     .align 11 #Fill 2K
 
-Given the long fill period at reset, the simulation is simultaneously un-interesting and overwhelming.  Suffice it to say, it leads to a colorful demo.
+Given the repetitive nature of drawing characters, the simulation is simultaneously un-interesting and overwhelming.  Suffice it to say, it leads to a colorful demo.
 
 .. image:: _static/vgareal.jpg
     :width: 100%

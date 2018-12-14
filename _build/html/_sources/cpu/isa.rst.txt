@@ -6,7 +6,7 @@ Raisin64 Instruction Set
 Overview
 --------
 
-The Raisin64's instruction set draws heavily from MIPS with some concepts graciously borrowed from ARM as well.  While the programmer's model and instruction set are decoupled from the underlying microarchitecture of the specific implementation, it was nonetheless decided to design the instructions such that a hardwired control unit (see TODO:ref:`Instruction Decode`) could process and set the appropriate signals.
+The Raisin64's instruction set draws heavily from MIPS with some concepts graciously borrowed from ARM as well.  While the programmer's model and instruction set are decoupled from the underlying microarchitecture of the specific implementation, it was nonetheless decided to design the instructions such that a hardwired control unit (see :ref:`Decode Unit <cpu:Decode Unit>`) could process and set the appropriate signals.
 
 Instructions are variable length (16-64) bit, and some have multiple forms like the :ref:`ADD Instruction <cpu/isa/add:ADD - Integer Add>`.  When an instruction has multiple encodings, the opcode is usually the same between the alternate length versions of that instruction, but in all cases the processor expands the 16 and 32-bit versions of the instruction into their canonical 64-bit form, which has a regular encoding.  The general instruction formats and opcodes are described below.
 
@@ -37,7 +37,7 @@ The 32 and 64-bit instruction formats share the same Unit/Op numbers, which are 
    :hspace: 400
    :bits: 16
    
-The 16-bit regsiter format is a compact expression of select instructions operating with one source and one destination register.  Instructions normally operating on three registers, such as ADD, instead operate in 2-register mode (i.e. Rd = Rd + Rs).
+The 16-bit regsiter format is a compact expression of select instructions operating with one source and one destination register.  Instructions normally operating on three registers, such as ADD, instead operate in 2-register mode (i.e. ``$rd`` = ``$rd`` + ``$rs``).
    
    
 16I - 16-bit Immediate Format

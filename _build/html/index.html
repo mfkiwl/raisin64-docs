@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to Raisin64’s documentation! &mdash; Raisin64 0.2 documentation</title>
+  <title>Welcome to Raisin64’s documentation! &mdash; Raisin64 0.2a documentation</title>
   
 
   
@@ -154,8 +154,7 @@
   <div class="section" id="welcome-to-raisin64-s-documentation">
 <h1>Welcome to Raisin64’s documentation!<a class="headerlink" href="#welcome-to-raisin64-s-documentation" title="Permalink to this headline">¶</a></h1>
 <p>Raisin64 (<em>RISC Architecture with In-order Superscalar INterlocked-pipeline</em>) is a pure 64-bit CPU design created as part of an educational project.  Inspired by the architecture of  the <a class="reference external" href="https://en.wikipedia.org/wiki/R10000">MIPS R10000</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/POWER3">POWER3</a>, Raisin64 employs multiple specialized pipelines for integer operations, branching, load/store, etc. presently using a simplified issue system appropriate for the scope of a semester-long project.</p>
-<p>Unlike most superscalar designs, Raisin64 does not re-order instructions or use register renaming <a class="footnote-reference" href="#id3" id="id1">[1]</a> but instead provides a larger architectural register file of 63x64-bit registers.</p>
-<a class="reference internal image-reference" href="_images/raisin64block.png"><img alt="High-level CPU block diagram" src="_images/raisin64block.png" style="width: 100%;" /></a>
+<p>Unlike most superscalar designs, Raisin64 does not re-order instructions or use register renaming <a class="footnote-reference" href="#id4" id="id1">[1]</a> but instead provides a larger architectural register file of 63x64-bit registers.</p>
 <p>Major features of the Raisin64 include:</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -165,7 +164,7 @@
 </tr>
 <tr class="field-even field"><th class="field-name"><a class="reference external" href="isa">Instructions</a>:</th><td class="field-body">50 Opcodes (with 16, 32, and 64-bit formats)</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Design:</th><td class="field-body">RISC (Harvard Architecture <a class="footnote-reference" href="#id4" id="id2">[2]</a>)</td>
+<tr class="field-odd field"><th class="field-name">Design:</th><td class="field-body">RISC (Harvard Architecture <a class="footnote-reference" href="#id5" id="id2">[2]</a>)</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Type:</th><td class="field-body">Register-Register</td>
 </tr>
@@ -177,17 +176,48 @@
 </tr>
 </tbody>
 </table>
+<a class="reference internal image-reference" href="_images/raisin64block.png"><img alt="High-level CPU block diagram" src="_images/raisin64block.png" style="width: 100%;" /></a>
+<p>The various repositories hosting the source-code described in this document are available here:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="72%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Metaproject</td>
+<td><a class="reference external" href="https://github.com/ChrisPVille/raisin64">https://github.com/ChrisPVille/raisin64</a></td>
+</tr>
+<tr class="row-even"><td>CPU RTL</td>
+<td><a class="reference external" href="https://github.com/ChrisPVille/raisin64-cpu">https://github.com/ChrisPVille/raisin64-cpu</a></td>
+</tr>
+<tr class="row-odd"><td>Binutils</td>
+<td><a class="reference external" href="https://github.com/ChrisPVille/raisin64-binutils">https://github.com/ChrisPVille/raisin64-binutils</a></td>
+</tr>
+<tr class="row-even"><td>Nexys4DDR Example</td>
+<td><a class="reference external" href="https://github.com/ChrisPVille/raisin64-nexys4ddr">https://github.com/ChrisPVille/raisin64-nexys4ddr</a></td>
+</tr>
+<tr class="row-odd"><td>Binutils</td>
+<td><a class="reference external" href="https://github.com/ChrisPVille/raisin64-binutils">https://github.com/ChrisPVille/raisin64-binutils</a></td>
+</tr>
+<tr class="row-even"><td>OpenOCD</td>
+<td><a class="reference external" href="https://github.com/ChrisPVille/raisin64-openocd">https://github.com/ChrisPVille/raisin64-openocd</a></td>
+</tr>
+<tr class="row-odd"><td>Docs Source</td>
+<td><a class="reference external" href="https://github.com/ChrisPVille/raisin64-docs">https://github.com/ChrisPVille/raisin64-docs</a></td>
+</tr>
+</tbody>
+</table>
 <div class="toctree-wrapper compound">
 </div>
 <div class="section" id="footnotes">
 <h2>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h2>
-<table class="docutils footnote" frame="void" id="id3" rules="none">
+<table class="docutils footnote" frame="void" id="id4" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Raisin64 will issue instructions out-of-order assuming subsequent instructions are dependancy-free and the appropriate execution unit is available.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Raisin64 will execute instructions out-of-order assuming subsequent instructions are dependancy-free and the appropriate execution unit is available.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id4" rules="none">
+<table class="docutils footnote" frame="void" id="id5" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td><a class="reference external" href="https://en.wikipedia.org/wiki/Modified_Harvard_architecture">Split-Cache Modified Harvard</a> when
