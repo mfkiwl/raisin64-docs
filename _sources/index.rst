@@ -10,10 +10,6 @@ Raisin64 (*RISC Architecture with In-order Superscalar INterlocked-pipeline*) is
 
 Unlike most superscalar designs, Raisin64 does not re-order instructions or use register renaming [1]_ but instead provides a larger architectural register file of 63x64-bit registers.
 
-.. image:: _static/raisin64block.png
-    :width: 100%
-    :alt: High-level CPU block diagram
-
 Major features of the Raisin64 include:
 
 :Bits: 64-bit
@@ -23,6 +19,22 @@ Major features of the Raisin64 include:
 :Branching: Compare and Branch
 :Endianness: Big
 :Registers: 63 (R0 = 0)
+
+.. image:: _static/raisin64block.png
+    :width: 100%
+    :alt: High-level CPU block diagram
+
+The various repositories hosting the source-code described in this document are available here:
+
+===================== ====================
+Metaproject           `<https://github.com/ChrisPVille/raisin64>`_
+CPU RTL               `<https://github.com/ChrisPVille/raisin64-cpu>`_
+Binutils              `<https://github.com/ChrisPVille/raisin64-binutils>`_
+Nexys4DDR Example     `<https://github.com/ChrisPVille/raisin64-nexys4ddr>`_
+Binutils              `<https://github.com/ChrisPVille/raisin64-binutils>`_
+OpenOCD               `<https://github.com/ChrisPVille/raisin64-openocd>`_
+Docs Source           `<https://github.com/ChrisPVille/raisin64-docs>`_
+===================== ====================
 
 .. Full TOC for the PDF and index
 .. toctree::
@@ -38,6 +50,6 @@ Major features of the Raisin64 include:
 Footnotes
 ---------
 
-.. [1] Raisin64 will issue instructions out-of-order assuming subsequent instructions are dependancy-free and the appropriate execution unit is available.
+.. [1] Raisin64 will execute instructions out-of-order assuming subsequent instructions are dependancy-free and the appropriate execution unit is available.
 .. [2] `Split-Cache Modified Harvard <https://en.wikipedia.org/wiki/Modified_Harvard_architecture>`_ when
         :ref:`proposed caches and MMU <cpu:Proposed Extensions>` are introduced.

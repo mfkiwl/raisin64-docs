@@ -9,12 +9,12 @@ Using the preliminary instruction set defined early in the semester, binutils wa
 
    The current Raisin64 GNU Assembler port only constructs the 64-bit version of the instruction set.  While the linker, disassembler, and other infrastructure tools should support the smaller instruction words (with some testing done to that effect), the assembler will require significant work outside the scope of the present semester.
 
-The software architecture of the template was noted for it's reasonable size (ISA definitions and assembler were in the many-hundred-line range instead of the tens-of-thousands range for MIPS and X86), the Raisin64 is quite dissimilar being 64-bit with an entirely different instruction scheme.  The `actual assembler core <https://github.com/ChrisPVille/raisin64-binutils/blob/raisin64/gas/config/tc-raisin64.c>`_ was largely rewritten in what became a deep exploration of the binutils architecture.
+The software architecture of the template was noted for it's reasonable size (ISA definitions and assembler were in the many-hundred-line range instead of the tens-of-thousands range for MIPS and x86), the Raisin64 is quite dissimilar being 64-bit with an entirely different instruction scheme.  The `actual assembler core <https://github.com/ChrisPVille/raisin64-binutils/blob/raisin64/gas/config/tc-raisin64.c>`_ was largely rewritten in what became a deep exploration of the binutils architecture.
 
 Assembler
 ---------
 
-Being a port of binutils, the Raisin64 assembler should be familiar and comfortable to use for an assembly language programmer supporting the full set of `GNU As <https://sourceware.org/binutils/docs/as/index.html>`_ features.  An effort was made to support MIPS-like syntax with ``$r0`` or ``$zero`` style register numbering and a ``opcode $dest, $src1, $src2`` format.
+Being a port of binutils, the Raisin64 assembler should be familiar to an assembly language programmer, supporting the full set of `GNU As <https://sourceware.org/binutils/docs/as/index.html>`_ features.  An effort was made to support MIPS-like syntax with ``$r0`` or ``$zero`` style register numbering and a ``opcode $dest, $src1, $src2`` instruction format.
 
 **Named Registers:**
 
@@ -33,7 +33,7 @@ The assembler can be invoked as usual for GNU As:
 
 This will produce an ELF that can be manipulated with objdump, objcopy, etc.
 
-An example of the assembly process is in `assemble.sh <https://github.com/ChrisPVille/raisin64-cpu/blob/master/support/assemble.sh>`_ which takes an input assembly file, produces the assembled ELF, extracts the ``.text`` and ``.data`` sections (containing the instruction and data memories respectively), finally converting them from hex to ASCII using the xxd utility.  The result is suitable for the ``$readmemh`` Verilog command:
+An example of the assembly process is in `assemble.sh <https://github.com/ChrisPVille/raisin64-cpu/blob/master/support/assemble.sh>`_ which takes an input assembly file, produces the assembled ELF, prints, and extracts the ``.text`` and ``.data`` sections (containing the instruction and data memories respectively).  Finally, it converts the converting the output files from hex to ASCII using the xxd utility.  The result is suitable for the ``$readmemh`` Verilog command:
 
 .. code-block:: shell
 
@@ -64,13 +64,13 @@ Binutils is mostly free from external dependencies out of necessity, so it shoul
 Debugging
 ---------
 
-As the Raisin64 was designed with a home grown JTAG controller I wrote recently (the `JTAGlet <https://github.com/ChrisPVille/jtaglet>`_), there was no existing support in any tools.  Not that JTAG core support would help much given the new ISA, but keeping with the bootstrap theme, a custom configuration script for `OpenOCD <http://openocd.org/>`_ was created that uses/misuses the scripting interface to provide communication with the processor's JTAG interface, program the memories, and examine the state of the machine.
+As the Raisin64 was designed with a home grown JTAG controller (the `JTAGlet <https://github.com/ChrisPVille/jtaglet>`_), there was no existing support in any tools.  Not that JTAG core support would help much given the new ISA, but keeping with the bootstrap theme, a custom configuration script for `OpenOCD <http://openocd.org/>`_ was created that uses/misuses the scripting interface to provide communication with the processor's JTAG interface, program the memories, and examine the state of the machine.
 
 .. admonition:: Future Work
 
-    While the scripting interface was a quick way to support my target, the conventional approach is to write support for targets and JTAG controller in C, releasing a new version of OpenOCD (much like I did with binutils).  This will be necessary to support remote debugging (via GDB) and will make future development easier.
+    While the scripting interface was a quick way to support my target, the conventional approach is to write support for the target and JTAG controller in C, releasing a new version of OpenOCD (much like I did with binutils).  This will be necessary to support remote debugging (via GDB) and will make future development easier.
 
-The configuration script is too large to repeat here, but is accessible at `<https://github.com/ChrisPVille/raisin64-cpu/blob/master/support/jtag/raisin64_nodeps_openocd.cfg>`_.  It is currently configured for a `Bus Blaster v3 <https://www.seeedstudio.com/Bus-Blaster-v3-p-1415.html>`_, but can be easily reconfigured for other JTAG probes.
+The configuration script is accessible at `<https://github.com/ChrisPVille/raisin64-cpu/blob/master/support/jtag/raisin64_nodeps_openocd.cfg>`_.  Although it is currently configured for a `Bus Blaster v3 <https://www.seeedstudio.com/Bus-Blaster-v3-p-1415.html>`_, it can be easily reconfigured for other JTAG probes.
 
 This script is be invoked by the adjacent ``programImemDmem.sh <imem.hex> <optional dmem.hex>`` or as:
 
