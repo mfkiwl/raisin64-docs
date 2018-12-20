@@ -51,6 +51,6 @@ PDF Documentation     `<https://raisin64.fsys.io/_build/latex/Raisin64.pdf>`_
 Footnotes
 ---------
 
-.. [1] Raisin64 will execute instructions out-of-order assuming subsequent instructions are dependancy-free and the appropriate execution unit is available.
+.. [1] Raisin64 will always issue instructions in-order but may do so before previous ones have finished executing provided they are dependency-free and the appropriate execution unit is available.
 .. [2] `Split-Cache Modified Harvard <https://en.wikipedia.org/wiki/Modified_Harvard_architecture>`_ when
         :ref:`proposed caches and MMU <cpu:Proposed Extensions>` are introduced.
